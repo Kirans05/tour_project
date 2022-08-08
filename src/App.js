@@ -10,6 +10,7 @@ import TermsAndCondition from './DashBoardComponents/TermsAndCondition'
 import BookingPage from "./DashBoardComponents/BookingPage"
 import HomePage from "./DashBoardComponents/HomePage"
 import HelpPage from "./DashBoardComponents/HelpPage"
+import TourDetails from './DashBoardComponents/TourDetails'
 const App = () => {
   return (
     <div>
@@ -23,6 +24,7 @@ const App = () => {
       <Route path='/bookingPage' element={<BookingPage />} />
       <Route path='/HomePage' element={<HomePage />} />
       <Route path='/helpPage' element={<HelpPage />} />
+      <Route path='/TourDeatils' element={<TourDetails />} />
 
     </Routes>
     </div>

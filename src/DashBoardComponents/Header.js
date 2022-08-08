@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Menu, MenuItem, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -21,8 +21,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-
-
+import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -301,7 +301,7 @@ const Header = () => {
   const list = (anchor) => (
     <Box
       sx={{
-        width: "350px",
+       width:{xs:"250px",md:"350px"},
         display: "flex",
         flexDirection: "column",
         rowGap: 2,
@@ -336,8 +336,8 @@ const Header = () => {
           paddingLeft: "10%",
         }}
       >
-        <Typography>Login</Typography>
-        <Typography>SignUp</Typography>
+        <Typography onClick={()=>navigate("/login")}>Login</Typography>
+        <Typography onClick={()=>navigate("/login")}>SignUp</Typography>
       </Box>
 
       <Divider />
@@ -772,7 +772,7 @@ const Header = () => {
   const NearByModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -844,7 +844,7 @@ const Header = () => {
   const recommendationModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -908,7 +908,7 @@ const Header = () => {
   const AttractionsModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -971,7 +971,7 @@ const Header = () => {
   const uniqueExperienceModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -1054,7 +1054,7 @@ const Header = () => {
   const Travel_Transport_serviceModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -1315,7 +1315,7 @@ const Header = () => {
   const Tour_sightseeing_Modal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -1693,7 +1693,7 @@ const Header = () => {
   const Ticket_PassesModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -2086,7 +2086,7 @@ const Header = () => {
   const Seasonal_special_oCCasionModal = (anchor) => (
     <Box
     sx={{
-      width: "350px",
+     width:{xs:"250px",md:"350px"},
       display: "flex",
       flexDirection: "column",
       rowGap: 2,
@@ -2310,7 +2310,7 @@ const Header = () => {
   const outDoorActivitesModal = (anchor) => (
     <Box
       sx={{
-        width: "350px",
+       width:{xs:"250px",md:"350px"},
         display: "flex",
         flexDirection: "column",
         rowGap: 2,
@@ -2875,7 +2875,7 @@ const Header = () => {
   const Food_DrinkModal = (anchor) => (
     <Box
       sx={{
-        width: "350px",
+       width:{xs:"250px",md:"350px"},
         display: "flex",
         flexDirection: "column",
         rowGap: 2,
@@ -3312,7 +3312,7 @@ const Header = () => {
   const classes_workShopsModal = (anchor) => (
     <Box
       sx={{
-        width: "350px",
+       width:{xs:"250px",md:"350px"},
         display: "flex",
         flexDirection: "column",
         rowGap: 2,
@@ -3693,7 +3693,7 @@ const Header = () => {
   const Art_cultureModal = (anchor) => (
     <Box
       sx={{
-        width: "350px",
+       width:{xs:"250px",md:"350px"},
         display: "flex",
         flexDirection: "column",
         rowGap: 2,
@@ -4161,8 +4161,10 @@ const Header = () => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
-        paddingTop:"1%"
+        justifyContent: {xs:"space-between",md:"space-between"},
+        paddingTop:{sm:"0%",md:"1%"},
+        paddingLeft:{xs:"1%"},
+        paddingRight:{xs:"1%"},
       }}
     >
       <Box
@@ -4190,12 +4192,16 @@ const Header = () => {
       <Box
         className="rightPart"
         sx={{
-          display: "flex",
+          display: {xs:"none",md:"flex"},
           flexDirection: "row",
           alignItems: "center",
           columnGap: 3,
         }}
       >
+        <Box className="textField&SearchIcons" sx={{display:"flex",flexDirection:"row",alignItems:"center",columnGap:2,"&:hover":{border:"1px solid black"},border:"1px solid white",padding:"2px"}}>
+        <input type={"text"} placeholder="Search for Paris or Colosseum" style={{outline:"none",height:"40px",width:"320px",border:"1px solid white"}}/>
+        <SearchIcon />
+        </Box>
         <Typography
           variant="h6"
           sx={{
@@ -4271,6 +4277,9 @@ const Header = () => {
           <Typography variant="h6" onClick={handleClick}>Account</Typography>
         </Box>
         
+      </Box>
+      <Box className="rightPartMediaQuery" sx={{display:{xs:"flex",md:"none"}}}>
+          <SearchIcon sx={{fontSize:"30px"}} />
       </Box>
 
       {/* NearBy Drawer */}
