@@ -211,7 +211,7 @@ const TourDetails = () => {
         
         <Box
           className="otherDetails"
-          sx={{ display: "flex", flexDirection: "row", columnGap: 2 }}
+          sx={{ display: "flex", flexDirection: "row", columnGap: 2,width:"100%" }}
         >
           <Box
             className="lefthalf"
@@ -267,7 +267,7 @@ const TourDetails = () => {
               <KeyboardArrowDownIcon />
             </Box>
           </Box>
-          <Box className="rightHalf" sx={{display:"flex",flexDirection:"column",rowGap:{xs:2}}}>
+          <Box className="rightHalf" sx={{display:"flex",flexDirection:"column",rowGap:{xs:2},width:{xs:"100%",md:"80%"}}}>
             <Box
               className="safetyMeasures&otherDetails"
               sx={{ display: "flex", flexDirection: {xs:"column",md:"row"}, columnGap: 2,rowGap:2 }}

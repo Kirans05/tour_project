@@ -4162,7 +4162,7 @@ const Header = () => {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: {xs:"space-between",md:"space-between"},
-        paddingTop:{sm:"0%",md:"1%"},
+        paddingTop:{sm:"0%",md:"0%"},
         paddingLeft:{xs:"1%"},
         paddingRight:{xs:"1%"},
       }}
