@@ -20,6 +20,11 @@ import AffiliatePage from './DashBoardComponents/AffiliatePage'
 import NewsPage from './DashBoardComponents/NewsPage'
 import BlogPage from './DashBoardComponents/BlogPage'
 import UserProfile from './userInformation/UserProfile'
+import UserLoginInformationPage from './userInformation/UserLoginInformationPage'
+import PaymentMethodPage from './userInformation/PaymentMethodPage'
+import NotificationPage from './userInformation/NotificationPage'
+import TravelPireferences from './userInformation/TravelPireferences'
+import SiteSettings from './userInformation/SiteSettings'
 const App = () => {
   return (
     <div>
@@ -43,6 +48,11 @@ const App = () => {
       <Route path='/NewsPage' element={<NewsPage />} />
       <Route path='/blogPage' element={<BlogPage />} />
       <Route path='/useProfilePage' element={<UserProfile />} />
+      <Route path='/loginInformation' element={<UserLoginInformationPage />} />
+      <Route path='/paymentMethod' element={<PaymentMethodPage />} />
+      <Route path='/notificationDetails' element={<NotificationPage />} />
+      <Route path='/travelPreferences' element={<TravelPireferences />} />
+      <Route path='/siteSettings' element={<SiteSettings />} />
     </Routes>
     </div>
   )
