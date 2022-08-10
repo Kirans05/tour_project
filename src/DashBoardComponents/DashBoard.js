@@ -32,6 +32,7 @@ import ArtCulture from "../Tours Componnets/ArtCulture";
 import { useNavigate } from "react-router-dom";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 
 
 function valuetext(value) {
@@ -43,16 +44,16 @@ const minDistance = 10;
 const DashBoard = () => {
 
   const navigate = useNavigate()
-  const [arts_culture, setArts_culture] = useState(true);
-  const [classes_workspaces, setclasses_workspaces] = useState(true);
-  const [food_drink, setFood_drinnk] = useState(true);
-  const [likelyToSellOut, setLikelyToSellOut] = useState(true);
-  const [outDoorActivity, setOutDoorActivity] = useState(true);
-  const [seasonal_specialOcation, setSeasonal_specialOcation] = useState(true);
-  const [ticketsAndPasses, setTicketsAndPasses] = useState(true);
-  const [tours_sightseeing, setTours_sightseeing] = useState(true);
-  const [travel_Transportation, setTravel_Transportation] = useState(true);
-  const [uniqueExperience, setUniqueExperience] = useState(true);
+  // const [arts_culture, setArts_culture] = useState(true);
+  // const [classes_workspaces, setclasses_workspaces] = useState(true);
+  // const [food_drink, setFood_drinnk] = useState(true);
+  // const [likelyToSellOut, setLikelyToSellOut] = useState(true);
+  // const [outDoorActivity, setOutDoorActivity] = useState(true);
+  // const [seasonal_specialOcation, setSeasonal_specialOcation] = useState(true);
+  // const [ticketsAndPasses, setTicketsAndPasses] = useState(true);
+  const [tours_sightseeing, setTours_sightseeing] = useState(false);
+  // const [travel_Transportation, setTravel_Transportation] = useState(true);
+  // const [uniqueExperience, setUniqueExperience] = useState(true);
 
   const [value1, setValue1] = React.useState([20, 37]);
   const [dateValue, setDateValue] = useState(new Date());
@@ -73,7 +74,14 @@ const DashBoard = () => {
 
 const [secondArtState , setsecondArtState]  = useState(true)
 const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
-
+const [secondTourSightSeeingState, setSecondTourSightSeeingState] = useState(null)
+const [tourState, setTourState] = useState({
+  crusisSailing:false,
+  getAround:false,
+  private_Luxury:false,
+  sightseeingTour:false,
+  toursByDuration:false
+})
 
 
 
@@ -113,7 +121,7 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
               backgroundColor: "white",
             }}
           >
-            <Typography variant="h5">London Tours, Tickets, & Excursions</Typography>
+            <Typography variant="h5">Tours, Tickets, & Excursions</Typography>
             <DesktopDatePicker
                     label="Date desktop"
                     inputFormat="MM/dd/yyyy"
@@ -357,7 +365,7 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                   }}
                 >
                   <DesktopDatePicker
-                    label="Date desktop"
+                    // label="Date desktop"
                     inputFormat="MM/dd/yyyy"
                     value={dateValue}
                     onChange={handleDateTimeChange}
@@ -411,6 +419,9 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                   </Box>
                 </Box>
                 <Divider />
+
+               
+
                 {/* all london tours */}
                 <Box className="All London Tours">
                   <Typography
@@ -422,11 +433,11 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                       fontSize: "25px",
                     }}
                   >
-                    All London Tours
+                    All Tours
                   </Typography>
 
                   {/* arts and Culture */}
-                  <Box className="Art & Culture">
+                  {/* <Box className="Art & Culture">
                     <Box
                       sx={{
                         display: "flex",
@@ -458,14 +469,14 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
                   
                   {/* art and culture sub filters */}
-                  <ArtCulture />
+                  {/* <ArtCulture /> */}
 
                   
                   {/* Classes & Workshops */}
-                  <Box className="Classes & Workshops">
+                  {/* <Box className="Classes & Workshops">
                     <Box
                       sx={{
                         display: "flex",
@@ -497,10 +508,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Food & Drink */}
-                  <Box className="Food & Drink">
+                  {/* <Box className="Food & Drink">
                     <Box
                       sx={{
                         display: "flex",
@@ -532,10 +543,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Likely To Sell Out */}
-                  <Box className="Likely To Sell Out">
+                  {/* <Box className="Likely To Sell Out">
                     <Box
                       sx={{
                         display: "flex",
@@ -567,10 +578,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Outdoor Activities */}
-                  <Box className="Outdoor Activities ">
+                  {/* <Box className="Outdoor Activities ">
                     <Box
                       sx={{
                         display: "flex",
@@ -602,10 +613,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Seasonal & Special Occasions */}
-                  <Box className="Seasonal & Special Occasions">
+                  {/* <Box className="Seasonal & Special Occasions">
                     <Box
                       sx={{
                         display: "flex",
@@ -639,10 +650,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Tickets & Passes */}
-                  <Box className="Tickets & Passes">
+                  {/* <Box className="Tickets & Passes">
                     <Box
                       sx={{
                         display: "flex",
@@ -674,7 +685,7 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Tours, Sightseeing & Cruises */}
                   <Box className="Tours, Sightseeing & Cruises">
@@ -683,7 +694,15 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         display: "flex",
                         justifyContent: "space-between",
                       }}
-                      onClick={() => setTours_sightseeing(!tours_sightseeing)}
+                      onClick={() => {
+                        if(secondTourSightSeeingState == null){
+                          setSecondTourSightSeeingState("");
+                          setTours_sightseeing(!tours_sightseeing)
+                        }else{
+                          setSecondTourSightSeeingState(null);
+                          setTours_sightseeing(!tours_sightseeing)
+                        }
+                      }}
                     >
                       <Typography
                         sx={{
@@ -699,20 +718,20 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                       <Box className="arrows">
                         <KeyboardArrowDownIcon
                           sx={{
-                            display: tours_sightseeing ? "flex" : "none",
+                            display: !tours_sightseeing ? "flex" : "none",
                           }}
                         />
                         <KeyboardArrowUpIcon
                           sx={{
-                            display: !tours_sightseeing ? "flex" : "none",
+                            display: tours_sightseeing ? "flex" : "none",
                           }}
                         />
                       </Box>
                     </Box>
                   </Box>
 
-                  {/* Tours, Sightseeing & Cruises */}
-                  <Box className="Travel & Transportation Services">
+                  {/* Travel & Transportation Services */}
+                  {/* <Box className="Travel & Transportation Services">
                     <Box
                       sx={{
                         display: "flex",
@@ -746,10 +765,10 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   {/* Unique Experiences */}
-                  <Box className="Unique Experiences">
+                  {/* <Box className="Unique Experiences">
                     <Box
                       sx={{
                         display: "flex",
@@ -781,8 +800,356 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
                         />
                       </Box>
                     </Box>
-                  </Box>
+                  </Box> */}
+
                 </Box>
+
+                {
+        secondTourSightSeeingState == "" ?
+        <Box className="mainTravel&TransporationServices"
+        sx={{
+          display:"flex",
+          flexDirection:"column",
+          rowGap:2
+        }}
+        >
+    
+    {/* back Button London Tour*/}
+    {/* <Box className="mainTour,SightSeeing&Cruises" sx={{
+     display:"flex",
+     flexDirection:"row",
+     columnGap:1,
+     paddingLeft:"10%"
+   }}>
+     <KeyboardBackspaceIcon 
+     sx={{
+       "&:hover":{cursor:"pointer"}
+     }}
+     />
+     <Typography>Back To Tour</Typography>
+   </Box> */}
+
+   <Box className="mainBody" sx={{
+     paddingLeft:"10%",
+     fontSize:"30px",
+     display:"flex",
+     flexDirection:"column",
+     rowGap:3
+   }}>
+     <Typography>All Tours, Sightseeing & Cruises</Typography>
+
+
+     {/* Cruises & Sailing*/}
+     <Box className="Cruises & Sailing"
+     onClick={()=>setSecondTourSightSeeingState("Cruises & Sailing")}
+     >
+         <Box
+           sx={{
+             display: "flex",
+             justifyContent: "space-between",
+           }}
+         >
+           <Typography
+             sx={{
+               "&:hover": {
+                 // textDecoration: "underLine",
+                 cursor: "pointer",
+               },
+             }}
+           >
+             Cruises & Sailing
+           </Typography>
+           <Box
+             className="arrows"
+           >
+             <KeyboardArrowDownIcon />
+           </Box>
+         </Box>
+       </Box>
+
+
+       
+             
+     {/* How To Get Around*/}
+     <Box className="How To Get Around"
+     onClick={()=>setSecondTourSightSeeingState("How To Get Around")}
+     >
+         <Box
+           sx={{
+             display: "flex",
+             justifyContent: "space-between",
+           }}
+         >
+           <Typography
+             sx={{
+               "&:hover": {
+                 // textDecoration: "underLine",
+                 cursor: "pointer",
+               },
+             }}
+           >
+             How To Get Around
+           </Typography>
+           <Box
+             className="arrows"
+           >
+              <KeyboardArrowDownIcon />
+           </Box>
+         </Box>
+       </Box>
+
+
+
+
+             {/* Private And Luxury*/}
+     <Box className="Private And Luxury"
+    //  onClick={()=>setFirstTour_sightseeingState("SightSeeing Tours")}
+     >
+         <Box
+           sx={{
+             display: "flex",
+             justifyContent: "space-between",
+           }}
+         >
+           <Typography
+             sx={{
+               "&:hover": {
+                 // textDecoration: "underLine",
+                 cursor: "pointer",
+               },
+             }}
+           >
+             Private And Luxury
+           </Typography>
+         </Box>
+       </Box>
+
+
+
+                  {/* SightSeeing Tours*/}
+     <Box className="SightSeeing Tours"
+     onClick={()=>setSecondTourSightSeeingState("SightSeeing Tours")}
+     >
+         <Box
+           sx={{
+             display: "flex",
+             justifyContent: "space-between",
+           }}
+         >
+           <Typography
+             sx={{
+               "&:hover": {
+                 // textDecoration: "underLine",
+                 cursor: "pointer",
+               },
+             }}
+           >
+             SightSeeing Tours
+           </Typography>
+           <Box
+             className="arrows"
+           >
+             <KeyboardArrowDownIcon />
+           </Box>
+         </Box>
+       </Box>
+
+
+
+
+                 {/* Tours By Duration*/}
+     <Box className="Tours By Duration"
+     onClick={()=>setSecondTourSightSeeingState("Tours By Duration")}
+     >
+         <Box
+           sx={{
+             display: "flex",
+             justifyContent: "space-between",
+           }}
+         >
+           <Typography
+             sx={{
+               "&:hover": {
+                 // textDecoration: "underLine",
+                 cursor: "pointer",
+               },
+             }}
+           >
+             Tours By Duration
+           </Typography>
+           <Box
+             className="arrows"
+           >
+              <KeyboardArrowDownIcon />
+           </Box>
+         </Box>
+       </Box>
+
+
+   </Box>
+
+   </Box>
+   : secondTourSightSeeingState == "Cruises & Sailing" ?
+   <Box className="Cruises & Sailing" sx={{
+    display:"flex",
+    flexDirection:"column",
+    rowGap:3,
+    paddingLeft:"10%"
+  }}>
+
+       {/* back Button Cruises & Sailing*/}
+    <Box className="BackButtonCruises & Sailing" sx={{
+     display:"flex",
+     flexDirection:"row",
+     columnGap:1,
+    //  paddingLeft:"10%"
+   }}>
+     <KeyboardBackspaceIcon 
+     sx={{
+       "&:hover":{cursor:"pointer"}
+     }}
+     onClick={()=>{
+      setSecondTourSightSeeingState("");
+      setTourState({...tourState,crusisSailing:!tourState.crusisSailing})
+     }}
+     />
+     <Typography>Tours, SightSeeing & Cruises</Typography>
+   </Box>
+   <Typography>All Cruises & Sailing</Typography>
+   <Typography>Catamaran Cruises</Typography>
+   <Typography>Day Cruises</Typography>
+   <Typography>Dinner Cruises</Typography>
+   <Typography>Gandala Cruises</Typography>
+   <Typography>Night Cruises</Typography>
+   <Typography>Parts of Call Tours</Typography>
+   <Typography>Share Excursions</Typography>
+   <Typography>SightSeeing Cruises</Typography>
+  </Box>
+  : secondTourSightSeeingState == "How To Get Around" ?
+  <Box className="How To Get Around" sx={{
+    display:"flex",
+    flexDirection:"column",
+    rowGap:3,
+    paddingLeft:"10%"
+  }}>
+
+       {/* back Button How To Get Around*/}
+    <Box className="BackButtonHow To Get Around" sx={{
+     display:"flex",
+     flexDirection:"row",
+     columnGap:1,
+    //  paddingLeft:"10%"
+   }}>
+     <KeyboardBackspaceIcon 
+     sx={{
+       "&:hover":{cursor:"pointer"}
+     }}
+     onClick={()=>{
+      setSecondTourSightSeeingState("");
+      setTourState({...tourState,getAround:!tourState.getAround})
+     }}
+     />
+     <Typography>Tours, SightSeeing & Cruises</Typography>
+   </Box>
+   <Typography>All How To Get Around</Typography>
+   <Typography>Air Tours</Typography>
+   <Typography>Bike Rentals</Typography>
+   <Typography>Bike Tours</Typography>
+   <Typography>Bus Tours</Typography>
+   <Typography>Car Tours</Typography>
+   <Typography>Classic Car Tours</Typography>
+   <Typography>E-Bike Tours</Typography>
+   <Typography>Helicopter Tours</Typography>
+   <Typography>Hot Air Balloon Rides</Typography>
+   <Typography>Limousine Tours</Typography>
+   <Typography>Luxury Car Tours</Typography>
+   <Typography>Mountain Bike Tours</Typography>
+   <Typography>Pedicab Tours</Typography>
+   <Typography>Power Boats</Typography>
+   <Typography>Public Transporatation Tours</Typography>
+   <Typography>Rail Tours</Typography>
+   <Typography>Rentals</Typography>
+   <Typography>Road Trip</Typography>
+   <Typography>Self Giuded Tours</Typography>
+   <Typography>Speed Boat Rentals</Typography>
+   <Typography>Vespa, Scooter & Moped Tours</Typography>
+   <Typography>Walking Tours</Typography>
+   <Typography>Water Tours</Typography>
+  </Box>
+    : secondTourSightSeeingState == "SightSeeing Tours" ? 
+    <Box className="SightSeeing Tours" sx={{
+      display:"flex",
+      flexDirection:"column",
+      rowGap:3,
+      paddingLeft:"10%"
+    }}>
+  
+         {/* back Button SightSeeing Tours*/}
+      <Box className="BackButtonSightSeeing Tours" sx={{
+       display:"flex",
+       flexDirection:"row",
+       columnGap:1,
+      //  paddingLeft:"10%"
+     }}>
+       <KeyboardBackspaceIcon 
+       sx={{
+         "&:hover":{cursor:"pointer"}
+       }}
+       onClick={()=>{
+        setSecondTourSightSeeingState("");
+        setTourState({...tourState,sightseeingTour:!tourState.sightseeingTour})
+       }}
+       />
+       <Typography>Tours, SightSeeing & Cruises</Typography>
+     </Box>
+     <Typography>All SightSeeing Tours</Typography>
+     <Typography>Adventure Tours</Typography>
+     <Typography>City Tours</Typography>
+     <Typography>Hop on Hop off Buses</Typography>
+     <Typography>Night Tours</Typography>
+     <Typography>Observation Decks</Typography>
+     <Typography>Private SightSeeing Tours</Typography>
+     <Typography>SightSeeing Cruises</Typography>
+     <Typography>SightSeeing Passes</Typography>
+     <Typography>Skip The Line Tickets</Typography>
+     <Typography>SkyScrappers & Towers</Typography>
+    </Box>
+    : secondTourSightSeeingState == "Tours By Duration" ?
+    <Box className="Tours By Duration" sx={{
+      display:"flex",
+      flexDirection:"column",
+      rowGap:3,
+      paddingLeft:"10%"
+    }}>
+  
+         {/* back Button Tours By Duration*/}
+      <Box className="BackButtonTours By Duration" sx={{
+       display:"flex",
+       flexDirection:"row",
+       columnGap:1,
+      //  paddingLeft:"10%"
+     }}>
+       <KeyboardBackspaceIcon 
+       sx={{
+         "&:hover":{cursor:"pointer"}
+       }}
+       onClick={()=>{
+        setSecondTourSightSeeingState("");
+        setTourState({...tourState,toursByDuration:!tourState.toursByDuration})
+       }}
+       />
+       <Typography>Tours, SightSeeing & Cruises</Typography>
+     </Box>
+     <Typography>All Tours By Duration</Typography>
+     <Typography>Day Trips</Typography>
+     <Typography>Full-Day Tours</Typography>
+     <Typography>Half-Day Tours</Typography>
+     <Typography>Layover Tours</Typography>
+     <Typography>Multi-Day Tours</Typography>
+     <Typography>Overnight Tours</Typography>
+    </Box>
+    : null
+      }
 
                 <Divider />
 

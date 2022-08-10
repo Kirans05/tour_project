@@ -27,7 +27,7 @@ const Footer = () => {
         padding:"2% 0% 2% 0% "
       }}
     >
-      <Box
+      {/* <Box
         className="socialMediaIcons"
         sx={{
           display: "flex",
@@ -43,8 +43,8 @@ const Footer = () => {
         <InstagramIcon sx={{ color: "white" }} />
         <YouTubeIcon sx={{ color: "white" }} />
         <PinterestIcon sx={{ color: "white" }} />
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         className="ratings"
         sx={{
           width: "100%",
@@ -56,7 +56,7 @@ const Footer = () => {
       >
         <Rating name="size-medium" defaultValue={4} readOnly />
         <Typography sx={{ color: "white" }}>Travel</Typography>
-      </Box>
+      </Box> */}
       <Box
         className="contactInformations"
         sx={{
@@ -77,12 +77,11 @@ const Footer = () => {
             rowGap: {xs:1,md:2},
           }}
         >
-          <Typography onClick={()=>navigate("/helpPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
-          >Help Center</Typography>
+          {/* <Typography onClick={()=>navigate("/helpPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
+          >Help Center</Typography> */}
           <Typography onClick={()=>navigate("/PrivacyPolicy")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
           >Privacy Policy</Typography>
-          <Typography onClick={()=>navigate("/aboutPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
-          >About Travel</Typography>
+          
         </Box>
         <Box
           className="secondBox"
@@ -93,11 +92,12 @@ const Footer = () => {
             rowGap: {xs:1,md:2},
           }}
         >
-          <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/carrerPage")}>Carrers</Typography>
-          <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
-          <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/supplierSignUpPgae")}>Supplier Signup</Typography>
+          <Typography onClick={()=>navigate("/aboutPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
+          >About Travel</Typography>
+          {/* <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
+          <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/supplierSignUpPgae")}>Supplier Signup</Typography> */}
         </Box>
-        <Box
+        {/* <Box
           className="thirdBox"
           sx={{
             color: "white",
@@ -115,7 +115,7 @@ const Footer = () => {
           <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
           onClick={()=>navigate("/NewsPage")}
           >News</Typography>
-        </Box>
+        </Box> */}
         <Box
           className="fourthBox"
           sx={{
@@ -126,8 +126,8 @@ const Footer = () => {
           }}
         >
           <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
-          onClick={()=>navigate("/blogPage")}
-          >Travel Blog</Typography>
+          onClick={()=>navigate("/TermsAndCondition")}
+          >Terms & Conditions</Typography>
         </Box>
       </Box>
     </Box>

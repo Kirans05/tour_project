@@ -330,15 +330,15 @@ const Header = () => {
       {/* registeration signup or login */}
       <Box
         className="registeration"
-        sx={{
+        sx={{  
           display: "flex",
           flexDirection: "column",
           rowGap: 2,
           paddingLeft: "10%",
         }}
       >
-        <Typography onClick={()=>navigate("/login")}>Login</Typography>
-        <Typography onClick={()=>navigate("/login")}>SignUp</Typography>
+        <Typography onClick={()=>navigate("/login")} sx={{"&:hover":{cursor:"pointer"}}}>Login</Typography>
+        <Typography onClick={()=>navigate("/login")} sx={{"&:hover":{cursor:"pointer"}}}>SignUp</Typography>
       </Box>
 
       <Divider />
@@ -471,6 +471,8 @@ const Header = () => {
 
       <Divider />
 
+
+    
       {/* Explore London */}
       <Box
         className="Explore London"
@@ -481,13 +483,13 @@ const Header = () => {
           paddingLeft: "10%",
         }}
       >
-        <Typography>Explore London</Typography>
-        <Typography>London Tours</Typography>
+        <Typography>Explore</Typography>
+        {/* <Typography>London Tours</Typography> */}
         <Box
           className="All London Tours"
           sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
         >
-          <Typography variant="h6"
+          {/* <Typography variant="h6"
           onClick={()=>navigate("/")}
           sx={{
             "&:hover":{
@@ -496,10 +498,10 @@ const Header = () => {
           }}
           >
             All London Tours
-          </Typography>
+          </Typography> */}
 
           {/* arts and Culture */}
-          <Box className="Art & Culture">
+          {/* <Box className="Art & Culture">
             <Box
               sx={{
                 display: "flex",
@@ -526,15 +528,15 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Audio Guides */}
-          <Box className="Audio Guides">
+          {/* <Box className="Audio Guides">
             <Typography>Audio Guides</Typography>
-          </Box>
+          </Box> */}
 
           {/* Classes & Workshops */}
-          <Box className="Classes & Workshops">
+          {/* <Box className="Classes & Workshops">
             <Box
               sx={{
                 display: "flex",
@@ -558,10 +560,10 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Food & Drink */}
-          <Box className="Food & Drink">
+          {/* <Box className="Food & Drink">
             <Box
               sx={{
                 display: "flex",
@@ -585,20 +587,20 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Kid Friendly */}
-          <Box className="Kid Friendly">
+          {/* <Box className="Kid Friendly">
             <Typography>Kid Friendly</Typography>
-          </Box>
+          </Box> */}
 
           {/* Likely To Sell Out */}
-          <Box className="Likely To Sell Out">
+          {/* <Box className="Likely To Sell Out">
             <Typography>Likely To Sell Out</Typography>
-          </Box>
+          </Box> */}
 
           {/* Outdoor Activities */}
-          <Box className="Outdoor Activities ">
+          {/* <Box className="Outdoor Activities ">
             <Box
               sx={{
                 display: "flex",
@@ -622,10 +624,10 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Seasonal & Special Occasions */}
-          <Box className="Seasonal & Special Occasions">
+          {/* <Box className="Seasonal & Special Occasions">
             <Box
               sx={{
                 display: "flex",
@@ -649,10 +651,10 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Tickets & Passes */}
-          <Box className="Tickets & Passes">
+          {/* <Box className="Tickets & Passes">
             <Box
               sx={{
                 display: "flex",
@@ -676,7 +678,7 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Tours, Sightseeing & Cruises */}
           <Box className="Tours, Sightseeing & Cruises">
@@ -706,7 +708,7 @@ const Header = () => {
           </Box>
 
           {/* TRavel TRansportation And Services */}
-          <Box className="Travel & Transportation Services">
+          {/* <Box className="Travel & Transportation Services">
             <Box
               sx={{
                 display: "flex",
@@ -730,10 +732,10 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Unique Experiences */}
-          <Box className="Unique Experiences">
+          {/* <Box className="Unique Experiences">
             <Box
               sx={{
                 display: "flex",
@@ -757,12 +759,12 @@ const Header = () => {
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
 
       {/* Attractions */}
-      <Box
+      {/* <Box
         className="attractions"
         sx={{
           display: "flex",
@@ -776,10 +778,10 @@ const Header = () => {
       >
         <Typography>Attractions</Typography>
         <KeyboardArrowRightIcon />
-      </Box>
+      </Box> */}
 
       {/* Recommendations */}
-      <Box
+      {/* <Box
         className="Recommendations "
         sx={{
           display: "flex",
@@ -793,10 +795,10 @@ const Header = () => {
       >
         <Typography>Recommendations</Typography>
         <KeyboardArrowRightIcon />
-      </Box>
+      </Box> */}
 
       {/* NearBy */}
-      <Box
+      {/* <Box
         className="NearBy"
         sx={{
           display: "flex",
@@ -810,7 +812,9 @@ const Header = () => {
       >
         <Typography>NearBy</Typography>
         <KeyboardArrowRightIcon />
-      </Box>
+      </Box>  */}
+
+
     </Box>
   );
 
@@ -1438,7 +1442,7 @@ const Header = () => {
      }}
      onClick={Tour_SightSeeingToggleDrawer(anchor, false)}
      />
-     <Typography>London Tour</Typography>
+     <Typography>Back To Tour</Typography>
    </Box>
 
    <Box className="mainBody" sx={{
@@ -1614,7 +1618,7 @@ const Header = () => {
      display:"flex",
      flexDirection:"row",
      columnGap:1,
-     paddingLeft:"10%"
+    //  paddingLeft:"10%"
    }}>
      <KeyboardBackspaceIcon 
      sx={{
@@ -1647,7 +1651,7 @@ const Header = () => {
      display:"flex",
      flexDirection:"row",
      columnGap:1,
-     paddingLeft:"10%"
+    //  paddingLeft:"10%"
    }}>
      <KeyboardBackspaceIcon 
      sx={{
@@ -1695,7 +1699,7 @@ const Header = () => {
        display:"flex",
        flexDirection:"row",
        columnGap:1,
-       paddingLeft:"10%"
+      //  paddingLeft:"10%"
      }}>
        <KeyboardBackspaceIcon 
        sx={{
@@ -1730,7 +1734,7 @@ const Header = () => {
        display:"flex",
        flexDirection:"row",
        columnGap:1,
-       paddingLeft:"10%"
+      //  paddingLeft:"10%"
      }}>
        <KeyboardBackspaceIcon 
        sx={{

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Header from "./Header";
+import Travel3 from "../images/img2.jpg";
 import Travel2 from "../images/travel2.jpg";
 import Travel1 from "../images/travel1.jpg";
 import Image1 from "../images/img1.webp";
@@ -25,9 +26,40 @@ import Image3 from "../images/travel2.jpg"
 
 const HomePage = () => {
   const [dateValue, setDateValue] = useState(new Date());
+  const [imageState,setImageState] = useState([Travel2,2])
+  const [dotClicked, setDotClicked] = useState({
+    first:false,
+    second:true,
+    third:false
+  })
   const handleChange = (newValue) => {
     setDateValue(newValue);
   };
+
+  setTimeout(()=>{
+    if(imageState[1] == 1){
+      setImageState([Travel2,2])
+      setDotClicked({
+        first:false,
+        second:true,
+        third:false
+      })
+    }else if(imageState[1] == 2){
+      setImageState([Travel3,3])
+      setDotClicked({
+        first:false,
+        second:false,
+        third:true
+      })
+    }else{
+      setImageState([Travel1,1])
+      setDotClicked({
+        first:true,
+        second:false,
+        third:false
+      })
+    }
+  },5000)
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -50,13 +82,13 @@ const HomePage = () => {
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "center",
-              border:"2px solid black",
+              // border:"2px solid black",
               position:"relative"
             }}
           >
             <Box
               component={"img"}
-              src={Travel2}
+              src={imageState[0]}
               alt="homePageImages"
               sx={{
                 maxWidth: "100%",
@@ -134,6 +166,67 @@ const HomePage = () => {
                   <Button variant="contained" color="success">Search</Button>
                 </Box>
               </Box>
+            </Box>
+            <Box className="dots" sx={{
+              display:"flex",
+              flexDirection:"row",
+              alignItems:"center",
+              justifyContent:"center",
+              columnGap:1,
+              position:"absolute",
+              bottom:"20px",
+              left:"50%"
+            }}>
+               <Box className="1stDot" sx={{
+                  backgroundColor:dotClicked.first ? "gold" : "white",
+                  borderRadius:"50%",
+                  color:"white",
+                  width:"10px",
+                  height:"10px"
+                }}
+                onClick={()=>{
+                  setImageState([Travel1,1]);
+                  setDotClicked({
+                    first:true,
+                    second:false,
+                    third:false
+                  })
+                }}
+                ></Box>
+                <Box className="2ndDot" sx={{
+                  backgroundColor:dotClicked.second ? "gold" : "white",
+                  borderRadius:"50%",
+                  color:"white",
+                  width:"10px",
+                  height:"10px"
+                  
+                }}
+                onClick={()=>{
+                  setImageState([Travel2,2]);
+                  setDotClicked({
+                    first:false,
+                    second:true,
+                    third:false
+                  })
+                }}
+                ></Box>
+               
+                <Box className="3rdDot" sx={{
+                  backgroundColor:dotClicked.third ? "gold": "white",
+                  borderRadius:"50%",
+                  color:"white",
+                  width:"10px",
+                  height:"10px"
+                }}
+                onClick={()=>{
+                  setImageState([Travel3,3]);
+                  setDotClicked({
+                    first:false,
+                    second:false,
+                    third:true
+                  })
+                }}
+                ></Box>
             </Box>
           </Box>
 
