@@ -26,6 +26,8 @@ import ProfileChoice from "./ProfileChoice";
 const UserLoginInformationPage = () => {
 
     const navigate = useNavigate()
+    const [showOptions, setShowOptions] = useState(true)
+    const [showLoginOptions,setShowLoginOptions] = useState(false)
 
   return (
     <Box>
@@ -39,14 +41,14 @@ const UserLoginInformationPage = () => {
           columnGap: 2,
         }}
       >
-        <ProfileChoice />
+        <ProfileChoice setShowOptions={setShowOptions} showOptions={showOptions}/>
         <Box
           className="rightPart"
           sx={{
             width: "70%",
             border: "2px solid #e6e7e8",
             padding: "2%",
-            display: "flex",
+            display:{xs:showLoginOptions ? "flex" : "none",md:"flex"},
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "space-between",

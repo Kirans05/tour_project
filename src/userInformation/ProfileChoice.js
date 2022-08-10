@@ -21,20 +21,20 @@ import {
   import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
   import SearchIcon from "@mui/icons-material/Search";
   import { useNavigate } from "react-router-dom";
-const ProfileChoice = () => {
+const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,showIndividualOptions}) => {
     const navigate = useNavigate()
 
   return (
     <Box
     className="leftpart"
     sx={{
-      width: "20%",
+      width: {xs:"100%",md:"20%"},
       border: "2px solid #e6e7e8",
-      display: "flex",
+      display: {xs:showOptions ? "flex":"none",md:"flex"},
       flexDirection: "column",
       alignItems: "center",
       rowGap: 3,
-      padding: "1% 1% 1% 1%",
+      padding: "1% 1% 2% 1%",
     }}
   >
     <Box className="profileImage">
@@ -60,7 +60,11 @@ const ProfileChoice = () => {
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/useProfilePage")}
+        onClick={()=>{
+          navigate("/useProfilePage")
+          setShowIndividualOptions(!showIndividualOptions)
+          setShowOptions(!showOptions)
+        }}
       >
         <PermIdentityIcon />
         <Typography sx={{ fontSize: "25px" }}>

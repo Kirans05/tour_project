@@ -21,11 +21,13 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
 import ProfileChoice from "./ProfileChoice";
-
-
+import Footer from "../DashBoardComponents/Footer"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const UserProfile = () => {
   
+  const [showOptions, setShowOptions] = useState(true)
+  const [showIndividualOptions, setShowIndividualOptions] = useState(false)
   const navigate = useNavigate()
   const [dateValue, setDateValue] = React.useState(new Date());
   const [userNameEdit, setUserNameEdit] = useState(false);
@@ -48,18 +50,31 @@ const UserProfile = () => {
             columnGap: 2,
           }}
         >
-          <ProfileChoice />
+          <ProfileChoice showOptions={showOptions} setShowIndividualOptions={setShowIndividualOptions} setShowOptions={setShowOptions}/>
           <Box
             className="rightPart"
             sx={{
-              width: "70%",
+              width: {xs:"100%",md:"70%"},
               border: "2px solid #e6e7e8",
-              display: "flex",
+              display: {xs:showIndividualOptions ? "flex" : "none",md:"flex"},
               flexDirection: "column",
               rowGap: 2,
               padding: "2%",
             }}
           >
+            <Box className="backButton" 
+            sx={{
+              display:{xs:"flex",md:"none"},
+              alignItems:"center"
+            }}
+            onClick={()=>{
+              setShowIndividualOptions(false)
+              setShowOptions(true)
+            }}
+            >
+              <ArrowBackIosIcon />
+              <Typography sx={{fontSize:"20px"}}>Profile</Typography>
+            </Box>
             <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
               Personal Information
             </Typography>
@@ -510,6 +525,7 @@ const UserProfile = () => {
 
           </Box>
         </Box>
+        <Footer /> 
       </Box>
     </LocalizationProvider>
   );

@@ -129,7 +129,7 @@ const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
               alignItems: "center",
               columnGap: 2,
               backgroundColor: "white",
-              paddingBottom: "1%",
+              paddingBottom: {xs:"7%",md:"3%"},
               position: "sticky",
               top: "0px",
               left: "0px",

@@ -22,6 +22,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import SearchIcon from '@mui/icons-material/Search';
+import ArtCulture from "../ModalComponents/ArtCulture";
 // import SearchIcon from '@mui/icons-material/Search';
 
 const Header = () => {
@@ -366,6 +367,48 @@ const Header = () => {
         >
           <HomeIcon />
           <Typography>Home</Typography>
+        </Box>
+        <Box
+          className="Profile"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            columnGap: 1,
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => navigate("/useProfilePage")}
+        >
+          <Typography>Profile</Typography>
+        </Box>
+        <Box
+          className="WishList"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            columnGap: 1,
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => navigate("/wishList")}
+        >
+          <Typography>WishList</Typography>
+        </Box>
+        <Box
+          className="dashBoard"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            columnGap: 1,
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => navigate("/")}
+        >
+          <Typography>DashBoard</Typography>
         </Box>
         <Box
           className="Booking"
@@ -727,6 +770,7 @@ const Header = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingLeft: "10%",
+          "&:hover":{cursor:"pointer"}
         }}
         onClick={AttractionsToggleDrawer("left", true)}
       >
@@ -743,6 +787,7 @@ const Header = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingLeft: "10%",
+          "&:hover":{cursor:"pointer"}
         }}
         onClick={RecommendationToggleDrawer("left", true)}
       >
@@ -759,6 +804,7 @@ const Header = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingLeft: "10%",
+          "&:hover":{cursor:"pointer"}
         }}
         onClick={NearbyToggleDrawer("left", true)}
       >
@@ -1014,7 +1060,13 @@ const Header = () => {
 
 
       {/* main body */}
-      <Box className="mainUnique Experience">
+      <Box className="mainUnique Experience"
+       sx={{
+        display:"flex",
+        flexDirection:"column",
+        rowGap:2
+      }}
+      >
     
         {/* back Button London Tour*/}
         <Box className="mainUnique Experience" sx={{
@@ -1097,7 +1149,13 @@ const Header = () => {
 
       {
         FirstTravel_TransportState == ""?
-        <Box className="mainTravel&TransporationServices">
+        <Box className="mainTravel&TransporationServices"
+        sx={{
+          display:"flex",
+          flexDirection:"column",
+          rowGap:2
+        }}
+        >
     
         {/* back Button London Tour*/}
         <Box className="mainTravel&TransporationServices" sx={{
@@ -1359,7 +1417,13 @@ const Header = () => {
 
       {
         FirstTour_sightseeingState == "" ?
-        <Box className="mainTravel&TransporationServices">
+        <Box className="mainTravel&TransporationServices"
+        sx={{
+          display:"flex",
+          flexDirection:"column",
+          rowGap:2
+        }}
+        >
     
     {/* back Button London Tour*/}
     <Box className="mainTour,SightSeeing&Cruises" sx={{
@@ -1735,7 +1799,13 @@ const Header = () => {
 
     {
       FirstTickets_PassesState == "" ?
-      <Box className="mainTour,SightSeeing&Cruises">
+      <Box className="mainTour,SightSeeing&Cruises"
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        rowGap:2
+      }}
+      >
     
           {/* back Button London Tour*/}
           <Box className="mainSeasonal&SpecialOccasions" sx={{
@@ -2129,7 +2199,13 @@ const Header = () => {
 
       {
         FirstSeasonl_SpecialState == "" ?
-        <Box className="mainSeasonal&SpecialOccasions">
+        <Box className="mainSeasonal&SpecialOccasions"
+        sx={{
+          display:"flex",
+          flexDirection:"column",
+          rowGap:2
+        }}
+        >
     
           {/* back Button London Tour*/}
           <Box className="mainSeasonal&SpecialOccasions" sx={{
@@ -2353,7 +2429,13 @@ const Header = () => {
 
       {
           FirstOutDoorActivitesState == "" ? 
-          <Box className="mainOutDoorAndActivitees">
+          <Box className="mainOutDoorAndActivitees"
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            rowGap:2
+          }}
+          >
     
           {/* back Button London Tour*/}
           <Box className="mainOutDoorAndActivitees" sx={{
@@ -2918,7 +3000,13 @@ const Header = () => {
 
         {
           FirstFood_DrinkState == "" ?
-          <Box className="mainFoodAndDrink">
+          <Box className="mainFoodAndDrink"
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            rowGap:2
+          }}
+          >
     
     {/* back Button London Tour*/}
     <Box className="mainFoodAndDrink" sx={{
@@ -3355,7 +3443,13 @@ const Header = () => {
 
         {
           FirstClass_workshopState == "" ?
-          <Box className="mainClassesAndWorshop">
+          <Box className="mainClassesAndWorshop"
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            rowGap:2
+          }}
+          >
     
           {/* back Button London Tour*/}
           <Box className="mainClassesAndWorshop" sx={{
@@ -3737,7 +3831,13 @@ const Header = () => {
 
         {
           FirstArtState == "" ?  
-          <Box className="mainAllArtAndCulture">
+          <Box className="mainAllArtAndCulture" 
+          sx={{
+            display:"flex",
+            flexDirection:"column",
+            rowGap:2
+          }}
+          >
     
           {/* back Button London Tour*/}
           <Box className="BackButtonLondonTour" sx={{
@@ -4185,7 +4285,7 @@ const Header = () => {
           }}
           onClick={toggleDrawer("left", true)}
         />
-        <Typography variant="h4" onClick={()=>navigate("/")} sx={{
+        <Typography variant="h4" onClick={()=>navigate("/HomePage")} sx={{
           "&:hover":{cursor:"pointer"}
         }}>Travel</Typography>
       </Box>
@@ -4239,9 +4339,11 @@ const Header = () => {
             },
             columnGap: 1,
           }}
+          onClick={()=>navigate("/helpPage")}
         >
           <HelpOutlineIcon />
-          <Typography variant="h6">Help</Typography>
+          <Typography variant="h6"
+          >Help</Typography>
         </Box>
         <Box
           className="booking"
@@ -4256,8 +4358,10 @@ const Header = () => {
             },
             columnGap: 1,
           }}
+          onClick={()=>navigate("/bookingPage")}
         >
-          <Typography variant="h6">Booking</Typography>
+          <Typography variant="h6"
+          >Booking</Typography>
         </Box>
         <Box
           className="account"

@@ -25,6 +25,7 @@ import PaymentMethodPage from './userInformation/PaymentMethodPage'
 import NotificationPage from './userInformation/NotificationPage'
 import TravelPireferences from './userInformation/TravelPireferences'
 import SiteSettings from './userInformation/SiteSettings'
+import WishList from './DashBoardComponents/WishList'
 const App = () => {
   return (
     <div>
@@ -53,6 +54,7 @@ const App = () => {
       <Route path='/notificationDetails' element={<NotificationPage />} />
       <Route path='/travelPreferences' element={<TravelPireferences />} />
       <Route path='/siteSettings' element={<SiteSettings />} />
+      <Route path='/wishList' element={<WishList />} />
     </Routes>
     </div>
   )
