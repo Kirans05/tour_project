@@ -20,46 +20,44 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import Image3 from "../images/travel2.jpg"
-
-
+import Image3 from "../images/travel2.jpg";
 
 const HomePage = () => {
   const [dateValue, setDateValue] = useState(new Date());
-  const [imageState,setImageState] = useState([Travel2,2])
+  const [imageState, setImageState] = useState([Travel2, 2]);
   const [dotClicked, setDotClicked] = useState({
-    first:false,
-    second:true,
-    third:false
-  })
+    first: false,
+    second: true,
+    third: false,
+  });
   const handleChange = (newValue) => {
     setDateValue(newValue);
   };
 
-  setTimeout(()=>{
-    if(imageState[1] == 1){
-      setImageState([Travel2,2])
+  setTimeout(() => {
+    if (imageState[1] == 1) {
+      setImageState([Travel2, 2]);
       setDotClicked({
-        first:false,
-        second:true,
-        third:false
-      })
-    }else if(imageState[1] == 2){
-      setImageState([Travel3,3])
+        first: false,
+        second: true,
+        third: false,
+      });
+    } else if (imageState[1] == 2) {
+      setImageState([Travel3, 3]);
       setDotClicked({
-        first:false,
-        second:false,
-        third:true
-      })
-    }else{
-      setImageState([Travel1,1])
+        first: false,
+        second: false,
+        third: true,
+      });
+    } else {
+      setImageState([Travel1, 1]);
       setDotClicked({
-        first:true,
-        second:false,
-        third:false
-      })
+        first: true,
+        second: false,
+        third: false,
+      });
     }
-  },5000)
+  }, 5000);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -82,8 +80,7 @@ const HomePage = () => {
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "center",
-              // border:"2px solid black",
-              position:"relative"
+              position: "relative",
             }}
           >
             <Box
@@ -97,136 +94,161 @@ const HomePage = () => {
                 minHeight: { xs: "50vh", md: "60vh" },
               }}
             />
-            <Box className="amazingThings"
-            sx={{
-              border:"2px solid #f5f2f2",
-              display:"flex",
-              flexDirection:"column",
-              rowGap:2,
-              padding:{xs:"1%",md:"2%"},
-              backgroundColor:"#f2f2f2",
-              position:"absolute",
-              left:{xs:"10px",md:"50px"},
-              width:{xs:"90%",md:"25%"}
-            }}  
-            >
-              <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Find amazing things to do.</Typography>
-              <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Anytime, anywhere</Typography>
-              <Box className="secondBox"
+            <Box
+              className="amazingThings"
               sx={{
-                display:"flex",
-                flexDirection:"column",
-                alignItems:"flex-start",
-                rowGap:2,
-                
+                border: "2px solid #f5f2f2",
+                display: "flex",
+                flexDirection: "column",
+                rowGap: 2,
+                padding: { xs: "1%", md: "2%" },
+                backgroundColor: "#f2f2f2",
+                position: "absolute",
+                left: { xs: "10px", md: "50px" },
+                width: { xs: "90%", md: "25%" },
               }}
-              >
-                <Box className="searchBox" 
+            >
+              <Typography
                 sx={{
-                  display:"flex",
-                  flexDirection:"row",
-                  alignItems:"center",
-                  justifyContent:"flex-start",
-                  width:"90%",
-                  columnGap:2,
-                  border:"2px solid #ebf1fa",
-                  padding:"2%",
-                  backgroundColor:"white"
+                  fontSize: { xs: "16px", md: "20px" },
+                  fontWeight: "bold",
                 }}
+              >
+                Find amazing things to do.
+              </Typography>
+              <Typography sx={{ fontSize:{xs:"16px",md:"20px"}, fontWeight: "bold" }}>
+                Anytime, anywhere
+              </Typography>
+              <Box
+                className="secondBox"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  rowGap: 2,
+                }}
+              >
+                <Box
+                  className="searchBox"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    width: "90%",
+                    columnGap: 2,
+                    border: "2px solid #ebf1fa",
+                    padding: "2%",
+                    backgroundColor: "white",
+                  }}
                 >
                   <SearchIcon />
                   <input
                     type={"text"}
                     placeholder={"Las Vegas, London, Paris..."}
                     style={{
-                      width:"80%",
-                      height:"25px",
-                      outline:"none",
-                      border:"none"
+                      width: "80%",
+                      height: "25px",
+                      outline: "none",
+                      border: "none",
                     }}
                   />
                 </Box>
-                <Box className="datePicker" 
-                sx={{
-                  display:"flex",
-                  flexDirection:"row",
-                  alignItems:"center",
-                  justifyContent:"flex-start",
-                  columnGap:2
-
-                }}
+                <Box
+                  className="datePicker"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    columnGap: 2,
+                  }}
                 >
                   <DesktopDatePicker
-                    label="Date desktop"
                     inputFormat="MM/dd/yyyy"
                     value={dateValue}
                     onChange={handleChange}
-                    renderInput={(params) => <TextField sx={{backgroundColor:"white"}} {...params} />}
+                    renderInput={(params) => (
+                      <TextField
+                        sx={{ backgroundColor: "white" }}
+                        {...params}
+                      />
+                    )}
                   />
-                  <Button variant="contained" color="success">Search</Button>
+                  <Button variant="contained" color="success">
+                    Search
+                  </Button>
                 </Box>
               </Box>
             </Box>
-            <Box className="dots" sx={{
-              display:"flex",
-              flexDirection:"row",
-              alignItems:"center",
-              justifyContent:"center",
-              columnGap:1,
-              position:"absolute",
-              bottom:"20px",
-              left:"50%"
-            }}>
-               <Box className="1stDot" sx={{
-                  backgroundColor:dotClicked.first ? "gold" : "white",
-                  borderRadius:"50%",
-                  color:"white",
-                  width:"10px",
-                  height:"10px"
+            <Box
+              className="dots"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                columnGap: 1,
+                position: "absolute",
+                bottom: "20px",
+                left: "50%",
+              }}
+            >
+              <Box
+                className="1stDot"
+                sx={{
+                  backgroundColor: dotClicked.first ? "gold" : "white",
+                  borderRadius: "50%",
+                  color: "white",
+                  width: "10px",
+                  height: "10px",
                 }}
-                onClick={()=>{
-                  setImageState([Travel1,1]);
+                onClick={() => {
+                  setImageState([Travel1, 1]);
                   setDotClicked({
-                    first:true,
-                    second:false,
-                    third:false
-                  })
+                    first: true,
+                    second: false,
+                    third: false,
+                  });
                 }}
-                ></Box>
-                <Box className="2ndDot" sx={{
-                  backgroundColor:dotClicked.second ? "gold" : "white",
-                  borderRadius:"50%",
-                  color:"white",
-                  width:"10px",
-                  height:"10px"
-                  
+              ></Box>
+              <Box
+                className="2ndDot"
+                sx={{
+                  backgroundColor: dotClicked.second ? "gold" : "white",
+                  borderRadius: "50%",
+                  color: "white",
+                  width: "10px",
+                  height: "10px",
                 }}
-                onClick={()=>{
-                  setImageState([Travel2,2]);
+                onClick={() => {
+                  setImageState([Travel2, 2]);
                   setDotClicked({
-                    first:false,
-                    second:true,
-                    third:false
-                  })
+                    first: false,
+                    second: true,
+                    third: false,
+                  });
                 }}
-                ></Box>
-               
-                <Box className="3rdDot" sx={{
-                  backgroundColor:dotClicked.third ? "gold": "white",
-                  borderRadius:"50%",
-                  color:"white",
-                  width:"10px",
-                  height:"10px"
+              ></Box>
+
+              <Box
+                className="3rdDot"
+                sx={{
+                  backgroundColor: dotClicked.third ? "gold" : "white",
+                  borderRadius: "50%",
+                  color: "white",
+                  width: "10px",
+                  height: "10px",
                 }}
-                onClick={()=>{
-                  setImageState([Travel3,3]);
+                onClick={() => {
+                  setImageState([Travel3, 3]);
                   setDotClicked({
-                    first:false,
-                    second:false,
-                    third:true
-                  })
+                    first: false,
+                    second: false,
+                    third: true,
+                  });
                 }}
-                ></Box>
+              ></Box>
             </Box>
           </Box>
 
@@ -241,7 +263,7 @@ const HomePage = () => {
               alignItems: "center",
             }}
           >
-            <Typography sx={{ fontWeight: "bold", fontSize: "25px" }}>
+            <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}>
               Why book with Travel
             </Typography>
             <Box
@@ -262,32 +284,43 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "25%" },
+                  width: { xs: "100%", md: "fit-content" },
+                  // width: { xs: "100%", md: "25%" },
+                  justifyContent:"center",
+                  rowGap:1
                 }}
-              >
-                <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
+                >
+                <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
                   Ultimate flexibility
                 </Typography>
-                <Typography>
+                <Typography sx={{
+                  fontSize:{xs:"14px",md:"16px"},
+                  // width:"75%"
+                }}>
                   You’re in control, with free cancellation and payment options
                   to satisfy any plan or budget.
                 </Typography>
               </Box>
               <Box
-                className="Memorable Experiences"
+                className="Memorable experiences"
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "25%" },
+                  width: { xs: "100%", md: "fit-content" },
+                  // width: { xs: "100%", md: "25%" },
+                  justifyContent:"center",
+                  rowGap:1
                 }}
-              >
-                <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
-                  Memorable experiences
+                >
+                <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
+                Memorable experiences
                 </Typography>
-                <Typography>
-                  Browse and book tours and activities so incredible, you’ll
-                  want to tell your friends.
+                <Typography sx={{
+                  fontSize:{xs:"14px",md:"16px"},
+                  // width:"75%"
+                }}>
+                  Browse and book tours and activities so incredible, you’ll want to tell your friends.
                 </Typography>
               </Box>
               <Box
@@ -296,33 +329,45 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "25%" },
+                  width: { xs: "100%", md: "fit-content" },
+                  // width: { xs: "100%", md: "25%" },
+                  justifyContent:"center",
+                  rowGap:1
                 }}
-              >
-                <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
-                  Qualmti at our core
+                >
+                <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
+                Quality at our core
                 </Typography>
-                <Typography>
-                  High quality standards. Millions of reviews. A Tripadvisor
-                  company.
+                <Typography sx={{
+                  fontSize:{xs:"14px",md:"16px"},
+                  // width:"75%"
+                }}>
+                  High quality standards. Millions of reviews. A Tripadvisor company.
                 </Typography>
               </Box>
               <Box
-                className="Award-wining support"
+                className="Award-winning support"
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "25%" },
+                  width: { xs: "100%", md: "fit-content" },
+                  // width: { xs: "100%", md: "25%" },
+                  justifyContent:"center",
+                  rowGap:1
                 }}
-              >
-                <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
-                  Award-wining support
+                >
+                <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
+                Award-winning supports
                 </Typography>
-                <Typography>
+                <Typography sx={{
+                  fontSize:{xs:"14px",md:"16px"},
+                  // width:"75%"
+                }}>
                   New price? New plan? No problem. We’re here to help, 24/7.
                 </Typography>
               </Box>
+              
             </Box>
           </Box>
 
@@ -347,7 +392,7 @@ const HomePage = () => {
               justifyContent: "center",
             }}
           >
-            <Typography sx={{ fontWeight: "bold", fontSize: "25px" }}>
+            <Typography sx={{ fontWeight: "bold", fontSize:{xs:"20px",md:"30px"}}}>
               Recently Viewed
             </Typography>
             <Box
@@ -382,7 +427,7 @@ const HomePage = () => {
                     borderRadius: "10px",
                   }}
                 />
-                <Typography sx={{ fontWeight: "bold", fontSize: "15px" }}>
+                <Typography sx={{ fontWeight: "bold", fontSize: {xs:"15px",md:"15px"} }}>
                   Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock
                 </Typography>
                 <Box
@@ -560,6 +605,7 @@ const HomePage = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 width: { xs: "100%", md: "30%" },
+                padding:{xs:"1%",md:"1%"}
               }}
             >
               <Typography
@@ -595,7 +641,7 @@ const HomePage = () => {
               width: "100%",
             }}
           >
-            <Typography sx={{ fontSize: "22px", fontWeight: "bold" }}>
+            <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
               Top attractions near London
             </Typography>
             <Box
@@ -947,7 +993,7 @@ const HomePage = () => {
               justifyContent: "center",
               width: "100%",
               backgroundColor: "#e6edf7",
-              padding: { xs: "0%", md: "2% 0 2% 0" },
+              padding: { xs: "1%", md: "2% 0 2% 0" },
             }}
           >
             <Box
@@ -982,183 +1028,239 @@ const HomePage = () => {
             </Box>
           </Box>
 
-          <Box className="eighthPart"
-          sx={{
-            display:"flex",
-            flexDirection:"column",
-            alignItems:"center",
-            justifyContent:"center",
-            rowGap:2,
-            width:{xs:"100%"},
-          }}
+          <Box
+            className="eighthPart"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              rowGap: 2,
+              width: { xs: "100%" },
+            }}
           >
-              <Typography 
+            <Typography
               sx={{
-                fontSize:"30px",
-                fontWeight:"bold"
+                fontSize: "30px",
+                fontWeight: "bold",
               }}
-              >Top Destinations</Typography>
-              <Box className="Top Destinations Places"
+            >
+              Top Destinations
+            </Typography>
+            <Box
+              className="Top Destinations Places"
               sx={{
-                display:"flex",
-                flexDirection:"row",
-                justifyContent:{xs:"flex-start",md:"space-around"},
-                flexWrap:{xs:"nowrap",md:"wrap"},
-                width:{xs:"100%",md:"60%"},
-                rowGap:3,
-                overflow:{xs:"auto",md:"none"},
-                padding:{xs:"1%",md:"0%"},
-                columnGap:{xs:2,md:0}
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: { xs: "flex-start", md: "space-around" },
+                flexWrap: { xs: "nowrap", md: "wrap" },
+                width: { xs: "100%", md: "60%" },
+                rowGap: 3,
+                overflow: { xs: "auto", md: "none" },
+                padding: { xs: "1%", md: "0%" },
+                columnGap: { xs: 2, md: 0 },
               }}
+            >
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
               >
-                  <Box className="1stImage"
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
                   sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
+                    width: "250px",
+                    borderRadius: "20px",
                   }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
-                  <Box className="1stImage"
+                />
+                <Typography
                   sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
                   }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
-                  <Box className="1stImage"
-                  sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
-                  }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
-                  <Box className="1stImage"
-                  sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
-                  }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
-                  <Box className="1stImage"
-                  sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
-                  }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
-                  <Box className="1stImage"
-                  sx={{
-                    width:"250px",
-                    position:"relative",
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    opacity:0.7,
-                    "&:hover":{cursor:"pointer",opacity:1}
-                  }}
-                  >
-                    <Box component={"img"} src={Image3} alt="destinationPlaces" 
-                    sx={{
-                      width:"250px",
-                      borderRadius:"20px"
-                    }}
-                    />
-                    <Typography sx={{fontSize:"25px",
-                    fontWeight:"bold",
-                    color:"white",
-                    position:"absolute",
-                    }}>Las Vegas</Typography>
-                  </Box>
+                >
+                  Las Vegas
+                </Typography>
               </Box>
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
+              >
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
+                  sx={{
+                    width: "250px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
+                  }}
+                >
+                  Las Vegas
+                </Typography>
+              </Box>
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
+              >
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
+                  sx={{
+                    width: "250px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
+                  }}
+                >
+                  Las Vegas
+                </Typography>
+              </Box>
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
+              >
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
+                  sx={{
+                    width: "250px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
+                  }}
+                >
+                  Las Vegas
+                </Typography>
+              </Box>
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
+              >
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
+                  sx={{
+                    width: "250px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
+                  }}
+                >
+                  Las Vegas
+                </Typography>
+              </Box>
+              <Box
+                className="1stImage"
+                sx={{
+                  width: "250px",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.7,
+                  "&:hover": { cursor: "pointer", opacity: 1 },
+                }}
+              >
+                <Box
+                  component={"img"}
+                  src={Image3}
+                  alt="destinationPlaces"
+                  sx={{
+                    width: "250px",
+                    borderRadius: "20px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    color: "white",
+                    position: "absolute",
+                  }}
+                >
+                  Las Vegas
+                </Typography>
+              </Box>
+            </Box>
           </Box>
-
-
         </Box>
         <Footer />
       </Box>

@@ -79,7 +79,11 @@ const Footer = () => {
         >
           {/* <Typography onClick={()=>navigate("/helpPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
           >Help Center</Typography> */}
-          <Typography onClick={()=>navigate("/PrivacyPolicy")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
+          <Typography onClick={()=>navigate("/PrivacyPolicy")} 
+          sx={{
+            "&:hover":{cursor:"pointer",textDecoration:"underLine"},
+            fontSize:{xs:"16px",md:"20px"}
+          }}
           >Privacy Policy</Typography>
           
         </Box>
@@ -92,7 +96,11 @@ const Footer = () => {
             rowGap: {xs:1,md:2},
           }}
         >
-          <Typography onClick={()=>navigate("/aboutPage")} sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
+          <Typography onClick={()=>navigate("/aboutPage")} 
+          sx={{
+            "&:hover":{cursor:"pointer",textDecoration:"underLine"},
+            fontSize:{xs:"16px",md:"20px"}
+          }}
           >About Travel</Typography>
           {/* <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
           <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/supplierSignUpPgae")}>Supplier Signup</Typography> */}
@@ -125,7 +133,10 @@ const Footer = () => {
             rowGap: {xs:1,md:2},
           }}
         >
-          <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}
+          <Typography sx={{
+            "&:hover":{cursor:"pointer",textDecoration:"underLine"},
+            fontSize:{xs:"16px",md:"20px"}
+          }}
           onClick={()=>navigate("/TermsAndCondition")}
           >Terms & Conditions</Typography>
         </Box>

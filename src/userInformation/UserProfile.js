@@ -19,15 +19,16 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProfileChoice from "./ProfileChoice";
 import Footer from "../DashBoardComponents/Footer"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const UserProfile = () => {
-  
-  const [showOptions, setShowOptions] = useState(true)
-  const [showIndividualOptions, setShowIndividualOptions] = useState(false)
+  const {value} = useParams()
+  const [visibleChoice, setVisibleChoice] = useState(value[1] == "t" ? true : false);
+  const [inidividualOptions, setIndividualOptions] = useState(value[1] == "t" ? false : true)
+
   const navigate = useNavigate()
   const [dateValue, setDateValue] = React.useState(new Date());
   const [userNameEdit, setUserNameEdit] = useState(false);
@@ -50,13 +51,13 @@ const UserProfile = () => {
             columnGap: 2,
           }}
         >
-          <ProfileChoice showOptions={showOptions} setShowIndividualOptions={setShowIndividualOptions} setShowOptions={setShowOptions}/>
+          <ProfileChoice setIndividualOptions={setIndividualOptions} inidividualOptions={inidividualOptions} visibleChoice={visibleChoice} setVisibleChoice={setVisibleChoice}/>
           <Box
             className="rightPart"
             sx={{
               width: {xs:"100%",md:"70%"},
               border: "2px solid #e6e7e8",
-              display: {xs:showIndividualOptions ? "flex" : "none",md:"flex"},
+              display: {xs:inidividualOptions ? "flex" : "none",md:"flex"},
               flexDirection: "column",
               rowGap: 2,
               padding: "2%",
@@ -68,8 +69,8 @@ const UserProfile = () => {
               alignItems:"center"
             }}
             onClick={()=>{
-              setShowIndividualOptions(false)
-              setShowOptions(true)
+              setIndividualOptions(!inidividualOptions)
+              setVisibleChoice(!visibleChoice)
             }}
             >
               <ArrowBackIosIcon />
@@ -525,7 +526,6 @@ const UserProfile = () => {
 
           </Box>
         </Box>
-        <Footer /> 
       </Box>
     </LocalizationProvider>
   );

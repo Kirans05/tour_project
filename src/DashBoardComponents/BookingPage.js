@@ -23,13 +23,13 @@ const BookingPage = () => {
       >
         <Typography 
         sx={{
-          fontSize:"30px",
+          fontSize:{xs:"20px",md:"30px"},
           fontWeight:"bold"
         }}
         >
           No Active Booking
           </Typography>
-          <Typography>Find your next unforgettable experience on Travel.</Typography>
+          <Typography sx={{fontSize:{xs:"16px",md:"20px"}}}>Find your next unforgettable experience on Travel.</Typography>
           <Button variant='contained' color='warning'
           onClick={()=>navigate("/HomePage")}
           >Start Exploring</Button>

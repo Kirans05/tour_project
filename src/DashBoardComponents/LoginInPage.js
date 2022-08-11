@@ -24,7 +24,7 @@ const LoginInPage = () => {
           rowGap: 2,
         }}
       >
-        <Typography sx={{fontSize:{xs:"30px",md:"45px"}}}>Log in and get exploring</Typography>
+        <Typography sx={{fontSize:{xs:"20px",md:"30px"}}}>Log in and get exploring</Typography>
         <Typography sx={{fontSize:{xs:"20px",md:"30px"}}}>
           Log into your account with your email, or create one below. Quick and
           easy - promise!

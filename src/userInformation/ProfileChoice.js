@@ -20,8 +20,11 @@ import {
   import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
   import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
   import SearchIcon from "@mui/icons-material/Search";
-  import { useNavigate } from "react-router-dom";
-const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,showIndividualOptions}) => {
+  import { useLocation, useNavigate } from "react-router-dom";
+const ProfileChoice = ({setVisibleChoice,visibleChoice, inidividualOptions, setIndividualOptions}) => {
+
+  const location = useLocation()
+
     const navigate = useNavigate()
 
   return (
@@ -30,7 +33,7 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
     sx={{
       width: {xs:"100%",md:"20%"},
       border: "2px solid #e6e7e8",
-      display: {xs:showOptions ? "flex":"none",md:"flex"},
+      display: {xs:visibleChoice ? "flex":"none",md:"flex"},
       flexDirection: "column",
       alignItems: "center",
       rowGap: 3,
@@ -61,9 +64,9 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:active":{color:"blue"}
         }}
         onClick={()=>{
-          navigate("/useProfilePage")
-          setShowIndividualOptions(!showIndividualOptions)
-          setShowOptions(!showOptions)
+          navigate("/useProfilePage:false")
+          setIndividualOptions(!inidividualOptions);
+          setVisibleChoice(!visibleChoice)
         }}
       >
         <PermIdentityIcon />
@@ -82,7 +85,7 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/loginInformation")}
+        onClick={()=>navigate("/loginInformation:false")}
       >
         <VpnKeyIcon />
         <Typography sx={{ fontSize: "25px" }}>
@@ -100,7 +103,7 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/paymentMethod")}
+        onClick={()=>navigate("/paymentMethod:false")}
       >
         <PaymentIcon />
         <Typography sx={{ fontSize: "25px" }}>
@@ -118,7 +121,7 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/notificationDetails")}
+        onClick={()=>navigate("/notificationDetails:false")}
       >
         <NotificationsActiveIcon />
         <Typography sx={{ fontSize: "25px" }}>Notifications</Typography>
@@ -134,7 +137,9 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/travelPreferences")}
+        onClick={()=>{
+            navigate("/travelPreferences:false")
+        }}
       >
         <CardTravelIcon />
         <Typography sx={{ fontSize: "25px" }}>
@@ -152,7 +157,9 @@ const ProfileChoice = ({showOptions,setShowIndividualOptions,setShowOptions,show
           "&:hover": { cursor: "pointer", backgroundColor: "#f2f4f7" },
           "&:active":{color:"blue"}
         }}
-        onClick={()=>navigate("/siteSettings")}
+        onClick={()=>{
+            navigate("/siteSettings:false")
+        }}
       >
         <SettingsIcon />
         <Typography sx={{ fontSize: "25px" }}>Site Settings</Typography>

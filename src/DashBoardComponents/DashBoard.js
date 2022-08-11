@@ -26,14 +26,15 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import HorizontalSlider from "react-horizontal-slider";
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ArtCulture from "../Tours Componnets/ArtCulture";
 import { useNavigate } from "react-router-dom";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
-
+import "./DashBoard.css";
+import Footer from "./Footer";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -42,8 +43,7 @@ function valuetext(value) {
 const minDistance = 10;
 
 const DashBoard = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // const [arts_culture, setArts_culture] = useState(true);
   // const [classes_workspaces, setclasses_workspaces] = useState(true);
   // const [food_drink, setFood_drinnk] = useState(true);
@@ -71,19 +71,17 @@ const DashBoard = () => {
   const [FirstTravel_TransportState, setFirstTravel_TransportState] =
     useState("");
 
-
-const [secondArtState , setsecondArtState]  = useState(true)
-const [secondArtDesignState , setsecondArtDesignState]  = useState(true)
-const [secondTourSightSeeingState, setSecondTourSightSeeingState] = useState(null)
-const [tourState, setTourState] = useState({
-  crusisSailing:false,
-  getAround:false,
-  private_Luxury:false,
-  sightseeingTour:false,
-  toursByDuration:false
-})
-
-
+  const [secondArtState, setsecondArtState] = useState(true);
+  const [secondArtDesignState, setsecondArtDesignState] = useState(true);
+  const [secondTourSightSeeingState, setSecondTourSightSeeingState] =
+    useState(null);
+  const [tourState, setTourState] = useState({
+    crusisSailing: false,
+    getAround: false,
+    private_Luxury: false,
+    sightseeingTour: false,
+    toursByDuration: false,
+  });
 
   const handleChange1 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -110,7 +108,12 @@ const [tourState, setTourState] = useState({
         <Header />
         <Box
           className="mainBody"
-          sx={{ display: "flex", flexDirection: "column", rowGap: 1 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 1,
+            width: "100%",
+          }}
         >
           <Box
             className="FirstMainBody"
@@ -119,210 +122,260 @@ const [tourState, setTourState] = useState({
               flexDirection: "column",
               rowGap: 1,
               backgroundColor: "white",
+              width: { xs: "100%", md: "88%" },
+              padding: { xs: "0%", md: "0% 6% 0% 6%" },
             }}
           >
-            <Typography variant="h5">Tours, Tickets, & Excursions</Typography>
+            <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+              Tours, Tickets, & Excursions
+            </Typography>
             <DesktopDatePicker
-                    label="Date desktop"
-                    inputFormat="MM/dd/yyyy"
-                    value={dateValue}
-                    onChange={handleDateTimeChange}
-                    renderInput={(params) => <TextField sx={{display:{xs:"flex",md:"none"},borderRadius:{xs:"100px"},width:"100%"}} {...params} />}
-                  />
+              inputFormat="MM/dd/yyyy"
+              value={dateValue}
+              onChange={handleDateTimeChange}
+              renderInput={(params) => (
+                <TextField
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    borderRadius: { xs: "100px" },
+                    width: "100%",
+                  }}
+                  {...params}
+                />
+              )}
+            />
           </Box>
           <Box
-            className="horizontalSlider"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              columnGap: 2,
-              backgroundColor: "white",
-              paddingBottom: {xs:"7%",md:"3%"},
               position: "sticky",
               top: "0px",
               left: "0px",
-              paddingTop: "1%",
-              paddingLeft: "1%",
               zIndex: 100,
-              overflow:"auto"
+              padding: { xs: "1% 0% 7% 1%", md: "1% 6% 0% 6%" },
+              width: { xs: "100%", md: "88%" },
+              backgroundColor: "white",
             }}
           >
-            <Box className="toogleButtonForFilters" sx={{display:{xs:"flex",md:"none"}}}>
-              <FilterAltIcon sx={{fontSize:"35px", border:"2px solid black",borderRadius:"20px",padding:"5px"}}/>
-            </Box>
             <Box
+              className="horizontalSlider"
               sx={{
-                border: "2px solid black",
                 display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
                 alignItems: "center",
-                borderRadius: "120px",
+                columnGap: 2,
                 backgroundColor: "white",
+                overflow: "hidden",
+                width: "100%",
+                padding: "1%",
+                overflow: { xs: "auto", md: "hidden" },
               }}
             >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
+              <Box
+                className="toogleButtonForFilters"
+                sx={{ display: { xs: "flex", md: "none" } }}
+              >
+                <FilterAltIcon
+                  sx={{
+                    fontSize: "35px",
+                    border: "2px solid black",
+                    borderRadius: "20px",
+                    padding: "5px",
+                  }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  border: "2px solid black",
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "fit-content",
+                  padding: "1%",
+                  columnGap: 1,
+                  alignItems: "center",
+                  borderRadius: "120px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
+                <Typography sx={{ fontSize: { xs: "15px", md: "18px" } }}>
+                  Day Trips
+                </Typography>
+              </Box>
             </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-            <Box
-              sx={{
-                border: "2px solid black",
-                display: "flex",
-                flexDirection: "row",
-                width: "fit-content",
-                padding: "1%",
-                columnGap: 1,
-                alignItems: "center",
-                borderRadius: "120px",
-                backgroundColor: "white",
-              }}
-            >
-              <Avatar sx={{ bgcolor: "red" }}>N</Avatar>
-              <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>Day Trips</Typography>
-            </Box>
-           
-            </Box>
-           
+          </Box>
 
           {/* second Main Bo0dy  */}
           <Box
             className="SecondMainBody"
             sx={{
-              width: "100%",
+              width: { xs: "100%", md: "88%" },
               display: "flex",
               justifyContent: "space-between",
               columnGap: 2,
               zIndex: 15,
+              padding: { xs: "0%", md: "0% 6% 0% 6%" },
             }}
           >
             {/* Left half Of Secoond Main Body */}
@@ -330,9 +383,9 @@ const [tourState, setTourState] = useState({
               className="LeftHalf"
               sx={{
                 width: "24%",
-                boxShadow: "0px 1px 1px 1px black",
+                boxShadow: "0px 1px 1px 1px #e6e8eb",
                 height: "fit-content",
-                display: {xs:"none",md:"flex"},
+                display: { xs: "none", md: "flex" },
                 flexDirection: "column",
                 rowGap: 3,
                 padding: "1% 1% 1% 1%",
@@ -351,9 +404,12 @@ const [tourState, setTourState] = useState({
                   top: "110px",
                   left: "0px",
                   zIndex: 10000,
+                  rowGap: 2,
                 }}
               >
-                <Typography>When are you travelling?</Typography>
+                <Typography sx={{ fontSize: "20px" }}>
+                  When are you travelling?
+                </Typography>
                 <Box
                   sx={{
                     backgroundColor: "white",
@@ -361,7 +417,8 @@ const [tourState, setTourState] = useState({
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: "70px",
+                    height: "fit-content",
+                    width: "fit-content",
                   }}
                 >
                   <DesktopDatePicker
@@ -386,7 +443,7 @@ const [tourState, setTourState] = useState({
               >
                 {/* popular filters */}
                 <Box className="popular filter">
-                  <Typography sx={{ fontSize: "25px" }}>Popular</Typography>
+                  <Typography sx={{ fontSize: "20px" }}>Popular</Typography>
                   <Box>
                     <Box>
                       <FormGroup>
@@ -420,8 +477,6 @@ const [tourState, setTourState] = useState({
                 </Box>
                 <Divider />
 
-               
-
                 {/* all london tours */}
                 <Box className="All London Tours">
                   <Typography
@@ -430,7 +485,7 @@ const [tourState, setTourState] = useState({
                         cursor: "pointer",
                         textDecoration: "underLine",
                       },
-                      fontSize: "25px",
+                      fontSize: "20px",
                     }}
                   >
                     All Tours
@@ -470,11 +525,10 @@ const [tourState, setTourState] = useState({
                       </Box>
                     </Box>
                   </Box> */}
-                  
+
                   {/* art and culture sub filters */}
                   {/* <ArtCulture /> */}
 
-                  
                   {/* Classes & Workshops */}
                   {/* <Box className="Classes & Workshops">
                     <Box
@@ -695,12 +749,12 @@ const [tourState, setTourState] = useState({
                         justifyContent: "space-between",
                       }}
                       onClick={() => {
-                        if(secondTourSightSeeingState == null){
+                        if (secondTourSightSeeingState == null) {
                           setSecondTourSightSeeingState("");
-                          setTours_sightseeing(!tours_sightseeing)
-                        }else{
+                          setTours_sightseeing(!tours_sightseeing);
+                        } else {
                           setSecondTourSightSeeingState(null);
-                          setTours_sightseeing(!tours_sightseeing)
+                          setTours_sightseeing(!tours_sightseeing);
                         }
                       }}
                     >
@@ -801,21 +855,19 @@ const [tourState, setTourState] = useState({
                       </Box>
                     </Box>
                   </Box> */}
-
                 </Box>
 
-                {
-        secondTourSightSeeingState == "" ?
-        <Box className="mainTravel&TransporationServices"
-        sx={{
-          display:"flex",
-          flexDirection:"column",
-          rowGap:2
-        }}
-        >
-    
-    {/* back Button London Tour*/}
-    {/* <Box className="mainTour,SightSeeing&Cruises" sx={{
+                {secondTourSightSeeingState == "" ? (
+                  <Box
+                    className="mainTravel&TransporationServices"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      rowGap: 2,
+                    }}
+                  >
+                    {/* back Button London Tour*/}
+                    {/* <Box className="mainTour,SightSeeing&Cruises" sx={{
      display:"flex",
      flexDirection:"row",
      columnGap:1,
@@ -829,333 +881,727 @@ const [tourState, setTourState] = useState({
      <Typography>Back To Tour</Typography>
    </Box> */}
 
-   <Box className="mainBody" sx={{
-     paddingLeft:"10%",
-     fontSize:"30px",
-     display:"flex",
-     flexDirection:"column",
-     rowGap:3
-   }}>
-     <Typography>All Tours, Sightseeing & Cruises</Typography>
+                    <Box
+                      className="mainBody"
+                      sx={{
+                        paddingLeft: "10%",
+                        fontSize: "16px",
+                        display: "flex",
+                        flexDirection: "column",
+                        rowGap: 3,
+                      }}
+                    >
+                      <Typography>All Tours, Sightseeing & Cruises</Typography>
 
+                      {/* Cruises & Sailing*/}
+                      <Box
+                        className="Cruises & Sailing"
+                        onClick={() =>
+                          setSecondTourSightSeeingState("Cruises & Sailing")
+                        }
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              "&:hover": {
+                                // textDecoration: "underLine",
+                                cursor: "pointer",
+                              },
+                              fontSize: "16px",
+                            }}
+                          >
+                            Cruises & Sailing
+                          </Typography>
+                          <Box className="arrows">
+                            <KeyboardArrowDownIcon />
+                          </Box>
+                        </Box>
+                      </Box>
 
-     {/* Cruises & Sailing*/}
-     <Box className="Cruises & Sailing"
-     onClick={()=>setSecondTourSightSeeingState("Cruises & Sailing")}
-     >
-         <Box
-           sx={{
-             display: "flex",
-             justifyContent: "space-between",
-           }}
-         >
-           <Typography
-             sx={{
-               "&:hover": {
-                 // textDecoration: "underLine",
-                 cursor: "pointer",
-               },
-             }}
-           >
-             Cruises & Sailing
-           </Typography>
-           <Box
-             className="arrows"
-           >
-             <KeyboardArrowDownIcon />
-           </Box>
-         </Box>
-       </Box>
+                      {/* How To Get Around*/}
+                      <Box
+                        className="How To Get Around"
+                        onClick={() =>
+                          setSecondTourSightSeeingState("How To Get Around")
+                        }
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              "&:hover": {
+                                // textDecoration: "underLine",
+                                cursor: "pointer",
+                              },
+                              fontSize: "16px",
+                            }}
+                          >
+                            How To Get Around
+                          </Typography>
+                          <Box className="arrows">
+                            <KeyboardArrowDownIcon />
+                          </Box>
+                        </Box>
+                      </Box>
 
+                      {/* Private And Luxury*/}
+                      <Box
+                        className="Private And Luxury"
+                        //  onClick={()=>setFirstTour_sightseeingState("SightSeeing Tours")}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              "&:hover": {
+                                // textDecoration: "underLine",
+                                cursor: "pointer",
+                              },
+                              fontSize: "16px",
+                            }}
+                          >
+                            Private And Luxury
+                          </Typography>
+                        </Box>
+                      </Box>
 
-       
-             
-     {/* How To Get Around*/}
-     <Box className="How To Get Around"
-     onClick={()=>setSecondTourSightSeeingState("How To Get Around")}
-     >
-         <Box
-           sx={{
-             display: "flex",
-             justifyContent: "space-between",
-           }}
-         >
-           <Typography
-             sx={{
-               "&:hover": {
-                 // textDecoration: "underLine",
-                 cursor: "pointer",
-               },
-             }}
-           >
-             How To Get Around
-           </Typography>
-           <Box
-             className="arrows"
-           >
-              <KeyboardArrowDownIcon />
-           </Box>
-         </Box>
-       </Box>
+                      {/* SightSeeing Tours*/}
+                      <Box
+                        className="SightSeeing Tours"
+                        onClick={() =>
+                          setSecondTourSightSeeingState("SightSeeing Tours")
+                        }
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              "&:hover": {
+                                // textDecoration: "underLine",
+                                cursor: "pointer",
+                              },
+                              fontSize: "16px",
+                            }}
+                          >
+                            SightSeeing Tours
+                          </Typography>
+                          <Box className="arrows">
+                            <KeyboardArrowDownIcon />
+                          </Box>
+                        </Box>
+                      </Box>
 
-
-
-
-             {/* Private And Luxury*/}
-     <Box className="Private And Luxury"
-    //  onClick={()=>setFirstTour_sightseeingState("SightSeeing Tours")}
-     >
-         <Box
-           sx={{
-             display: "flex",
-             justifyContent: "space-between",
-           }}
-         >
-           <Typography
-             sx={{
-               "&:hover": {
-                 // textDecoration: "underLine",
-                 cursor: "pointer",
-               },
-             }}
-           >
-             Private And Luxury
-           </Typography>
-         </Box>
-       </Box>
-
-
-
-                  {/* SightSeeing Tours*/}
-     <Box className="SightSeeing Tours"
-     onClick={()=>setSecondTourSightSeeingState("SightSeeing Tours")}
-     >
-         <Box
-           sx={{
-             display: "flex",
-             justifyContent: "space-between",
-           }}
-         >
-           <Typography
-             sx={{
-               "&:hover": {
-                 // textDecoration: "underLine",
-                 cursor: "pointer",
-               },
-             }}
-           >
-             SightSeeing Tours
-           </Typography>
-           <Box
-             className="arrows"
-           >
-             <KeyboardArrowDownIcon />
-           </Box>
-         </Box>
-       </Box>
-
-
-
-
-                 {/* Tours By Duration*/}
-     <Box className="Tours By Duration"
-     onClick={()=>setSecondTourSightSeeingState("Tours By Duration")}
-     >
-         <Box
-           sx={{
-             display: "flex",
-             justifyContent: "space-between",
-           }}
-         >
-           <Typography
-             sx={{
-               "&:hover": {
-                 // textDecoration: "underLine",
-                 cursor: "pointer",
-               },
-             }}
-           >
-             Tours By Duration
-           </Typography>
-           <Box
-             className="arrows"
-           >
-              <KeyboardArrowDownIcon />
-           </Box>
-         </Box>
-       </Box>
-
-
-   </Box>
-
-   </Box>
-   : secondTourSightSeeingState == "Cruises & Sailing" ?
-   <Box className="Cruises & Sailing" sx={{
-    display:"flex",
-    flexDirection:"column",
-    rowGap:3,
-    paddingLeft:"10%"
-  }}>
-
-       {/* back Button Cruises & Sailing*/}
-    <Box className="BackButtonCruises & Sailing" sx={{
-     display:"flex",
-     flexDirection:"row",
-     columnGap:1,
-    //  paddingLeft:"10%"
-   }}>
-     <KeyboardBackspaceIcon 
-     sx={{
-       "&:hover":{cursor:"pointer"}
-     }}
-     onClick={()=>{
-      setSecondTourSightSeeingState("");
-      setTourState({...tourState,crusisSailing:!tourState.crusisSailing})
-     }}
-     />
-     <Typography>Tours, SightSeeing & Cruises</Typography>
-   </Box>
-   <Typography>All Cruises & Sailing</Typography>
-   <Typography>Catamaran Cruises</Typography>
-   <Typography>Day Cruises</Typography>
-   <Typography>Dinner Cruises</Typography>
-   <Typography>Gandala Cruises</Typography>
-   <Typography>Night Cruises</Typography>
-   <Typography>Parts of Call Tours</Typography>
-   <Typography>Share Excursions</Typography>
-   <Typography>SightSeeing Cruises</Typography>
-  </Box>
-  : secondTourSightSeeingState == "How To Get Around" ?
-  <Box className="How To Get Around" sx={{
-    display:"flex",
-    flexDirection:"column",
-    rowGap:3,
-    paddingLeft:"10%"
-  }}>
-
-       {/* back Button How To Get Around*/}
-    <Box className="BackButtonHow To Get Around" sx={{
-     display:"flex",
-     flexDirection:"row",
-     columnGap:1,
-    //  paddingLeft:"10%"
-   }}>
-     <KeyboardBackspaceIcon 
-     sx={{
-       "&:hover":{cursor:"pointer"}
-     }}
-     onClick={()=>{
-      setSecondTourSightSeeingState("");
-      setTourState({...tourState,getAround:!tourState.getAround})
-     }}
-     />
-     <Typography>Tours, SightSeeing & Cruises</Typography>
-   </Box>
-   <Typography>All How To Get Around</Typography>
-   <Typography>Air Tours</Typography>
-   <Typography>Bike Rentals</Typography>
-   <Typography>Bike Tours</Typography>
-   <Typography>Bus Tours</Typography>
-   <Typography>Car Tours</Typography>
-   <Typography>Classic Car Tours</Typography>
-   <Typography>E-Bike Tours</Typography>
-   <Typography>Helicopter Tours</Typography>
-   <Typography>Hot Air Balloon Rides</Typography>
-   <Typography>Limousine Tours</Typography>
-   <Typography>Luxury Car Tours</Typography>
-   <Typography>Mountain Bike Tours</Typography>
-   <Typography>Pedicab Tours</Typography>
-   <Typography>Power Boats</Typography>
-   <Typography>Public Transporatation Tours</Typography>
-   <Typography>Rail Tours</Typography>
-   <Typography>Rentals</Typography>
-   <Typography>Road Trip</Typography>
-   <Typography>Self Giuded Tours</Typography>
-   <Typography>Speed Boat Rentals</Typography>
-   <Typography>Vespa, Scooter & Moped Tours</Typography>
-   <Typography>Walking Tours</Typography>
-   <Typography>Water Tours</Typography>
-  </Box>
-    : secondTourSightSeeingState == "SightSeeing Tours" ? 
-    <Box className="SightSeeing Tours" sx={{
-      display:"flex",
-      flexDirection:"column",
-      rowGap:3,
-      paddingLeft:"10%"
-    }}>
-  
-         {/* back Button SightSeeing Tours*/}
-      <Box className="BackButtonSightSeeing Tours" sx={{
-       display:"flex",
-       flexDirection:"row",
-       columnGap:1,
-      //  paddingLeft:"10%"
-     }}>
-       <KeyboardBackspaceIcon 
-       sx={{
-         "&:hover":{cursor:"pointer"}
-       }}
-       onClick={()=>{
-        setSecondTourSightSeeingState("");
-        setTourState({...tourState,sightseeingTour:!tourState.sightseeingTour})
-       }}
-       />
-       <Typography>Tours, SightSeeing & Cruises</Typography>
-     </Box>
-     <Typography>All SightSeeing Tours</Typography>
-     <Typography>Adventure Tours</Typography>
-     <Typography>City Tours</Typography>
-     <Typography>Hop on Hop off Buses</Typography>
-     <Typography>Night Tours</Typography>
-     <Typography>Observation Decks</Typography>
-     <Typography>Private SightSeeing Tours</Typography>
-     <Typography>SightSeeing Cruises</Typography>
-     <Typography>SightSeeing Passes</Typography>
-     <Typography>Skip The Line Tickets</Typography>
-     <Typography>SkyScrappers & Towers</Typography>
-    </Box>
-    : secondTourSightSeeingState == "Tours By Duration" ?
-    <Box className="Tours By Duration" sx={{
-      display:"flex",
-      flexDirection:"column",
-      rowGap:3,
-      paddingLeft:"10%"
-    }}>
-  
-         {/* back Button Tours By Duration*/}
-      <Box className="BackButtonTours By Duration" sx={{
-       display:"flex",
-       flexDirection:"row",
-       columnGap:1,
-      //  paddingLeft:"10%"
-     }}>
-       <KeyboardBackspaceIcon 
-       sx={{
-         "&:hover":{cursor:"pointer"}
-       }}
-       onClick={()=>{
-        setSecondTourSightSeeingState("");
-        setTourState({...tourState,toursByDuration:!tourState.toursByDuration})
-       }}
-       />
-       <Typography>Tours, SightSeeing & Cruises</Typography>
-     </Box>
-     <Typography>All Tours By Duration</Typography>
-     <Typography>Day Trips</Typography>
-     <Typography>Full-Day Tours</Typography>
-     <Typography>Half-Day Tours</Typography>
-     <Typography>Layover Tours</Typography>
-     <Typography>Multi-Day Tours</Typography>
-     <Typography>Overnight Tours</Typography>
-    </Box>
-    : null
-      }
+                      {/* Tours By Duration*/}
+                      <Box
+                        className="Tours By Duration"
+                        onClick={() =>
+                          setSecondTourSightSeeingState("Tours By Duration")
+                        }
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              "&:hover": {
+                                // textDecoration: "underLine",
+                                cursor: "pointer",
+                              },
+                              fontSize: "16px",
+                            }}
+                          >
+                            Tours By Duration
+                          </Typography>
+                          <Box className="arrows">
+                            <KeyboardArrowDownIcon />
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                ) : secondTourSightSeeingState == "Cruises & Sailing" ? (
+                  <Box
+                    className="Cruises & Sailing"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      rowGap: 3,
+                      paddingLeft: "10%",
+                    }}
+                  >
+                    {/* back Button Cruises & Sailing*/}
+                    <Box
+                      className="BackButtonCruises & Sailing"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        columnGap: 1,
+                        //  paddingLeft:"10%"
+                      }}
+                    >
+                      <KeyboardBackspaceIcon
+                        sx={{
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                        onClick={() => {
+                          setSecondTourSightSeeingState("");
+                          setTourState({
+                            ...tourState,
+                            crusisSailing: !tourState.crusisSailing,
+                          });
+                        }}
+                      />
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        Tours, SightSeeing & Cruises
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      All Cruises & Sailing
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Catamaran Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Day Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Dinner Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Gandala Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Night Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Parts of Call Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Share Excursions
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      SightSeeing Cruises
+                    </Typography>
+                  </Box>
+                ) : secondTourSightSeeingState == "How To Get Around" ? (
+                  <Box
+                    className="How To Get Around"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      rowGap: 3,
+                      paddingLeft: "10%",
+                    }}
+                  >
+                    {/* back Button How To Get Around*/}
+                    <Box
+                      className="BackButtonHow To Get Around"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        columnGap: 1,
+                        //  paddingLeft:"10%"
+                      }}
+                    >
+                      <KeyboardBackspaceIcon
+                        sx={{
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                        onClick={() => {
+                          setSecondTourSightSeeingState("");
+                          setTourState({
+                            ...tourState,
+                            getAround: !tourState.getAround,
+                          });
+                        }}
+                      />
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        Tours, SightSeeing & Cruises
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      All How To Get Around
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Air Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Bike Rentals
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Bike Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Bus Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Car Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Classic Car Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      E-Bike Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Helicopter Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Hot Air Balloon Rides
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Limousine Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Luxury Car Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Mountain Bike Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Pedicab Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Power Boats
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Public Transporatation Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Rail Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Rentals
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Road Trip
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Self Giuded Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Speed Boat Rentals
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Vespa, Scooter & Moped Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Walking Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Water Tours
+                    </Typography>
+                  </Box>
+                ) : secondTourSightSeeingState == "SightSeeing Tours" ? (
+                  <Box
+                    className="SightSeeing Tours"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      rowGap: 3,
+                      paddingLeft: "10%",
+                    }}
+                  >
+                    {/* back Button SightSeeing Tours*/}
+                    <Box
+                      className="BackButtonSightSeeing Tours"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        columnGap: 1,
+                        //  paddingLeft:"10%"
+                      }}
+                    >
+                      <KeyboardBackspaceIcon
+                        sx={{
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                        onClick={() => {
+                          setSecondTourSightSeeingState("");
+                          setTourState({
+                            ...tourState,
+                            sightseeingTour: !tourState.sightseeingTour,
+                          });
+                        }}
+                      />
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        Tours, SightSeeing & Cruises
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      All SightSeeing Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Adventure Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      City Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Hop on Hop off Buses
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Night Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Observation Decks
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Private SightSeeing Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      SightSeeing Cruises
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      SightSeeing Passes
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Skip The Line Tickets
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      SkyScrappers & Towers
+                    </Typography>
+                  </Box>
+                ) : secondTourSightSeeingState == "Tours By Duration" ? (
+                  <Box
+                    className="Tours By Duration"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      rowGap: 3,
+                      paddingLeft: "10%",
+                    }}
+                  >
+                    {/* back Button Tours By Duration*/}
+                    <Box
+                      className="BackButtonTours By Duration"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        columnGap: 1,
+                        //  paddingLeft:"10%"
+                      }}
+                    >
+                      <KeyboardBackspaceIcon
+                        sx={{
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                        onClick={() => {
+                          setSecondTourSightSeeingState("");
+                          setTourState({
+                            ...tourState,
+                            toursByDuration: !tourState.toursByDuration,
+                          });
+                        }}
+                      />
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        Tours, SightSeeing & Cruises
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      All Tours By Duration
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Day Trips
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Full-Day Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Half-Day Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Layover Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Multi-Day Tours
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "14px", md: "16px" },
+                        "&:hover": { cursor: "pointer" },
+                      }}
+                    >
+                      Overnight Tours
+                    </Typography>
+                  </Box>
+                ) : null}
 
                 <Divider />
 
                 {/* price filter */}
                 <Box className="price Filter">
-                  <Typography>Price</Typography>
+                  <Typography sx={{ fontSize: "20px" }}>Price</Typography>
                   <Slider
                     getAriaLabel={() => "Minimum distance"}
                     value={value1}
@@ -1213,7 +1659,7 @@ const [tourState, setTourState] = useState({
 
                 {/* Time of day */}
                 <Box className="TimeOfDay">
-                  <Typography sx={{ fontSize: "16px" }}>Time Of Day</Typography>
+                  <Typography sx={{ fontSize: "20px" }}>Time Of Day</Typography>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox color="success" />}
@@ -1231,31 +1677,46 @@ const [tourState, setTourState] = useState({
 
                 {/* Rating */}
                 <Box className="ratings">
-                  <Typography sx={{ fontSize: "16px" }}>Rating</Typography>
+                  <Typography sx={{ fontSize: "20px" }}>Rating</Typography>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Box className="5star">
+                    <Box
+                      className="5star"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
                       <Checkbox />
                       <Rating name="read-only" value={5} readOnly />
                     </Box>
-                    <Box className="4star" sx={{ display: "flex" }}>
+                    <Box
+                      className="4star"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
                       <Checkbox />
                       <Rating name="read-only" value={4} readOnly />
-                      <Typography>& up</Typography>
+                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
                     </Box>
-                    <Box className="3star" sx={{ display: "flex" }}>
+                    <Box
+                      className="3star"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
                       <Checkbox />
                       <Rating name="read-only" value={3} readOnly />
-                      <Typography>& up</Typography>
+                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
                     </Box>
-                    <Box className="2star" sx={{ display: "flex" }}>
+                    <Box
+                      className="2star"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
                       <Checkbox />
                       <Rating name="read-only" value={2} readOnly />
-                      <Typography>& up</Typography>
+                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
                     </Box>
-                    <Box className="1star" sx={{ display: "flex" }}>
+                    <Box
+                      className="1star"
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
                       <Checkbox />
                       <Rating name="read-only" value={1} readOnly />
-                      <Typography>& up</Typography>
+                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -1264,7 +1725,7 @@ const [tourState, setTourState] = useState({
 
                 {/* Specials */}
                 <Box className="Specials">
-                  <Typography sx={{ fontSize: "16px" }}>Specials</Typography>
+                  <Typography sx={{ fontSize: "20px" }}>Specials</Typography>
                   <FormGroup>
                     <FormControlLabel
                       disabled
@@ -1319,7 +1780,10 @@ const [tourState, setTourState] = useState({
             <Box
               className="rightHalf"
               sx={{
-                width: {xs:"100%",md:"74%"},
+                width: { xs: "100%", md: "74%" },
+                display: "flex",
+                flexDirection: "column",
+                rowGap: 2,
               }}
             >
               <Box className="countAvailableContents">
@@ -1334,22 +1798,22 @@ const [tourState, setTourState] = useState({
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={()=>navigate("/TourDeatils")}
+                  onClick={() => navigate("/TourDeatils")}
                 >
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
                       borderRadius: "20px",
                     }}
                   />
@@ -1358,13 +1822,27 @@ const [tourState, setTourState] = useState({
                     className="placeDetails"
                     sx={{
                       display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
                     }}
                   >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
                         Stonehenge, Windsor Castle and Bath with Pub Lunch in
                         Lacock
                       </Typography>
@@ -1372,31 +1850,50 @@ const [tourState, setTourState] = useState({
                         className="ratingBox"
                         sx={{ display: "flex", columnGap: 1 }}
                       >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
                       </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
                       <Box
                         className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
                       </Box>
                       <Box
                         className="concellationBox"
@@ -1404,39 +1901,71 @@ const [tourState, setTourState] = useState({
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
                       </Box>
                     </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
+                <Divider />
                 <Box
                   className="firstImage"
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={()=>navigate("/TourDeatils")}
+                  onClick={() => navigate("/TourDeatils")}
                 >
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
                       borderRadius: "20px",
                     }}
                   />
@@ -1445,13 +1974,27 @@ const [tourState, setTourState] = useState({
                     className="placeDetails"
                     sx={{
                       display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
                     }}
                   >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
                         Stonehenge, Windsor Castle and Bath with Pub Lunch in
                         Lacock
                       </Typography>
@@ -1459,31 +2002,50 @@ const [tourState, setTourState] = useState({
                         className="ratingBox"
                         sx={{ display: "flex", columnGap: 1 }}
                       >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
                       </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
                       <Box
                         className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
                       </Box>
                       <Box
                         className="concellationBox"
@@ -1491,822 +2053,71 @@ const [tourState, setTourState] = useState({
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
                       </Box>
                     </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
                       </Typography>
                       <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
-                          columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
                       </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
-                <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
                     </Box>
                   </Box>
                 </Box>
-                 <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box>
-                 <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box>
-                 <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
+                <Divider />
                 <Box
                   className="firstImage"
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={()=>navigate("/TourDeatils")}
+                  onClick={() => navigate("/TourDeatils")}
                 >
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
                       borderRadius: "20px",
                     }}
                   />
@@ -2315,13 +2126,27 @@ const [tourState, setTourState] = useState({
                     className="placeDetails"
                     sx={{
                       display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
                     }}
                   >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
                         Stonehenge, Windsor Castle and Bath with Pub Lunch in
                         Lacock
                       </Typography>
@@ -2329,31 +2154,50 @@ const [tourState, setTourState] = useState({
                         className="ratingBox"
                         sx={{ display: "flex", columnGap: 1 }}
                       >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
                       </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
                       <Box
                         className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
                       </Box>
                       <Box
                         className="concellationBox"
@@ -2361,126 +2205,71 @@ const [tourState, setTourState] = useState({
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
                       </Box>
                     </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-                 <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
+                <Divider />
                 <Box
                   className="firstImage"
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={()=>navigate("/TourDeatils")}
+                  onClick={() => navigate("/TourDeatils")}
                 >
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
                       borderRadius: "20px",
                     }}
                   />
@@ -2489,13 +2278,27 @@ const [tourState, setTourState] = useState({
                     className="placeDetails"
                     sx={{
                       display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
                     }}
                   >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
                         Stonehenge, Windsor Castle and Bath with Pub Lunch in
                         Lacock
                       </Typography>
@@ -2503,31 +2306,50 @@ const [tourState, setTourState] = useState({
                         className="ratingBox"
                         sx={{ display: "flex", columnGap: 1 }}
                       >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
                       </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
                       <Box
                         className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
                       </Box>
                       <Box
                         className="concellationBox"
@@ -2535,126 +2357,71 @@ const [tourState, setTourState] = useState({
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
                       </Box>
                     </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-                 <Box
-                  className="firstImage"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
-                    "&:hover": {
-                      cursor: "pointer",
-                      boxShadow: "0px 0px 5px 0px #505752",
-                    },
-                  }}
-                  onClick={()=>navigate("/TourDeatils")}
-                >
-                  <Box
-                    component={"img"}
-                    src={Image1}
-                    alt="place image"
-                    sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
-                      borderRadius: "20px",
-                    }}
-                  />
-
-                  <Box
-                    className="placeDetails"
-                    sx={{
-                      display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
-                    }}
-                  >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
-                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
-                        Lacock
-                      </Typography>
-                      <Box
-                        className="ratingBox"
-                        sx={{ display: "flex", columnGap: 1 }}
-                      >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
-                      </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
-                      <Box
-                        className="AccessTime"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
-                      </Box>
-                      <Box
-                        className="concellationBox"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          columnGap: 1,
-                        }}
-                      >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
-                      </Box>
-                    </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
-                    </Box>
-                  </Box>
-                </Box> 
+                <Divider />
                 <Box
                   className="firstImage"
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: 3,
-                    padding: "2%",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={()=>navigate("/TourDeatils")}
+                  onClick={() => navigate("/TourDeatils")}
                 >
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: {xs:"150px",md:"250px"},
-                      maxHeight: {xs:"150px",md:"250px"},
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
                       borderRadius: "20px",
                     }}
                   />
@@ -2663,13 +2430,27 @@ const [tourState, setTourState] = useState({
                     className="placeDetails"
                     sx={{
                       display: "flex",
-                      flexDirection: {xs:"column",md:"row"},
-                      padding: {xs:"0",md:"1%"},
-                      width:"900px"
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
                     }}
                   >
-                    <Box className="placeDescriptions">
-                      <Typography sx={{ fontSize: {xs:"17px",md:"20px"}, fontWeight: "bold" }}>
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
                         Stonehenge, Windsor Castle and Bath with Pub Lunch in
                         Lacock
                       </Typography>
@@ -2677,31 +2458,50 @@ const [tourState, setTourState] = useState({
                         className="ratingBox"
                         sx={{ display: "flex", columnGap: 1 }}
                       >
-                        <Rating name="read-only" value={4} readOnly sx={{fontSize:{xs:"15px",md:"20px"}}}/>
-                        <Typography sx={{fontSize:{xs:"15px",md:"20px"}}}>3047</Typography>
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
                       </Box>
-                      <Typography sx={{ display:{xs:"none",md:"flex"},fontSize: "15px" }}>
-                        Avoid the hassle of renting a car to see rural England’s
-                        highlights with help from this full-day tour which
-                        includes round-trip transport from London. Choose from
-                        two options to find what best suits your preferences,
-                        and travel by air-conditioned coach bus with onboard
-                        Wi-Fi. You can either combine a visit to Stonehenge with
-                        a pub lunch in Lacock and a walking tour of Windsor, or
-                        opt to visit both Windsor Castle and Stonehenge with a
-                        break for a traditional English pub lunch. Both options
-                        also pass by the city of Bath, hometown of Jane Austen.
-                      </Typography>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
                       <Box
                         className="AccessTime"
                         sx={{
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <AccessTimeIcon sx={{fontSize:{xs:"17px",md:"22px"}}} />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}}>12 hours 30 minutes</Typography>
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
                       </Box>
                       <Box
                         className="concellationBox"
@@ -2709,15 +2509,654 @@ const [tourState, setTourState] = useState({
                           display: "flex",
                           flexDirection: "row",
                           columnGap: 1,
+                          alignItems: "center",
                         }}
                       >
-                        <CheckIcon  sx={{fontSize:{xs:"17px",md:"22px"}}}  />
-                        <Typography sx={{fontSize:{xs:"15px",md:"18px"}}} >Free Cancellation</Typography>
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
                       </Box>
                     </Box>
-                    <Box className="PriceDetails" sx={{display:{xs:"flex",md:"flex"},flexDirection:{xs:"row",md:"column"},justifyContent:{xs:"flex-start",md:"flex-start"},alignItems:{xs:"center",md:"flex-end"}}}>
-                      <Typography>from</Typography>
-                      <Box sx={{display:"flex",flexDirection:"row",alignItems:"center"}}><CurrencyRupeeIcon /><Typography>8747.68</Typography></Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                  onClick={() => navigate("/TourDeatils")}
+                >
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
+                      borderRadius: "20px",
+                    }}
+                  />
+
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                  onClick={() => navigate("/TourDeatils")}
+                >
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
+                      borderRadius: "20px",
+                    }}
+                  />
+
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                  onClick={() => navigate("/TourDeatils")}
+                >
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
+                      borderRadius: "20px",
+                    }}
+                  />
+
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "0%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                  onClick={() => navigate("/TourDeatils")}
+                >
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "150px", md: "250px" },
+                      maxHeight: { xs: "150px", md: "250px" },
+                      borderRadius: "20px",
+                    }}
+                  />
+
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
@@ -2725,6 +3164,7 @@ const [tourState, setTourState] = useState({
             </Box>
           </Box>
         </Box>
+        <Footer />
       </Box>
     </LocalizationProvider>
   );

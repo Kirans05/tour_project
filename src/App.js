@@ -26,9 +26,11 @@ import NotificationPage from './userInformation/NotificationPage'
 import TravelPireferences from './userInformation/TravelPireferences'
 import SiteSettings from './userInformation/SiteSettings'
 import WishList from './DashBoardComponents/WishList'
+import UserSettings from './userInformation/UserSettings'
+import { Box } from '@mui/material'
 const App = () => {
   return (
-    <div>
+    <Box>
     <Routes>
       <Route path='/' element={<DashBoard />} />
       <Route path='/signup' element={<SignUpPage />} />
@@ -48,15 +50,10 @@ const App = () => {
       <Route path='/AffiliatePage' element={<AffiliatePage />} />
       <Route path='/NewsPage' element={<NewsPage />} />
       <Route path='/blogPage' element={<BlogPage />} />
-      <Route path='/useProfilePage' element={<UserProfile />} />
-      <Route path='/loginInformation' element={<UserLoginInformationPage />} />
-      <Route path='/paymentMethod' element={<PaymentMethodPage />} />
-      <Route path='/notificationDetails' element={<NotificationPage />} />
-      <Route path='/travelPreferences' element={<TravelPireferences />} />
-      <Route path='/siteSettings' element={<SiteSettings />} />
       <Route path='/wishList' element={<WishList />} />
+      <Route path='/userProfile' element={<UserSettings />} />
     </Routes>
-    </div>
+    </Box>
   )
 }
 

@@ -1,11 +1,21 @@
 import { Box,Switch,Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
 import Header from '../DashBoardComponents/Header'
 import ProfileChoice from './ProfileChoice'
+import Footer from "../DashBoardComponents/Footer";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const NotificationPage = () => {
+
+  const {value} = useParams()
+    const [visibleChoice, setVisibleChoice] = useState(value[1] == "t" ? true : false);
+    const [inidividualOptions, setIndividualOptions] = useState(value[1] == "t" ? false : true)
+
   return (
     <Box>
     <Header />
@@ -18,18 +28,32 @@ const NotificationPage = () => {
         columnGap: 2,
       }}
     >
-      <ProfileChoice />
+                   <ProfileChoice setIndividualOptions={setIndividualOptions} inidividualOptions={inidividualOptions} visibleChoice={visibleChoice} setVisibleChoice={setVisibleChoice}/>
+
       <Box
         className="rightPart"
         sx={{
-          width: "70%",
           border: "2px solid #e6e7e8",
-          display: "flex",
+          width: {xs:"100%",md:"70%"},
+          display:{xs:inidividualOptions ? "flex" : "none",md:"flex"},
           flexDirection: "column",
           rowGap: 2,
           padding: "2%",
         }}
       >
+         <Box className="backButton" 
+            sx={{
+              display:{xs:"flex",md:"none"},
+              alignItems:"center"
+            }}
+            onClick={()=>{
+              setIndividualOptions(!inidividualOptions)
+              setVisibleChoice(!visibleChoice)
+            }}
+            >
+              <ArrowBackIosIcon />
+              <Typography sx={{fontSize:"20px"}}>Profile</Typography>
+            </Box>
         <Typography sx={{fontSize:"30px",fontWeight:"bold"}}>Notifications</Typography>
         <Typography>Marketing emails</Typography>
         <Box sx={{

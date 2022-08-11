@@ -20,14 +20,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProfileChoice from "./ProfileChoice";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Footer from "../DashBoardComponents/Footer";
+
 
 const UserLoginInformationPage = () => {
 
     const navigate = useNavigate()
-    const [showOptions, setShowOptions] = useState(true)
-    const [showLoginOptions,setShowLoginOptions] = useState(false)
+    const {value} = useParams()
+    const [visibleChoice, setVisibleChoice] = useState(value[1] == "t" ? true : false);
+    const [inidividualOptions, setIndividualOptions] = useState(value[1] == "t" ? false : true)
 
   return (
     <Box>
@@ -41,19 +45,35 @@ const UserLoginInformationPage = () => {
           columnGap: 2,
         }}
       >
-        <ProfileChoice setShowOptions={setShowOptions} showOptions={showOptions}/>
+        <ProfileChoice setIndividualOptions={setIndividualOptions} inidividualOptions={inidividualOptions} visibleChoice={visibleChoice} setVisibleChoice={setVisibleChoice}/>
         <Box
           className="rightPart"
           sx={{
-            width: "70%",
+            width: {xs:"100%",md:"70%"},
             border: "2px solid #e6e7e8",
             padding: "2%",
-            display:{xs:showLoginOptions ? "flex" : "none",md:"flex"},
+            display:{xs:inidividualOptions ? "flex" : "none",md:"flex"},
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "space-between",
+            rowGap:2
           }}
         >
+
+<Box className="backButton" 
+            sx={{
+              display:{xs:"flex",md:"none"},
+              alignItems:"center"
+            }}
+            onClick={()=>{
+              setIndividualOptions(!inidividualOptions)
+              setVisibleChoice(!visibleChoice)
+            }}
+            >
+              <ArrowBackIosIcon />
+              <Typography sx={{fontSize:"20px"}}>Profile</Typography>
+            </Box>
+
           <Box
             className="loginInfoDetails"
             sx={{
@@ -62,6 +82,7 @@ const UserLoginInformationPage = () => {
               alignItems: "flex-start",
               justifyContent: "flex-start",
               columnGap: 1,
+              rowGap:2
             }}
           >
             <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
