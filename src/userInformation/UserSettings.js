@@ -70,12 +70,16 @@ const UserSettings = () => {
               border: "2px solid #e6e7e8",
               display: {xs:displayChoice ? "flex" : "none" ,md:"flex"},
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: {xs:"flex-start",md:"center"},
               rowGap: 3,
               padding: "1% 1% 2% 1%",
             }}
           >
-            <Box className="profileImage">
+            <Box className="profileImage"
+            sx={{
+              alignSelf:{xs:"center",md:"none"}
+            }}
+            >
               <Avatar sx={{ bgcolor: "red", width: "70px", height: "70px" }}>
                 OP
               </Avatar>

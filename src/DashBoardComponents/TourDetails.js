@@ -1,4 +1,12 @@
-import { Box, Button, Rating, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import Header from "./Header";
 import Image1 from "../images/img1.webp";
@@ -20,14 +28,39 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { display } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import {useSelector,useDispatch} from "react-redux"
+import {addTravelMembers, booking_date_day} from "../redux/reducer/reducer"
+import {addChild, removeChild, addAdults, removeAdults, tourBookingDate} from "../redux/action/index"
+
 
 const TourDetails = () => {
+
+  // redux states and dispatch functions
+  const memberPresentstate = useSelector((state) => state.addTravelMembers)
+  const memberBookingDate = useSelector((state) => state.booking_date_day)
+  const dispatch = useDispatch()
+
+
   const navigate = useNavigate();
   const [value, setValue] = React.useState(new Date());
   const [peopleCount, setPeopleCount] = useState("2 Adults");
   const [Availability, setAvailability] = useState(false);
+  const [menuVisible, setmenuVisible] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleChange = (newValue) => {
+    dispatch(tourBookingDate(newValue))
+
     setValue(newValue);
   };
 
@@ -249,6 +282,7 @@ const TourDetails = () => {
                   padding: { xs: "5% 5% 5% 5%", md: "2% 3% 3% 3%" },
                   backgroundColor: "#ebeff5",
                   rowGap: 2,
+                  position: "relative",
                 }}
               >
                 <Box
@@ -300,6 +334,8 @@ const TourDetails = () => {
                       />
                     )}
                   />
+
+                  {/* no of people adult or child */}
                   <Box
                     className="noOfPeople"
                     sx={{
@@ -311,12 +347,196 @@ const TourDetails = () => {
                       "&:hover": { cursor: "pointer" },
                       backgroundColor: "white",
                     }}
+                    // onClick={()=>setmenuVisible(!menuVisible)}
+                    onClick={handleClick}
                   >
                     <PermIdentityIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      {peopleCount}
+                      {memberPresentstate.adult} Adult, {memberPresentstate.child} Child
                     </Typography>
                   </Box>
+
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    sx={{
+                      marginTop:{xs:"5px",md:"5px"}
+                    }}
+                  >
+                    <MenuItem
+                      sx={{
+                        width: "360px",
+                        "&:hover": {
+                          cursor: "pointer",
+                          backgroundColor: "white",
+                        },
+                      }}
+                    >
+                      <Box
+                        className="Adults"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          width: { xs: "100%", md: "100%" },
+                        }}
+                      >
+                        <Box
+                          className="leftPart"
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            justifyContent: "flex-start",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            Adult (18-110)
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            Minimum: 1, Maximum: 15
+                          </Typography>
+                        </Box>
+                        <Box
+                          className="rightPart"
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            columnGap: 2,
+                          }}
+                        >
+                          <RemoveCircleOutlineIcon
+                            sx={{
+                              fontSize: { xs: "16px", md: "20px" },
+                            }}
+                           
+                            onClick={()=>{
+                              if(memberPresentstate.adult > 2){
+                                dispatch(removeAdults(1))
+                              }
+                            }}
+                          />
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            {memberPresentstate.adult}
+                          </Typography>
+                          <AddCircleOutlineIcon
+                            sx={{
+                              fontSize: { xs: "16px", md: "20px" },
+                            }}
+                            onClick={()=>{
+                              if(memberPresentstate.adult < 15){
+                                dispatch(addAdults(1))
+                              }
+                            }}
+                          />
+                        </Box>
+                      </Box>
+                    </MenuItem>
+                    <MenuItem
+                      sx={{
+                        width: "360px",
+                        "&:hover": {
+                          cursor: "pointer",
+                          backgroundColor: "white",
+                        },
+                      }}
+                    >
+                      <Box
+                        className="child"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          width: { xs: "100%", md: "100%" },
+                        }}
+                      >
+                        <Box
+                          className="leftPart"
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            justifyContent: "flex-start",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            child (5-17)
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            Minimum: 0, Maximum: 15
+                          </Typography>
+                        </Box>
+                        <Box
+                          className="rightPart"
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            columnGap: 2,
+                          }}
+                        >
+                          <RemoveCircleOutlineIcon
+                          
+                            sx={{
+                              fontSize: { xs: "16px", md: "20px" },
+                            }}
+                            onClick={()=>{
+                              if(memberPresentstate.child >0){
+                                dispatch(removeChild(1))
+                              }
+                            }}
+                          />
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "12px", md: "14px" },
+                            }}
+                          >
+                            {memberPresentstate.child}
+                          </Typography>
+                          <AddCircleOutlineIcon
+                            sx={{
+                              fontSize: { xs: "16px", md: "20px" },
+                            }}
+                            onClick={()=>{
+                              if(memberPresentstate.child < 15){
+                                dispatch(addChild(1))
+                              }
+                            }}
+                          />
+                        </Box>
+                      </Box>
+                    </MenuItem>
+                  </Menu>
+
+                  {/* check availability button */}
                   <Button
                     color="success"
                     variant="contained"
