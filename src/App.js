@@ -28,6 +28,7 @@ import SiteSettings from './userInformation/SiteSettings'
 import WishList from './DashBoardComponents/WishList'
 import UserSettings from './userInformation/UserSettings'
 import { Box } from '@mui/material'
+import CheckOutPage from './DashBoardComponents/CheckOutPage'
 const App = () => {
   return (
     <Box>
@@ -52,6 +53,7 @@ const App = () => {
       <Route path='/blogPage' element={<BlogPage />} />
       <Route path='/wishList' element={<WishList />} />
       <Route path='/userProfile' element={<UserSettings />} />
+      <Route path='/checkoutPage' element={<CheckOutPage />} />
     </Routes>
     </Box>
   )
