@@ -370,7 +370,7 @@ const TourDetails = () => {
                   >
                     <MenuItem
                       sx={{
-                        width: "360px",
+                        width: {xs:"320px",md:"360px"},
                         "&:hover": {
                           cursor: "pointer",
                           backgroundColor: "white",
@@ -453,7 +453,7 @@ const TourDetails = () => {
                     </MenuItem>
                     <MenuItem
                       sx={{
-                        width: "360px",
+                        width: {xs:"320px",md:"360px"},
                         "&:hover": {
                           cursor: "pointer",
                           backgroundColor: "white",
@@ -545,8 +545,7 @@ const TourDetails = () => {
                     Check Availability
                   </Button>
                 </Box>
-                <Box
-                  className="reservationDetailsBox"
+                <Box className="reservationDetailsBox"
                   sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
                 >
                   <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
@@ -575,8 +574,7 @@ const TourDetails = () => {
           </Box>
         </Box>
 
-        <Box
-          className="otherDetails"
+        <Box  className="otherDetails"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -642,8 +640,7 @@ const TourDetails = () => {
               <KeyboardArrowDownIcon />
             </Box> */}
           </Box>
-          <Box
-            className="rightHalf"
+          <Box className="rightHalf"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -662,11 +659,13 @@ const TourDetails = () => {
                 rowGap: 1,
               }}
             >
-              <Box
-                className="options1"
+              <Box className="options1"
                 sx={{
                   border: "1px solid #f0efed",
                   "&:hover": { cursor: "pointer" },
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:1
                 }}
               >
                 <Box
@@ -674,14 +673,14 @@ const TourDetails = () => {
                   sx={{
                     border: "1px solid #f0efed",
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: {xs:"column",md:"row"},
                     alignItems: "flex-start",
                     justifyContent: "space-between",
                     padding: "2% 3% 2% 3%",
+                    rowGap:1
                   }}
                 >
-                  <Box
-                    className="leftPart"
+                  <Box className="leftPart"
                     sx={{
                       display: "flex",
                       flexDirection: "column",
@@ -696,12 +695,11 @@ const TourDetails = () => {
                       group. Pickup included
                     </Typography>
                   </Box>
-                  <Box
-                    className="rightPart"
+                  <Box className="rightPart"
                     sx={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "flex-end",
+                      alignItems: {xs:"flex-start",md:"flex-end"},
                       rowGap: 2,
                     }}
                   >
@@ -710,7 +708,8 @@ const TourDetails = () => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-end",
+                        alignItems: {xs:"flex-start",md:"flex-end"},
+                        rowGap:1
                       }}
                     >
                       <Box
@@ -720,6 +719,7 @@ const TourDetails = () => {
                           flexDirection: "row",
                           alignItems: "center",
                           justifyContent: "flex-end",
+                          rowGap:1
                         }}
                       >
                         <CurrencyRupeeIcon />
@@ -763,12 +763,13 @@ const TourDetails = () => {
                 className="options2"
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: {xs:"column",md:"row"},
+                  alignItems: {xs:"flex-start",md:"center"},
                   justifyContent: "space-between",
                   padding: "2% 3% 2% 3%",
                   border: "1px solid #f0efed",
                   "&:hover": { cursor: "pointer" },
+                  rowGap:2
                 }}
               >
                 <Box
@@ -788,7 +789,7 @@ const TourDetails = () => {
                     display: "flex",
                     flexDirection: "column",
                     rowGap: 1,
-                    alignItems: "flex-end",
+                    alignItems: {xs:"flex-start",md:"flex-end"},
                   }}
                 >
                   <Box
@@ -809,12 +810,13 @@ const TourDetails = () => {
                 className="options3"
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: {xs:"column",md:"row"},
+                  alignItems: {xs:"flex-start",md:"center"},
                   justifyContent: "space-between",
                   padding: "2% 3% 2% 3%",
                   border: "1px solid #f0efed",
                   "&:hover": { cursor: "pointer" },
+                  rowGap:2
                 }}
               >
                 <Box
@@ -834,7 +836,7 @@ const TourDetails = () => {
                     display: "flex",
                     flexDirection: "column",
                     rowGap: 1,
-                    alignItems: "flex-end",
+                    alignItems: {xs:"flex-start",md:"flex-end"},
                   }}
                 >
                   <Box
@@ -855,12 +857,13 @@ const TourDetails = () => {
                 className="options4"
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: {xs:"column",md:"row"},
+                  alignItems: {xs:"flex-start",md:"center"},
                   justifyContent: "space-between",
                   padding: "2% 3% 2% 3%",
                   border: "1px solid #f0efed",
                   "&:hover": { cursor: "pointer" },
+                  rowGap:2
                 }}
               >
                 <Box
@@ -880,7 +883,7 @@ const TourDetails = () => {
                     display: "flex",
                     flexDirection: "column",
                     rowGap: 1,
-                    alignItems: "flex-end",
+                    alignItems: {xs:"flex-start",md:"flex-end"},
                   }}
                 >
                   <Box

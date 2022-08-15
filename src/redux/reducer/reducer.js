@@ -54,7 +54,7 @@ const travelDetailsRecord = {
     ExpirationMonth:"",
     Expirayyear:"",
     SecurityCode:"",
-    Country:"",
+    Country:"India",
     SaveCreditCard:false,
     EmailAddress:"",
     PhoneNumber:"",

@@ -35,6 +35,10 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import "./DashBoard.css";
 import Footer from "./Footer";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+
 
 function valuetext(value) {
   return `${value}°C`;
@@ -83,6 +87,9 @@ const DashBoard = () => {
     toursByDuration: false,
   });
 
+
+  const [addFavorite, setAddFovirate] = useState(false)
+
   const handleChange1 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -98,6 +105,13 @@ const DashBoard = () => {
   const handleDateTimeChange = (newValue) => {
     setDateValue(newValue);
   };
+
+
+  function disableWeekends(date) {
+    return date.getDay() === 0 || date.getDay() === 6;
+  }
+
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -133,8 +147,10 @@ const DashBoard = () => {
               inputFormat="MM/dd/yyyy"
               value={dateValue}
               onChange={handleDateTimeChange}
-              renderInput={(params) => (
-                <TextField
+              disablePast
+              renderInput={(params) => {
+                console.log(params)
+               return  <TextField
                   sx={{
                     display: { xs: "flex", md: "none" },
                     borderRadius: { xs: "100px" },
@@ -142,7 +158,7 @@ const DashBoard = () => {
                   }}
                   {...params}
                 />
-              )}
+              }}
             />
           </Box>
           <Box
@@ -427,6 +443,8 @@ const DashBoard = () => {
                     value={dateValue}
                     onChange={handleDateTimeChange}
                     renderInput={(params) => <TextField {...params} />}
+                    shouldDisableDate={disableWeekends}
+                    disablePast
                   />
                 </Box>
               </Box>
@@ -1799,25 +1817,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -1827,6 +1877,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -1951,25 +2002,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -1979,6 +2062,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2103,25 +2187,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2131,6 +2247,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2255,25 +2372,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2283,6 +2432,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2407,25 +2557,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2435,6 +2617,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2559,25 +2742,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2587,6 +2802,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2711,25 +2927,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2739,6 +2987,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -2863,25 +3112,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -2891,6 +3172,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -3015,25 +3297,57 @@ const DashBoard = () => {
                     display: "flex",
                     flexDirection: "row",
                     columnGap: { xs: 2, md: 3 },
-                    padding: { xs: "0%", md: "2%" },
+                    padding: { xs: "1%", md: "2%" },
                     "&:hover": {
                       cursor: "pointer",
                       boxShadow: "0px 0px 5px 0px #505752",
                     },
                   }}
-                  onClick={() => navigate("/TourDeatils")}
                 >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
                   <Box
                     component={"img"}
                     src={Image1}
                     alt="place image"
                     sx={{
-                      maxWidth: { xs: "150px", md: "250px" },
-                      maxHeight: { xs: "150px", md: "250px" },
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
                       borderRadius: "20px",
                     }}
                   />
-
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
                   <Box
                     className="placeDetails"
                     sx={{
@@ -3043,6 +3357,7 @@ const DashBoard = () => {
                       width: "900px",
                       columnGap: 2,
                     }}
+                    onClick={() => navigate("/TourDeatils")}
                   >
                     <Box
                       className="placeDescriptions"
@@ -3160,6 +3475,377 @@ const DashBoard = () => {
                     </Box>
                   </Box>
                 </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "1%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
+                      borderRadius: "20px",
+                    }}
+                  />
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                    onClick={() => navigate("/TourDeatils")}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
+                <Box
+                  className="firstImage"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: { xs: 2, md: 3 },
+                    padding: { xs: "1%", md: "2%" },
+                    "&:hover": {
+                      cursor: "pointer",
+                      boxShadow: "0px 0px 5px 0px #505752",
+                    },
+                  }}
+                >
+                  <Box className="imgBox"
+                  sx={{
+                    maxWidth: { xs: "130px", md: "250px" },
+                    minWidth: { xs: "130px", md: "250px" },
+                    maxHeight: { xs: "150px", md: "250px" },
+                    borderRadius: "20px",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    justifyContent:"flex-start",
+                    position:"relative",
+                  }}
+                  >
+
+                  <Box
+                    component={"img"}
+                    src={Image1}
+                    alt="place image"
+                    sx={{
+                      maxWidth: { xs: "100%", md: "100%" },
+                      maxHeight: { xs: "100%", md: "100%" },
+                      minHeight: { xs: "100%", md: "100%" },
+                      borderRadius: "20px",
+                    }}
+                  />
+                    <Box className="wishlistIcon"
+                    onClick={()=>setAddFovirate(!addFavorite)}
+                    sx={{
+                      display:"flex",
+                      flexDirection:"row",
+                      position:"absolute",
+                      right:"10px",
+                      top:"10px"
+                    }}
+                    >
+                        <FavoriteIcon sx={{
+                          color:"red",
+                          display:addFavorite ? "flex" : "none"
+                        }}/>
+                        <FavoriteBorderIcon  sx={{
+                          display:!addFavorite ? "flex" : "none" 
+                        }}/>
+                    </Box>
+                  </Box>
+                  <Box
+                    className="placeDetails"
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      padding: { xs: "0", md: "1%" },
+                      width: "900px",
+                      columnGap: 2,
+                    }}
+                    onClick={() => navigate("/TourDeatils")}
+                  >
+                    <Box
+                      className="placeDescriptions"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        rowGap: { xs: 0, md: 1 },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "16px", md: "20px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Stonehenge, Windsor Castle and Bath with Pub Lunch in
+                        Lacock
+                      </Typography>
+                      <Box
+                        className="ratingBox"
+                        sx={{ display: "flex", columnGap: 1 }}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={4}
+                          readOnly
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "16px" } }}
+                        >
+                          3047
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="aboutPlace"
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                      >
+                        <Typography
+                          sx={{ fontSize: "16px", display: "inline-block" }}
+                        >
+                          Avoid the hassle of renting a car to see rural
+                          England’s highlights with help from this full-day tour
+                          which includes round-trip transport from London.
+                          Choose from two options to find what best suits your
+                          preferences, and travel...
+                          <span className="more">more</span>
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="AccessTime"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          12 hours 30 minutes
+                        </Typography>
+                      </Box>
+                      <Box
+                        className="concellationBox"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          columnGap: 1,
+                          alignItems: "center",
+                        }}
+                      >
+                        <CheckIcon
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        />
+                        <Typography
+                          sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                        >
+                          Free Cancellation
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="PriceDetails"
+                      sx={{
+                        display: { xs: "flex", md: "flex" },
+                        flexDirection: { xs: "row", md: "column" },
+                        justifyContent: { xs: "flex-start", md: "flex-start" },
+                        alignItems: { xs: "center", md: "flex-end" },
+                        columnGap: 1,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                        from
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CurrencyRupeeIcon sx={{ fontSize: "19px" }} />
+                        <Typography
+                          sx={{ fontSize: { xs: "15px", md: "20px" } }}
+                        >
+                          8747.68
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Divider />
               </Box>
             </Box>
           </Box>

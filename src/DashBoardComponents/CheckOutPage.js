@@ -1036,6 +1036,7 @@ const CheckOutPage = () => {
   
   const [todayDate, setTodayDate] = useState(new Date().toLocaleDateString());
   const [currency, setCurrency] = React.useState("EUR");
+  const [countryState, setCountryState] = useState("India")
 
     const [showPromoCode, setShowPromoCode] = useState(false)
 
@@ -1047,6 +1048,11 @@ const CheckOutPage = () => {
     setCurrency(event.target.value);
   };
 
+
+  const handleCountryChange = (event) => {
+    dispatch(Country(event.target.value))
+  setCountryState(event.target.value);
+};
 
 
 
@@ -1091,7 +1097,7 @@ const CheckOutPage = () => {
             className="leftPart"
             sx={{
               width: { xs: "100%", md: "65%" },
-              padding: { xs: "0%", md: "1%" },
+              padding: { xs: "1%", md: "1%" },
               display: "flex",
               flexDirection: "column",
               rowGap: 2,
@@ -1100,7 +1106,7 @@ const CheckOutPage = () => {
             <Box className="1stLeftPart" 
             sx={{
                 border: "2px solid #edebeb",
-                padding:{xs:"0%",md:"2%"},
+                padding:{xs:"2%",md:"2%"},
                 display:"flex",
                 flexDirection:"column",
                 rowGap:2
@@ -1111,7 +1117,7 @@ const CheckOutPage = () => {
               className="tourImage&Descriptions"
               sx={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: {xs:"row-reverse",md:"row"},
                 columnGap: 2,
                 alignItems: "flex-start",
                 justifyContent: "flex-start",
@@ -1122,7 +1128,8 @@ const CheckOutPage = () => {
                 src={Imgae2}
                 alt="tour image"
                 sx={{
-                  width: { xs: "100px", md: "200px" },
+                  width: { xs: "120px", md: "200px" },
+                  height:{xs:"100px"},
                   borderRadius: "20px",
                 }}
               />
@@ -1199,8 +1206,9 @@ const CheckOutPage = () => {
                 <Box className="travelerDetails" sx={{
                     width:{xs:"100%",md:"100%"},
                     display:"flex",
-                    flexDirection:"row",
-                    justifyContent:"space-between"
+                    flexDirection:{xs:"column",md:"row"},
+                    justifyContent:"space-between",
+                    rowGap:1
                 }}>
                  
                   <Box className="firstName"
@@ -1239,6 +1247,7 @@ const CheckOutPage = () => {
                     <TextField type={"text"} placeholder={"Enter LastName"}  fullWidth   onChange={(e) => dispatch(addLastName(e.target.value))}  />
                   </Box>
                 </Box>
+
               </Box>
 
               {/* tour Details */}
@@ -1318,7 +1327,7 @@ const CheckOutPage = () => {
                 rowGap:1
               }}>
                 <Typography>Cardholder Name</Typography>
-                <TextField type={"text"} fullWidth   onChange={(e) => dispatch(CardholderName(e.target.value))}  />
+                <TextField type={"text"}  placeholder="Enter CardHolder Name"   fullWidth   onChange={(e) => dispatch(CardholderName(e.target.value))}  />
               </Box>
               <Box className="creditCradNumber" sx={{
                 width:"100%",
@@ -1327,15 +1336,17 @@ const CheckOutPage = () => {
                 rowGap:1
               }}>
                 <Typography>Credit Card Number</Typography>
-                <TextField type={"text"} fullWidth   onChange={(e) => dispatch(CreditCardNumber(e.target.value))}  />
+                <TextField type={"text"} fullWidth placeholder="Enter Card Number"  onChange={(e) => dispatch(CreditCardNumber(e.target.value))}  />
               </Box>
               <Box className="expirayDate&SecurityCode"
               sx={{
                 display:"flex",
                 flexDirection:"row",
-                justifyContent:"space-around",
+                justifyContent:{xs:"flex-start",md:"space-around"},
                 alignItems:"flex-end",
                 width:{xs:"100%",md:"100%"},
+                flexWrap:{xs:"wrap",md:"nowrap"},
+                rowGap:2
               }}
               >
                 <Box className="expirayMonth"
@@ -1377,7 +1388,7 @@ const CheckOutPage = () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Security Code</Typography>
-                  <TextField type={"text"}   onChange={(e) => dispatch(SecurityCode(e.target.value))}   />
+                  <TextField type={"text"} placeholder="3 or 4 digit code usually found near the signature strip."  onChange={(e) => dispatch(SecurityCode(e.target.value))}   />
                 </Box>
                 </Box>
 
@@ -1404,7 +1415,18 @@ const CheckOutPage = () => {
                     fontWeight:"bold"
                   }}
                   >Country</Typography>
-                  <TextField type={"text"}  onChange={(e) => dispatch(Country(e.target.value))}  />
+                  <TextField
+                    id="outlined-select-currency"
+                    select
+                    value={countryState}
+                    onChange={handleCountryChange}
+                  >
+                    {countries.map((option) => (
+                      <MenuItem key={option.name+ ","+option.code} value={option.name}  >
+                         {option.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Box>
                 <Box className="saveCreditCardDetails" 
                 sx={{
@@ -1458,7 +1480,9 @@ const CheckOutPage = () => {
                 display:"flex",
                 flexDirection:"row",
                 alignItems:"center",
-                justifyContent:"space-between"
+                justifyContent:"space-between",
+                flexWrap:{xs:"wrap",md:"nowrap"},
+                rowGap:2
               }}
               >
 
@@ -1476,7 +1500,7 @@ const CheckOutPage = () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Email Address</Typography>
-                  <TextField type={"text"}   onChange={(e) => dispatch(EmailAddress(e.target.value))}   />
+                  <TextField type={"text"} placeholder="Enter Email Id"  onChange={(e) => dispatch(EmailAddress(e.target.value))}   />
                 </Box>
 
                 {/* phone Number Box */}
@@ -1515,7 +1539,7 @@ const CheckOutPage = () => {
                       </MenuItem>
                     ))}
                   </TextField>
-                  <TextField type={"text"}   onChange={(e) => dispatch(PhoneNumber(e.target.value))}  />
+                  <TextField type={"text"} placeholder="Enter Phone Number"  onChange={(e) => dispatch(PhoneNumber(e.target.value))}  />
                   </Box>
                 </Box>
               </Box>
@@ -1542,7 +1566,7 @@ const CheckOutPage = () => {
             border:"2px solid #edf0ee",
             width:{xs:"100%",md:"30%"},
             height:"fit-content",
-            display:"flex",
+            display:{xs:"none",md:"flex"},
             flexDirection:"column",
             rowGap:4,
             padding:{xs:"0%",md:"1%"},
