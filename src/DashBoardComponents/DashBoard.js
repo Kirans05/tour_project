@@ -140,7 +140,7 @@ const DashBoard = () => {
               padding: { xs: "0%", md: "0% 6% 0% 6%" },
             }}
           >
-            <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+            <Typography sx={{ fontSize: "20px", fontWeight: "bold" }} className="Typography">
               Tours, Tickets, & Excursions
             </Typography>
             <DesktopDatePicker
@@ -149,7 +149,6 @@ const DashBoard = () => {
               onChange={handleDateTimeChange}
               disablePast
               renderInput={(params) => {
-                console.log(params)
                return  <TextField
                   sx={{
                     display: { xs: "flex", md: "none" },
@@ -161,7 +160,10 @@ const DashBoard = () => {
               }}
             />
           </Box>
-          <Box
+
+
+
+          {/* <Box
             sx={{
               position: "sticky",
               top: "0px",
@@ -185,7 +187,7 @@ const DashBoard = () => {
                 overflow: { xs: "auto", md: "hidden" },
               }}
             >
-              <Box
+              {/* <Box
                 className="toogleButtonForFilters"
                 sx={{ display: { xs: "flex", md: "none" } }}
               >
@@ -197,9 +199,9 @@ const DashBoard = () => {
                     padding: "5px",
                   }}
                 />
-              </Box>
+              </Box> */}
 
-              <Box
+  {/*              <Box
                 sx={{
                   border: "2px solid black",
                   display: "flex",
@@ -380,7 +382,9 @@ const DashBoard = () => {
                 </Typography>
               </Box>
             </Box>
-          </Box>
+          </Box> */}
+
+
 
           {/* second Main Bo0dy  */}
           <Box
@@ -417,7 +421,7 @@ const DashBoard = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   position: "sticky",
-                  top: "110px",
+                  top: "10px",
                   left: "0px",
                   zIndex: 10000,
                   rowGap: 2,
@@ -1651,7 +1655,7 @@ const DashBoard = () => {
                       label="1 to 4 hours"
                     />
                     <FormControlLabel
-                      control={<Checkbox />}
+                      control={<Checkbox color="success" />}
                       label="4 hours to 1 day"
                     />
                     <FormControlLabel

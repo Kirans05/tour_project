@@ -143,6 +143,9 @@ const Header = () => {
   const [FirstTravel_TransportState, setFirstTravel_TransportState] =
     useState("");
 
+
+    const [showSmallScreenSearch, setShowSmallScreenSearch] = useState(false)
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -360,7 +363,7 @@ const Header = () => {
           Login
         </Typography>
         <Typography
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signup")}
           sx={{
             "&:hover": { cursor: "pointer" },
             fontSize: { xs: "14px", md: "16px" },
@@ -538,7 +541,7 @@ const Header = () => {
             help
           </Typography>
         </Box>
-        <Box
+        {/* <Box
           className="En"
           sx={{
             display: "flex",
@@ -562,8 +565,8 @@ const Header = () => {
           >
             En
           </Typography>
-        </Box>
-        <Box
+        </Box> */}
+        {/* <Box
           className="INR"
           sx={{
             display: "flex",
@@ -589,7 +592,7 @@ const Header = () => {
           >
             INR
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
 
       <Divider />
@@ -5051,12 +5054,13 @@ const Header = () => {
         paddingTop: { sm: "0%", md: "0%" },
         paddingLeft: { xs: "1%" },
         paddingRight: { xs: "1%" },
+        width:"98%"
       }}
     >
       <Box
         className={"leftPart"}
         sx={{
-          display: "flex",
+          display: !showSmallScreenSearch ? "flex" : "none",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
@@ -5083,6 +5087,30 @@ const Header = () => {
         </Typography>
       </Box>
       <Box
+          className="textField&SearchIcons"
+          sx={{
+            display: {xs:"none",md:"flex"},
+            flexDirection: "row",
+            alignItems: "center",
+            columnGap: 2,
+            "&:hover": { border: "1px solid black" },
+            border: "1px solid white",
+            padding: "2px",
+          }}
+        >
+          <input
+            type={"text"}
+            placeholder="Search for Paris or Colosseum"
+            style={{
+              outline: "none",
+              height: "40px",
+              width: "320px",
+              border: "1px solid white",
+            }}
+          />
+          <SearchIcon />
+        </Box>
+      <Box
         className="rightPart"
         sx={{
           display: { xs: "none", md: "flex" },
@@ -5091,7 +5119,7 @@ const Header = () => {
           columnGap: 3,
         }}
       >
-        <Box
+        {/* <Box
           className="textField&SearchIcons"
           sx={{
             display: "flex",
@@ -5114,8 +5142,8 @@ const Header = () => {
             }}
           />
           <SearchIcon />
-        </Box>
-        <Typography
+        </Box> */}
+        {/* <Typography
           sx={{
             borderBottom: "3px solid white",
             "&:hover": {
@@ -5138,7 +5166,7 @@ const Header = () => {
           }}
         >
           Rs
-        </Typography>
+        </Typography> */}
         <Box
           className="help"
           sx={{
@@ -5174,6 +5202,11 @@ const Header = () => {
           }}
           onClick={() => navigate("/bookingPage")}
         >
+           <BookOnlineIcon
+            sx={{
+              fontSize: { xs: "20px", md: "22px" },
+            }}
+          />
           <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
             Booking
           </Typography>
@@ -5203,9 +5236,31 @@ const Header = () => {
       </Box>
       <Box
         className="rightPartMediaQuery"
-        sx={{ display: { xs: "flex", md: "none" } }}
+        sx={{ display: { xs: !showSmallScreenSearch ? "flex" : "none", md: "none" } }}
+        onClick={()=>setShowSmallScreenSearch(true)}
       >
         <SearchIcon sx={{ fontSize: "30px" }} />
+      </Box>
+      <Box className="searchTab"
+      sx={{
+        display:showSmallScreenSearch ? "flex" : "none",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-between",
+        width:"100%",
+      }}
+      >
+          <TextField type={"text"} sx={{
+            width:"80%"
+          }}/>
+          <SearchIcon sx={{
+            fontSize:"30px"
+          }}/>
+          <CloseIcon onClick={()=>setShowSmallScreenSearch(false)}
+          sx={{
+            fontSize:"30px"
+          }}
+          />
       </Box>
 
       {/* NearBy Drawer */}
@@ -5334,7 +5389,7 @@ const Header = () => {
         }}
       >
         <MenuItem
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signup")}
           sx={{
             fontSize: { xs: "14px", md: "16px" },
           }}

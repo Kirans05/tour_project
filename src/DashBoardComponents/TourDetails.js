@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Menu,
   MenuItem,
   Rating,
@@ -11,7 +12,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Image1 from "../images/img1.webp";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DesktopDatePicker, LocalizationProvider, MonthPicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import IosShareIcon from "@mui/icons-material/IosShare";
@@ -33,7 +34,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {useSelector,useDispatch} from "react-redux"
 import {addTravelMembers, booking_date_day} from "../redux/reducer/reducer"
 import {addChild, removeChild, addAdults, removeAdults, tourBookingDate} from "../redux/action/index"
+import CloseIcon from "@mui/icons-material/Close";
 
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 
 const TourDetails = () => {
 
@@ -48,6 +54,10 @@ const TourDetails = () => {
   const [peopleCount, setPeopleCount] = useState("2 Adults");
   const [Availability, setAvailability] = useState(false);
   const [menuVisible, setmenuVisible] = useState(false);
+  const [FirstTour_sightseeingState, setFirstTour_sightseeingState] =
+    useState(null);
+
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -327,6 +337,7 @@ const TourDetails = () => {
                     inputFormat="MM/dd/yyyy"
                     value={value}
                     onChange={handleChange}
+                    disablePast
                     renderInput={(params) => (
                       <TextField
                         sx={{ backgroundColor: "white" }}
@@ -334,6 +345,17 @@ const TourDetails = () => {
                       />
                     )}
                   />
+                  {/* <MonthPicker
+                    inputFormat="MM"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => (
+                      <TextField
+                        sx={{ backgroundColor: "white" }}
+                        {...params}
+                      />
+                    )}
+                  /> */}
 
                   {/* no of people adult or child */}
                   <Box
@@ -589,7 +611,7 @@ const TourDetails = () => {
               display: { xs: "none", md: "flex" },
               flexDirection: "column",
               rowGap: 2,
-              width: "20%",
+              width: "22%",
             }}
           >
             <Box
@@ -601,11 +623,959 @@ const TourDetails = () => {
                 columnGap: 1,
               }}
             >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+              <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
+            "&:hover":{textDecoration:"underLine",cursor:"pointer"}
+            }}
+            // onClick={()=>{
+            //   if(FirstTour_sightseeingState == "nothing"){
+            //     setFirstTour_sightseeingState("")
+            //   }else{
+            //     setFirstTour_sightseeingState("nothing")
+            //   }
+            // }}
+            >
                 Tours, SightSeeing & Cruises
               </Typography>
-              <KeyboardArrowDownIcon />
+              <Box className="arrows"
+              sx={{
+                display:"flex",
+                flexDirection:"row",
+                alignItems:"center",
+                justifyContent:"flex-start",
+                "&:hover":{cursor:"pointer"}
+              }}
+              onClick={() => {
+                if(FirstTour_sightseeingState == null){
+                  setFirstTour_sightseeingState("")
+                }else{
+                  setFirstTour_sightseeingState(null)
+                }
+              }}
+              >
+                <KeyboardArrowDownIcon 
+                sx={{
+                  display:FirstTour_sightseeingState == null ? "flex":"none"
+                }}
+                />
+                <KeyboardArrowUp 
+                sx={{
+                  display:FirstTour_sightseeingState !== null ? "flex" : "none" 
+                }}
+                />
+              </Box>
             </Box>
+
+              {/* sub parts of tour, sightseeing and cruises */}
+              <Box
+                 sx={{
+                   width: { xs: "250px", md: "350px" },
+                   display: "flex",
+                   flexDirection: "column",
+                   rowGap: 2,
+                 }}
+                    role="presentation"
+    >
+      {/* title */}
+      {/* <Box
+        className="artCulturetitle"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CloseIcon
+          sx={{ fontSize: { xs: "25px", md: "30px" } }}
+        />
+        <Typography
+          sx={{
+            fontSize: { xs: "20px", md: "22px" },
+          }}
+        >
+          Travel
+        </Typography>
+      </Box> */}
+
+      {/* back Button */}
+      {/* <Box
+        className="BackButton"
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          columnGap: 1,
+          alignItems: "center",
+          paddingLeft: "10%",
+        }}
+      >
+        <KeyboardBackspaceIcon
+          sx={{
+            "&:hover": { cursor: "pointer" },
+            fontSize: { xs: "25px", md: "30px" },
+          }}
+        />
+        <Typography
+          sx={{
+            fontSize: { xs: "20px", md: "22px" },
+          }}
+        >
+          Back To Main
+        </Typography>
+      </Box> */}
+
+
+      {FirstTour_sightseeingState == "" ? (
+        <Box
+          className="mainTravel&TransporationServices"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 2,
+            width:"70%"
+          }}
+        >
+          {/* back Button London Tour*/}
+          <Box
+            className="mainTour,SightSeeing&Cruises"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              columnGap: 1,
+              alignItems: "center",
+              paddingLeft: "0%",
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
+              onClick={()=>setFirstTour_sightseeingState(null)}
+            />
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+              }}
+            >
+              Back To Tour
+            </Typography>
+          </Box>
+
+          <Box
+            className="mainBody"
+            sx={{
+              paddingLeft: "0%",
+              fontSize: "30px",
+              display: "flex",
+              flexDirection: "column",
+              rowGap: 3,
+            }}
+          >
+
+            {/* Cruises & Sailing*/}
+            <Box
+              className="Cruises & Sailing"
+              onClick={() => setFirstTour_sightseeingState("Cruises & Sailing")}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
+                >
+                  Cruises & Sailing
+                </Typography>
+                <Box className="arrows">
+                  <KeyboardArrowRightIcon />
+                </Box>
+              </Box>
+            </Box>
+
+            {/* How To Get Around*/}
+            <Box
+              className="How To Get Around"
+              onClick={() => setFirstTour_sightseeingState("How To Get Around")}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      // textDecoration: "underLine",
+                      cursor: "pointer",
+                    },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
+                >
+                  How To Get Around
+                </Typography>
+                <Box className="arrows">
+                  <KeyboardArrowRightIcon />
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Private And Luxury*/}
+            <Box
+              className="Private And Luxury"
+              //  onClick={()=>setFirstTour_sightseeingState("SightSeeing Tours")}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      // textDecoration: "underLine",
+                      cursor: "pointer",
+                    },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
+                >
+                  Private And Luxury
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* SightSeeing Tours*/}
+            <Box
+              className="SightSeeing Tours"
+              onClick={() => setFirstTour_sightseeingState("SightSeeing Tours")}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      // textDecoration: "underLine",
+                      cursor: "pointer",
+                    },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
+                >
+                  SightSeeing Tours
+                </Typography>
+                <Box className="arrows">
+                  <KeyboardArrowRightIcon />
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Tours By Duration*/}
+            <Box
+              className="Tours By Duration"
+              onClick={() => setFirstTour_sightseeingState("Tours By Duration")}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      // textDecoration: "underLine",
+                      cursor: "pointer",
+                    },
+                    fontSize: { xs: "14px", md: "16px" },
+                  }}
+                >
+                  Tours By Duration
+                </Typography>
+                <Box className="arrows">
+                  <KeyboardArrowRightIcon />
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      ) : FirstTour_sightseeingState == "Cruises & Sailing" ? (
+        <Box
+          className="Cruises & Sailing"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 3,
+            paddingLeft: "0%",
+          }}
+        >
+          {/* back Button Cruises & Sailing*/}
+          <Box
+            className="BackButtonCruises & Sailing"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              columnGap: 1,
+              //  paddingLeft:"10%"
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
+              onClick={() => setFirstTour_sightseeingState("")}
+            />
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+              }}
+            >
+              Tours, SightSeeing & Cruises
+            </Typography>
+          </Box>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            All Cruises & Sailing
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Catamaran Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Day Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Dinner Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Gandala Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Night Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Parts of Call Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Share Excursions
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            SightSeeing Cruises
+          </Typography>
+        </Box>
+      ) : FirstTour_sightseeingState == "How To Get Around" ? (
+        <Box
+          className="How To Get Around"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 3,
+            paddingLeft: "0%",
+          }}
+        >
+          {/* back Button How To Get Around*/}
+          <Box
+            className="BackButtonHow To Get Around"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              columnGap: 1,
+              //  paddingLeft:"10%"
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
+              onClick={() => setFirstTour_sightseeingState("")}
+            />
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
+              Tours, SightSeeing & Cruises
+            </Typography>
+          </Box>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            All How To Get Around
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Air Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Bike Rentals
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Bike Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Bus Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Car Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Classic Car Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            E-Bike Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Helicopter Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Hot Air Balloon Rides
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Limousine Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Luxury Car Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Mountain Bike Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Pedicab Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Power Boats
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Public Transporatation Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Rail Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Rentals
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Road Trip
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Self Giuded Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Speed Boat Rentals
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Vespa, Scooter & Moped Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Walking Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Water Tours
+          </Typography>
+        </Box>
+      ) : FirstTour_sightseeingState == "SightSeeing Tours" ? (
+        <Box
+          className="SightSeeing Tours"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 3,
+            paddingLeft: "0%",
+          }}
+        >
+          {/* back Button SightSeeing Tours*/}
+          <Box
+            className="BackButtonSightSeeing Tours"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              columnGap: 1,
+              //  paddingLeft:"10%"
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
+              onClick={() => setFirstTour_sightseeingState("")}
+            />
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
+              Tours, SightSeeing & Cruises
+            </Typography>
+          </Box>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            All SightSeeing Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Adventure Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            City Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Hop on Hop off Buses
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Night Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Observation Decks
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Private SightSeeing Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            SightSeeing Cruises
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            SightSeeing Passes
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Skip The Line Tickets
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            SkyScrappers & Towers
+          </Typography>
+        </Box>
+      ) : FirstTour_sightseeingState == "Tours By Duration" ? (
+        <Box
+          className="Tours By Duration"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 3,
+            paddingLeft: "0%",
+          }}
+        >
+          {/* back Button Tours By Duration*/}
+          <Box
+            className="BackButtonTours By Duration"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              columnGap: 1,
+              //  paddingLeft:"10%"
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
+              onClick={() => setFirstTour_sightseeingState("")}
+            />
+            <Typography
+              sx={{
+                fontSize: { xs: "14px", md: "16px" },
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
+              Tours, SightSeeing & Cruises
+            </Typography>
+          </Box>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            All Tours By Duration
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Day Trips
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Full-Day Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Half-Day Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Layover Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Multi-Day Tours
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            Overnight Tours
+          </Typography>
+        </Box>
+      ) : null}
+    </Box>
+
+
+
             {/* <Box
               className="Attractions"
               sx={{
@@ -645,7 +1615,7 @@ const TourDetails = () => {
               display: "flex",
               flexDirection: "column",
               rowGap: { xs: 3 },
-              width: { xs: "100%", md: "80%" },
+              width: { xs: "100%", md: "78%" },
             }}
           >
             {/* booking options */}

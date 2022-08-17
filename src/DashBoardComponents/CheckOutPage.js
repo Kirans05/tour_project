@@ -1019,6 +1019,45 @@ const countries = [
 
 
 
+  const Months = [
+    {
+      name:"Jan"
+    },
+    {
+      name:"Feb"
+    },
+    {
+      name:"Mar"
+    },
+    {
+      name:"Apr"
+    },
+    {
+      name:"May"
+    },
+    {
+      name:"Jun"
+    },
+    {
+      name:"Jul"
+    },
+    {
+      name:"Aug"
+    },
+    {
+      name:"Sep"
+    },
+    {
+      name:"Oct"
+    },
+    {
+      name:"Nov"
+    },
+    {
+      name:"Dec"
+    },
+  ]
+
 
 
 const CheckOutPage = () => {
@@ -1039,7 +1078,7 @@ const CheckOutPage = () => {
   const [countryState, setCountryState] = useState("India")
 
     const [showPromoCode, setShowPromoCode] = useState(false)
-
+  const [cardEexpiryMonth, setCardExpiryMonth] = useState("")
   
   
   
@@ -1267,7 +1306,7 @@ const CheckOutPage = () => {
                 <Typography sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}>Special Requirements</Typography>
-                <textarea rows={4} cols={50}  onChange={(e) => dispatch(specialRequirements(e.target.value))} />
+                <textarea rows={4} cols={40}  onChange={(e) => dispatch(specialRequirements(e.target.value))} />
               </Box>
             </Box>
 
@@ -1360,7 +1399,20 @@ const CheckOutPage = () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Expiration Month</Typography>
-                  <TextField type={"month"}  onChange={(e) => dispatch(ExpirationMonth(e.target.value))}  />
+<TextField
+                    id="outlined-select-currency"
+                    select
+                    value={countryState}
+                    onChange={handleCountryChange}
+                  >
+                    {Months.map((option,index) => (
+                      <MenuItem key={index} value={option.name}  >
+                         {option.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+
                 </Box>
                 <Box className="expirayYear"
                  sx={{

@@ -168,6 +168,7 @@ const HomePage = () => {
                     inputFormat="MM/dd/yyyy"
                     value={dateValue}
                     onChange={handleChange}
+                    disablePast
                     renderInput={(params) => (
                       <TextField
                         sx={{ backgroundColor: "white" }}
@@ -203,14 +204,14 @@ const HomePage = () => {
                   width: "10px",
                   height: "10px",
                 }}
-                onClick={() => {
-                  setImageState([Travel1, 1]);
-                  setDotClicked({
-                    first: true,
-                    second: false,
-                    third: false,
-                  });
-                }}
+                // onClick={() => {
+                //   setImageState([Travel1, 1]);
+                //   setDotClicked({
+                //     first: true,
+                //     second: false,
+                //     third: false,
+                //   });
+                // }}
               ></Box>
               <Box
                 className="2ndDot"
@@ -221,14 +222,14 @@ const HomePage = () => {
                   width: "10px",
                   height: "10px",
                 }}
-                onClick={() => {
-                  setImageState([Travel2, 2]);
-                  setDotClicked({
-                    first: false,
-                    second: true,
-                    third: false,
-                  });
-                }}
+                // onClick={() => {
+                //   setImageState([Travel2, 2]);
+                //   setDotClicked({
+                //     first: false,
+                //     second: true,
+                //     third: false,
+                //   });
+                // }}
               ></Box>
 
               <Box
@@ -240,14 +241,14 @@ const HomePage = () => {
                   width: "10px",
                   height: "10px",
                 }}
-                onClick={() => {
-                  setImageState([Travel3, 3]);
-                  setDotClicked({
-                    first: false,
-                    second: false,
-                    third: true,
-                  });
-                }}
+                // onClick={() => {
+                //   setImageState([Travel3, 3]);
+                //   setDotClicked({
+                //     first: false,
+                //     second: false,
+                //     third: true,
+                //   });
+                // }}
               ></Box>
             </Box>
           </Box>
@@ -261,6 +262,7 @@ const HomePage = () => {
               rowGap: 2,
               justifyContent: "center",
               alignItems: "center",
+              // border:"2px solid red"
             }}
           >
             <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}>
@@ -271,11 +273,12 @@ const HomePage = () => {
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
-                columnGap: { xs: 0, md: 2 },
-                alignItems: "center",
-                justifyContent: "center",
+                columnGap: { xs: 0, md: 1 },
+                alignItems: "flex-start",
+                justifyContent: "space-around",
                 padding: { xs: "2% 2% 2% 2%", md: "0% 5% 0% 5%" },
                 rowGap: { xs: 3, md: 0 },
+                width:{xs:"96%",md:"90%"}
               }}
             >
               <Box
@@ -284,10 +287,10 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "fit-content" },
-                  // width: { xs: "100%", md: "25%" },
+                  // width: { xs: "100%", md: "fit-content" },
+                  width: { xs: "100%", md: "25%" },
                   justifyContent:"center",
-                  rowGap:1
+                  rowGap:1,
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
@@ -307,10 +310,10 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "fit-content" },
-                  // width: { xs: "100%", md: "25%" },
+                  // width: { xs: "100%", md: "fit-content" },
+                  width: { xs: "100%", md: "25%" },
                   justifyContent:"center",
-                  rowGap:1
+                  rowGap:1,
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
@@ -329,10 +332,10 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "fit-content" },
-                  // width: { xs: "100%", md: "25%" },
+                  // width: { xs: "100%", md: "fit-content" },
+                  width: { xs: "100%", md: "25%" },
                   justifyContent:"center",
-                  rowGap:1
+                  rowGap:1,
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
@@ -351,10 +354,10 @@ const HomePage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "100%", md: "fit-content" },
-                  // width: { xs: "100%", md: "25%" },
+                  // width: { xs: "100%", md: "fit-content" },
+                  width: { xs: "100%", md: "25%" },
                   justifyContent:"center",
-                  rowGap:1
+                  rowGap:1,
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
@@ -642,7 +645,7 @@ const HomePage = () => {
             }}
           >
             <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-              Top attractions near London
+              Top attractions 
             </Typography>
             <Box
               className="topAttractionsplaces"
@@ -652,7 +655,7 @@ const HomePage = () => {
                 justifyContent: { xs: "flex-start", md: "center" },
                 alignItems: "center",
                 columnGap: 4,
-                width: { xs: "100%", md: "100%" },
+                width: { xs: "92%", md: "92%" },
                 overflow: "auto",
                 padding: { xs: "3% 4% 3% 4%", md: "3% 4% 3% 4%" },
               }}
