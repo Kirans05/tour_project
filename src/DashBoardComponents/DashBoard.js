@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -37,8 +37,10 @@ import "./DashBoard.css";
 import Footer from "./Footer";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
-
+import {totalProductReducer} from "../redux/reducer/reducer"
+import {individualProductAction, productAction} from "../redux/action/index"
+import {useSelector, useDispatch} from "react-redux"
+import axios from "axios"
 
 function valuetext(value) {
   return `${value}°C`;
@@ -48,6 +50,10 @@ const minDistance = 10;
 
 const DashBoard = () => {
   const navigate = useNavigate();
+
+  const myState = useSelector((state) => state.totalProductReducer);
+  const dispatch = useDispatch()
+
   // const [arts_culture, setArts_culture] = useState(true);
   // const [classes_workspaces, setclasses_workspaces] = useState(true);
   // const [food_drink, setFood_drinnk] = useState(true);
@@ -110,6 +116,44 @@ const DashBoard = () => {
   function disableWeekends(date) {
     return date.getDay() === 0 || date.getDay() === 6;
   }
+
+//   {
+//     "id": 1,
+//     "name": "something",
+//     "description": "Something",
+//     "city": "London",
+//     "imageUrl": "Something",
+//     "active": true,
+//     "price": 1234.56,
+//     "currency": "INR",
+//     "availableQty": 10,
+//     "created": "2022-06-06T18:30:00.000+00:00",
+//     "updated": "2022-06-06T18:30:00.000+00:00"
+// },
+
+const productClicked = (item) => {
+    dispatch(individualProductAction(item))
+}
+
+
+
+const fetchData = async () => {
+  let options = {
+    url:"http://localhost:8080/tour/allProducts",
+    headers:{
+      "content-type":"application/json"
+    },
+    method:"GET"
+  }
+
+  let {data} = await axios(options)
+  dispatch(productAction(data))
+}
+
+
+useEffect(()=>{
+  fetchData()
+},[])
 
 
 
@@ -1882,6 +1926,7 @@ const DashBoard = () => {
                       columnGap: 2,
                     }}
                     onClick={() => navigate("/TourDeatils")}
+                    // onClick={()=>productClicked("item")}
                   >
                     <Box
                       className="placeDescriptions"

@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Travel3 from "../images/img2.jpg";
 import Travel2 from "../images/travel2.jpg";
@@ -21,6 +21,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import Image3 from "../images/travel2.jpg";
+import axios from "axios";
 
 const HomePage = () => {
   const [dateValue, setDateValue] = useState(new Date());
@@ -58,6 +59,27 @@ const HomePage = () => {
       });
     }
   }, 5000);
+
+
+
+  const fetchCurrentUserData = async () => {
+    let options = {
+      url:"http://localhost:8080/user/me",
+      method:"GET",
+      headers:{
+          "content-type":"application/json",
+          "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    }
+
+    let {data} = await axios(options)
+    localStorage.setItem("userData",data)
+  }
+
+
+  useEffect(()=>{
+    fetchCurrentUserData()
+  },[])
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

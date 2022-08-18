@@ -59,7 +59,8 @@ const travelDetailsRecord = {
     EmailAddress:"",
     PhoneNumber:"",
     countryCode:"",
-    PromoCode:""
+    PromoCode:"",
+    currencyCode:"INR"
 }
 export const travelDetails = (state = travelDetailsRecord, action) => {
     switch(action.type){
@@ -107,8 +108,95 @@ export const travelDetails = (state = travelDetailsRecord, action) => {
 
         case "countryCode" : 
             return {...state,countryCode : action.payload};
+       
+        case "currencyCode" : 
+            return {...state,currencyCode : action.payload};
 
         default : 
             return state
+    }
+}
+
+
+
+
+
+
+// signupDetails information 
+const signUpObject = {
+    email:"",
+    firstName:"",
+    lastName:"",
+    phoneNumber:"",
+    password:"",
+    phoneNumberCode:"India,+91"
+}
+export const signUpInfo = (state = signUpObject, action) => {
+    switch(action.type){
+        case "signupEmail" : 
+            return {...state,email:action.payload}
+
+        case "signupFirstName" :
+            return {...state,firstName:action.payload}
+
+        case "signupLastName" : 
+            return {...state,lastName:action.payload}
+
+        case "signupPhoneNumber" : 
+            return {...state,phoneNumber:action.payload}
+
+        case "signupPassword" : 
+            return {...state,password:action.payload}
+
+        case "phoneNumberCode" : 
+            return {...state,phoneNumberCode:action.payload}
+
+        default :
+            return state
+
+    }
+}   
+
+
+const userLoginDetails = {
+    email:"",
+    password:""
+}
+export const loginDetails = (state = userLoginDetails, action) => {
+    switch(action.type){
+        case "loginEmail" :
+            return {...state, email:action.payload}
+        
+        case "loginPassword" :
+            return {...state, password:action.payload}
+        
+        default :
+            return state
+    }
+}
+
+
+// total product array
+const totalProductList = []
+export const totalProductReducer = (action = totalProductList, state) => {
+    switch(action.type){
+        case "productList" : 
+            return [...totalProductList,...action.payload]
+
+        default :
+            return state;
+    }
+}
+
+
+// single Product information reducer
+const singleProductObject = {}
+export const singleProductReducer = (action , state) => {
+    switch(action.type){
+        case "individualProduct" :
+            return action.payload
+
+        default :
+        return state
     }
 }

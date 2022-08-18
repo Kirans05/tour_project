@@ -16,58 +16,8 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useSelector, useDispatch } from "react-redux";
 import {booking_date_day, addTravelMembers, travelDetails} from "../redux/reducer/reducer"
 import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../redux/action";
+import axios from "axios"
 
-
-// const currencies = [
-//   {
-//     value: "USD",
-//     label: "$",
-//   },
-//   {
-//     value: "EUR",
-//     label: "€",
-//   },
-//   {
-//     value: "BTC",
-//     label: "฿",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-//   {
-//     value: "JPY",
-//     label: "¥",
-//   },
-// ];
 
 
 const countries = [
@@ -1095,6 +1045,42 @@ const CheckOutPage = () => {
 
 
 
+const submitHandler = async () => {
+  let options = {
+    url:"http://localhost:8080/order/create",
+    method:"POST",
+    headers:{
+      "content-type":"application/json",
+      "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+    },
+    data:{
+      quantity:1,
+      currency:fullBookingDetails.currencyCode,
+      token:"",
+      userId:"",
+      productId:"",
+      amount:"",
+      cardNumber:"",
+      cardHolderName:"",
+      cardExpiry:"",
+      cardCvv:"",
+      fromDate:"",
+      toDate:"",
+      adultQty:"",
+      childQty:""
+    }
+  }
+    try{
+      let {data} = await axios(options)
+
+    }catch(error){
+      
+    }
+}
+
+
+
+
 
   return (
     <Box>
@@ -1399,7 +1385,7 @@ const CheckOutPage = () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Expiration Month</Typography>
-<TextField
+                <TextField
                     id="outlined-select-currency"
                     select
                     value={countryState}
@@ -1480,7 +1466,7 @@ const CheckOutPage = () => {
                     ))}
                   </TextField>
                 </Box>
-                <Box className="saveCreditCardDetails" 
+                {/* <Box className="saveCreditCardDetails" 
                 sx={{
                     display:"flex",
                     flexDirection:"row",
@@ -1494,7 +1480,7 @@ const CheckOutPage = () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Save my credit card for future use</Typography>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
 
@@ -1603,7 +1589,7 @@ const CheckOutPage = () => {
           
           </Box>
           <Button variant="contained" color="success"
-          onClick={()=>console.log(fullBookingDetails)}
+         onClick={submitHandler}
           >
                         Book Now
            </Button>
@@ -1775,7 +1761,7 @@ const CheckOutPage = () => {
 
               {/* book button */}
               <Button variant="contained" color="success"
-              onClick={()=>console.log(fullBookingDetails)}
+              onClick={submitHandler}
               >
                 Book Now
               </Button>

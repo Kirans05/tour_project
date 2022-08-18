@@ -1,5 +1,5 @@
 import { Typography, Box, Button, Rating, Divider } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
 import Image2 from "../images/img2.jpg"
@@ -11,6 +11,28 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 const WishList = () => {
 
   const [cartItem, setCartItem] = useState(true)
+
+
+  const fetchData = async () => {
+    // let options = {
+    //   url:"",
+    //   headers:{
+    //     "content-type":"application/json"
+    //   },
+    //   data:{
+
+    //   }
+    // }
+
+    // let result = await axios(options)
+  }
+
+
+  useEffect(()=>{
+    // fetchData()
+  },[])
+
+
 
   return (
     <Box>

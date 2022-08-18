@@ -1,5 +1,5 @@
 import { Typography, Box, Button, Rating, Divider } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
 import Image2 from "../images/img2.jpg"
@@ -12,6 +12,26 @@ import { useNavigate } from 'react-router-dom'
 const BookingPage = () => {
 
   const navigate = useNavigate()
+
+
+  const fetchData = async () => {
+    // let options = {
+    //   url:"",
+    //   headers:{
+    //     "content-type":"application/json"
+    //   },
+    //   data:{
+
+    //   }
+    // }
+
+    // let result = await axios(options)
+  }
+
+
+  useEffect(()=> {
+    // fetchData()
+  },[])
 
   return (
     <Box>

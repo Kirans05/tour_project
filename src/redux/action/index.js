@@ -166,3 +166,104 @@ export const countryCode = (payload) => {
         payload
     }
 }
+
+
+
+//  signUpdetails
+// email info
+export const signUpEmail = (payload) => {
+    return {
+        type:"signupEmail",
+        payload
+    }
+}
+
+
+// firstName info
+export const signUpFirstName = (payload) => {
+    return {
+        type:"signupFirstName",
+        payload
+    }
+}
+
+
+// lastName info
+export const signUpLastName = (payload) => {
+    return {
+        type:"signupLastName",
+        payload
+    }
+}
+
+
+// PhoneNumber info
+export const signUpPhoneNumber = (payload) => {
+    return {
+        type:"signupPhoneNumber",
+        payload
+    }
+}
+
+
+
+// password info
+export const signUpPassword = (payload) => {
+    return {
+        type:"signupPassword",
+        payload
+    }
+}
+
+
+//  phoneNumberCode
+export const phoneNumberCode = (payload) => {
+    return {
+        type:"phoneNumberCode",
+        payload
+    }
+}
+
+
+
+//  User Login details
+export const LoginEmail = (payload) => {
+    return {
+        type:"loginEmail",
+        payload
+    }
+}
+
+
+// user Login Password
+export const loginPassword = (payload) => {
+    return {
+        type:"loginPassword",
+        payload
+    }
+}
+
+
+//  product list
+export const productAction = (payload) => {
+    return {
+        type:"productList",
+        payload
+    }
+}
+
+// currency
+export const currencyCodeAction = (payload) =>{
+    return {
+        type:"currencyCode",
+        payload
+    }
+}
+
+// singleProduct selected
+export const individualProductAction = (payload) => {
+    return {
+        type:"individualProduct",
+        payload
+    }
+}
