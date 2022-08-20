@@ -9,16 +9,16 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import Header from "./Header";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import AppleIcon from "@mui/icons-material/Apple";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
-import "./Login.css";
-import {signUpEmail} from "../redux/action/index"
+import "../LoginPage/Login.css";
+import {signUpEmail} from "../../redux/action/index"
 import {useDispatch, useSelector} from "react-redux"
-import {signUpInfo} from "../redux/reducer/reducer"
+import {signUpInfo} from "../../redux/reducer/reducer"
+import Header from "../HeaderComponents/Header";
+import Footer from "../FooterComponents/Footer";
 
 const SignUpPage = () => {
   const navigate = useNavigate();

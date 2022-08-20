@@ -9,17 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import Header from "./Header";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import AppleIcon from "@mui/icons-material/Apple";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
 import "./Login.css";
 import {useDispatch, useSelector} from "react-redux"
-import {loginDetails} from "../redux/reducer/reducer"
-import {LoginEmail, loginPassword} from "../redux/action/index"
+import {loginDetails} from "../../redux/reducer/reducer"
+import {LoginEmail, loginPassword} from "../../redux/action/index"
 import axios from "axios"
+import Header from "../HeaderComponents/Header";
+import Footer from "../FooterComponents/Footer";
 
 const LoginInPage = () => {
   const navigate = useNavigate();
@@ -51,12 +51,17 @@ const LoginInPage = () => {
       method:"POST"
     }
 
-    let {data} = await axios(options)
-    if(data.success){
+    try{
+      let {data} = await axios(options)
+      console.log(data)
+    if(!data.success){
       localStorage.setItem("accessToken",data.accessToken)
       navigate("/")
-    }else{
-
+    }
+    }catch(error){
+      if(error.response.data.message == "Bad credentials"){
+        setAlertMessage("Incorrect Credentials")
+      }
     }
   }
   }

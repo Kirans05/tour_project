@@ -244,7 +244,7 @@ export const loginPassword = (payload) => {
 }
 
 
-//  product list
+//  product list total
 export const productAction = (payload) => {
     return {
         type:"productList",
@@ -264,6 +264,15 @@ export const currencyCodeAction = (payload) =>{
 export const individualProductAction = (payload) => {
     return {
         type:"individualProduct",
+        payload
+    }
+}
+
+
+//  current user details
+export const currentUserAction = (payload) => {
+    return {
+        type:"currentUserDetails",
         payload
     }
 }

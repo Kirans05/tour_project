@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
@@ -29,14 +29,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import SearchIcon from "@mui/icons-material/Search";
-import ArtCulture from "../ModalComponents/ArtCulture";
+import ArtCulture from "../../ModalComponents/ArtCulture";
 // import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
-import { useDispatch } from "react-redux";
-import { currencyCodeAction } from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import { currencyCodeAction, currentUserAction } from "../../redux/action";
+import {currentUserReducer} from "../../redux/reducer/reducer"
+import axios from "axios";
 
 
 
@@ -1020,12 +1022,12 @@ const country_currency = [
 
 const Header = () => {
 
-
+  const myState = useSelector((state) => state.currentUserReducer);
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [countryCurrencyState, setCountryCurrencyState] = useState("INR")
-
-
+  const [showUserProfile, setShowUserProfile] = useState(localStorage.getItem("accessToken") != null ? true : false)
+  
   const contryChangeHandler = (e) => {
     dispatch(currencyCodeAction(e.target.value))
     setCountryCurrencyState(e.target.value)
@@ -6052,6 +6054,34 @@ const Header = () => {
     </Box>
   );
 
+
+  const fetchCurrentUser = async () => {
+    let options ={
+      url:"http://localhost:8080/user/me",
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    }
+
+
+    try{
+      let {data} = await axios(options)
+      dispatch(currentUserAction(data))
+    }catch(error){
+      if(error.response.data.error == "Unauthorized"){
+        localStorage.removeItem("accessToken")
+        // navigate("/")
+      }
+    }
+  }
+
+
+  useEffect(()=>{
+    fetchCurrentUser()
+  },[])
+
   return (
     <Box
       sx={{
@@ -6237,7 +6267,7 @@ const Header = () => {
         <Box
           className="account"
           sx={{
-            display: "flex",
+            display: !showUserProfile ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             borderBottom: "3px solid white",
@@ -6261,7 +6291,7 @@ const Header = () => {
           <Box
           className="userName&profile"
           sx={{
-            display: "flex",
+            display: showUserProfile ? "flex": "none",
             flexDirection: "row",
             alignItems: "center",
             borderBottom: "3px solid white",
@@ -6277,7 +6307,7 @@ const Header = () => {
             sx={{ fontSize: { xs: "16px", md: "20px" } }}
             onClick={handleUserProfileClick}
           >
-            Kiran
+            {myState.firstName} {myState.lastName}
           </Typography>
         </Box>
       </Box>
@@ -6484,6 +6514,7 @@ const Header = () => {
           sx={{
             fontSize: { xs: "14px", md: "16px" },
           }}
+          onClick={()=>localStorage.removeItem("accessToken")}
         >
           LogOut
         </MenuItem>

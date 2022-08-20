@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import Header from "./Header";
+import Header from "../Screens/HeaderComponents/Header";
 import Image1 from "../images/img1.webp";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { DesktopDatePicker, LocalizationProvider, MonthPicker } from "@mui/x-date-pickers";
@@ -45,7 +45,8 @@ const TourDetails = () => {
 
   // redux states and dispatch functions
   const memberPresentstate = useSelector((state) => state.addTravelMembers)
-  const memberBookingDate = useSelector((state) => state.booking_date_day)
+  const booking_dateDetails = useSelector((state) => state.booking_date_day)
+  const singleTourDetails = useSelector((state) => state.singleProductReducer)
   const dispatch = useDispatch()
 
 
@@ -98,7 +99,7 @@ const TourDetails = () => {
         >
           <Box className="PlaceTitTle">
             <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
-              Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock
+              {singleTourDetails.name}
             </Typography>
           </Box>
           <Box
@@ -315,7 +316,8 @@ const TourDetails = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    <CurrencyRupeeIcon /> 8719.53
+                    {/* <CurrencyRupeeIcon /> 8719.53 */}
+                    {singleTourDetails.currency} {singleTourDetails.price}
                   </Typography>
                 </Box>
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
@@ -562,7 +564,13 @@ const TourDetails = () => {
                   <Button
                     color="success"
                     variant="contained"
-                    onClick={() => setAvailability(!Availability)}
+                    onClick={() => {
+                      if(booking_dateDetails.BookDate == ""){
+                        alert("please select date of booking")
+                      }else{
+                        setAvailability(!Availability)
+                      }
+                    }}
                   >
                     Check Availability
                   </Button>

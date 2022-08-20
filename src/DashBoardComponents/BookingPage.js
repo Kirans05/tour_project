@@ -1,7 +1,7 @@
 import { Typography, Box, Button, Rating, Divider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Footer from './Footer'
-import Header from './Header'
+import Footer from '../Screens/FooterComponents/Footer'
+import Header from '../Screens/HeaderComponents/Header'
 import Image2 from "../images/img2.jpg"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';

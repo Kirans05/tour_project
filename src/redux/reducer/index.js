@@ -1,5 +1,5 @@
 import {combineReducers} from "redux"
-import {addTravelMembers, booking_date_day, travelDetails, signUpInfo, loginDetails, totalProductReducer} from "./reducer"
+import {addTravelMembers, booking_date_day, travelDetails, signUpInfo, loginDetails, totalProductReducer, currentUserReducer, singleProductReducer} from "./reducer"
 
 const rootReducer = combineReducers({
     addTravelMembers,
@@ -7,7 +7,9 @@ const rootReducer = combineReducers({
     travelDetails,
     signUpInfo,
     loginDetails,
-    totalProductReducer
+    totalProductReducer,
+    currentUserReducer,
+    singleProductReducer
 })
 
 export default  rootReducer

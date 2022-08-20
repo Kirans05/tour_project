@@ -8,7 +8,7 @@ import {
     Typography,
   } from "@mui/material";
   import React, { useState } from "react";
-  import Header from "../DashBoardComponents/Header";
+  import Header from "../Screens/HeaderComponents/Header";
   import PermIdentityIcon from "@mui/icons-material/PermIdentity";
   import VpnKeyIcon from "@mui/icons-material/VpnKey";
   import PaymentIcon from "@mui/icons-material/Payment";

@@ -9,7 +9,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
+import Header from "../Screens/HeaderComponents/Header";
 import {
   signUpFirstName,
   signUpLastName,
@@ -1010,29 +1010,31 @@ const SignUpUserDetails = () => {
       setAlertMessage("Please Fill Password");
       setSnakBarOpen(true);
     } else {
-      
-    let options = {
-      url:"http://localhost:8080/auth/signup",
-      method:"POST",
-      headers:{
-        "content-type":"application/json"
-      },
-      data:{
-        firstName:myState["firstName"],
-        lastName:myState["lastName"],
-        email:myState["email"],
-        password:myState["password"]
+
+      let options = {
+        url:"http://localhost:8080/auth/signup",
+        method:"POST",
+        headers:{
+          "content-type":"application/json"
+        },
+        data:{
+          firstName:myState["firstName"],
+          lastName:myState["lastName"],
+          email:myState["email"],
+          password:myState["password"]
+        }
       }
-    }
 
-    let {data} = await axios(options)
-
-    if(data.success) {
-      localStorage.setItem("success",true)
-      navigate("/")
-    }else{
-      localStorage.setItem("success",false)
-    }
+      try{
+        let {data} = await axios(options)
+        console.log(data)
+        if(data.success) {
+          navigate("/login")
+        }
+      }catch(error){
+        setAlertMessage(error.response.data.message)
+        setSnakBarOpen(true)
+      }
   }
   };
 

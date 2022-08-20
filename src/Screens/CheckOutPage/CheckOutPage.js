@@ -7,16 +7,16 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import Header from "./Header";
-import Imgae2 from "../images/img2.jpg";
+import Imgae2 from "../../images/img2.jpg";
 import { RiVisaLine, RiRefund2Line } from "react-icons/ri";
 import { SiAmericanexpress, SiMastercard } from "react-icons/si";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useSelector, useDispatch } from "react-redux";
-import {booking_date_day, addTravelMembers, travelDetails} from "../redux/reducer/reducer"
-import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../redux/action";
+import {booking_date_day, addTravelMembers, travelDetails, singleProductReducer, currentUserReducer} from "../../redux/reducer/reducer"
+import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../../redux/action/index";
 import axios from "axios"
+import Header from "../HeaderComponents/Header";
 
 
 
@@ -1016,6 +1016,9 @@ const CheckOutPage = () => {
   const memberPresentState = useSelector((state) => state.addTravelMembers)
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const fullBookingDetails = useSelector((state) => state.travelDetails)
+  const singleTourDetails = useSelector((state) => state.singleProductReducer)
+  const currentUserDetails = useSelector((state) => state.currentUserReducer)
+
   
 
   const date = booking_dateDetails.BookDate +"/ "+booking_dateDetails.BookMonth+ "/"+ booking_dateDetails.BookYear
@@ -1043,9 +1046,23 @@ const CheckOutPage = () => {
   setCountryState(event.target.value);
 };
 
+const handleExpiryMonth = (e) => {
+  dispatch(ExpirationMonth(e.target.value))
+  setCardExpiryMonth(e.target.value)
+} 
+
 
 
 const submitHandler = async () => {
+
+  let date = new Date();
+  date.setDate(date.getDate()+2)
+
+
+  let expirayMon = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(`${fullBookingDetails.ExpirationMonth}`) / 3 + 1
+
+  let expiryYear =  `${fullBookingDetails.Expirayyear}`.slice(2)
+
   let options = {
     url:"http://localhost:8080/order/create",
     method:"POST",
@@ -1055,26 +1072,29 @@ const submitHandler = async () => {
     },
     data:{
       quantity:1,
-      currency:fullBookingDetails.currencyCode,
-      token:"",
-      userId:"",
-      productId:"",
-      amount:"",
-      cardNumber:"",
-      cardHolderName:"",
-      cardExpiry:"",
-      cardCvv:"",
-      fromDate:"",
-      toDate:"",
-      adultQty:"",
-      childQty:""
+      currency:`${singleTourDetails.currency}`,
+      token:`${localStorage.getItem("accessToken")}`,
+      userId:currentUserDetails.id,
+      productId:singleTourDetails.id,
+      amount:singleTourDetails.price,
+      cardNumber:fullBookingDetails.CreditCardNumber,
+      cardHolderName:fullBookingDetails.CardholderName,
+      cardExpiry:`${expirayMon}/${expiryYear}`,
+      cardCvv:fullBookingDetails.SecurityCode,
+      fromDate:new Date().toLocaleDateString('en-CA'),
+      // fromDate:`${booking_dateDetails.BookYear}-${booking_dateDetails.BookMonth}-${booking_dateDetails.BookDate}`,
+      // toDate:`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+      toDate: date.toLocaleDateString('en-CA'),
+      adultQty:memberPresentState.adult,
+      childQty:memberPresentState.child
     }
   }
+  console.log(options)
     try{
       let {data} = await axios(options)
-
+      console.log(data)
     }catch(error){
-      
+        console.log(error)
     }
 }
 
@@ -1361,7 +1381,11 @@ const submitHandler = async () => {
                 rowGap:1
               }}>
                 <Typography>Credit Card Number</Typography>
-                <TextField type={"text"} fullWidth placeholder="Enter Card Number"  onChange={(e) => dispatch(CreditCardNumber(e.target.value))}  />
+                <TextField  fullWidth 
+                placeholder="Enter Card Number"
+                  onChange={(e) => dispatch(CreditCardNumber(e.target.value))}  
+                inputProps={{ maxLength: 16, className:'digitsOnly' }}
+                />
               </Box>
               <Box className="expirayDate&SecurityCode"
               sx={{
@@ -1388,8 +1412,8 @@ const submitHandler = async () => {
                 <TextField
                     id="outlined-select-currency"
                     select
-                    value={countryState}
-                    onChange={handleCountryChange}
+                    value={cardEexpiryMonth}
+                    onChange={handleExpiryMonth}
                   >
                     {Months.map((option,index) => (
                       <MenuItem key={index} value={option.name}  >
@@ -1426,7 +1450,9 @@ const submitHandler = async () => {
                     fontSize:{xs:"14px",md:"16px"}
                   }}
                   >Security Code</Typography>
-                  <TextField type={"text"} placeholder="3 or 4 digit code usually found near the signature strip."  onChange={(e) => dispatch(SecurityCode(e.target.value))}   />
+                  <TextField type={"text"} placeholder="3 or 4 digit code usually found near the signature strip."  onChange={(e) => dispatch(SecurityCode(e.target.value))}  
+                  inputProps={{ maxLength: 3 }}
+                  />
                 </Box>
                 </Box>
 

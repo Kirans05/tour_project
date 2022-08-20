@@ -1,9 +1,9 @@
 import { Box,Switch,Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import Header from '../DashBoardComponents/Header'
+import Header from '../Screens/HeaderComponents/Header'
 import ProfileChoice from './ProfileChoice'
-import Footer from "../DashBoardComponents/Footer";
+import Footer from "../Screens/FooterComponents/Footer";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 

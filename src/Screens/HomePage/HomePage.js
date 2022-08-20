@@ -8,20 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Travel3 from "../images/img2.jpg";
-import Travel2 from "../images/travel2.jpg";
-import Travel1 from "../images/travel1.jpg";
-import Image1 from "../images/img1.webp";
-import Image2 from "../images/img2.jpg";
+import Travel3 from "../../images/img2.jpg";
+import Travel2 from "../../images/travel2.jpg";
+import Travel1 from "../../images/travel1.jpg";
+import Image1 from "../../images/img1.webp";
+import Image2 from "../../images/img2.jpg";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import Footer from "./Footer";
+import Footer from "./../FooterComponents/Footer";
 import SearchIcon from "@mui/icons-material/Search";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import Image3 from "../images/travel2.jpg";
+import Image3 from "../../images/travel2.jpg";
 import axios from "axios";
+import Header from "../HeaderComponents/Header";
 
 const HomePage = () => {
   const [dateValue, setDateValue] = useState(new Date());

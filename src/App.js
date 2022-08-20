@@ -1,35 +1,23 @@
 import React from 'react'
 import { Link, Route, Routes } from "react-router-dom"
-import AgreementPage from './DashBoardComponents/AgreementPage'
-import DashBoard from './DashBoardComponents/DashBoard'
-import Header from './DashBoardComponents/Header'
-import LoginInPage from './DashBoardComponents/LoginInPage'
-import PrivacyPolicy from './DashBoardComponents/PrivacyPolicy'
-import SignUpPage from './DashBoardComponents/SignUpPage'
-import TermsAndCondition from './DashBoardComponents/TermsAndCondition'
-import BookingPage from "./DashBoardComponents/BookingPage"
-import HomePage from "./DashBoardComponents/HomePage"
-import HelpPage from "./DashBoardComponents/HelpPage"
-import TourDetails from './DashBoardComponents/TourDetails'
-import AboutPage from './DashBoardComponents/AboutPage'
-import CarrersPage from './DashBoardComponents/CarrersPage'
-import SiteMapPgae from './DashBoardComponents/SiteMapPgae'
-import SupplierSignUpPage from './DashBoardComponents/SupplierSignUpPage'
-import TravelAgentPage from './DashBoardComponents/TravelAgentPage'
-import AffiliatePage from './DashBoardComponents/AffiliatePage'
-import NewsPage from './DashBoardComponents/NewsPage'
-import BlogPage from './DashBoardComponents/BlogPage'
-import UserProfile from './userInformation/UserProfile'
-import UserLoginInformationPage from './userInformation/UserLoginInformationPage'
-import PaymentMethodPage from './userInformation/PaymentMethodPage'
-import NotificationPage from './userInformation/NotificationPage'
-import TravelPireferences from './userInformation/TravelPireferences'
-import SiteSettings from './userInformation/SiteSettings'
-import WishList from './DashBoardComponents/WishList'
-import UserSettings from './userInformation/UserSettings'
 import { Box } from '@mui/material'
-import CheckOutPage from './DashBoardComponents/CheckOutPage'
-import SignUpUserDetails from './DashBoardComponents/SignUpUserDetails'
+import DashBoard from './Screens/DashBoard/DashBoard'
+import SignUpPage from './Screens/SignupPage/SignUpPage'
+import LoginInPage from './Screens/LoginPage/LoginInPage'
+import TermsAndCondition from './Screens/FooterComponents/TermsAndCondition/TermsAndCondition'
+import PrivacyPolicy from './Screens/FooterComponents/PrivacyPolicy/PrivacyPolicy'
+import HomePage from './Screens/HomePage/HomePage'
+import AboutPage from './Screens/FooterComponents/About/AboutPage'
+import CheckOutPage from './Screens/CheckOutPage/CheckOutPage'
+import BookingPage from "./DashBoardComponents/BookingPage"
+import HelpPage from "./DashBoardComponents/HelpPage"
+import TourDetails from "./DashBoardComponents/TourDetails"
+import WishList from "./DashBoardComponents/WishList"
+import UserSettings from "./userInformation/UserSettings"
+import SignUpUserDetails from "./DashBoardComponents/SignUpUserDetails"
+
+
+
 const App = () => {
   return (
     <Box>
@@ -39,19 +27,11 @@ const App = () => {
       <Route path='/login' element={<LoginInPage />} />
       <Route path='/TermsAndCondition' element={<TermsAndCondition />} />
       <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} />
-      <Route path='/agreement' element={<AgreementPage />} />
       <Route path='/bookingPage' element={<BookingPage />} />
       <Route path='/HomePage' element={<HomePage />} />
       <Route path='/helpPage' element={<HelpPage />} />
       <Route path='/TourDeatils' element={<TourDetails />} />
       <Route path='/aboutPage' element={<AboutPage />} />
-      <Route path='/carrerPage' element={<CarrersPage />} />
-      <Route path='/siteMapPage' element={<SiteMapPgae />} />
-      <Route path='/supplierSignUpPgae' element={<SupplierSignUpPage />} />
-      <Route path='/TravelAgentPage' element={<TravelAgentPage />} />
-      <Route path='/AffiliatePage' element={<AffiliatePage />} />
-      <Route path='/NewsPage' element={<NewsPage />} />
-      <Route path='/blogPage' element={<BlogPage />} />
       <Route path='/wishList' element={<WishList />} />
       <Route path='/userProfile' element={<UserSettings />} />
       <Route path='/checkoutPage' element={<CheckOutPage />} />

@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import Header from "../DashBoardComponents/Header";
+import Header from "../Screens/HeaderComponents/Header";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -24,7 +24,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate, useParams } from "react-router-dom";
 import ProfileChoice from "./ProfileChoice";
-import Footer from "../DashBoardComponents/Footer";
+import Footer from "../Screens/FooterComponents/Footer";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };

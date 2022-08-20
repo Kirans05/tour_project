@@ -27,7 +27,7 @@ export const addTravelMembers = (state = tourMembersNumbers, action) => {
 const date_day_details = {
     BookDate : "",
     BookDay : "",
-    BookMonth :"",
+    BookMonth : "",
     BookYear : "",
     BookTime : ""
 }
@@ -178,10 +178,10 @@ export const loginDetails = (state = userLoginDetails, action) => {
 
 // total product array
 const totalProductList = []
-export const totalProductReducer = (action = totalProductList, state) => {
+export const totalProductReducer = (state = totalProductList, action) => {
     switch(action.type){
         case "productList" : 
-            return [...totalProductList,...action.payload]
+            return action.payload
 
         default :
             return state;
@@ -191,12 +191,25 @@ export const totalProductReducer = (action = totalProductList, state) => {
 
 // single Product information reducer
 const singleProductObject = {}
-export const singleProductReducer = (action , state) => {
+export const singleProductReducer = (state = singleProductObject , action) => {
     switch(action.type){
         case "individualProduct" :
             return action.payload
 
         default :
         return state
+    }
+}
+
+
+
+const currentUserObj = {};
+export const currentUserReducer = (state = currentUserObj, action) => {
+    switch(action.type){
+        case "currentUserDetails": 
+            return action.payload
+
+        default : 
+            return state
     }
 }

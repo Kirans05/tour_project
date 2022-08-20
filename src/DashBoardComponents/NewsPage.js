@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import Header from './Header'
+import Header from '../Screens/HeaderComponents/Header'
 
 const NewsPage = () => {
   return (

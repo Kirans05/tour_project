@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
-import Header from '../DashBoardComponents/Header'
+import Header from '../Screens/HeaderComponents/Header'
 import ProfileChoice from './ProfileChoice'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
