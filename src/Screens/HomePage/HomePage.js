@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Travel3 from "../../assets/images/img2.jpg";
-import Travel2 from "../../images/travel2.jpg";
-import Travel1 from "../../images/travel1.jpg";
+import Travel2 from "../../assets/images/travel2.jpg"
+import Travel1 from "../../assets/images/travel1.jpg";
 import Image1 from "../../assets/images/img1.webp";
 import Image2 from "../../assets/images/img2.jpg";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
@@ -19,7 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import Image3 from "../../images/travel2.jpg";
+import Image3 from "../../assets/images/travel2.jpg";
 import axios from "axios";
 import Header from "../HeaderComponents/Header";
 

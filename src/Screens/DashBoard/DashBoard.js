@@ -42,6 +42,8 @@ import {useSelector, useDispatch} from "react-redux"
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import ProductCards from "../../Components/ProductCard/ProductCards";
+import Skeleton from "../../Components/skeleton/SkeletonPattern";
+import SkeletonPattern from "../../Components/skeleton/SkeletonPattern";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -1632,7 +1634,7 @@ useEffect(()=>{
                 sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
               >
                 {
-                  myState.length == 0 ? <Typography>No products</Typography> 
+                  myState.length == 0 ? <SkeletonPattern />
                   :<Box
                   className="travelData"
                   sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}>

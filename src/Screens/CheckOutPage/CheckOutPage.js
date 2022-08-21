@@ -1138,14 +1138,18 @@ const submitHandler = async () => {
       childQty:memberPresentState.child
     }
   }
-  console.log(options)
     try{
       let {data} = await axios(options)
       console.log(data)
+      console.log(data.message)
+      setAlertMessage(data.message)
+      setSnakBarOpen(true)
     }catch(error){
         console.log(error)
     }
-    navigate("/")
+    setTimeout(()=>{
+      navigate("/")
+    },4000)
   }
 }
 
@@ -1949,7 +1953,7 @@ const submitHandler = async () => {
           </Box>
         </Box>
         </Box>
-        <Snackbar open={SnakBarOpen} autoHideDuration={3000} onClose={handleSnakBarClose}>
+        <Snackbar open={SnakBarOpen} autoHideDuration={4000} onClose={handleSnakBarClose}>
         <Alert onClose={handleSnakBarClose} severity="warning" sx={{ width: '150%' }}>
         {alertMessage}
         </Alert>
