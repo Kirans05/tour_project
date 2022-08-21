@@ -9,13 +9,12 @@ import PrivacyPolicy from './Screens/FooterComponents/PrivacyPolicy/PrivacyPolic
 import HomePage from './Screens/HomePage/HomePage'
 import AboutPage from './Screens/FooterComponents/About/AboutPage'
 import CheckOutPage from './Screens/CheckOutPage/CheckOutPage'
-import BookingPage from "./DashBoardComponents/BookingPage"
-import HelpPage from "./DashBoardComponents/HelpPage"
-import TourDetails from "./DashBoardComponents/TourDetails"
-import WishList from "./DashBoardComponents/WishList"
-import UserSettings from "./userInformation/UserSettings"
-import SignUpUserDetails from "./DashBoardComponents/SignUpUserDetails"
-
+import HelpPage from "./Screens/HelpPage/HelpPage"
+import TourDetails from "./Screens/TourDetails/TourDetails"
+import WishList from "./Screens/WishList/WishList"
+import UserSettings from "./Components/userInformation/UserSettings"
+import SignUpUserDetails from "./Screens/SignupPage/SignUpUserDetails"
+import BookingPage from "./Screens/BookingPage/BookingPage"
 
 
 const App = () => {

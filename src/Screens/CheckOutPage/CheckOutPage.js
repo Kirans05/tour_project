@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import Imgae2 from "../../images/img2.jpg";
+import Imgae2 from "../../assets/images/img2.jpg";
 import { RiVisaLine, RiRefund2Line } from "react-icons/ri";
 import { SiAmericanexpress, SiMastercard } from "react-icons/si";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";

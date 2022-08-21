@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Travel3 from "../../images/img2.jpg";
+import Travel3 from "../../assets/images/img2.jpg";
 import Travel2 from "../../images/travel2.jpg";
 import Travel1 from "../../images/travel1.jpg";
-import Image1 from "../../images/img1.webp";
-import Image2 from "../../images/img2.jpg";
+import Image1 from "../../assets/images/img1.webp";
+import Image2 from "../../assets/images/img2.jpg";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Footer from "./../FooterComponents/Footer";
 import SearchIcon from "@mui/icons-material/Search";

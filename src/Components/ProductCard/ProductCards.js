@@ -1,7 +1,7 @@
 import { Box, Rating, Typography } from '@mui/material'
 import React, { useEffect, useState } from "react";
-import Image1 from "../../images/img1.webp";
-import Image2 from "../../images/img2.jpg";
+import Image1 from "../../assets/images/img1.webp";
+import Image2 from "../../assets/images/img2.jpg";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,47 @@ import { individualProductAction } from '../../redux/action/index';
 const ProductCards = ({item}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [reRender, setRerender] = useState(true)
+
+
+  const[productList, setProductList] = useState(JSON.parse(localStorage.getItem("tourProduct")))
+  const [wishListItem, setWishListItem] = useState(false)
+  const checkWishList = () => {
+    if(productList.length){
+      let filterItem = productList.filter(product => product.id == item.id)
+      if(filterItem.length){
+        setWishListItem(true)
+      }
+    }
+  }
+
+useEffect(()=>{
+  checkWishList()
+
+},[reRender])
+
+
+  
+
+  const wishListAddHandler = () => {
+    if(localStorage.getItem("tourProduct") == null){
+      let arr = []
+      arr.push(item)
+      arr = JSON.stringify(arr)
+      localStorage.setItem("tourProduct",arr)
+    }else{
+      let arr = localStorage.getItem("tourProduct")
+      arr = JSON.parse(arr)
+      let filteredProduct = arr.filter(product => product.id == item.id)
+      if(filteredProduct.length){
+        //  product already exists
+      }else{
+      arr.push(item)
+      arr = JSON.stringify(arr)
+      localStorage.setItem("tourProduct",arr)
+      }
+    }
+  }
 
   return (
     <Box
@@ -66,13 +107,20 @@ const ProductCards = ({item}) => {
         right:"10px",
         top:"10px"
       }}
+      onClick={()=>{
+        if(localStorage.getItem("accessToken") == null){
+          navigate("/login")
+        }else{
+          wishListAddHandler()
+        }
+      }}
       >
-          {/* <FavoriteIcon sx={{
+          <FavoriteIcon sx={{
             color:"red",
-            display:"flex"
-          }}/> */}
+            display:wishListItem ? "flex" : "none"
+          }}/>
           <FavoriteBorderIcon  sx={{
-            display: "flex" 
+            display: !wishListItem ? "flex" : "none" 
           }}/>
       </Box>
     </Box>

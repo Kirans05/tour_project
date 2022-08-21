@@ -39,6 +39,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { currencyCodeAction, currentUserAction } from "../../redux/action";
 import {currentUserReducer} from "../../redux/reducer/reducer"
 import axios from "axios";
+import { render } from "react-dom";
 
 
 
@@ -1021,14 +1022,14 @@ const country_currency = [
 
 
 const Header = ({setlogoutRender,logoutRender}) => {
+  const [showUserProfile, setShowUserProfile] = useState(localStorage.getItem("accessToken") != null ? true : false)
   const location = useLocation()
   // location.pathname
   const myState = useSelector((state) => state.currentUserReducer);
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [countryCurrencyState, setCountryCurrencyState] = useState("INR")
-  const [showUserProfile, setShowUserProfile] = useState(localStorage.getItem("accessToken") != null ? true : false)
-
+  
 
 
   const contryChangeHandler = (e) => {
@@ -1147,6 +1148,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
   const [anchorElState, setAnchorElState] = React.useState(null);
   const open = Boolean(anchorEl);
   const UserProfileOpen = Boolean(anchorElState);
+
 
 
 
@@ -1361,7 +1363,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
       <Box
         className="registeration"
         sx={{
-          display: "flex",
+          display: localStorage.getItem("accessToken") == null ? "flex" : "none",
           flexDirection: "column",
           rowGap: 2,
           paddingLeft: "10%",
@@ -6086,9 +6088,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
   },[])
 
 
-  useEffect(()=>{
 
-  },[logoutRender])
 
   return (
     <Box
@@ -6281,7 +6281,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         <Box
           className="account"
           sx={{
-            display: !showUserProfile ? "flex" : "none",
+            display: localStorage.getItem("accessToken") == null ? "flex": "none",
             flexDirection: "row",
             alignItems: "center",
             borderBottom: "3px solid white",
@@ -6305,7 +6305,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           <Box
           className="userName&profile"
           sx={{
-            display: showUserProfile ? "flex": "none",
+            display: localStorage.getItem("accessToken") != null ? "flex": "none",
             flexDirection: "row",
             alignItems: "center",
             borderBottom: "3px solid white",
@@ -6530,8 +6530,12 @@ const Header = ({setlogoutRender,logoutRender}) => {
           }}
           onClick={()=>{
             localStorage.removeItem("accessToken")
-            setlogoutRender(!logoutRender)
-            navigate("/")
+            if(location.pathname == "/"){
+              setlogoutRender(!logoutRender)
+              navigate("/")
+            }else{
+              navigate("/")
+            }
           }}
         >
           LogOut

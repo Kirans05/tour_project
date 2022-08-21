@@ -7,36 +7,83 @@ const PrivacyPolicy = () => {
   return (
     <Box>
       <Header />
-      <Box>
-        <Typography>PRIVACY AND COOKIES STATEMENT</Typography>
-        <Box className="Effective: 25 March 2021">
-          <Typography>Effective: 25 March 2021</Typography>
-          <Typography>
+      <Box className="mainBody"
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"flex-start",
+        justifyContent:"flex-start",
+        rowGap:2,
+        padding:{xs:"0% 1% 0% 1%",md:"0% 5% 0% 5%"},
+        width:{xs:"98%",md:"50%"}
+      }}
+      >
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        rowGap:2
+      }}
+      >
+        <Typography sx={{
+          fontSize:{xs:"20px",md:"24px"},
+          fontWeight:"bold"
+        }}>PRIVACY AND COOKIES STATEMENT</Typography>
+        <Box className="Effective: 25 March 2021"
+        sx={{
+          display:"flex",
+          flexDirection:"column",
+          rowGap:2
+        }}
+        >
+          <Typography
+          sx={{
+            fontSize:{xs:"16px",md:"18px"},
+            fontWeight:"bold"
+          }}
+          >Effective: 25 March 2021</Typography>
+          <Typography
+          sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             We know that sharing your personal information with us is based on
             trust. We take this seriously and are committed to ensuring that we
             respect your privacy when you visit our website or use our services.
             Please review this privacy and cookies statement (“Statement”)
             carefully to learn about our privacy practices.
           </Typography>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             We operate a service that enables users (“you”, “your”) to research,
             find, and book travel experiences worldwide. In this Statement,
             these are collectively referred to as our Services.
           </Typography>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             Our Services are owned and operated by Viator, Inc. By using our
             Services and visiting our websites and related applications, whether
             on a computer, phone, tablet or similar device (these are all
             referred to as a “Device”), you are accepting the practices
             described below.
           </Typography>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             As a global company, we operate in a number of countries and
             territories where the laws and customs differ. This Statement
             provides a general overview of our privacy practices.
           </Typography>
           <Box>
-            <ol>
+            <ol style={{fontSize:"18px"}}>
               <li>Information Collected</li>
               <li>Information Uses</li>
               <li>Information Sharing</li>
@@ -55,10 +102,25 @@ const PrivacyPolicy = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="details">
+      <Box className="details"
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        rowGap:1,
+      }}
+      >
         <Box className="Information Collected">
-          <Typography>1.Information Collected</Typography>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"},
+            fontWeight:"bold"
+          }}
+          >1.Information Collected</Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             When you access or use our Services, we collect information from and
             about you to provide a more personalized and relevant experience.
             Some information we collect automatically. Other information we
@@ -70,7 +132,7 @@ const PrivacyPolicy = () => {
             their service. Information collected may include the following:
           </Typography>
           <Box className="ul">
-            <ul>
+            <ul  style={{fontSize:"18px"}}>
               <li>
                 Contact information, including name, phone number and postal and
                 email addresses
@@ -100,14 +162,22 @@ const PrivacyPolicy = () => {
               <li>Information about your travel plans and preferences</li>
             </ul>
           </Box>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             We may also collect, in instances where you have provided it,
             information about other travellers, including their email address
             and other travel-related information. If you are sharing information
             with us about other individuals, you must obtain their consent.
           </Typography>
 
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             In addition to the categories noted above, we may also collect
             location information if you have instructed your Device to send such
             information via the privacy settings on that Device, or, for
@@ -121,7 +191,11 @@ const PrivacyPolicy = () => {
             attractions near you when you are traveling.
           </Typography>
 
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             You can change the privacy settings of your Device at any time in
             order to turn off the functionality that collects and shares
             location information and/or the functionality to tag your photos
@@ -132,7 +206,11 @@ const PrivacyPolicy = () => {
             help.
           </Typography>
 
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             Please see the section on Cookies below for more information
             regarding the use of cookies and other technology described in this
             section, including regarding your choices relating to such
@@ -141,8 +219,17 @@ const PrivacyPolicy = () => {
         </Box>
 
         <Box className="Information Uses">
-          <Typography>2.Information Uses</Typography>
-          <Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"},
+            fontWeight:"bold"
+          }}
+          >2.Information Uses</Typography>
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >
             We are committed to providing you with relevant content on our
             Services and respect the data privacy laws of the different
             jurisdictions in which we operate. We use information about you so
@@ -150,7 +237,9 @@ const PrivacyPolicy = () => {
             following ways:
           </Typography>
           <Box className="ul">
-            <ul>
+            <ul
+             style={{fontSize:"18px"}}
+            >
               <li>Register and manage your Viator account</li>
               <li>Facilitate your bookings</li>
               <li>Measure interest in and improve our Services</li>
@@ -187,15 +276,30 @@ const PrivacyPolicy = () => {
               </li>
             </ul>
           </Box>
-          <Typography>Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a Viator user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information.
+          <Typography
+           sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+          >Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a Viator user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information.
 </Typography>
         </Box>
 
         <Box className="Information Sharing">
-                  <Typography>3.Information Sharing</Typography>
-                  <Typography>In order to provide some of our Services, we may need to share information with certain other third parties, including our group of companies, in the following circumstances:</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >3.Information Sharing</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >In order to provide some of our Services, we may need to share information with certain other third parties, including our group of companies, in the following circumstances:</Typography>
                   <Box>
-                    <ul>
+                    <ul
+                     style={{fontSize:"18px"}}
+                    >
                       <li>Our Group of Companies. We share information with companies in our corporate family so we can provide you with information about products and services, both travel-related and others, which might interest you. These companies and websites will comply with this Statement and all applicable laws governing the transmission of promotional communications.</li>
 <li>Experience Suppliers. We share your information with suppliers of travel experiences to allow them to fulfil the bookings you make through our Services.</li>
 <li>Service Providers. We share information with certain service providers used to facilitate our Services, including to help with transactions.</li>
@@ -205,16 +309,39 @@ const PrivacyPolicy = () => {
 <li>Other third parties, such as referring websites.Third parties may also assist us in collecting information by, for example, operating features of our website or facilitating the delivery of online advertising tailored to your interests. We may share audience segments and other information with third parties that use that information for tailored advertising to you.</li>
                     </ul>
                   </Box>
-                  <Typography>Third parties may only collect or access information as needed to perform their permitted functions.</Typography>
-                  <Typography>Certain Device operating system versions permit you to opt out of certain types of information sharing, including to certain advertising networks. Please check your Device settings if you want to limit such tracking.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >Third parties may only collect or access information as needed to perform their permitted functions.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >Certain Device operating system versions permit you to opt out of certain types of information sharing, including to certain advertising networks. Please check your Device settings if you want to limit such tracking.</Typography>
         </Box>
 
         <Box className="Information Choices">
-                  <Typography>4.Information Choices</Typography>
-                  <Typography>You have options with respect to the collection and use of your information.</Typography>
-                  <Typography>Your options:</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >4.Information Choices</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >You have options with respect to the collection and use of your information.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >Your options:</Typography>
                   <Box className="ul">
-                    <ul>
+                    <ul
+                     style={{fontSize:"18px"}}
+                    >
                       <li>You can choose not to provide us with certain information, although it may be needed to take advantage of certain features offered on our websites.</li>
 <li>You can prevent the collection of geolocation information, but note that turning off location sharing may affect certain features of our Services.</li>
 <li>You also can add or update information and close your account. If you close your account, we will deactivate your account and remove your profile information. We may retain some information associated with your account (including past transactions) for internal purposes including backups, fraud prevention, dispute resolution, investigations and legal compliance for the period necessary to fulfill the purposes outlined in this Statement.</li>
@@ -224,37 +351,93 @@ const PrivacyPolicy = () => {
         </Box>
 
         <Box className="Information Transfers">
-                  <Typography>5.Information Transfers</Typography>
-                  <Typography>We are a global company and we operate in many different jurisdictions. If we transfer your information to other countries, we will use and protect that information as described in this Statement and in accordance with applicable law.</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >5.Information Transfers</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >We are a global company and we operate in many different jurisdictions. If we transfer your information to other countries, we will use and protect that information as described in this Statement and in accordance with applicable law.</Typography>
 
         </Box>
 
         <Box className="Information Security">
-                  <Typography>6.Information Security</Typography>
-                  <Typography>We have implemented appropriate administrative, technical, and physical security procedures to help protect your information. We only authorize specific employees to access personal information and they may do so only for permitted business functions. We use encryption when transmitting your information between your system and ours, and between our system and those of the parties with whom we share information. We also employ firewalls and intrusion detection systems to help prevent unauthorized access to your information. However, we cannot guarantee the security of information from unauthorized entry or use, hardware or software failure, or other circumstances outside of our control.
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >6.Information Security</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >We have implemented appropriate administrative, technical, and physical security procedures to help protect your information. We only authorize specific employees to access personal information and they may do so only for permitted business functions. We use encryption when transmitting your information between your system and ours, and between our system and those of the parties with whom we share information. We also employ firewalls and intrusion detection systems to help prevent unauthorized access to your information. However, we cannot guarantee the security of information from unauthorized entry or use, hardware or software failure, or other circumstances outside of our control.
 </Typography>
         </Box>
 
           <Box className="Information Retention">
-                  <Typography>7.Information Retention</Typography>
-                  <Typography>We will retain copies of your information for as long as you maintain your account or as necessary in connection with the purposes set out in this Statement, unless applicable law requires a longer retention period. In addition, we may retain your information for the duration of any period necessary to establish, exercise or defend any legal rights.</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >7.Information Retention</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >We will retain copies of your information for as long as you maintain your account or as necessary in connection with the purposes set out in this Statement, unless applicable law requires a longer retention period. In addition, we may retain your information for the duration of any period necessary to establish, exercise or defend any legal rights.</Typography>
           </Box>  
 
           <Box className="Do Not Track Signals">
-                  <Typography>8.Do Not Track Signals</Typography>
-                  <Typography>Our website is not designed to currently respond to “Do Not Track” (“DNT”) signal requests from browsers. This is due to the lack of global standardized interpretation that defines “Do Not Track” signals. Once the industry has settled on standards related to this issue, we may re-evaluate this approach.</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >8.Do Not Track Signals</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >Our website is not designed to currently respond to “Do Not Track” (“DNT”) signal requests from browsers. This is due to the lack of global standardized interpretation that defines “Do Not Track” signals. Once the industry has settled on standards related to this issue, we may re-evaluate this approach.</Typography>
           </Box>
 
           <Box className="Cookies">
-                  <Typography>9.Cookies</Typography>
-                  <Typography>We want your access to our Services to be as easy, efficient and useful as possible. To help us do this, we use cookies and similar technologies to improve your experience, to enhance site security and to show you relevant advertising.</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >9.Cookies</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >We want your access to our Services to be as easy, efficient and useful as possible. To help us do this, we use cookies and similar technologies to improve your experience, to enhance site security and to show you relevant advertising.</Typography>
 
                   <Box className="What are cookies?">
-                    <Typography>What are cookies?</Typography>
-                    <Typography>Cookies are small text files that are automatically placed on your Device when you visit almost any website. They are stored by your internet browser and contain basic information about your internet use. Your browser sends these cookies back to a website every time you revisit it, so it can recognize your Device and improve your experience by, among other things, providing you with personalized content. We also use cookies to remember your login details, so you don’t have to re-enter them repeatedly when you use our Services. Other cookies help us understand your preferences. The cookies we use fall into three categories.
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"},
+                      fontWeight:"bold"
+                    }}
+                    >What are cookies?</Typography>
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"}
+                    }}
+                    >Cookies are small text files that are automatically placed on your Device when you visit almost any website. They are stored by your internet browser and contain basic information about your internet use. Your browser sends these cookies back to a website every time you revisit it, so it can recognize your Device and improve your experience by, among other things, providing you with personalized content. We also use cookies to remember your login details, so you don’t have to re-enter them repeatedly when you use our Services. Other cookies help us understand your preferences. The cookies we use fall into three categories.
 </Typography>
                   <Box className="ul">
-                    <ul>
+                    <ul
+                     style={{fontSize:"18px"}}
+                    >
                       <li>Essential - These cookies are necessary to help you access and move around the website and use all its features. Without these cookies, the website would not work properly and you would not be able to use certain important features. For example, we use a cookie to keep you logged in during your visit, so the site does not require you to log in repeatedly to access different pages. We may also use essential cookies for fraud detection and prevention purposes. You cannot turn off essential cookies through the Cookie Consent Tool, as such cookies are necessary for you to access and use the features of the website.</li>
                       <li>Analytics and customisation - We use these cookies to help us understand how the website is being used and how we can improve your experience of it. These cookies can provide us with information to help us understand which parts of the website interest our visitors and if they experience any errors. We use these cookies to test different designs and features for our sites and we also use them to help us monitor how visitors reach the website. We also use cookies to save your settings and preferences on the website, such as language preference and information you've previously entered when searching for travel experiences. Some customization cookies are essential if you want to use certain features of the website.</li>
                       <li>Advertising - Advertising cookies help ensure that the advertisements you see are as relevant to you as possible. For example, some advertising cookies help select ads that are based on your interests. Others help prevent the same ad from continuously reappearing for you. We also use cookies to make it easy to share content from the website with your friends through your favorite social networks. Social media sites, may set cookies that recognize you when you view content on the website and allow you to share content across both the website and the social media site via the use of sharing settings. For further details, please check your social media site’s terms of use and privacy policy. We also work with third-party advertisers to give you access to travel content that might be of interest, and may set cookies on our Services to provide you with advertising that matches your interests and preferences. These "third-party cookies" collect information about your browsing behaviour and interaction with ads or the Services more generally. This information also helps us limit the number of times you may see the same ads and improve your online experience.</li>
@@ -264,15 +447,84 @@ const PrivacyPolicy = () => {
           </Box>
 
                 <Box className="Cookie Consent Tool">
-                  <Typography>10.Cookie Consent Tool</Typography>
-                  <Typography>To give you control, we provide you with a Cookie Consent Tool, which allows you to review first and third party cookies placed through our website and adjust your cookie settings, including whether or not to accept or decline such cookies.</Typography>
-                  <Typography>You can access this Cookie Consent Tool at any time by clicking the “Cookie Consent” link at the bottom of every page or by modifying your preferences in our cookie banner. In addition, you can manage cookies through the settings of your internet browser. You can have the browser notify you when you receive a new cookie, delete individual cookies or delete all cookies.</Typography>
-                  <Typography>Most advertising networks offer you a way to opt out of advertising cookies. See www.aboutads.info/choices and www.youronlinechoices.com for useful information on how to do this.</Typography>
-                  <Typography>If you delete your cookies, your access to some functionality and areas of our Services might be degraded or restricted.</Typography>
-                  <Typography>Our use of any information we collect through cookies is subject to this Statement, which is linked on every page of our website.</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >10.Cookie Consent Tool</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >To give you control, we provide you with a Cookie Consent Tool, which allows you to review first and third party cookies placed through our website and adjust your cookie settings, including whether or not to accept or decline such cookies.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >You can access this Cookie Consent Tool at any time by clicking the “Cookie Consent” link at the bottom of every page or by modifying your preferences in our cookie banner. In addition, you can manage cookies through the settings of your internet browser. You can have the browser notify you when you receive a new cookie, delete individual cookies or delete all cookies.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >Most advertising networks offer you a way to opt out of advertising cookies. See www.aboutads.info/choices and www.youronlinechoices.com for useful information on how to do this.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >If you delete your cookies, your access to some functionality and areas of our Services might be degraded or restricted.</Typography>
+                  <Typography
+                   sx={{
+            fontSize:{xs:"16px",md:"18px"}
+          }}
+                  >Our use of any information we collect through cookies is subject to this Statement, which is linked on every page of our website.</Typography>
                 </Box>
 
+
+                <Box className="Statement Changes and Notification">
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"},
+                    fontWeight:"bold"
+                  }}
+                  >11.Statement Changes and Notification</Typography>
+                  <Typography
+                   sx={{
+                    fontSize:{xs:"16px",md:"18px"}
+                  }}
+                  >We may update this Statement in the future. If we believe any changes are material, we will let you know by doing one or more of the following: sending you a communication about the changes, placing a notice on the website and/or posting an updated Statement on the website. We will note at the top of this Statement when it was most recently updated. We encourage you to check back from time to time to review the most current version and to periodically review this Statement for the latest information on our privacy practices.</Typography>
+                </Box>
+
+                  <Box className="Contact">
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"},
+                      fontWeight:"bold"
+                    }}
+                    >12.Contact</Typography>
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"}
+                    }}
+                    >If you have a data privacy request, such as a request to delete or access your data, please visit our dedicated privacy portal by clicking here. For general data privacy inquiries or questions concerning our Privacy and Cookies Statement, please contact our privacy team by clicking here.</Typography>
+                  </Box>
+
+                  <Box className="Europe">
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"},
+                      fontWeight:"bold"
+                    }}
+                    >13.Europe</Typography>
+                    <Typography
+                     sx={{
+                      fontSize:{xs:"16px",md:"18px"}
+                    }}
+                    >This GDPR Statement applies to persons in the European Economic Area (“EEA”), including those based in the United Kingdom. This GDPR Statement supplements our Statement; however, where the Statement conflicts with the GDPR Statement, the GDPR Statement will prevail as to persons in the EEA.</Typography>
+                  </Box>
+
       </Box>
+    </Box>
     </Box>
   );
 };

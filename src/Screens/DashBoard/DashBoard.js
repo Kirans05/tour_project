@@ -17,8 +17,8 @@ import {
 import React, { useEffect, useState } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Image1 from "../../images/img1.webp";
-import Image2 from "../../images/img2.jpg";
+import Image1 from "../../assets/images/img1.webp";
+import Image2 from "../../assets/images/img2.jpg";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckIcon from "@mui/icons-material/Check";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -54,7 +54,6 @@ const DashBoard = () => {
   const [logoutRender, setlogoutRender] = useState(true)
 
   const myState = useSelector((state) => state.totalProductReducer);
-  console.log(myState)
   const dispatch = useDispatch()
   
 
@@ -154,7 +153,6 @@ useEffect(()=>{
 useEffect(()=>{
   
 },[logoutRender])
-
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
