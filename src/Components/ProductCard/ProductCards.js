@@ -86,8 +86,13 @@ const ProductCards = ({item}) => {
         columnGap: 2,
       }}
       onClick={() => {
+        if(localStorage.getItem("accessToken") != null){
         dispatch(individualProductAction(item))
         navigate("/TourDeatils")
+        }else{
+          navigate("/signup")
+        }
+
       }}
       // onClick={()=>productClicked("item")}
     >

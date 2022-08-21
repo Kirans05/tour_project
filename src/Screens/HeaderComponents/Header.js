@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -1020,14 +1020,17 @@ const country_currency = [
 
 
 
-const Header = () => {
-
+const Header = ({setlogoutRender,logoutRender}) => {
+  const location = useLocation()
+  // location.pathname
   const myState = useSelector((state) => state.currentUserReducer);
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [countryCurrencyState, setCountryCurrencyState] = useState("INR")
   const [showUserProfile, setShowUserProfile] = useState(localStorage.getItem("accessToken") != null ? true : false)
-  
+
+
+
   const contryChangeHandler = (e) => {
     dispatch(currencyCodeAction(e.target.value))
     setCountryCurrencyState(e.target.value)
@@ -1399,7 +1402,7 @@ const Header = () => {
         <Box
           className="Home"
           sx={{
-            display: "flex",
+            display: localStorage.getItem("accessToken") != null ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             columnGap: 1,
@@ -1425,7 +1428,7 @@ const Header = () => {
         <Box
           className="Profile"
           sx={{
-            display: "flex",
+            display: localStorage.getItem("accessToken") != null ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             columnGap: 1,
@@ -1451,7 +1454,7 @@ const Header = () => {
         <Box
           className="WishList"
           sx={{
-            display: "flex",
+            display: localStorage.getItem("accessToken") != null ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             columnGap: 1,
@@ -1477,7 +1480,7 @@ const Header = () => {
         <Box
           className="dashBoard"
           sx={{
-            display: "flex",
+            display: localStorage.getItem("accessToken") != null ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             columnGap: 1,
@@ -1503,7 +1506,7 @@ const Header = () => {
         <Box
           className="Booking"
           sx={{
-            display: "flex",
+            display: localStorage.getItem("accessToken") != null ? "flex" : "none",
             flexDirection: "row",
             alignItems: "center",
             columnGap: 1,
@@ -6082,6 +6085,11 @@ const Header = () => {
     fetchCurrentUser()
   },[])
 
+
+  useEffect(()=>{
+
+  },[logoutRender])
+
   return (
     <Box
       sx={{
@@ -6251,7 +6259,13 @@ const Header = () => {
             },
             columnGap: 1,
           }}
-          onClick={() => navigate("/bookingPage")}
+          onClick={() => {
+            if(localStorage.getItem("accessToken") != null){
+              navigate("/bookingPage")
+            }else{
+              
+            }
+          }}
         >
            <BookOnlineIcon
             sx={{
@@ -6514,7 +6528,11 @@ const Header = () => {
           sx={{
             fontSize: { xs: "14px", md: "16px" },
           }}
-          onClick={()=>localStorage.removeItem("accessToken")}
+          onClick={()=>{
+            localStorage.removeItem("accessToken")
+            setlogoutRender(!logoutRender)
+            navigate("/")
+          }}
         >
           LogOut
         </MenuItem>

@@ -1,10 +1,12 @@
 import {
+  Alert,
   Box,
   Button,
   Divider,
   Menu,
   MenuItem,
   Rating,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -57,6 +59,16 @@ const TourDetails = () => {
   const [menuVisible, setmenuVisible] = useState(false);
   const [FirstTour_sightseeingState, setFirstTour_sightseeingState] =
     useState(null);
+    const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
+  const [alertMessage, setAlertMessage] = useState("")
+
+  const handleSnakBarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnakBarOpen(false);
+  };
 
 
 
@@ -566,7 +578,8 @@ const TourDetails = () => {
                     variant="contained"
                     onClick={() => {
                       if(booking_dateDetails.BookDate == ""){
-                        alert("please select date of booking")
+                        setAlertMessage("please select date of booking")
+                        setSnakBarOpen(true)
                       }else{
                         setAvailability(!Availability)
                       }
@@ -1697,11 +1710,12 @@ const TourDetails = () => {
                           flexDirection: "row",
                           alignItems: "center",
                           justifyContent: "flex-end",
-                          rowGap:1
+                          rowGap:1,
+                          columnGap:1
                         }}
                       >
-                        <CurrencyRupeeIcon />
-                        <Typography>14600.85</Typography>
+                       {singleTourDetails.currency} 
+                        <Typography>{(memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price)}</Typography>
                       </Box>
                       <Typography>per group (up to 8)</Typography>
                     </Box>
@@ -1737,7 +1751,7 @@ const TourDetails = () => {
                 </Box>
               </Box>
 
-              <Box
+              {/* <Box
                 className="options2"
                 sx={{
                   display: "flex",
@@ -1876,7 +1890,7 @@ const TourDetails = () => {
                   </Box>
                   <Typography>per group (up to 4)</Typography>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
 
             {/* other details */}
@@ -2151,6 +2165,11 @@ const TourDetails = () => {
             </Box>
           </Box>
         </Box>
+        <Snackbar open={SnakBarOpen} autoHideDuration={3000} onClose={handleSnakBarClose}>
+        <Alert onClose={handleSnakBarClose} severity="warning" sx={{ width: '150%' }}>
+        {alertMessage}
+        </Alert>
+      </Snackbar>
       </Box>
     </LocalizationProvider>
   );

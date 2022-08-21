@@ -1,8 +1,10 @@
 import {
+  Alert,
   Box,
   Button,
   Divider,
   MenuItem,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,6 +19,7 @@ import {booking_date_day, addTravelMembers, travelDetails, singleProductReducer,
 import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../../redux/action/index";
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -1011,14 +1014,17 @@ const countries = [
 
 
 const CheckOutPage = () => {
-  
+
+  const navigate = useNavigate()
+
   //  redux state and dispatch functions
   const memberPresentState = useSelector((state) => state.addTravelMembers)
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const fullBookingDetails = useSelector((state) => state.travelDetails)
   const singleTourDetails = useSelector((state) => state.singleProductReducer)
   const currentUserDetails = useSelector((state) => state.currentUserReducer)
-
+  const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
+  const [alertMessage, setAlertMessage] = useState("")
   
 
   const date = booking_dateDetails.BookDate +"/ "+booking_dateDetails.BookMonth+ "/"+ booking_dateDetails.BookYear
@@ -1032,7 +1038,15 @@ const CheckOutPage = () => {
 
     const [showPromoCode, setShowPromoCode] = useState(false)
   const [cardEexpiryMonth, setCardExpiryMonth] = useState("")
-  
+
+
+  const handleSnakBarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnakBarOpen(false);
+  };
   
   
     const handleChange = (event) => {
@@ -1055,6 +1069,43 @@ const handleExpiryMonth = (e) => {
 
 const submitHandler = async () => {
 
+  if(fullBookingDetails.LeadTravelerFirstName == ""){
+    setAlertMessage("Please Enter Traveler First Name")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.LeadTravelerLastName ==  ""){
+    setAlertMessage("Please Enter Traveler Last Name")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.specialRequirements == ""){
+    setAlertMessage("Please Enter Traveler Special Requirements")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.CardholderName== ""){
+    setAlertMessage("Please Enter Card Holder Name")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.CreditCardNumber == ""){
+    setAlertMessage("Please Enter Card Number")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.ExpirationMonth == ""){
+    setAlertMessage("Please Enter Expiray Month")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.Expirayyear == ""){
+    setAlertMessage("Please Enter Expiry Year")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.SecurityCode == ""){
+    setAlertMessage("Please Enter Security Code")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.EmailAddress == ""){
+    setAlertMessage("Please Enter Email Id")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.PhoneNumber == ""){
+    setAlertMessage("Please Enter Phone Number")
+    setSnakBarOpen(true)
+  }else if(fullBookingDetails.countryCode == ""){
+    setAlertMessage("Please Enter Ciuntry Code")
+    setSnakBarOpen(true)
+  }else{
+
+  
+
   let date = new Date();
   date.setDate(date.getDate()+2)
 
@@ -1076,14 +1127,12 @@ const submitHandler = async () => {
       token:`${localStorage.getItem("accessToken")}`,
       userId:currentUserDetails.id,
       productId:singleTourDetails.id,
-      amount:singleTourDetails.price,
-      cardNumber:fullBookingDetails.CreditCardNumber,
+      amount:(singleTourDetails.price*memberPresentState.adult)+(memberPresentState.child*singleTourDetails.price),
+      cardNumber:fullBookingDetails.CreditCardNumber.toString(),
       cardHolderName:fullBookingDetails.CardholderName,
       cardExpiry:`${expirayMon}/${expiryYear}`,
       cardCvv:fullBookingDetails.SecurityCode,
       fromDate:new Date().toLocaleDateString('en-CA'),
-      // fromDate:`${booking_dateDetails.BookYear}-${booking_dateDetails.BookMonth}-${booking_dateDetails.BookDate}`,
-      // toDate:`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
       toDate: date.toLocaleDateString('en-CA'),
       adultQty:memberPresentState.adult,
       childQty:memberPresentState.child
@@ -1096,6 +1145,8 @@ const submitHandler = async () => {
     }catch(error){
         console.log(error)
     }
+    navigate("/")
+  }
 }
 
 
@@ -1192,7 +1243,7 @@ const submitHandler = async () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Jazz Notes - Jazz Jam Ticket
+                  {singleTourDetails.name}
                 </Typography>
                 <Box className="time&Experience">
                   <Typography
@@ -1200,7 +1251,7 @@ const submitHandler = async () => {
                       fontSize: { xs: "14px", md: "16px" },
                     }}
                   >
-                    Jazz Notes - Jazz Jam Ticket 14:00
+                    {singleTourDetails.description}
                   </Typography>
                   <Typography
                     sx={{
@@ -1664,7 +1715,7 @@ const submitHandler = async () => {
                     fontSize:{xs:"14px",md:"16px"},
                     fontWeight:"bold"
                 }}
-                >Jazz Notes - Jazz Jam Ticket</Typography>
+                >{singleTourDetails.name}</Typography>
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
@@ -1674,7 +1725,7 @@ const submitHandler = async () => {
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}
-                >Jazz Notes - Jazz Jam Ticket 14:00</Typography>
+                >{singleTourDetails.description}</Typography>
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
@@ -1737,7 +1788,7 @@ const submitHandler = async () => {
                         fontSize:{xs:"16px",md:"20px"},
                         fontWeight:"bold"
                     }}
-                    >986.54</Typography>
+                    >{(singleTourDetails.price*memberPresentState.adult)+(memberPresentState.child*singleTourDetails.price)}</Typography>
                   </Box>
                   </Box>
 
@@ -1898,6 +1949,11 @@ const submitHandler = async () => {
           </Box>
         </Box>
         </Box>
+        <Snackbar open={SnakBarOpen} autoHideDuration={3000} onClose={handleSnakBarClose}>
+        <Alert onClose={handleSnakBarClose} severity="warning" sx={{ width: '150%' }}>
+        {alertMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

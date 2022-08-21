@@ -51,7 +51,7 @@ const minDistance = 10;
 
 const DashBoard = () => {
   const navigate = useNavigate();
-  
+  const [logoutRender, setlogoutRender] = useState(true)
 
   const myState = useSelector((state) => state.totalProductReducer);
   console.log(myState)
@@ -151,13 +151,17 @@ useEffect(()=>{
 },[])
 
 
+useEffect(()=>{
+  
+},[logoutRender])
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
         className="dashBoardBody"
         sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
       >
-        <Header />
+        <Header logoutRender={logoutRender} setlogoutRender={setlogoutRender}/>
         <Box
           className="mainBody"
           sx={{
