@@ -1025,6 +1025,7 @@ const CheckOutPage = () => {
   const currentUserDetails = useSelector((state) => state.currentUserReducer)
   const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = useState("")
+  const [alertMessageColor, setAlertMessageColor] = useState("warning")
   
 
   const date = booking_dateDetails.BookDate +"/ "+booking_dateDetails.BookMonth+ "/"+ booking_dateDetails.BookYear
@@ -1139,9 +1140,8 @@ const submitHandler = async () => {
     }
   }
     try{
+      setAlertMessageColor("success")
       let {data} = await axios(options)
-      console.log(data)
-      console.log(data.message)
       setAlertMessage(data.message)
       setSnakBarOpen(true)
     }catch(error){
@@ -1783,10 +1783,11 @@ const submitHandler = async () => {
                   sx={{
                     display:"flex",
                     flexDirection:"row",
-                    alignItems:"center"
+                    alignItems:"center",
+                    columnGap:1
                   }}
                   >
-                    <CurrencyRupeeIcon />
+                   <Typography>{singleTourDetails.currency}</Typography>
                     <Typography
                     sx={{
                         fontSize:{xs:"16px",md:"20px"},
@@ -1954,7 +1955,7 @@ const submitHandler = async () => {
         </Box>
         </Box>
         <Snackbar open={SnakBarOpen} autoHideDuration={4000} onClose={handleSnakBarClose}>
-        <Alert onClose={handleSnakBarClose} severity="warning" sx={{ width: '150%' }}>
+        <Alert onClose={handleSnakBarClose} severity={alertMessageColor} sx={{ width: '150%' }}>
         {alertMessage}
         </Alert>
       </Snackbar>

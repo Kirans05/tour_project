@@ -23,6 +23,8 @@ const ProductCards = ({item}) => {
 
   const[productList, setProductList] = useState(JSON.parse(localStorage.getItem("tourProduct")))
   const [wishListItem, setWishListItem] = useState(false)
+
+
   const checkWishList = () => {
     if(productList.length){
       let filterItem = productList.filter(product => product.id == item.id)
@@ -51,11 +53,16 @@ useEffect(()=>{
       arr = JSON.parse(arr)
       let filteredProduct = arr.filter(product => product.id == item.id)
       if(filteredProduct.length){
-        //  product already exists
+        let removedWishListProduct = arr.filter(product=>product.id !== item.id)
+        console.log(removedWishListProduct)
+        removedWishListProduct = JSON.stringify(removedWishListProduct)
+        localStorage.setItem("tourProduct",removedWishListProduct)
+        setWishListItem(false)
       }else{
       arr.push(item)
       arr = JSON.stringify(arr)
       localStorage.setItem("tourProduct",arr)
+      setWishListItem(true)
       }
     }
   }
