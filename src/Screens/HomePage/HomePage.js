@@ -23,6 +23,9 @@ import Image3 from "../../assets/images/travel2.jpg";
 import axios from "axios";
 import Header from "../HeaderComponents/Header";
 
+
+const Base_url = process.env.REACT_APP_Axios_Base_urls
+
 const HomePage = () => {
   const [dateValue, setDateValue] = useState(new Date());
   const [imageState, setImageState] = useState([Travel2, 2]);
@@ -64,7 +67,7 @@ const HomePage = () => {
 
   const fetchCurrentUserData = async () => {
     let options = {
-      url:"http://localhost:8080/user/me",
+      url:`${Base_url}/user/me`,
       method:"GET",
       headers:{
           "content-type":"application/json",

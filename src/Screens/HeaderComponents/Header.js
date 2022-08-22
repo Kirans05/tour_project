@@ -41,7 +41,7 @@ import {currentUserReducer} from "../../redux/reducer/reducer"
 import axios from "axios";
 import { render } from "react-dom";
 
-
+const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 const country_currency = [
   {
@@ -6061,16 +6061,16 @@ const Header = ({setlogoutRender,logoutRender}) => {
 
 
   const fetchCurrentUser = async () => {
+
+    if(localStorage.getItem("accessToken") != null){
     let options ={
-      url:"http://localhost:8080/user/me",
+      url:`${Base_url}/user/me`,
       method:"GET",
       headers:{
         "content-type":"application/json",
         "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
       }
     }
-
-
     try{
       let {data} = await axios(options)
       dispatch(currentUserAction(data))
@@ -6080,6 +6080,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         // navigate("/")
       }
     }
+  }
   }
 
 

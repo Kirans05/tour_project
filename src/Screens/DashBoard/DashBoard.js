@@ -45,13 +45,22 @@ import ProductCards from "../../Components/ProductCard/ProductCards";
 import Skeleton from "../../Components/skeleton/SkeletonPattern";
 import SkeletonPattern from "../../Components/skeleton/SkeletonPattern";
 
+
+
+
+
+
 function valuetext(value) {
   return `${value}°C`;
 }
 
 const minDistance = 10;
+const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 const DashBoard = () => {
+
+
+
   const navigate = useNavigate();
   const [logoutRender, setlogoutRender] = useState(true)
 
@@ -130,7 +139,8 @@ const productClicked = (item) => {
 
 const fetchAllTourProducts = async () => {
   let options = {
-    url:"http://localhost:8080/tour/allProducts",
+    url:`${Base_url}/tour/allProducts`,
+    // url:`http://localhost/8080/tour/allProducts`,
     method:"GET",
     headers:{
       "content-type":"application/json",

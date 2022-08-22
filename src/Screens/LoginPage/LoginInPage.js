@@ -21,6 +21,9 @@ import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import Footer from "../FooterComponents/Footer";
 
+const Base_url = process.env.REACT_APP_Axios_Base_urls
+
+
 const LoginInPage = () => {
   const navigate = useNavigate();
   const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
@@ -40,7 +43,7 @@ const LoginInPage = () => {
     else{
 
     let options = {
-      url:"http://localhost:8080/auth/login",
+      url:`${Base_url}/auth/login`,
       headers:{
         "content-type":"application/json"
       },
@@ -51,9 +54,9 @@ const LoginInPage = () => {
       method:"POST"
     }
 
+    
     try{
       let {data} = await axios(options)
-      console.log(data)
     if(!data.success){
       localStorage.setItem("accessToken",data.accessToken)
       navigate("/")

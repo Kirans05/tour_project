@@ -22,6 +22,8 @@ import { signUpInfo } from "../../redux/reducer/reducer";
 import axios from "axios"
 
 
+const Base_url = process.env.REACT_APP_Axios_Base_urls
+
 
 const SignUpUserDetails = () => {
 
@@ -1012,7 +1014,7 @@ const SignUpUserDetails = () => {
     } else {
 
       let options = {
-        url:"http://localhost:8080/auth/signup",
+        url:`${Base_url}/auth/signup`,
         method:"POST",
         headers:{
           "content-type":"application/json"
@@ -1027,7 +1029,6 @@ const SignUpUserDetails = () => {
 
       try{
         let {data} = await axios(options)
-        console.log(data)
         if(data.success) {
           navigate("/login")
         }

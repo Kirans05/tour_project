@@ -21,6 +21,7 @@ import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import { Navigate, useNavigate } from "react-router-dom";
 
+const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 
 const countries = [
@@ -1116,7 +1117,7 @@ const submitHandler = async () => {
   let expiryYear =  `${fullBookingDetails.Expirayyear}`.slice(2)
 
   let options = {
-    url:"http://localhost:8080/order/create",
+    url:`${Base_url}/order/create`,
     method:"POST",
     headers:{
       "content-type":"application/json",
