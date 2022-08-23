@@ -147,6 +147,8 @@ const fetchAllTourProducts = async () => {
     }
   }
 
+  console.log(options)
+
   try{
     let {data} = await axios(options)
     dispatch(productAction(data))

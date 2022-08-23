@@ -1140,6 +1140,8 @@ const submitHandler = async () => {
       childQty:memberPresentState.child
     }
   }
+
+  console.log(options)
     try{
       setAlertMessageColor("success")
       let {data} = await axios(options)

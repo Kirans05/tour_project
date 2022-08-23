@@ -6071,6 +6071,9 @@ const Header = ({setlogoutRender,logoutRender}) => {
         "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
       }
     }
+
+    console.log(options)
+
     try{
       let {data} = await axios(options)
       dispatch(currentUserAction(data))

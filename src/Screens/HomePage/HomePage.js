@@ -75,6 +75,8 @@ const HomePage = () => {
       }
     }
 
+    console.log(options)
+
     let {data} = await axios(options)
     localStorage.setItem("userData",data)
   }

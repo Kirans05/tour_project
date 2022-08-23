@@ -1027,6 +1027,7 @@ const SignUpUserDetails = () => {
         }
       }
 
+      console.log(options)
       try{
         let {data} = await axios(options)
         if(data.success) {
