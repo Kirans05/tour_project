@@ -213,3 +213,15 @@ export const currentUserReducer = (state = currentUserObj, action) => {
             return state
     }
 }
+
+
+const addCartItemArray = []
+export const cratItemReducer = (state = addCartItemArray, action) => {
+    switch(action.type){
+        case "addCartItem" : 
+            return action.payload
+        default :
+            return state
+    }
+
+}

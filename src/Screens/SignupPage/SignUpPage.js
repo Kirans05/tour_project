@@ -55,25 +55,35 @@ const SignUpPage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-around",
+          justifyContent: "center",
           height: { xs: "80vh", md: "80vh" },
-          rowGap: 2,
+          rowGap: 3,
         }}
       >
-        <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
+        <Typography sx={{ fontSize: { xs: "16px", md: "25px" },
+      width:{xs:"80%",md:"50%"},
+      textAlign:"center"
+      }}>
           Sign up and get exploring
         </Typography>
-        <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
+        <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
+       width:{xs:"80%",md:"35%"},
+       textAlign:"center",
+      }}>
           Log into your account with your email, or create one below. Quick and
           easy - promise!
         </Typography>
         {/* <FormLabel>Email</FormLabel> */}
-        <TextField id="outlined-basic" label="Email" variant="outlined" onChange={(e) => dispatch(signUpEmail(e.target.value))}  value={myState.email}   />
+        <TextField id="outlined-basic" label="Email" variant="outlined" onChange={(e) => dispatch(signUpEmail(e.target.value))}  value={myState.email} 
+        sx={{
+          width:{xs:"85%",md:"35%"}
+        }}
+        />
         {/* <br /> */}
         <Button
           variant="contained"
           color="success"
-          sx={{ minWidth: "200px" }}
+          sx={{ minWidth:{xs:"85%",md:"35%"} }}
           onClick={submitHandler}
         >
           Continue
@@ -117,7 +127,8 @@ const SignUpPage = () => {
           />
         </Box>
         <Box>
-          <Typography>
+          <Typography
+          >
             By creating an account, you agree to our{" "}
             <span
               className="hover"

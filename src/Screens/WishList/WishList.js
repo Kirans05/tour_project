@@ -8,16 +8,19 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import WishListProductCard from '../../Components/WishList/WishListProductCard'
+import { singleProductReducer, cratItemReducer } from '../../redux/reducer/reducer';
+import { individualProductAction,cartItemAction } from '../../redux/action/index';
+import { useSelector } from 'react-redux'
 
 const WishList = () => {
 
   const [reRenderPage, setReRenderPage] = useState(true)
-  const [productList, setProductList] = useState(localStorage.getItem("tourProduct") != null ? true : false)
-  let arr = JSON.parse(localStorage.getItem("tourProduct"))
-  const [tourProductList, setToutProductList] = useState(arr)
 
-  useEffect(()=>{
-  },[reRenderPage])
+  const myCartItems = useSelector((state) => state.cratItemReducer)
+
+
+  // useEffect(()=>{
+  // },[reRenderPage])
 
 
 
@@ -26,8 +29,8 @@ const WishList = () => {
         <Header />
         <Box
         sx={{
-        padding:{xs:"2% 0% 2% 0%",md:"2% 6% 3% 6%"},
-        width:{xs:"100%",md:"88%"},
+        padding:{xs:"2% 3% 2% 3%",md:"2% 6% 3% 6%"},
+        width:{xs:"94%",md:"88%"},
         display:"flex",
         flexDirection:"column",
         rowGap:2,
@@ -60,7 +63,7 @@ const WishList = () => {
           rowGap:3,
         }}
         >
-          {
+          {/* {
             JSON.parse(localStorage.getItem("tourProduct")).length >0 ?
               <Box
               sx={{
@@ -95,9 +98,47 @@ const WishList = () => {
                 }}
                 >No Products</Typography>
               </Box>
-          }
+          } */}
 
-          
+
+          {
+            myCartItems.length == 0 ? 
+            <Box 
+            sx={{
+              width:"100%",
+              height:"70vh",
+              display:"flex",
+              flexDirection:"row",
+              alignItems:"center",
+              justifyContent:"center"
+            }}>
+                <Typography
+                sx={{
+                  fontSize:{xs:"20px",md:"25px"},
+                  fontWeight:"bold"
+                }}
+                >No Products</Typography>
+              </Box>
+              :  <Box
+              sx={{
+                display:"flex",
+                flexDirection:{xs:"column",md:"row"},
+                alignItems:{xs:"flex-start",md:"center"},
+                justifyContent:{xs:"flex-start",md:"flex-start"},
+                flexWrap:{xs:"nowrap",md:"wrap"},
+                width:{xs:"100%",md:"100%"},
+                rowGap:3,
+                columnGap:5
+              }}
+              >
+                {
+                  myCartItems.map((item , index) => {
+                    return <WishListProductCard key={index} item={item} 
+                    />
+                  })
+                }
+                </Box>
+          }
 
     </Box>
     </Box>

@@ -20,6 +20,16 @@ import { addFirstName, addLastName, CardholderName, Country, countryCode, Credit
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import { Navigate, useNavigate } from "react-router-dom";
+import Travel3 from "../../assets/images/travel3.jpg";
+import Travel4 from "../../assets/images/travel4.webp";
+import Travel6 from "../../assets/images/travel6.jpg";
+import Travel8 from "../../assets/images/travel8.jpg";
+import Travel9 from "../../assets/images/travel9.jpg";
+import Travel10 from "../../assets/images/travel10.jpg";
+import Travel11 from "../../assets/images/travel11.jpg";
+import Travel12 from "../../assets/images/travel312.jpg";
+
+
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
@@ -1013,8 +1023,14 @@ const countries = [
   ]
 
 
+  let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
+
+
 
 const CheckOutPage = () => {
+
+  const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
+
 
   const navigate = useNavigate()
 
@@ -1140,19 +1156,23 @@ const submitHandler = async () => {
       childQty:memberPresentState.child
     }
   }
-
-  console.log(options)
     try{
       setAlertMessageColor("success")
       let {data} = await axios(options)
-      setAlertMessage(data.message)
+      console.log(data)
+      if(data.message == "Error processing order"){
+        setAlertMessageColor("warning")
+        setAlertMessage(data.message)
+      }else{
+        setAlertMessage(data.message)
+      }
       setSnakBarOpen(true)
     }catch(error){
         console.log(error)
     }
-    setTimeout(()=>{
-      navigate("/")
-    },4000)
+  //   setTimeout(()=>{
+  //     navigate("/")
+  //   },4000)
   }
 }
 
@@ -1228,7 +1248,7 @@ const submitHandler = async () => {
             >
               <Box
                 component={"img"}
-                src={Imgae2}
+                src={productimage}
                 alt="tour image"
                 sx={{
                   width: { xs: "120px", md: "200px" },
@@ -1236,7 +1256,13 @@ const submitHandler = async () => {
                   borderRadius: "20px",
                 }}
               />
-              <Box className="tourDescriptions">
+              <Box className="tourDescriptions"
+              sx={{
+                display:"flex",
+                flexDirection:"column",
+                rowGap:1
+              }}
+              >
                 <Typography
                   sx={{
                     fontSize: { xs: "14px", md: "16px" },
@@ -1716,7 +1742,13 @@ const submitHandler = async () => {
               }}
               >Review Order Details</Typography>
               {/* ticket details */}
-              <Box className="tiicketDetails">
+              <Box className="tiicketDetails"
+              sx={{
+                display:"flex",
+                flexDirection:"column",
+                rowGap:1
+              }}
+              >
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"},

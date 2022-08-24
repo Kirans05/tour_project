@@ -54,15 +54,19 @@ const LoginInPage = () => {
       method:"POST"
     }
 
-    console.log(options)    
     try{
       let {data} = await axios(options)
     if(!data.success){
       localStorage.setItem("accessToken",data.accessToken)
+      let arr = []
+      localStorage.setItem("tourProduct",arr)
       navigate("/")
     }
     }catch(error){
+      console.log(error)
+
       if(error.response.data.message == "Bad credentials"){
+        setSnakBarOpen(true)
         setAlertMessage("Incorrect Credentials")
       }
     }
@@ -98,26 +102,41 @@ const LoginInPage = () => {
           rowGap: 2,
         }}
       >
-        <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
-          Log in and get exploring
-        </Typography>
-        <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
-          Log into your account with your email, or create one below. Quick and
-          easy - promise!
-        </Typography>
+        
 
+
+        <Typography sx={{ fontSize: { xs: "16px", md: "25px" },
+      width:{xs:"80%",md:"35%"},
+      textAlign:"center"
+      }}>
+         Log in and get exploring
+        </Typography>
+        <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
+      width:{xs:"80%",md:"35%"},
+       textAlign:"center",
+      }}>
+         Log into your account with your email, or create one below. Quick and
+          easy - promise
+        </Typography>
 
         {/* <FormLabel>Email</FormLabel> */}
         <TextField id="outlined-basic" label="Email" variant="outlined" 
         value={myState.email}
         onChange={(e)=>dispatch(LoginEmail(e.target.value))}
+        sx={{
+          width:{xs:"85%",md:"35%"}
+          // width:"500px"
+        }}
         />
         <TextField  label="Password" variant="outlined" type={"password"} 
         value={myState.password}
         onChange={(e)=>dispatch(loginPassword(e.target.value))}
+        sx={{
+          width:{xs:"85%",md:"35%"}
+        }}
         />
         {/* <br /> */}
-        <Button variant="contained" color="success" sx={{ minWidth: "200px" }}
+        <Button variant="contained" color="success" sx={{ minWidth:{xs:"85%",md:"35%"}}}
         onClick={submitHandler}
         >
           Continue
@@ -160,8 +179,13 @@ const LoginInPage = () => {
             }}
           />
         </Box>
-        <Box>
-          <Typography>
+        <Box
+        sx={{
+          ml:"10px"
+        }}
+        >
+          <Typography
+          >
             By creating an account, you agree to our{" "}
             <span
               className="hover"

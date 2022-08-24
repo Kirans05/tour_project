@@ -43,7 +43,26 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 
+import Travel3 from "../../assets/images/travel3.jpg";
+import Travel4 from "../../assets/images/travel4.webp";
+import Travel6 from "../../assets/images/travel6.jpg";
+import Travel8 from "../../assets/images/travel8.jpg";
+import Travel9 from "../../assets/images/travel9.jpg";
+import Travel10 from "../../assets/images/travel10.jpg";
+import Travel11 from "../../assets/images/travel11.jpg";
+import Travel12 from "../../assets/images/travel312.jpg";
+import ImagesLists from "../../Components/ImagesList/ImagesLists";
+
+
+let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
+
+
+let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,Travel11]
+
 const TourDetails = () => {
+
+
+  const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
 
   // redux states and dispatch functions
   const memberPresentstate = useSelector((state) => state.addTravelMembers)
@@ -95,7 +114,7 @@ const TourDetails = () => {
           display: "flex",
           flexDirection: "column",
           rowGap: 2,
-          width: "100%",
+          // width: "100%",
         }}
       >
         <Header />
@@ -110,7 +129,9 @@ const TourDetails = () => {
           }}
         >
           <Box className="PlaceTitTle">
-            <Typography sx={{ fontSize: { xs: "20px", md: "30px" } }}>
+            <Typography sx={{ fontSize: { xs: "20px", md: "30px" } ,
+          padding:{xs: "2% 6% 0% 6%",md:"0%"}
+          }}>
               {singleTourDetails.name}
             </Typography>
           </Box>
@@ -124,6 +145,7 @@ const TourDetails = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                padding:{xs: "0% 6% 0% 6%",md:"0%"}
               }}
             >
               <Box
@@ -207,94 +229,33 @@ const TourDetails = () => {
                 sx={{
                   display: { xs: "none", md: "flex" },
                   flexDirection: "column",
-                  rowGap: 1,
+                  rowGap: 2,
                   alignItems: "center",
+                  width:"15%"
                 }}
               >
-                <Box
-                  className="placeImage"
-                  component={"img"}
-                  src={Image1}
-                  alt="Place Image"
-                  width={{ xs: "10px", md: "130px" }}
-                  maxHeight={"80vh"}
-                  sx={{
-                    opacity: 0.7,
-                    "&:hover": {
-                      cursor: "pointer",
-                      opacity: 1,
-                    },
-                  }}
-                />
-                <Box
-                  className="placeImage"
-                  component={"img"}
-                  src={Image1}
-                  alt="Place Image"
-                  width={{ xs: "10px", md: "130px" }}
-                  maxHeight={"80vh"}
-                  sx={{
-                    opacity: 0.7,
-                    "&:hover": {
-                      cursor: "pointer",
-                      opacity: 1,
-                    },
-                  }}
-                />
-                <Box
-                  className="placeImage"
-                  component={"img"}
-                  src={Image1}
-                  alt="Place Image"
-                  width={{ xs: "10px", md: "130px" }}
-                  maxHeight={"80vh"}
-                  sx={{
-                    opacity: 0.7,
-                    "&:hover": {
-                      cursor: "pointer",
-                      opacity: 1,
-                    },
-                  }}
-                />
-                <Box
-                  className="placeImage"
-                  component={"img"}
-                  src={Image1}
-                  alt="Place Image"
-                  width={{ xs: "10px", md: "130px" }}
-                  maxHeight={"80vh"}
-                  sx={{
-                    opacity: 0.7,
-                    "&:hover": {
-                      cursor: "pointer",
-                      opacity: 1,
-                    },
-                  }}
-                />
-                <Box
-                  className="placeImage"
-                  component={"img"}
-                  src={Image1}
-                  alt="Place Image"
-                  width={{ xs: "10px", md: "130px" }}
-                  maxHeight={"80vh"}
-                  sx={{
-                    opacity: 0.7,
-                    "&:hover": {
-                      cursor: "pointer",
-                      opacity: 1,
-                    },
-                  }}
-                />
+               {
+                arrList.map((item,index) => {
+                  return <ImagesLists  key={index}  />
+                })
+               } 
+              
               </Box>
 
               <Box
                 className="placeImage"
                 component={"img"}
-                src={Image1}
+                src={productImage}
                 alt="Place Image"
-                width={{ xs: "350px", md: "1050px" }}
-                maxHeight={"80vh"}
+                // width={{ xs: "350px", md: "1050px" }}
+                // maxHeight={"80vh"}
+                sx={{
+                  maxWidth:{xs:"100%",md:"500%"},
+                  minWidth:{xs:"100%",md:"50%"},
+                  minHeight:{xs:"100%",md:"555px"},
+                  maxHeight:{xs:"100%",md:"555px"}
+
+                }}
               />
               <Box
                 className="PriceDetails"
@@ -306,6 +267,8 @@ const TourDetails = () => {
                   backgroundColor: "#ebeff5",
                   rowGap: 2,
                   position: "relative",
+                  height:{xs:"100%",md:"490px"}
+
                 }}
               >
                 <Box
@@ -378,7 +341,7 @@ const TourDetails = () => {
                       display: "flex",
                       flexDirection: "row",
                       columnGap: 1,
-                      border: "1px solid black",
+                      border: "1px solid #dcdee0",
                       padding: "2%",
                       "&:hover": { cursor: "pointer" },
                       backgroundColor: "white",
@@ -622,8 +585,8 @@ const TourDetails = () => {
             display: "flex",
             flexDirection: "row",
             columnGap: 2,
-            width: { xs: "100%^", md: "88%" },
-            padding: { xs: "2%", md: "2% 6% 2% 6%" },
+            width: { xs: "88%^", md: "88%" },
+            padding: { xs: "2% 6% 2% 6%", md: "2% 6% 2% 6%" },
           }}
         >
           <Box
@@ -647,6 +610,7 @@ const TourDetails = () => {
               <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
             "&:hover":{textDecoration:"underLine",cursor:"pointer"}
             }}
+            onClick={()=>navigate("/")}
             // onClick={()=>{
             //   if(FirstTour_sightseeingState == "nothing"){
             //     setFirstTour_sightseeingState("")
@@ -665,13 +629,13 @@ const TourDetails = () => {
                 justifyContent:"flex-start",
                 "&:hover":{cursor:"pointer"}
               }}
-              onClick={() => {
-                if(FirstTour_sightseeingState == null){
-                  setFirstTour_sightseeingState("")
-                }else{
-                  setFirstTour_sightseeingState(null)
-                }
-              }}
+              // onClick={() => {
+              //   if(FirstTour_sightseeingState == null){
+              //     setFirstTour_sightseeingState("")
+              //   }else{
+              //     setFirstTour_sightseeingState(null)
+              //   }
+              // }}
               >
                 <KeyboardArrowDownIcon 
                 sx={{
@@ -1635,7 +1599,7 @@ const TourDetails = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              rowGap: { xs: 3 },
+              rowGap: { xs: 3,md:10 },
               width: { xs: "100%", md: "78%" },
             }}
           >
@@ -1667,7 +1631,7 @@ const TourDetails = () => {
                     flexDirection: {xs:"column",md:"row"},
                     alignItems: "flex-start",
                     justifyContent: "space-between",
-                    padding: "2% 3% 2% 3%",
+                    padding: "2% 4% 2% 4%",
                     rowGap:1
                   }}
                 >
@@ -1738,7 +1702,7 @@ const TourDetails = () => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "1%",
+                    padding: "2% 4% 2% 4%",
                     border: "1px solid #f0efed",
                   }}
                 >
@@ -1899,7 +1863,7 @@ const TourDetails = () => {
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
-                columnGap: 2,
+                columnGap: 4,
                 rowGap: 2,
               }}
             >
@@ -1940,6 +1904,8 @@ const TourDetails = () => {
                 </Typography>
               </Box>
             </Box>
+
+            {/* booking averview */}
             <Box
               className="overView"
               sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
@@ -2042,6 +2008,8 @@ const TourDetails = () => {
                 </Typography>
               </Box>
             </Box>
+
+            {/* whatss included */}
             <Box
               className="What's Included"
               sx={{ display: "flex", flexDirection: "column", rowGap: 1 }}

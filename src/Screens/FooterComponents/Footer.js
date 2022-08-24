@@ -24,7 +24,7 @@ const Footer = () => {
         alignItems: "flex-start",
         justifyContent: "flex-start",
         rowGap:3,
-        padding:"2% 0% 2% 0% "
+        padding:{xs:"2%",md:"2% 0% 2% 0% "}
       }}
     >
       {/* <Box
@@ -65,7 +65,7 @@ const Footer = () => {
           flexDirection: {xs:"column",md:"row"},
           justifyContent: "space-around",
           width: "100%",
-          rowGap:{xs:1,md:0}
+          rowGap:{xs:2,md:0}
         }}
       >
         <Box
@@ -82,7 +82,7 @@ const Footer = () => {
           <Typography onClick={()=>navigate("/PrivacyPolicy")} 
           sx={{
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
-            fontSize:{xs:"16px",md:"20px"}
+            fontSize:{xs:"12px",md:"14px"}
           }}
           >Privacy Policy</Typography>
           
@@ -99,7 +99,7 @@ const Footer = () => {
           <Typography onClick={()=>navigate("/aboutPage")} 
           sx={{
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
-            fontSize:{xs:"16px",md:"20px"}
+            fontSize:{xs:"12px",md:"14px"}
           }}
           >About Travel</Typography>
           {/* <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
@@ -135,7 +135,7 @@ const Footer = () => {
         >
           <Typography sx={{
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
-            fontSize:{xs:"16px",md:"20px"}
+            fontSize:{xs:"12px",md:"14px"}
           }}
           onClick={()=>navigate("/TermsAndCondition")}
           >Terms & Conditions</Typography>

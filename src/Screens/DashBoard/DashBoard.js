@@ -4,10 +4,14 @@ import {
   Button,
   Checkbox,
   Divider,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormLabel,
   Menu,
   MenuItem,
+  Radio,
+  RadioGroup,
   Rating,
   Slide,
   Slider,
@@ -44,8 +48,7 @@ import Header from "../HeaderComponents/Header";
 import ProductCards from "../../Components/ProductCard/ProductCards";
 import Skeleton from "../../Components/skeleton/SkeletonPattern";
 import SkeletonPattern from "../../Components/skeleton/SkeletonPattern";
-
-
+import { fontWeight } from "@mui/system";
 
 
 
@@ -147,7 +150,6 @@ const fetchAllTourProducts = async () => {
     }
   }
 
-  console.log(options)
 
   try{
     let {data} = await axios(options)
@@ -167,6 +169,9 @@ useEffect(()=>{
 useEffect(()=>{
   
 },[logoutRender])
+
+
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
@@ -190,11 +195,11 @@ useEffect(()=>{
               flexDirection: "column",
               rowGap: 1,
               backgroundColor: "white",
-              width: { xs: "100%", md: "88%" },
-              padding: { xs: "0%", md: "0% 6% 0% 6%" },
+              width: { xs: "94%", md: "88%" },
+              padding: { xs: "0% 3% 0% 3%", md: "0% 6% 0% 6%" },
             }}
           >
-            <Typography sx={{ fontSize: "20px", fontWeight: "bold" }} className="Typography">
+            <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
               Tours, Tickets, & Excursions
             </Typography>
             <DesktopDatePicker
@@ -204,9 +209,9 @@ useEffect(()=>{
               disablePast
               renderInput={(params) => {
                return  <TextField
+               className="inputRounded"
                   sx={{
                     display: { xs: "flex", md: "none" },
-                    borderRadius: { xs: "100px" },
                     width: "100%",
                   }}
                   {...params}
@@ -220,12 +225,12 @@ useEffect(()=>{
           <Box
             className="SecondMainBody"
             sx={{
-              width: { xs: "100%", md: "88%" },
+              width: { xs: "94%", md: "88%" },
               display: "flex",
               justifyContent: "space-between",
               columnGap: 2,
               zIndex: 15,
-              padding: { xs: "0%", md: "0% 6% 0% 6%" },
+              padding: { xs: "0% 3% 0% 3%", md: "0% 6% 0% 6%" },
             }}
           >
             {/* Left half Of Secoond Main Body */}
@@ -249,7 +254,7 @@ useEffect(()=>{
                   padding: "6%",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                   position: "sticky",
                   top: "10px",
                   left: "0px",
@@ -257,7 +262,7 @@ useEffect(()=>{
                   rowGap: 2,
                 }}
               >
-                <Typography sx={{ fontSize: "20px" }}>
+                <Typography sx={{ fontSize: {xs:"8px",md:"14px"} }}>
                   When are you travelling?
                 </Typography>
                 <Box
@@ -269,6 +274,7 @@ useEffect(()=>{
                     justifyContent: "center",
                     height: "fit-content",
                     width: "fit-content",
+                    borderRadius:"10px"
                   }}
                 >
                   <DesktopDatePicker
@@ -276,7 +282,9 @@ useEffect(()=>{
                     inputFormat="MM/dd/yyyy"
                     value={dateValue}
                     onChange={handleDateTimeChange}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField 
+                      className="inputRounde"
+                      {...params} />}
                     shouldDisableDate={disableWeekends}
                     disablePast
                   />
@@ -289,28 +297,46 @@ useEffect(()=>{
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  rowGap: 2,
+                  rowGap: 3,
                   zIndex: 10,
                 }}
               >
                 {/* popular filters */}
-                <Box className="popular filter">
-                  <Typography sx={{ fontSize: "20px" }}>Popular</Typography>
+                <Box className="popular filter"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography sx={{ fontSize: {xs:"8px",md:"16px"},fontWeight:"bold" }}>Popular</Typography>
                   <Box>
                     <Box>
                       <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="success" />}
-                          label="Good for avoiding crowds"
+                          label={<Typography
+                          sx={{
+                            fontSize: {xs:"8px",md:"14px"}
+                          }}
+                          >Good for avoiding crowdss</Typography>}
                         />
                         <FormControlLabel
                           control={<Checkbox color="success" />}
-                          label="Taking safety measures"
+                          label={<Typography
+                            sx={{
+                              fontSize: {xs:"8px",md:"14px"}
+                            }}
+                            >Taking safety measures</Typography>}
                         />
                         <FormControlLabel
                           disabled
                           control={<Checkbox />}
-                          label="Virtual experiences"
+                          label={<Typography
+                            sx={{
+                              fontSize: {xs:"8px",md:"14px"}
+                            }}
+                            >Virtual experiences</Typography>}
                           sx={{
                             "&:hover": { cursor: "not-allowed" },
                           }}
@@ -318,7 +344,11 @@ useEffect(()=>{
                         <FormControlLabel
                           disabled
                           control={<Checkbox />}
-                          label="Kid friendly"
+                          label={<Typography
+                            sx={{
+                              fontSize: {xs:"8px",md:"14px"}
+                            }}
+                            >Kid friendly</Typography>}
                           sx={{
                             "&:hover": { cursor: "not-allowed" },
                           }}
@@ -330,14 +360,21 @@ useEffect(()=>{
                 <Divider />
 
                 {/* all london tours */}
-                <Box className="All London Tours">
+                <Box className="All London Tours"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
                   <Typography
                     sx={{
                       "&:hover": {
                         cursor: "pointer",
                         textDecoration: "underLine",
                       },
-                      fontSize: "20px",
+                      fontSize: "16px",
+                      fontWeight:"bold"
                     }}
                   >
                     All Tours
@@ -616,12 +653,18 @@ useEffect(()=>{
                             textDecoration: "underLine",
                             cursor: "pointer",
                           },
-                          fontSize: "16px",
+                          fontSize: "14px",
                         }}
                       >
                         Tours, Sightseeing & Cruises
                       </Typography>
-                      <Box className="arrows">
+                      <Box className="arrows"
+                      sx={{
+                        "&:hover":{
+                          cursor:"pointer"
+                        }
+                      }}
+                      >
                         <KeyboardArrowDownIcon
                           sx={{
                             display: !tours_sightseeing ? "flex" : "none",
@@ -1452,8 +1495,14 @@ useEffect(()=>{
                 <Divider />
 
                 {/* price filter */}
-                <Box className="price Filter">
-                  <Typography sx={{ fontSize: "20px" }}>Price</Typography>
+                <Box className="price Filter"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography sx={{ fontSize: "16px", fontWeight:"bold" }}>Price</Typography>
                   <Slider
                     getAriaLabel={() => "Minimum distance"}
                     value={value1}
@@ -1461,37 +1510,52 @@ useEffect(()=>{
                     valueLabelDisplay="off"
                     getAriaValueText={valuetext}
                     disableSwap
-                  />
-                  <Typography
                     sx={{
-                      fontSize: "16px",
+                      color:"blue",
+                    }}
+                  />
+                  {/* <Typography
+                    sx={{
+                      fontSize: "14px",
                     }}
                   >
                     value : {value1}
-                  </Typography>
+                  </Typography> */}
                 </Box>
 
                 <Divider />
 
                 {/* duration lfilter */}
-                <Box className="durationFilter">
+                <Box className="durationFilter"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography
+                  sx={{
+                    fontSize:"16px",
+                    fontWeight:"bold"
+                  }}
+                  >Duration</Typography>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="Up to 1 hour"
+                      label={<Typography sx={{fontSize:"14px"}}>Up to 1 hour</Typography>}
                     />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="1 to 4 hours"
+                      label={<Typography sx={{fontSize:"14px"}}>1 to 4 hours</Typography>}
                     />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="4 hours to 1 day"
+                      label={<Typography sx={{fontSize:"14px"}}>4 hours to 1 day</Typography>}
                     />
                     <FormControlLabel
                       disabled
                       control={<Checkbox />}
-                      label="1 to 3 days"
+                      label={<Typography sx={{fontSize:"14px"}}>1 to 3 days</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
@@ -1499,7 +1563,7 @@ useEffect(()=>{
                     <FormControlLabel
                       disabled
                       control={<Checkbox />}
-                      label="3+ days"
+                      label={<Typography sx={{fontSize:"14px"}}>3+ days</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
@@ -1510,115 +1574,187 @@ useEffect(()=>{
                 <Divider />
 
                 {/* Time of day */}
-                <Box className="TimeOfDay">
-                  <Typography sx={{ fontSize: "20px" }}>Time Of Day</Typography>
+                <Box className="TimeOfDay"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography sx={{ fontSize: "16px",fontWeight:"bold" }}>Time Of Day</Typography>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="6am—12pm"
-                    />
+                      label={<Typography sx={{fontSize:"14px"}}>6am—12pm</Typography>}
+                      />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="12pm—5pm"
+                      label={<Typography sx={{fontSize:"14px"}}>12pm—5pm</Typography>}
+                      />
+                    <FormControlLabel control={<Checkbox />} 
+                      label={<Typography sx={{fontSize:"14px"}}>5pm—12am</Typography>}
                     />
-                    <FormControlLabel control={<Checkbox />} label="5pm—12am" />
                   </FormGroup>
                 </Box>
 
                 <Divider />
 
                 {/* Rating */}
-                <Box className="ratings">
-                  <Typography sx={{ fontSize: "20px" }}>Rating</Typography>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Box className="ratings"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography sx={{ fontSize: "16px",fontWeight:"bold" }}>Rating</Typography>
+                  {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Box
                       className="5star"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Checkbox />
-                      <Rating name="read-only" value={5} readOnly />
+                      <Rating name="read-only" value={5} readOnly sx={{fontSize:"22px"}}/>
                     </Box>
                     <Box
                       className="4star"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Checkbox />
-                      <Rating name="read-only" value={4} readOnly />
-                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
+                      <Rating name="read-only" value={4} readOnly sx={{fontSize:"22px"}}/>
+                      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
                     </Box>
                     <Box
                       className="3star"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Checkbox />
-                      <Rating name="read-only" value={3} readOnly />
-                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
+                      <Rating name="read-only" value={3} readOnly sx={{fontSize:"22px"}}/>
+                      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
                     </Box>
                     <Box
                       className="2star"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Checkbox />
-                      <Rating name="read-only" value={2} readOnly />
-                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
+                      <Rating name="read-only" value={2} readOnly  sx={{fontSize:"22px"}}/>
+                      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
                     </Box>
                     <Box
                       className="1star"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Checkbox />
-                      <Rating name="read-only" value={1} readOnly />
-                      <Typography sx={{ fontSize: "16px" }}>& up</Typography>
+                      <Rating name="read-only" value={1} readOnly  sx={{fontSize:"22px"}} />
+                      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
                     </Box>
-                  </Box>
+                  </Box> */}
+                  <FormControl>
+  <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+  >
+    <FormControlLabel value="five" control={<Radio color="success"/>} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Rating name="read-only" value={5} readOnly sx={{fontSize:"22px"}}/>
+    </Box>}
+    />
+    <FormControlLabel value="four" control={<Radio  color="success"/>} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Rating name="read-only" value={4} readOnly sx={{fontSize:"22px"}}/>
+      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+    </Box>}
+     />
+    <FormControlLabel value="three" control={<Radio  color="success"/>}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={3} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+    <FormControlLabel value="two" control={<Radio  color="success"/>}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={2} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+    <FormControlLabel value="one" control={<Radio  color="success"/>}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={1} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+  </RadioGroup>
+</FormControl>
                 </Box>
 
                 <Divider />
 
                 {/* Specials */}
-                <Box className="Specials">
-                  <Typography sx={{ fontSize: "20px" }}>Specials</Typography>
+                <Box className="Specials"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <Typography sx={{ fontSize: "16px",fontWeight:"bold" }}>Specials</Typography>
                   <FormGroup>
                     <FormControlLabel
                       disabled
                       control={<Checkbox color="success" />}
-                      label="Deals & Discounts"
+                      label={<Typography sx={{fontSize:"14px"}}>Deals & Discounts</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
-                    />
+                      />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="Free Cancellation"
-                    />
+                      label={<Typography sx={{fontSize:"14px"}}>Free Cancellation</Typography>}
+                      />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="Likely to Sell Out"
-                    />
+                      label={<Typography sx={{fontSize:"14px"}}>Likely to Sell Out</Typography>}
+                      />
                     <FormControlLabel
                       disabled
                       control={<Checkbox color="success" />}
-                      label="Skip-The-Line"
+                      label={<Typography sx={{fontSize:"14px"}}>Skip-The-Line</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
-                    />
+                      />
                     <FormControlLabel
                       control={<Checkbox color="success" />}
-                      label="Private Tour"
-                    />
+                      label={<Typography sx={{fontSize:"14px"}}>Private Tour</Typography>}
+                      />
                     <FormControlLabel
                       disabled
                       control={<Checkbox color="success" />}
-                      label="Travel Exclusive"
+                      label={<Typography sx={{fontSize:"14px"}}>Travel Exclusive</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
-                    />
+                      />
                     <FormControlLabel
                       disabled
                       control={<Checkbox color="success" />}
-                      label="New on Travel"
+                      label={<Typography sx={{fontSize:"14px"}}>New on Travel</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
@@ -1639,17 +1775,22 @@ useEffect(()=>{
               }}
             >
               <Box className="countAvailableContents">
-                <Typography>{myState.length}</Typography>
+                <Typography sx={{
+                  fontSize:{xs:"14px",md:"14px"}
+                  }}
+                >{myState.length} results</Typography>
               </Box>
-              <Box
+              {/* <Box
                 className="travelData"
                 sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
-              >
+              > */}
                 {
                   myState.length == 0 ? <SkeletonPattern />
                   :<Box
                   className="travelData"
-                  sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}>
+                  sx={{ display: "flex", flexDirection: "column", rowGap: 2,
+                  width:"100%",
+                  }}>
                     {
                      myState.map((item,index) => {
                        return  <ProductCards  key={index} item={item}/>
@@ -1657,7 +1798,7 @@ useEffect(()=>{
                     }
                   </Box> 
                 }
-              </Box>
+              {/* </Box> */}
             </Box>
           </Box>
         </Box>

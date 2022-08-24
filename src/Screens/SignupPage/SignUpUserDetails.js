@@ -1060,6 +1060,7 @@ const SignUpUserDetails = () => {
           alignItems: { xs: "flex-start", md: "center" },
           justifyContent: "center",
           rowGap: 3,
+          padding:{xs:"1% 0% 0% 2%",md:"0%"}
         }}
       >
         <Box

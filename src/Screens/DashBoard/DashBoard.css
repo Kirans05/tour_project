@@ -4,3 +4,7 @@
 .more{
     color:green
 }
+
+.inputRounde .MuiOutlinedInput-root{
+    border-radius: 10px;
+ }

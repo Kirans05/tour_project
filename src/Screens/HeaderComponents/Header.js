@@ -1331,11 +1331,12 @@ const Header = ({setlogoutRender,logoutRender}) => {
   const list = (anchor) => (
     <Box
       sx={{
-        width: { xs: "250px", md: "350px" },
+        width: { xs: "250px", md: "380px" },
         display: "flex",
         flexDirection: "column",
-        rowGap: 2,
+        rowGap: 5,
         zIndex: 1000000000000,
+        padding:"5% 0% 0% 0%"
       }}
       role="presentation"
       // onClick={toggleDrawer(anchor, false)}
@@ -1346,8 +1347,9 @@ const Header = ({setlogoutRender,logoutRender}) => {
         className="title"
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           alignItems: "center",
+          paddingLeft:"10%"
         }}
       >
         <CloseIcon
@@ -1365,14 +1367,14 @@ const Header = ({setlogoutRender,logoutRender}) => {
         sx={{
           display: localStorage.getItem("accessToken") == null ? "flex" : "none",
           flexDirection: "column",
-          rowGap: 2,
+          rowGap: 6,
           paddingLeft: "10%",
         }}
       >
         <Typography
           onClick={() => navigate("/login")}
           sx={{
-            "&:hover": { cursor: "pointer" },
+            "&:hover": { cursor: "pointer",textDecoration:"underLine" },
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
@@ -1381,7 +1383,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         <Typography
           onClick={() => navigate("/signup")}
           sx={{
-            "&:hover": { cursor: "pointer" },
+            "&:hover": { cursor: "pointer",textDecoration:"underLine" },
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
@@ -1397,7 +1399,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          rowGap: 2,
+          rowGap: 5,
           paddingLeft: "10%",
         }}
       >
@@ -1542,7 +1544,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               cursor: "pointer",
             },
           }}
-          onClick={() => navigate("/helpPage")}
+          // onClick={() => navigate("/helpPage")}
         >
           <HelpOutlineIcon
             sx={{
@@ -1554,7 +1556,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               fontSize: { xs: "14px", md: "16px" },
             }}
           >
-            help
+            Help
           </Typography>
         </Box>
         {/* <Box
@@ -1619,7 +1621,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          rowGap: 2,
+          rowGap: 5,
           paddingLeft: "10%",
         }}
       >
@@ -1843,11 +1845,17 @@ const Header = ({setlogoutRender,logoutRender}) => {
                   },
                   fontSize: { xs: "14px", md: "16px" },
                 }}
-                onClick={Tour_SightSeeingToggleDrawer("left", true)}
+                // onClick={Tour_SightSeeingToggleDrawer("left", true)}
+                onClick={()=>navigate("/")}
               >
                 Tours, Sightseeing & Cruises
               </Typography>
-              <Box className="arrows">
+              <Box className="arrows"
+              sx={{
+                marginRight:"15px",
+                "&:hover":{cursor:"pointer"}
+              }}
+              >
                 <KeyboardArrowRightIcon />
               </Box>
             </Box>
@@ -6072,7 +6080,6 @@ const Header = ({setlogoutRender,logoutRender}) => {
       }
     }
 
-    console.log(options)
 
     try{
       let {data} = await axios(options)
@@ -6102,10 +6109,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: { xs: "space-between", md: "space-between" },
-        paddingTop: { sm: "0%", md: "0%" },
-        paddingLeft: { xs: "1%" },
-        paddingRight: { xs: "1%" },
-        width:"98%"
+        width: { xs: "96%", md: "88%" },
+        padding: { xs: "2% 2% 1% 2%", md: "1% 6% 0% 6%" },
       }}
     >
 
@@ -6130,10 +6135,16 @@ const Header = ({setlogoutRender,logoutRender}) => {
         />
         <Typography
           variant="h4"
-          onClick={() => navigate("/HomePage")}
+          onClick={() => {
+            if(localStorage.getItem("accessToken") == null){
+              navigate("/login")
+            }else{
+              navigate("/HomePage")
+            }
+          }}
           sx={{
             "&:hover": { cursor: "pointer" },
-            fontSize: { xs: "20px", md: "25px" },
+            fontSize: { xs: "28px", md: "28px" },
           }}
         >
           Travel
@@ -6158,7 +6169,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             placeholder="Search for Paris or Colosseum"
             style={{
               outline: "none",
-              height: "40px",
+              height: "30px",
               width: "320px",
               border: "1px solid white",
             }}
@@ -6176,45 +6187,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
           columnGap: 3,
         }}
       >
-        {/* <Box
-          className="textField&SearchIcons"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            columnGap: 2,
-            "&:hover": { border: "1px solid black" },
-            border: "1px solid white",
-            padding: "2px",
-          }}
-        >
-          <input
-            type={"text"}
-            placeholder="Search for Paris or Colosseum"
-            style={{
-              outline: "none",
-              height: "40px",
-              width: "320px",
-              border: "1px solid white",
-            }}
-          />
-          <SearchIcon />
-        </Box> */}
-        {/* <Typography
-          sx={{
-            borderBottom: "3px solid white",
-            "&:hover": {
-              borderBottom: "3px solid green",
-              cursor: "pointer",
-            },
-            fontSize: { xs: "16px", md: "20px" },
-          }}
-        >
-          En
-        </Typography> */}
-
         {/* country and currency */}
-               <TextField
+               {/* <TextField
                     id="outlined-select-currency"
                     select
                     value={countryCurrencyState}
@@ -6225,7 +6199,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
                          {option.currency_code}
                       </MenuItem>
                     ))}
-                  </TextField>
+                  </TextField> */}
 
         {/* help */}
         <Box
@@ -6241,10 +6215,10 @@ const Header = ({setlogoutRender,logoutRender}) => {
             },
             columnGap: 1,
           }}
-          onClick={() => navigate("/helpPage")}
+          // onClick={() => navigate("/helpPage")}
         >
           <HelpOutlineIcon />
-          <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
+          <Typography sx={{ fontSize: { xs: "8px", md: "16px" } }} >
             Help
           </Typography>
         </Box>
@@ -6276,7 +6250,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               fontSize: { xs: "20px", md: "22px" },
             }}
           />
-          <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
+          <Typography sx={{ fontSize: { xs: "8px", md: "16px" } }} >
             Booking
           </Typography>
         </Box>
@@ -6298,7 +6272,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         >
           <PermIdentityIcon />
           <Typography
-            sx={{ fontSize: { xs: "16px", md: "20px" } }}
+            sx={{ fontSize: { xs: "8px", md: "16px" } }} 
             onClick={handleClick}
           >
             Account
@@ -6322,7 +6296,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         >
           <PermIdentityIcon />
           <Typography
-            sx={{ fontSize: { xs: "16px", md: "20px" } }}
+            sx={{ fontSize: { xs: "8px", md: "16px" } }} 
             onClick={handleUserProfileClick}
           >
             {myState.firstName} {myState.lastName}
@@ -6334,7 +6308,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
       <Box
         className="rightPartMediaQuery"
         sx={{ display: { xs: !showSmallScreenSearch ? "flex" : "none", md: "none" } }}
-        onClick={()=>setShowSmallScreenSearch(true)}
+        // onClick={()=>setShowSmallScreenSearch(true)}
       >
         <SearchIcon sx={{ fontSize: "30px" }} />
       </Box>
@@ -6536,6 +6510,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             localStorage.removeItem("accessToken")
             if(location.pathname == "/"){
               setlogoutRender(!logoutRender)
+              setAnchorElState(null);
               navigate("/")
             }else{
               navigate("/")

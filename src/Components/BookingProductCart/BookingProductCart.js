@@ -1,14 +1,4 @@
-import { Typography, Box, Button, Rating, Divider } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import Image2 from "../../assets/images/img2.jpg"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import { singleProductReducer, cratItemReducer } from '../../redux/reducer/reducer';
-import { individualProductAction,cartItemAction } from '../../redux/action/index';
-import { useDispatch, useSelector } from 'react-redux';
-import CheckIcon from "@mui/icons-material/Check";
+import React, { useState } from 'react'
 import Travel3 from "../../assets/images/travel3.jpg";
 import Travel4 from "../../assets/images/travel4.webp";
 import Travel6 from "../../assets/images/travel6.jpg";
@@ -17,23 +7,19 @@ import Travel9 from "../../assets/images/travel9.jpg";
 import Travel10 from "../../assets/images/travel10.jpg";
 import Travel11 from "../../assets/images/travel11.jpg";
 import Travel12 from "../../assets/images/travel312.jpg";
+import { Box, Rating, Typography } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CheckIcon from "@mui/icons-material/Check";
+
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
 
+const BookingProductCart = () => {
 
+    const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
 
-
-const WishListProductCard = ({item}) => {
-
-  const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
-  const myCartItems = useSelector((state) => state.cratItemReducer)
-  const dispatch = useDispatch();
-
-  const removeWishListHandler = () => {
-    let filterdProducts = myCartItems.filter(product => product.id  != item.id)
-    dispatch(cartItemAction(filterdProducts))
-  }
 
   return (
     <Box className='individualProduct'
@@ -84,7 +70,7 @@ const WishListProductCard = ({item}) => {
               cursor:"pointer"
             }
           }}
-          onClick={removeWishListHandler}
+          // onClick={removeWishListHandler}
           >
             <FavoriteIcon 
             sx={{
@@ -113,7 +99,7 @@ const WishListProductCard = ({item}) => {
           sx={{
             fontSize:{xs:"14px",md:"16px"}
           }}
-          >{item.name}</Typography>
+          >Harry Potter Tour of Warner Bros. Studio with Transport from London</Typography>
           <Box className='rating&Reviews'
           sx={{
             display:"flex",
@@ -132,7 +118,7 @@ const WishListProductCard = ({item}) => {
             sx={{
               fontSize:{xs:"12px",md:"14px"}
             }}
-            >{item.price}</Typography>
+            >543.4</Typography>
           </Box>
           <Box className='accessTimeAndFreeCancellation'>
              <Box className='hoursTime'
@@ -204,18 +190,18 @@ const WishListProductCard = ({item}) => {
                 fontWeight:"bold",
                 fontSize:{xs:"14px",md:"16px"}
               }}
-              >{item.currency}</Typography>
+              >GBP</Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"},
                 fontWeight:"bold",
               }}
-              >{item.price}</Typography>
+              >453</Typography>
             </Box>  
           </Box>
     </Box>
-  </Box>
+             </Box>
   )
 }
 
-export default WishListProductCard
+export default BookingProductCart

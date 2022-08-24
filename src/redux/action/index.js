@@ -276,3 +276,11 @@ export const currentUserAction = (payload) => {
         payload
     }
 }
+
+
+export const cartItemAction = (payload) => {
+    return {
+        type:"addCartItem",
+        payload
+    }
+} 

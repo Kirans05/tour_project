@@ -72,13 +72,13 @@ const UserSettings = () => {
           <Box
             className="leftpart"
             sx={{
-              width: { xs: "100%", md: "20%" },
+              width: { xs: "90%", md: "20%" },
               border: "2px solid #e6e7e8",
               display: {xs:displayChoice ? "flex" : "none" ,md:"flex"},
               flexDirection: "column",
               alignItems: {xs:"flex-start",md:"center"},
               rowGap: 3,
-              padding: "1% 1% 2% 1%",
+              padding: "1% 5% 2% 5%",
             }}
           >
             <Box className="profileImage"
@@ -114,7 +114,7 @@ const UserSettings = () => {
                 }}
               >
                 <PermIdentityIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                   Personal Information
                 </Typography>
               </Box>
@@ -134,7 +134,7 @@ const UserSettings = () => {
               }}
               >
                 <VpnKeyIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                   Login Information
                 </Typography>
               </Box>
@@ -155,7 +155,7 @@ const UserSettings = () => {
                 }}
               >
                 <PaymentIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                   Payment Method
                 </Typography>
               </Box>
@@ -176,7 +176,7 @@ const UserSettings = () => {
                   }}
               >
                 <NotificationsActiveIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Notifications</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Notifications</Typography>
               </Box>
               <Divider />
               <Box
@@ -195,7 +195,7 @@ const UserSettings = () => {
                 }}
               >
                 <CardTravelIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                   Traveller Preferences
                 </Typography>
               </Box>
@@ -217,7 +217,7 @@ const UserSettings = () => {
                   
               >
                 <SettingsIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Site Settings</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Site Settings</Typography>
               </Box>
             </Box>
           </Box>
@@ -245,7 +245,7 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 Personal Information
@@ -262,12 +262,12 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Full Name</Typography>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>{myState.firstName} {myState.lastName}</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Full Name</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>{myState.firstName} {myState.lastName}</Typography>
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -298,7 +298,7 @@ const UserSettings = () => {
                       rowGap: 1,
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Full Name</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Full Name</Typography>
                     <TextField type={"text"} placeholder={"kiran"} />
                     <Button
                       variant="contained"
@@ -320,12 +320,12 @@ const UserSettings = () => {
                       rowGap: 1,
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>LastName</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>LastName</Typography>
                     <TextField type={"text"} placeholder={"s"} />
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -393,14 +393,14 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>Email</Typography>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Email</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                       {myState.email}
                     </Typography>
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -433,10 +433,10 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Email</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Email</Typography>
                     <Typography
                       sx={{
-                        fontSize: {xs:"16px",md:"20px"},
+                       fontSize: {xs:"16px",md:"16px"},
                         "&:hover": {
                           cursor: "pointer",
                           textDecoration: "underLine",
@@ -453,7 +453,7 @@ const UserSettings = () => {
                     placeholder={"kiran@gmail.com"}
                     fullWidth
                   />
-                  <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                  <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                     Confirm Password
                   </Typography>
                   <Box
@@ -519,16 +519,16 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                       Phone Number
                     </Typography>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                       Not Provided
                     </Typography>
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -560,12 +560,12 @@ const UserSettings = () => {
                       // alignItems:"center",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                       Phone Number
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: {xs:"16px",md:"20px"},
+                       fontSize: {xs:"16px",md:"16px"},
                         color: "green",
                         "&:hover": {
                           cursor: "pointer",
@@ -607,16 +607,16 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                       Date of Birth
                     </Typography>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                       Not Provided
                     </Typography>
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -650,12 +650,12 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                       Date of Birth
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: {xs:"16px",md:"20px"},
+                       fontSize: {xs:"16px",md:"16px"},
                         color: "green",
                         "&:hover": {
                           cursor: "pointer",
@@ -702,14 +702,14 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Home Town</Typography>
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Home Town</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                       Not Provided
                     </Typography>
                   </Box>
                   <Typography
                     sx={{
-                      fontSize: {xs:"16px",md:"20px"},
+                     fontSize: {xs:"16px",md:"16px"},
                       color: "green",
                       "&:hover": {
                         cursor: "pointer",
@@ -742,10 +742,10 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Home Town</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Home Town</Typography>
                     <Typography
                       sx={{
-                        fontSize: {xs:"16px",md:"20px"},
+                       fontSize: {xs:"16px",md:"16px"},
                         color: "green",
                         "&:hover": {
                           cursor: "pointer",
@@ -806,7 +806,7 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
               </Box>
 
               <Box
@@ -831,7 +831,7 @@ const UserSettings = () => {
                   }}
                 >
                   <VpnKeyIcon />
-                  <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                  <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
                     Create a password to access your account from any device at
                     any time. Or, log in with one click with a connected account
                     below.
@@ -852,14 +852,14 @@ const UserSettings = () => {
                 <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}>
                   Deactivate
                 </Typography>
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }} >
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }} >
                   Deactivating your account means that your account will no
                   longer be available. You will not be able to log in and your
                   profile will not be accessible. Any reviews, photos, and tips
                   that you have contributed may continue to be displayed on the
                   site
                 </Typography>
-                <Alert severity="error" sx={{ fontSize: {xs:"16px",md:"20px"} }}>
+                <Alert severity="error" sx={{fontSize: {xs:"16px",md:"16px"} }}>
                   To deactivate your account, please log in again.
                 </Alert>
                 <Button
@@ -895,13 +895,13 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"}}}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"}}}>Profile</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 Payment Method
               </Typography>
-              <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>Your stored cards</Typography>
-              <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>Please log in to view your stored cards</Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Your stored cards</Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Please log in to view your stored cards</Typography>
             </Box>
           ) : displayItem == "notifications" ? (
             <Box
@@ -924,12 +924,12 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 Notifications
               </Typography>
-              <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Marketing emails</Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Marketing emails</Typography>
               <Box
                 sx={{
                   display: "flex",
@@ -938,7 +938,7 @@ const UserSettings = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                   Viator will send you weekly emails with travel inspirations,
                   tips, recommendations and company updates
                 </Typography>
@@ -966,7 +966,7 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Profile</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 Travel Preferences
@@ -989,7 +989,7 @@ const UserSettings = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Special Requirements</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Special Requirements</Typography>
                     <Typography
                       sx={{
                         color: "green",
@@ -997,14 +997,14 @@ const UserSettings = () => {
                           cursor: "pointer",
                           textDecoration: "underLine",
                         },
-                        fontSize: {xs:"16px",md:"20px"}
+                       fontSize: {xs:"16px",md:"16px"}
                       }}
                       onClick={() => setEditButton(true)}
                     >
                       Add
                     </Typography>
                   </Box>
-                  <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Not Provided</Typography>
+                  <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Not Provided</Typography>
                 </Box>
               ) : (
                 <Box
@@ -1025,7 +1025,7 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}s>Special Requirements</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Special Requirements</Typography>
                     <Typography
                       sx={{
                         color: "green",
@@ -1033,7 +1033,7 @@ const UserSettings = () => {
                           cursor: "pointer",
                           textDecoration: "underLine",
                         },
-                        fontSize: {xs:"16px",md:"20px"}
+                       fontSize: {xs:"16px",md:"16px"}
                       }}
                       onClick={() => setEditButton(false)}
                     >
@@ -1084,7 +1084,7 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{ fontSize: {xs:"16px",md:"20px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 Site Settings
