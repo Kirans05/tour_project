@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
@@ -36,10 +36,14 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import { useDispatch, useSelector } from "react-redux";
-import { currencyCodeAction, currentUserAction } from "../../redux/action";
-import {currentUserReducer} from "../../redux/reducer/reducer"
+import { currencyCodeAction, currentUserAction, filterProductByCityAction } from "../../redux/action";
+import {currentUserReducer, countryListReducer} from "../../redux/reducer/reducer"
 import axios from "axios";
 import { render } from "react-dom";
+import WebSiteLogo from "../../assets/images/websiteLogo.png"
+import WebSiteLogo1 from "../../assets/images/websiteLog1.jpeg"
+import WebSiteLogo2 from "../../assets/images/wesiteLogo2.jpeg"
+import WebSiteLogo3 from "../../assets/images/webSitelogo3.jpeg"
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
@@ -1148,7 +1152,13 @@ const Header = ({setlogoutRender,logoutRender}) => {
   const [anchorElState, setAnchorElState] = React.useState(null);
   const open = Boolean(anchorEl);
   const UserProfileOpen = Boolean(anchorElState);
+  
+  const [searchInputValue, setSearchInputValue] = useState("")
 
+  const countyList = useSelector((state) => state.countryListReducer)
+	const [isFocus, setIsFocus] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
+	const inputRef = useRef();
 
 
 
@@ -6133,7 +6143,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           }}
           onClick={toggleDrawer("left", true)}
         />
-        <Typography
+        {/* <Typography
           variant="h4"
           onClick={() => {
             if(localStorage.getItem("accessToken") == null){
@@ -6147,8 +6157,50 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "28px", md: "28px" },
           }}
         >
-          Travel
-        </Typography>
+          Mekatourizm
+        </Typography> */}
+        {/* <Box component={"img"} src={WebSiteLogo1} alt={"logo"} sx={{
+          width:{xs:"100px",md:"150px"},
+          height:{xs:"50px",md:"50px"},
+          margin:"0px",
+          "&:hover":{cursor:"pointer"}
+        }}
+        onClick={() => {
+          if(localStorage.getItem("accessToken") == null){
+            navigate("/login")
+          }else{
+            navigate("/HomePage")
+          }
+        }}
+        /> */}
+         {/* <Box component={"img"} src={WebSiteLogo2} alt={"logo"} sx={{
+          width:{xs:"100px",md:"150px"},
+          height:{xs:"50px",md:"50px"},
+          margin:"0px",
+          "&:hover":{cursor:"pointer"}
+        }}
+        onClick={() => {
+          if(localStorage.getItem("accessToken") == null){
+            navigate("/login")
+          }else{
+            navigate("/HomePage")
+          }
+        }}
+        /> */}
+        <Box component={"img"} src={WebSiteLogo3} alt={"logo"} sx={{
+          width:{xs:"100px",md:"150px"},
+          height:{xs:"50px",md:"50px"},
+          margin:"0px",
+          "&:hover":{cursor:"pointer"}
+        }}
+        onClick={() => {
+          if(localStorage.getItem("accessToken") == null){
+            navigate("/login")
+          }else{
+            navigate("/HomePage")
+          }
+        }}
+        /> 
       </Box>
 
       {/* serach box for big screens */}
@@ -6173,9 +6225,77 @@ const Header = ({setlogoutRender,logoutRender}) => {
               width: "320px",
               border: "1px solid white",
             }}
+            value={searchInputValue}
+                    onChange={(e) => {
+                      setSearchInputValue(e.target.value);
+                    }}
+                    ref={inputRef}
+                    onFocus={() => setIsFocus(true)}
+						onBlur={() => {
+							if (!isHovered) {
+								setIsFocus(false);
+							}
+						}}
           />
-          <SearchIcon />
+          <SearchIcon 
+          onClick={()=>{
+            dispatch(filterProductByCityAction(searchInputValue))
+            setIsFocus(false);
+            setlogoutRender(!logoutRender)
+            navigate("/")
+            setSearchInputValue("")
+          }}
+          />
         </Box>
+
+       { isFocus && (
+					      	<Box
+						              	className="shadow-lg absolute w-full"
+						              	onMouseEnter={() => {
+						              		setIsHovered(true);
+						              	}}
+						              	onMouseLeave={() => {
+						              		setIsHovered(false);
+						              	}}
+                            sx={{
+                              width:{xs:"85%",md:"24%"},
+                              height:{xs:"10vh",md:"10vh"},
+                              position:"absolute",
+                              top:{xs:"10%",md:"9%"},
+                              left:{xs:"3%",md:"34%"},
+                              zIndex:199999,
+                              backgroundColor:"white",
+                              display:"flex",
+                              flexDirection:"column",
+                              paddingLeft:{xs:"1%",md:"1%"},
+                              backgroundColor:"#dce5f2",
+                              overflow:"auto"
+                            }}
+						              >
+							{countyList.map((suggestion, index) => {
+								const isMatch =
+									suggestion.toLowerCase().indexOf(searchInputValue.toLowerCase()) >
+									-1;
+								return (
+									<Box key={index} >
+										{isMatch && (
+											<Box
+												className="p-5 hover:bg-gray-200 cursor-pointer"
+												onClick={() => {
+													setSearchInputValue(suggestion);
+													inputRef.current.focus();
+                          setIsFocus(false)
+												}}
+                        sx={{"&:hover":{cursor:"pointer"},}}
+											>
+												<Typography sx={{fontSize:{xs:"16px",md:"18px"}}}>{suggestion}</Typography>
+											</Box>
+										)}
+									</Box>
+								);
+							})}
+						</Box>
+					)}
 
         {/* right part */}
       <Box
@@ -6308,7 +6428,13 @@ const Header = ({setlogoutRender,logoutRender}) => {
       <Box
         className="rightPartMediaQuery"
         sx={{ display: { xs: !showSmallScreenSearch ? "flex" : "none", md: "none" } }}
-        // onClick={()=>setShowSmallScreenSearch(true)}
+        onClick={()=>{
+          if(showSmallScreenSearch == false){
+            setShowSmallScreenSearch(true)
+          }else{
+            setShowSmallScreenSearch(false)
+          }
+        }}
       >
         <SearchIcon sx={{ fontSize: "30px" }} />
       </Box>
@@ -6334,11 +6460,36 @@ const Header = ({setlogoutRender,logoutRender}) => {
             border:"none"
           }}
           placeholder={"Search Here.."}
+          value={searchInputValue}
+          onChange={(e) => {
+            setSearchInputValue(e.target.value);
+          }}
+          ref={inputRef}
+          onFocus={() => setIsFocus(true)}
+  onBlur={() => {
+    if (!isHovered) {
+      setIsFocus(false);
+    }
+  }}
           />
           <SearchIcon sx={{
             fontSize:"30px"
-          }}/>
-          <CloseIcon onClick={()=>setShowSmallScreenSearch(false)}
+          }}
+          onClick={()=>{
+            if(showSmallScreenSearch == false){
+              setShowSmallScreenSearch(true)
+            }else{
+              dispatch(filterProductByCityAction(searchInputValue))
+              setShowSmallScreenSearch(false)
+              setIsFocus(false);
+              setlogoutRender(!logoutRender)
+            }
+          }}
+          />
+          <CloseIcon onClick={()=>{
+            setShowSmallScreenSearch(false)
+            setIsFocus(false);
+          }}
           sx={{
             fontSize:"30px"
           }}

@@ -1,5 +1,5 @@
 const tourMembersNumbers = {
-    adult:2,
+    adult:1,
     child:0
 }
 
@@ -225,3 +225,42 @@ export const cratItemReducer = (state = addCartItemArray, action) => {
     }
 
 }
+
+
+
+//  duplicate product list for filtering purpose 
+const displayProduct = []
+export const displayProductReducer = (state = displayProduct, action) => {
+    switch(action.type) {
+        case "addProductList" : 
+            return action.payload
+        default :
+            return state
+    }
+}
+
+
+
+//  all list of counrties for filterting purpose
+const countryListArr = []
+export const countryListReducer = (state = countryListArr, action) => {
+    switch(action.type){
+        case "countryList" :
+            return action.payload
+        default :
+            return state
+    }
+}
+
+
+
+
+const countryName = ""
+export const filterProductByCityReducer = (state = countryName, action) => {
+    switch(action.type){
+        case "filterProduct":
+            return action.payload
+        default :
+            return state
+    }
+} 

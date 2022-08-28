@@ -51,10 +51,11 @@ const BookingPage = () => {
           display:"flex",
           flexDirection:{xs:"column",md:"row"},
           alignItems:{xs:"flex-start",md:"center"},
-          justifyContent:{xs:"flex-start",md:"space-between"},
+          justifyContent:{xs:"flex-start",md:"space-evenly"},
           flexWrap:{xs:"nowrap",md:"wrap"},
           width:{xs:"100%",md:"100%"},
           rowGap:6,
+          // columnGap:2
         }}
         >
           {

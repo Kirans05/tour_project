@@ -1284,7 +1284,7 @@ const submitHandler = async () => {
                       fontSize: { xs: "14px", md: "16px" },
                     }}
                   >
-                    {singleTourDetails.description}
+                    {singleTourDetails.description.substr(75,105)}
                   </Typography>
                   <Typography
                     sx={{
@@ -1764,7 +1764,7 @@ const submitHandler = async () => {
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}
-                >{singleTourDetails.description}</Typography>
+                >{singleTourDetails.description.substr(75,105)}</Typography>
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}

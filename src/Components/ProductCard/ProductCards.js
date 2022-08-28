@@ -30,10 +30,12 @@ import {
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
 
+
+
 const ProductCards = ({ item }) => {
 
   const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
-
+  const [description, setDescription] = useState(item.description.substr(75,125))
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -163,9 +165,10 @@ const ProductCards = ({ item }) => {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           padding: { xs: "0", md: "1%" },
-          width: {xs:"50%",md:"70%"},
+          width: {xs:"50%",md:"67%"},
           columnGap: 2,
-          rowGap:2
+          rowGap:2,
+          justifyContent:{xs:"flex-start",md:"space-between"},
         }}
         onClick={() => {
           if (localStorage.getItem("accessToken") != null) {
@@ -184,6 +187,7 @@ const ProductCards = ({ item }) => {
             flexDirection: "column",
             alignItems: "flex-start",
             rowGap: { xs: 1, md: 1 },
+            width:{xs:"100%",md:"80%"},
           }}
         >
           <Typography
@@ -198,7 +202,7 @@ const ProductCards = ({ item }) => {
           <Box className="ratingBox" sx={{ display: "flex", columnGap: 1 }}>
             <Rating
               name="read-only"
-              value={4}
+              value={item.stars}
               readOnly
               sx={{ fontSize: { xs: "15px", md: "18px" } }}
             />
@@ -211,17 +215,18 @@ const ProductCards = ({ item }) => {
          sx={{
           display:"flex",
           flexDirection:"column",
-          rowGap:3
+          rowGap:3,
+          width:{xs:"100%",md:"100%"}
          }}
          >
           {/* place description */}
          <Box
             className="aboutPlace"
-            sx={{ display: { xs: "none", md: "flex" } }}
+            sx={{ display: { xs: "none", md: "flex",width:"100%" } }}
           >
             <Typography sx={{ fontSize: {xs:"12px",md:"14px"}, display: "inline-block" }}>
-              {item.description}
-              <span className="more">more</span>
+              {description}
+              <span className="more">&nbsp; more</span>
             </Typography>
           </Box>
 

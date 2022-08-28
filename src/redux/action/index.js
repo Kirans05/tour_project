@@ -277,10 +277,37 @@ export const currentUserAction = (payload) => {
     }
 }
 
-
+// adding item to cart
 export const cartItemAction = (payload) => {
     return {
         type:"addCartItem",
         payload
     }
 } 
+
+
+//  dupliacte list of product to display in dashboard
+export const displayProductAction = (payload) => {
+    return {
+        type:"addProductList",
+        payload
+    }
+}
+
+
+
+export const countryListAction = (payload) => {
+    return {
+        type:"countryList",
+        payload
+    }
+}
+
+
+
+export const filterProductByCityAction = (payload) => {
+    return {
+        type:"filterProduct",
+        payload
+    }
+}

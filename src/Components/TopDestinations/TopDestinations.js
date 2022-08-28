@@ -8,6 +8,9 @@ import Travel10 from "../../assets/images/travel10.jpg";
 import Travel11 from "../../assets/images/travel11.jpg";
 import Travel12 from "../../assets/images/travel312.jpg";
 import { Box, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { filterProductByCityAction } from '../../redux/action';
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -15,10 +18,19 @@ let touristName = ["Ajanta Caves","Eiffel Tower","Great Wall of China","Elephant
 
 
 
-const TopDestinations = () => {
+const TopDestinations = ({item}) => {
 
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [productimage, setProductImage] = useState(arr[Math.floor(Math.random()*arr.length)])
     const [productnames, setProductName] = useState(touristName[Math.floor(Math.random()*touristName.length)])
+
+
+  const clickHandler = () => {
+    dispatch(filterProductByCityAction(item))
+    navigate("/")
+  }
 
   return (
     <Box
@@ -33,6 +45,7 @@ const TopDestinations = () => {
                   opacity: 0.7,
                   "&:hover": { cursor: "pointer", opacity: 1 },
                 }}
+                onClick={clickHandler}
               >
                 <Box
                   component={"img"}
@@ -52,7 +65,7 @@ const TopDestinations = () => {
                     fontSize:{xs:"16px",md:"18px"}
                   }}
                 >
-                  {productnames}
+                  {item}
                 </Typography>
               </Box>
   )

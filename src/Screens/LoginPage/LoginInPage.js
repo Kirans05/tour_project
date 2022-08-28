@@ -63,8 +63,6 @@ const LoginInPage = () => {
       navigate("/")
     }
     }catch(error){
-      console.log(error)
-
       if(error.response.data.message == "Bad credentials"){
         setSnakBarOpen(true)
         setAlertMessage("Incorrect Credentials")
@@ -97,9 +95,9 @@ const LoginInPage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-around",
+          justifyContent: "center",
           height: { xs: "80vh", md: "80vh" },
-          rowGap: 2,
+          rowGap: {xs:5,md:10},
         }}
       >
         
@@ -118,13 +116,23 @@ const LoginInPage = () => {
          Log into your account with your email, or create one below. Quick and
           easy - promise
         </Typography>
+      <Box
+      sx={{
+        width:{xs:"85%",md:"35%"},
+        height:{xs:"30vh",md:"30vh"},
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"space-between"
+      }}
+      >
 
+      
         {/* <FormLabel>Email</FormLabel> */}
         <TextField id="outlined-basic" label="Email" variant="outlined" 
         value={myState.email}
         onChange={(e)=>dispatch(LoginEmail(e.target.value))}
         sx={{
-          width:{xs:"85%",md:"35%"}
+          width:{xs:"100%",md:"100%"}
           // width:"500px"
         }}
         />
@@ -132,16 +140,17 @@ const LoginInPage = () => {
         value={myState.password}
         onChange={(e)=>dispatch(loginPassword(e.target.value))}
         sx={{
-          width:{xs:"85%",md:"35%"}
+          width:{xs:"100%",md:"100%"}
         }}
         />
         {/* <br /> */}
-        <Button variant="contained" color="success" sx={{ minWidth:{xs:"85%",md:"35%"}}}
+        <Button variant="contained" color="success" sx={{ minWidth:{xs:"100%",md:"100%"}}}
         onClick={submitHandler}
         >
           Continue
         </Button>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
+        </Box>
+        {/* <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Typography>or Continue with</Typography>
         </Box>
         <Box
@@ -203,7 +212,7 @@ const LoginInPage = () => {
             </span>
             .
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
       <Footer />
       <Snackbar open={SnakBarOpen} autoHideDuration={3000} onClose={handleSnakBarClose}>

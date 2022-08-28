@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
       }}
       >
         <Typography sx={{
-          fontSize:{xs:"20px",md:"24px"},
+          fontSize:{xs:"16px",md:"18px"},
           fontWeight:"bold"
         }}>PRIVACY AND COOKIES STATEMENT</Typography>
         <Box className="Effective: 25 March 2021"
@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
             fontSize:{xs:"16px",md:"18px"}
           }}
           >
-            Our Services are owned and operated by Viator, Inc. By using our
+            Our Services are owned and operated by Mekatourizm, Inc. By using our
             Services and visiting our websites and related applications, whether
             on a computer, phone, tablet or similar device (these are all
             referred to as a “Device”), you are accepting the practices
@@ -240,7 +240,7 @@ const PrivacyPolicy = () => {
             <ul
              style={{fontSize:"18px"}}
             >
-              <li>Register and manage your Viator account</li>
+              <li>Register and manage your Mekatourizm account</li>
               <li>Facilitate your bookings</li>
               <li>Measure interest in and improve our Services</li>
               <li>
@@ -280,7 +280,7 @@ const PrivacyPolicy = () => {
            sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a Viator user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information.
+          >Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a Mekatourizm user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information.
 </Typography>
         </Box>
 

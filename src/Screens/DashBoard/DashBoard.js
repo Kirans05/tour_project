@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
+  ListItemText,
   Menu,
   MenuItem,
   Radio,
@@ -40,8 +41,8 @@ import "./DashBoard.css";
 import Footer from "../FooterComponents/Footer";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {totalProductReducer} from "../../redux/reducer/reducer"
-import {individualProductAction, productAction} from "../../redux/action/index"
+import {totalProductReducer, displayProductReducer, filterProductByCityReducer} from "../../redux/reducer/reducer"
+import {individualProductAction, productAction, displayProductAction, countryListAction} from "../../redux/action/index"
 import {useSelector, useDispatch} from "react-redux"
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
@@ -49,7 +50,7 @@ import ProductCards from "../../Components/ProductCard/ProductCards";
 import Skeleton from "../../Components/skeleton/SkeletonPattern";
 import SkeletonPattern from "../../Components/skeleton/SkeletonPattern";
 import { fontWeight } from "@mui/system";
-
+import { Parser } from 'html-to-react'
 
 
 
@@ -57,8 +58,11 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-const minDistance = 10;
+const minDistance = 20;
 const Base_url = process.env.REACT_APP_Axios_Base_urls
+
+
+
 
 const DashBoard = () => {
 
@@ -66,9 +70,15 @@ const DashBoard = () => {
 
   const navigate = useNavigate();
   const [logoutRender, setlogoutRender] = useState(true)
-
-  const myState = useSelector((state) => state.totalProductReducer);
+  const totalProductList = useSelector((state) => state.totalProductReducer)
+  const allProductList = useSelector((state) => state.displayProductReducer) 
+  const selectedCity = useSelector((state) => state.filterProductByCityReducer) 
+  
+ 
   const dispatch = useDispatch()
+  const [minPrice, setMInPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(10)
+  const [listOfCountries, setListOfCountries] = useState([])
   
 
   // const [arts_culture, setArts_culture] = useState(true);
@@ -123,6 +133,9 @@ const DashBoard = () => {
     } else {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
+
+    const filterElements = totalProductList.filter(item => item.price >= newValue[0] && item.price <= newValue[1] )
+    dispatch(displayProductAction(filterElements))
   };
 
   const handleDateTimeChange = (newValue) => {
@@ -139,11 +152,43 @@ const productClicked = (item) => {
 }
 
 
+const handleRadioGroupChange = (e) => {
+  console.log(e)
+  let filterElements 
+  if(e.target.value == "five"){
+    filterElements = totalProductList.filter(item => item.stars >= 5)
+  }else if(e.target.value == "four"){
+    filterElements = totalProductList.filter(item => item.stars >= 4)    
+  }else if(e.target.value == "three"){
+    filterElements = totalProductList.filter(item => item.stars >= 3)        
+  }else if(e.target.value =="two"){
+    filterElements = totalProductList.filter(item => item.stars >= 2)            
+  }else if(e.target.value == "one"){
+    filterElements = totalProductList.filter(item => item.stars >= 1)                
+  }
+  dispatch(displayProductAction(filterElements))
+}
+
+
+
+const handleRadioDurationChange = (e) => {
+  let filterElements 
+  if(e.target.value == "Up to 1 hour"){
+    filterElements = totalProductList.filter(item => item.duration > 1)
+  }else if(e.target.value == "1 to 4 hours"){
+    filterElements = totalProductList.filter(item => item.duration > 4)
+  }else if(e.target.value == "4 hours to 1 day"){
+    filterElements = totalProductList.filter(item => item.duration > 6)
+  }
+  dispatch(displayProductAction(filterElements))
+}
+
+
+
 
 const fetchAllTourProducts = async () => {
   let options = {
     url:`${Base_url}/tour/allProducts`,
-    // url:`http://localhost/8080/tour/allProducts`,
     method:"GET",
     headers:{
       "content-type":"application/json",
@@ -154,6 +199,34 @@ const fetchAllTourProducts = async () => {
   try{
     let {data} = await axios(options)
     dispatch(productAction(data))
+    let min = data[0].price
+    let max = data[0].price
+    let cityObj = {}
+    let arr = []
+    const filterElements = data.filter(item => {
+      if(min > item.price){
+        min = item.price
+      }
+      if(item.price > max){
+        max = item.price
+      }
+      if(item.city in cityObj){
+      
+      }else{
+        cityObj[item.city] = item.city
+        arr.push(item.city)
+      }
+      if(selectedCity == ""){
+        return item
+      }
+      if(item.city.startsWith(selectedCity)){
+        return item
+      }
+    })
+    setMInPrice(min)
+    setMaxPrice(max)
+    dispatch(displayProductAction(filterElements))
+    dispatch(countryListAction(arr))
   }catch(error){
 
   }
@@ -163,12 +236,12 @@ const fetchAllTourProducts = async () => {
 
 useEffect(()=>{
   fetchAllTourProducts()
-},[])
-
-
-useEffect(()=>{
-  
 },[logoutRender])
+
+
+// useEffect(()=>{
+  
+// },[logoutRender])
 
 
 
@@ -304,7 +377,7 @@ useEffect(()=>{
                 {/* popular filters */}
                 <Box className="popular filter"
                 sx={{
-                  display:"flex",
+                  display:"none",
                   flexDirection:"column",
                   rowGap:3
                 }}
@@ -637,15 +710,15 @@ useEffect(()=>{
                         display: "flex",
                         justifyContent: "space-between",
                       }}
-                      onClick={() => {
-                        if (secondTourSightSeeingState == null) {
-                          setSecondTourSightSeeingState("");
-                          setTours_sightseeing(!tours_sightseeing);
-                        } else {
-                          setSecondTourSightSeeingState(null);
-                          setTours_sightseeing(!tours_sightseeing);
-                        }
-                      }}
+                      // onClick={() => {
+                      //   if (secondTourSightSeeingState == null) {
+                      //     setSecondTourSightSeeingState("");
+                      //     setTours_sightseeing(!tours_sightseeing);
+                      //   } else {
+                      //     setSecondTourSightSeeingState(null);
+                      //     setTours_sightseeing(!tours_sightseeing);
+                      //   }
+                      // }}
                     >
                       <Typography
                         sx={{
@@ -1507,9 +1580,11 @@ useEffect(()=>{
                     getAriaLabel={() => "Minimum distance"}
                     value={value1}
                     onChange={handleChange1}
-                    valueLabelDisplay="off"
+                    valueLabelDisplay="on"
                     getAriaValueText={valuetext}
                     disableSwap
+                    min={minPrice}
+                    max={maxPrice}
                     sx={{
                       color:"blue",
                     }}
@@ -1526,55 +1601,64 @@ useEffect(()=>{
                 <Divider />
 
                 {/* duration lfilter */}
-                <Box className="durationFilter"
-                sx={{
-                  display:"flex",
-                  flexDirection:"column",
-                  rowGap:3
-                }}
-                >
-                  <Typography
-                  sx={{
-                    fontSize:"16px",
-                    fontWeight:"bold"
-                  }}
-                  >Duration</Typography>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox color="success" />}
-                      label={<Typography sx={{fontSize:"14px"}}>Up to 1 hour</Typography>}
-                    />
-                    <FormControlLabel
-                      control={<Checkbox color="success" />}
-                      label={<Typography sx={{fontSize:"14px"}}>1 to 4 hours</Typography>}
-                    />
-                    <FormControlLabel
-                      control={<Checkbox color="success" />}
-                      label={<Typography sx={{fontSize:"14px"}}>4 hours to 1 day</Typography>}
-                    />
-                    <FormControlLabel
-                      disabled
-                      control={<Checkbox />}
-                      label={<Typography sx={{fontSize:"14px"}}>1 to 3 days</Typography>}
-                      sx={{
-                        "&:hover": { cursor: "not-allowed" },
-                      }}
-                    />
-                    <FormControlLabel
-                      disabled
-                      control={<Checkbox />}
-                      label={<Typography sx={{fontSize:"14px"}}>3+ days</Typography>}
-                      sx={{
-                        "&:hover": { cursor: "not-allowed" },
-                      }}
-                    />
-                  </FormGroup>
-                </Box>
+<FormControl>
+           <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+    onChange={handleRadioDurationChange}
+  >
+    <FormControlLabel value="Up to 1 hour" control={<Radio color="success" />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+     <Typography  sx={{ fontSize: "14px" }}>Up to 1 hour</Typography>
+    </Box>}
+    />
+    <FormControlLabel value="1 to 4 hours" control={<Radio  color="success"  />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Typography sx={{ fontSize: "14px" }}>1 to 4 hours</Typography>
+    </Box>}
+     />
+    <FormControlLabel value="4 hours to 1 day" control={<Radio  color="success" />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Typography sx={{ fontSize: "14px" }}>4 hours to 1 day</Typography>
+      </Box>}
+      />
+    {/* <FormControlLabel value="1 to 3 days" control={<Radio  color="success"  />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Typography sx={{ fontSize: "14px" }}>1 to 3 days</Typography>
+      </Box>}
+      />
+    <FormControlLabel value="3+ days" control={<Radio  color="success" />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Typography sx={{ fontSize: "14px" }}>3+ days</Typography>
+      </Box>}
+      /> */}
+  </RadioGroup>
+                  </FormControl>
 
-                <Divider />
+
+
+
+
+                {/* <Divider /> */}
 
                 {/* Time of day */}
-                <Box className="TimeOfDay"
+                {/* <Box className="TimeOfDay"
                 sx={{
                   display:"flex",
                   flexDirection:"column",
@@ -1591,11 +1675,11 @@ useEffect(()=>{
                       control={<Checkbox color="success" />}
                       label={<Typography sx={{fontSize:"14px"}}>12pm—5pm</Typography>}
                       />
-                    <FormControlLabel control={<Checkbox />} 
+                    <FormControlLabel control={<Checkbox color="success"/>} 
                       label={<Typography sx={{fontSize:"14px"}}>5pm—12am</Typography>}
                     />
                   </FormGroup>
-                </Box>
+                </Box> */}
 
                 <Divider />
 
@@ -1650,12 +1734,13 @@ useEffect(()=>{
                     </Box>
                   </Box> */}
                   <FormControl>
-  <RadioGroup
+           <RadioGroup
     aria-labelledby="demo-radio-buttons-group-label"
     defaultValue="female"
     name="radio-buttons-group"
+    onChange={handleRadioGroupChange}
   >
-    <FormControlLabel value="five" control={<Radio color="success"/>} 
+    <FormControlLabel value="five" control={<Radio color="success" />} 
     label={ <Box
       className="4star"
       sx={{ display: "flex", alignItems: "center" }}
@@ -1663,7 +1748,7 @@ useEffect(()=>{
       <Rating name="read-only" value={5} readOnly sx={{fontSize:"22px"}}/>
     </Box>}
     />
-    <FormControlLabel value="four" control={<Radio  color="success"/>} 
+    <FormControlLabel value="four" control={<Radio  color="success"  />} 
     label={ <Box
       className="4star"
       sx={{ display: "flex", alignItems: "center" }}
@@ -1672,7 +1757,7 @@ useEffect(()=>{
       <Typography sx={{ fontSize: "14px" }}>& up</Typography>
     </Box>}
      />
-    <FormControlLabel value="three" control={<Radio  color="success"/>}
+    <FormControlLabel value="three" control={<Radio  color="success" />}
       label={ <Box
         className="4star"
         sx={{ display: "flex", alignItems: "center" }}
@@ -1681,7 +1766,7 @@ useEffect(()=>{
         <Typography sx={{ fontSize: "14px" }}>& up</Typography>
       </Box>}
       />
-    <FormControlLabel value="two" control={<Radio  color="success"/>}
+    <FormControlLabel value="two" control={<Radio  color="success"  />}
       label={ <Box
         className="4star"
         sx={{ display: "flex", alignItems: "center" }}
@@ -1690,7 +1775,7 @@ useEffect(()=>{
         <Typography sx={{ fontSize: "14px" }}>& up</Typography>
       </Box>}
       />
-    <FormControlLabel value="one" control={<Radio  color="success"/>}
+    <FormControlLabel value="one" control={<Radio  color="success" />}
       label={ <Box
         className="4star"
         sx={{ display: "flex", alignItems: "center" }}
@@ -1700,7 +1785,7 @@ useEffect(()=>{
       </Box>}
       />
   </RadioGroup>
-</FormControl>
+                  </FormControl>
                 </Box>
 
                 <Divider />
@@ -1708,7 +1793,7 @@ useEffect(()=>{
                 {/* Specials */}
                 <Box className="Specials"
                 sx={{
-                  display:"flex",
+                  display:"none",
                   flexDirection:"column",
                   rowGap:3
                 }}
@@ -1754,7 +1839,7 @@ useEffect(()=>{
                     <FormControlLabel
                       disabled
                       control={<Checkbox color="success" />}
-                      label={<Typography sx={{fontSize:"14px"}}>New on Travel</Typography>}
+                      label={<Typography sx={{fontSize:"14px"}}>New on Mekatourizm</Typography>}
                       sx={{
                         "&:hover": { cursor: "not-allowed" },
                       }}
@@ -1778,21 +1863,21 @@ useEffect(()=>{
                 <Typography sx={{
                   fontSize:{xs:"14px",md:"14px"}
                   }}
-                >{myState.length} results</Typography>
+                >{allProductList.length} results</Typography>
               </Box>
               {/* <Box
                 className="travelData"
                 sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
               > */}
                 {
-                  myState.length == 0 ? <SkeletonPattern />
+                  allProductList.length == 0 ? <SkeletonPattern />
                   :<Box
                   className="travelData"
                   sx={{ display: "flex", flexDirection: "column", rowGap: 2,
                   width:"100%",
                   }}>
                     {
-                     myState.map((item,index) => {
+                     allProductList.map((item,index) => {
                        return  <ProductCards  key={index} item={item}/>
                       })
                     }

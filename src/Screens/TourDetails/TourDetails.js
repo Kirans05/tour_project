@@ -1,8 +1,12 @@
 import {
   Alert,
   Box,
+  Breadcrumbs,
   Button,
   Divider,
+  List,
+  ListItem,
+  ListSubheader,
   Menu,
   MenuItem,
   Rating,
@@ -10,8 +14,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../HeaderComponents/Header";
+import "./TourDeatils.css"
 import Image1 from "../../assets/images/img1.webp";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { DesktopDatePicker, LocalizationProvider, MonthPicker } from "@mui/x-date-pickers";
@@ -29,15 +34,15 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { display } from "@mui/system";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {useSelector,useDispatch} from "react-redux"
-import {addTravelMembers, booking_date_day} from "../../redux/reducer/reducer"
-import {addChild, removeChild, addAdults, removeAdults, tourBookingDate} from "../../redux/action/index"
+import {addTravelMembers, booking_date_day, cratItemReducer, singleProductReducer} from "../../redux/reducer/reducer"
+import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, cartItemAction} from "../../redux/action/index"
 import CloseIcon from "@mui/icons-material/Close";
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import SearchIcon from "@mui/icons-material/Search";
@@ -52,6 +57,12 @@ import Travel10 from "../../assets/images/travel10.jpg";
 import Travel11 from "../../assets/images/travel11.jpg";
 import Travel12 from "../../assets/images/travel312.jpg";
 import ImagesLists from "../../Components/ImagesList/ImagesLists";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import EmailIcon from '@mui/icons-material/Email';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Footer from "../FooterComponents/Footer";
+import { Parser } from 'html-to-react'
+
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -59,27 +70,44 @@ let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Trav
 
 let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,Travel11]
 
+
+
+
+
+
+
+let datavalues = ` 
+
+
+`
+
 const TourDetails = () => {
 
-
   const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
+
+  const [coopyState, setCopyState] = useState({
+    value: `${window.location.href}`,
+    copied: false,
+  })
+
 
   // redux states and dispatch functions
   const memberPresentstate = useSelector((state) => state.addTravelMembers)
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const singleTourDetails = useSelector((state) => state.singleProductReducer)
+  const cartItems = useSelector((state) => state.cratItemReducer)
   const dispatch = useDispatch()
 
 
   const navigate = useNavigate();
   const [value, setValue] = React.useState(new Date());
-  const [peopleCount, setPeopleCount] = useState("2 Adults");
   const [Availability, setAvailability] = useState(false);
-  const [menuVisible, setmenuVisible] = useState(false);
   const [FirstTour_sightseeingState, setFirstTour_sightseeingState] =
     useState(null);
     const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = useState("")
+  const [wishListitem, setwishListItem] = useState(false)
+  const [reRender, setReRender] = useState(false)
 
   const handleSnakBarClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -92,19 +120,71 @@ const TourDetails = () => {
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElShare, setAnchorElShare] = React.useState(null);
   const open = Boolean(anchorEl);
+  const openShare = Boolean(anchorElShare);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+
+const handleShareClickOption = (event) => {
+  setAnchorElShare(event.currentTarget);
+}
+
+  const handleShareOptions = () => {
+    setAnchorElShare(null);
+  }
+
   const handleChange = (newValue) => {
     dispatch(tourBookingDate(newValue))
-
     setValue(newValue);
   };
+
+
+  const checkWishListAdded = () => {
+      let filterElement = cartItems.filter(product => product.id == singleTourDetails.id)
+      if(filterElement.length){
+        setwishListItem(true)
+      }else{
+        setwishListItem(false)
+      }
+  }
+
+
+const addItemToWishList = () => {
+  if (cartItems.length == 0) {
+    //  adding cart item for first time
+    dispatch(cartItemAction([singleTourDetails]));
+  } else {
+    //  checking cartItem if it is present or not
+    let filterProduct = cartItems.filter(
+      (product) => product.id == singleTourDetails.id
+    );
+    if (filterProduct.length == 0) {
+      //  if it is not present we are adding it
+      dispatch(cartItemAction([...cartItems, singleTourDetails]));
+    } else {
+      //  if it is present we are removing it
+      let filterCurrentItem = cartItems.filter(
+        (product) => product.id != singleTourDetails.id
+      );
+      dispatch(cartItemAction(filterCurrentItem));
+    }
+  }
+  setReRender(!reRender)
+}
+
+
+useEffect(()=>{
+  checkWishListAdded()
+},[reRender])
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -118,6 +198,18 @@ const TourDetails = () => {
         }}
       >
         <Header />
+        <Box
+        sx={{paddingLeft:"6%"}}
+        >
+        <Breadcrumbs aria-label="breadcrumb">
+            <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
+            onClick={()=>navigate("/")}
+            >DashBoard</Typography>
+            <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
+            onClick={()=>navigate("/")}
+            >Tours, Sightseeing & Cruises</Typography>
+        </Breadcrumbs>
+        </Box>
         <Box
           className="tourDetailsBox"
           sx={{
@@ -159,7 +251,7 @@ const TourDetails = () => {
               >
                 <Rating
                   name="read-only"
-                  value={4}
+                  value={singleTourDetails.stars}
                   readOnly
                   sx={{ fontSize: { xs: "20px", md: "20px" } }}
                 />
@@ -180,9 +272,11 @@ const TourDetails = () => {
                   columnGap: 2,
                 }}
               >
+                {/* share options */}
                 <Box
                   className="share"
                   sx={{ display: "flex", flexDirection: "row", columnGap: 1 }}
+                  onClick={handleShareClickOption}
                 >
                   <IosShareIcon />
                   <Typography
@@ -194,11 +288,93 @@ const TourDetails = () => {
                     Share
                   </Typography>
                 </Box>
+
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorElShare}
+                    open={openShare}
+                    onClose={handleShareOptions}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    sx={{
+                      marginTop:{xs:"5px",md:"5px"}
+                    }}
+                  >
+                    <MenuItem
+                      sx={{
+                        width: {xs:"100px",md:"150px"},
+                        "&:hover": {
+                          cursor: "pointer",
+                          backgroundColor: "white",
+                        },
+                      }}
+                    >
+                      <Box
+                        className="copyLinkOptions"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-start",
+                          width: { xs: "100%", md: "100%" },
+                          columnGap:1
+                        }}
+                      >
+                        <ContentCopyIcon />
+                        <CopyToClipboard text={coopyState.value}
+          onCopy={() => setCopyState({...coopyState,copied: true})}>
+                        <Typography>Copy Link</Typography>
+          </CopyToClipboard>
+            
+                      </Box>
+                    </MenuItem>
+                    {/* <MenuItem
+                      sx={{
+                        width: {xs:"100px",md:"150px"},
+                        "&:hover": {
+                          cursor: "pointer",
+                          backgroundColor: "white",
+                        },
+                      }}
+                    >
+                    <Box
+                        className="copyLinkOptions"
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-start",
+                          width: { xs: "100%", md: "100%" },
+                          columnGap:1
+                        }}
+                      >
+                        <EmailIcon />
+                        <Typography>Email</Typography>
+                     
+                      </Box>
+                    </MenuItem> */}
+                  </Menu>
+
+
+
+                    {/* save to wishlist options */}
                 <Box
                   className="saveToWishList"
-                  sx={{ display: "flex", flexDirection: "row", columnGap: 1 }}
+                  sx={{ display: "flex", flexDirection: "row", columnGap: 1,
+                "&:hover":{cursor:"pointer"}
+                }}
+                  onClick={addItemToWishList}
                 >
-                  <FavoriteBorderIcon />
+                  <Box className="wishListIcon">
+                  <FavoriteBorderIcon  sx={{
+                    display:!wishListitem ? "flex" : "none"
+                  }}/>
+                  <FavoriteIcon  sx={{
+                    color:"red",
+                    display:wishListitem ? "flex" : "none"
+                  }}/>
+                  </Box>
                   <Typography
                     sx={{
                       "&:hover": { cursor: "pointer" },
@@ -425,7 +601,7 @@ const TourDetails = () => {
                             }}
                            
                             onClick={()=>{
-                              if(memberPresentstate.adult > 2){
+                              if(memberPresentstate.adult > 1){
                                 dispatch(removeAdults(1))
                               }
                             }}
@@ -589,6 +765,9 @@ const TourDetails = () => {
             padding: { xs: "2% 6% 2% 6%", md: "2% 6% 2% 6%" },
           }}
         >
+
+
+          {/* left part */}
           <Box
             className="lefthalf"
             sx={{
@@ -601,7 +780,7 @@ const TourDetails = () => {
             <Box
               className="LondonTours"
               sx={{
-                display: "flex",
+                display: "none",
                 flexDirection: "row",
                 justifyContent: "flex-start",
                 columnGap: 1,
@@ -1595,6 +1774,9 @@ const TourDetails = () => {
               <KeyboardArrowDownIcon />
             </Box> */}
           </Box>
+
+
+          {/* right part */}
           <Box className="rightHalf"
             sx={{
               display: "flex",
@@ -1683,12 +1865,12 @@ const TourDetails = () => {
                       </Box>
                       <Typography>per group (up to 8)</Typography>
                     </Box>
-                    <Button variant="outlined" color="warning">
+                    {/* <Button variant="outlined" color="warning">
                       Reserve Now & Pay Later
-                    </Button>
+                    </Button> */}
                     <Button
                       variant="contained"
-                      color="warning"
+                      color="primary"
                       onClick={() => navigate("/checkoutPage")}
                     >
                       Book Now
@@ -1698,7 +1880,7 @@ const TourDetails = () => {
                 <Box
                   className="secondHalf"
                   sx={{
-                    display: "flex",
+                    display: "none",
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1905,7 +2087,15 @@ const TourDetails = () => {
               </Box>
             </Box>
 
-            {/* booking averview */}
+           
+            {/* <Box
+             sx={{
+              display: "flex",
+              flexDirection: "column",
+              rowGap: { xs: 3,md:10 },
+              width: { xs: "100%", md: "100%" },
+            }}
+            >
             <Box
               className="overView"
               sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
@@ -1918,18 +2108,15 @@ const TourDetails = () => {
               >
                 Overview
               </Typography>
-              <Box className="overViewDetails">
+              <Box className="overViewDetails"
+              sx={{
+                display:"flex",
+                flexDirection:"column",
+                rowGap:1
+              }}
+              >
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  Avoid the hassle of renting a car to see rural England’s
-                  highlights with help from this full-day tour which includes
-                  round-trip transport from London. Choose from two options to
-                  find what best suits your preferences, and travel by
-                  air-conditioned coach bus with onboard Wi-Fi. You can either
-                  combine a visit to Stonehenge with a pub lunch in Lacock and a
-                  walking tour of Windsor, or opt to visit both Windsor Castle
-                  and Stonehenge with a break for a traditional English pub
-                  lunch. Both options also pass by the city of Bath, hometown of
-                  Jane Austen.
+                Immerse yourself in the spellbinding world of Harry Potter™ on this trip to the Warner Bros. Studio Tour London. Travel to the fabled Harry Potter studios by air-conditioned coach from central London, and on arrival, trace the footsteps of Hogwarts’ student wizards at leisure. Behold original sets such as Platform 9 ¾ and Diagon Alley; see the Hogwarts Express steam train; ride a broomstick like the cast; and uncover the behind-the-scenes secrets of the movies’ on-screen wizardry. This Harry Potter studio London tour includes round-trip coach transport and entrance tickets.
                 </Typography>
                 <Box className="unOrderList">
                   <Box
@@ -1942,7 +2129,7 @@ const TourDetails = () => {
                   >
                     <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Visit Stonehenge with a guide
+                    Admission to Warner Bros. Studio Tour London - The Making of Harry Potter
                     </Typography>
                   </Box>
                   <Box
@@ -1955,8 +2142,7 @@ const TourDetails = () => {
                   >
                     <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Sit down for lunch (or dinner) at a traditional English
-                      pub
+                    Step into the magical world of Harry Potter and see original sets, props, and costumes
                     </Typography>
                   </Box>
                   <Box
@@ -1969,8 +2155,21 @@ const TourDetails = () => {
                   >
                     <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Enjoy a coach tour of the beautiful Georgian city of Bath,
-                      home of the famous author Jane Austen
+                    Walk down Diagon Alley and see shop fronts such as Ollivanders wand shop and Gringotts Bank
+                    </Typography>
+                  </Box>
+                
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      columnGap: 1,
+                    }}
+                  >
+                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
+                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                    Snap photos of Platform 9 ¾ and see steam billowing from the original Hogwarts Express
                     </Typography>
                   </Box>
                   <Box
@@ -1983,8 +2182,20 @@ const TourDetails = () => {
                   >
                     <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Go for a walking tour of Windsor or visit Windsor Castle
-                      (depending on selection chosen)
+                    Explore Dumbledore’s office and discover never-before-seen treasures.
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      columnGap: 1,
+                    }}
+                  >
+                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
+                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+                    Learn how J.K. Rowling's books were brought to life on screen using special effects, animatronics, and life-sized models
                     </Typography>
                   </Box>
                 </Box>
@@ -2003,13 +2214,10 @@ const TourDetails = () => {
                   Why Travellers Choose This Tour
                 </Typography>
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  In addition to the multiple sightseeing stops, this tour
-                  includes lunch in a traditional, 14th-century pub.
+                Numerous daily departure times are available, making this tour a flexible option for Harry Potter fans.
                 </Typography>
               </Box>
             </Box>
-
-            {/* whatss included */}
             <Box
               className="What's Included"
               sx={{ display: "flex", flexDirection: "column", rowGap: 1 }}
@@ -2038,8 +2246,7 @@ const TourDetails = () => {
                   >
                     <CheckIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Visit Stonehenge, an UNESCO World Heritage Site (if option
-                      selected)
+                    Entry ticket to Harry Potter Warner Bros Studio Tour London
                     </Typography>
                   </Box>
                   <Box
@@ -2053,21 +2260,7 @@ const TourDetails = () => {
                   >
                     <CheckIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Entry to Windsor Castle (if option selected)
-                    </Typography>
-                  </Box>
-                  <Box
-                    className="3rdItem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <CheckIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Panoramic tour of Georgian city of Bath
+                    Return transfers in air-conditioned coach
                     </Typography>
                   </Box>
                 </Box>
@@ -2089,7 +2282,7 @@ const TourDetails = () => {
                   >
                     <ClearIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Hotel pick-up & drop-off
+                    Food and drinks
                     </Typography>
                   </Box>
                   <Box
@@ -2103,7 +2296,7 @@ const TourDetails = () => {
                   >
                     <ClearIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Gratuities
+                    Gratuities
                     </Typography>
                   </Box>
                   <Box
@@ -2117,27 +2310,214 @@ const TourDetails = () => {
                   >
                     <ClearIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Entry to Roman Baths
+                    Digital guide available in 10 different languages at additional cost
                     </Typography>
                   </Box>
                 </Box>
               </Box>
-              <Typography
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  "&:hover": { cursor: "pointer", textDecoration: "underLine" },
-                }}
-              >
-                see 3 More
-              </Typography>
             </Box>
+            <Box className="Meeting And Pickup"
+            sx={{
+              display:"flex",
+              flexDirection:"column",
+              alignItems:"flex-start",
+              rowGap:3
+            }}
+            >
+                <Typography 
+                sx={{
+                  fontSize:{xs:"18px",md:"20px"},
+                  fontWeight:"bold"
+                }}
+                >Meeting And Pickup</Typography>
+
+                <Box className="meeting point"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:2
+                }}
+                >
+                  <Typography
+                  sx={{
+                    fontWeight:"bold",
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                  >Meeting point</Typography>
+                  <Box>
+                    <Typography
+                    sx={{
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                    >Victoria Coach Station</Typography>
+                    <Typography
+                    sx={{
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                    >Victoria Coach Station, 164 Buckingham Palace Rd, London SW1W 9TP, UK</Typography>
+                  </Box>
+                  <Typography
+                  sx={{
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                  >Located approximately 7 minutes walk from Victoria Underground and Railway station. Tour departs inside the building at the following departure gate. Boarding starts 15 minute before the departure stated below. 8:15am - Gate 19 9:15am, 10:15am, 11:15am, 12:15pm & 13:45pm - Gate 0</Typography>
+                </Box>
+                <Box className="endPoint"
+                  sx={{
+                    display:"flex",
+                    flexDirection:"column",
+                    rowGap:2
+                  }}
+                >
+                  <Typography
+                  sx={{
+                    fontSize: { xs: "14px", md: "16px" },
+                    fontWeight:"bold"
+                  }}
+                  >End Point</Typography>
+                  <Box className="endPointDetails"
+                    sx={{
+                      display:"flex",
+                      flexDirection:"column",
+                    }}
+                  >
+                    <Typography
+                    sx={{
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                    >Victoria Station</Typography>
+                    <Typography
+                    sx={{
+                    fontSize: { xs: "14px", md: "16px" }
+                  }}
+                    >Victoria St, London SW1E 5ND, UK</Typography>
+                  </Box>
+                 
+                </Box>
+            </Box>
+            </Box> */}
+
+
+            {/* over  view */}
+            {/* <Box sx={{display:"flex",flexDirection:"column",rowGap:3}}>
+              <Typography variant="h4" >Overview</Typography>
+              <Typography fontSize={"18px"}>Discover the capital city of the United Arab Emirates on this guided all-day tour from Dubai. Along the way, pass by the Jebel Ali Port, the largest man-made port in the world. In Abu Dhabi, visit the Grand Mosque, the Heritage Village, and Emirates Palace. Stop at Marian Mall for lunch and browse the date and carpet markets. Tour also includes a stop at Ferrari World for photos.</Typography>
+              <List sx={{ listStyleType: 'disc',paddingLeft:"20px" }}>
+      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>VThis tour is ideal for first-time visitors to the UAE
+</Typography></ListItem>
+      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Relax on the drive to Abu Dhabi (less than two hours from Dubai)
+</Typography>
+</ListItem>
+      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Enjoy time to shop for souvenirs and wares</Typography>
+</ListItem>
+      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Hotel pickup and drop-off is included</Typography>
+</ListItem>
+               </List>
+               <Box sx={{display:"flex",flexDirection:"column",rowGap:2}}>
+                <Typography variant="h4">What's Included</Typography>
+                <Box sx={{display:"flex",justifyContent:"space-between",width:"100%"}}>
+                  <Box width={"50%"}>
+                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Pick-up & Drop-off from your Hotel / Residence</Typography>
+                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Sheikh Zayed Grand Mosque Visit</Typography>
+                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Abu Dhabi Corniche
+</Typography>
+                  </Box>
+                  <Box width={"50%"}>
+                    <Typography fontSize={"16px"}>❌&nbsp; &nbsp; Gratuities</Typography>
+                    <Typography fontSize={"16px"}>❌&nbsp; &nbsp; Hotel transfers</Typography>
+                  </Box>
+                </Box>
+               </Box>
+               <Typography variant="h4">Meeting And Pickup</Typography>
+               <Typography variant="h5">Meeting point</Typography>
+               <Box>
+               <Typography fontSize={"18px"}>Jumeirah Beach Hotel</Typography>
+              <Typography fontSize={"18px"}>Jumeirah St - Umm Suqeim - Umm Suqeim 3 - Dubai - United Arab Emirates</Typography>
+               </Box>
+              <Typography fontSize={"18px"}>Located in: Jumeirah Beach Hotel Address: Inside Burj Al Arab, Ticket Lounge - Umm Suqeim - Umm Suqeim 3 - Dubai Note: Head to Jumeirah Beach Hotel where valet parking is available for the Inside Burj Al Arab tour</Typography>
+              <Typography variant="h5">End point</Typography>
+              <Box>
+              <Typography fontSize={"18px"}>This activity ends back at the meeting point.</Typography>
+              </Box>
+            </Box> */}
+
+
+
+{/* <div dangerouslySetInnerHTML={{ __html: singleTourDetails.description }}></div> */}
+
+            {/* <>
+              {singleTourDetails.description}
+            </> */}
+
+<Box >
+      {Parser().parse(singleTourDetails.description)}
+    </Box>
+
+{/* {
+  singleTourDetails.description
+} */}
+
+
+
+            {/* smaple documennt */}
+            {/* <div>
+              <h2 className="overView-h2">Overview</h2>
+              <p className="overView-p">Visit some of the top attractions outside of London on this day trip to Stonehenge, Windsor Castle and the historic town of Bath. Start at Windsor Castle, home to the British royal family, for a tour of the State Apartments and St George’s Chapel, and then continue west of London to Salisbury, home of the mysterious Stonehenge rock formations. Finally, arrive in Bath, known for its elegant Georgian architecture and Roman baths. All admission tickets are included in the tour price. Please note: Windsor Castle is closed on Tuesdays and Wednesdays</p>
+              <ul className="overView-ul">
+                <li>Guided day trip from London to Windsor Castle, Stonehenge and Bath</li>
+                <li>Explore St George's Chapel and the State Apartments at Windsor Castle</li>
+                <li>Tour the mysterious site of Stonehenge with an exclusive interactive map & VOX audio guide</li>
+                <li>Take a panoramic tour of Georgian Bath with a guide
+                </li>
+                <li>Visit the Roman Baths with free audio guide, a well-preserved public bathing pool offering an insight into life during the Roman era</li>
+                <li>Includes first-class luxury coach with FREE Wi-Fi and the services of a guide</li>
+                              </ul>
+              <h3 className="overView-whyTravellers">Why Travellers Choose This Tour</h3>
+              <p className="overView-p">Visit Stonehenge, Windsor Castle, and Bath from London without worrying about transport or entry fees for attractions—you can choose from tour options with two or all entry fees included.</p>
+              <h3 className="overView-whyTravellers">What's Included</h3>
+              <div className="includedDiv">
+                <div className="leftDivIncluded">
+                  <p className="included-p">✔ &nbsp; &nbsp; Superior Coach, Wi-Fi and USB Charging On-board</p>
+                  <p className="included-p">✔ &nbsp; &nbsp; Expert guide</p>
+                  <p className="included-p">✔ &nbsp; &nbsp; Admission to Windsor Castle (if option selected)</p>
+                </div>
+                <div className="rightDivIncluded">
+                  <p className="included-p">❌&nbsp; &nbsp; Hotel pick-up and drop-off</p>
+                  <p className="included-p">❌&nbsp; &nbsp; Gratuities</p>
+                  <p className="included-p">❌&nbsp; &nbsp; Lunch</p>
+                </div>
+              </div>
+
+
+
+              <h2>Meeting And Pickup</h2>
+              <h3 className="meethingPoint">Meeting point</h3>
+              <div>
+              <p className="meething-p">Victoria Coach Station</p>
+              <p className="meething-p">Victoria Coach Station, 164 Buckingham Palace Rd, London SW1W 9TP, UK</p>
+              </div>
+                <p className="moreP">Tour departs at 8 am (boarding at 7.30 am), Victoria Coach Station, Gate 1-5</p>
+                <h3 className="meethingPoint">Start time</h3>
+                <p className="moreP">08:00 am</p>
+                <h3 className="meethingPoint">End point</h3>
+                <div>
+                  <p className="meething-p">Vauxhall Bridge Road</p>
+                  <p className="meething-p">Vauxhall Bridge Rd, Pimlico, London SW1, UK</p>
+                </div>
+            </div> */}
+
+
           </Box>
         </Box>
+
+
+
         <Snackbar open={SnakBarOpen} autoHideDuration={3000} onClose={handleSnakBarClose}>
         <Alert onClose={handleSnakBarClose} severity="warning" sx={{ width: '150%' }}>
         {alertMessage}
         </Alert>
       </Snackbar>
+      <Footer />
       </Box>
     </LocalizationProvider>
   );

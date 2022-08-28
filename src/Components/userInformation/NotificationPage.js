@@ -62,7 +62,7 @@ const NotificationPage = () => {
             alignItems:"center",
             justifyContent:"space-between"
         }}>
-            <Typography>Viator will send you weekly emails with travel inspirations, tips, recommendations and company updates</Typography>
+            <Typography>Mekatourizm will send you weekly emails with travel inspirations, tips, recommendations and company updates</Typography>
             <Switch {...label} defaultChecked color="success" />
         </Box>
     </Box>

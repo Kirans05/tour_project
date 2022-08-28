@@ -91,7 +91,7 @@ const SignUpPage = () => {
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <Typography>or Continue with</Typography>
         </Box>
-        <Box
+        {/* <Box
           className="loginOptions"
           sx={{
             display: "flex",
@@ -125,7 +125,7 @@ const SignUpPage = () => {
               width: { xs: "30px", md: "80px" },
             }}
           />
-        </Box>
+        </Box> */}
         <Box>
           <Typography
           >

@@ -2,12 +2,14 @@ import {
   Box,
   Button,
   FormControlLabel,
+  Menu,
+  MenuItem,
   Radio,
   Rating,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image2 from "../../assets/images/img2.jpg";
 import Travel2 from "../../assets/images/travel2.jpg"
 import Image1 from "../../assets/images/img1.webp";
@@ -38,6 +40,12 @@ import HomeImage3 from "../../assets/images/homePage3.webp"
 import HomeImage4 from "../../assets/images/homePage4.jpg"
 import HomeImage5 from "../../assets/images/homePage5.jpg"
 import HomeImage6 from "../../assets/images/homePage6.jpg"
+import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterProductByCityAction} from "../../redux/action/index"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {totalProductReducer, displayProductReducer, countryListReducer} from "../../redux/reducer/reducer"
+
+
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -48,6 +56,13 @@ let destinationArr = [1,2,3,4,5,6,7,8]
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 const HomePage = () => {
+
+
+
+  const totalProductList = useSelector((state) => state.totalProductReducer)
+  const countryListSuggestions = useSelector((state) => state.countryListReducer)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [dateValue, setDateValue] = useState(new Date());
   const [imageState, setImageState] = useState([HomeImage5, 2]);
   const [dotClicked, setDotClicked] = useState({
@@ -55,7 +70,14 @@ const HomePage = () => {
     second: true,
     third: false,
   });
+  const [searchInputValue, setSearchInputValue] = useState("")
+  const suggestions = ["React", "HTML", "CSS"];
+	const [isFocus, setIsFocus] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
+	const inputRef = useRef();
+
   const handleChange = (newValue) => {
+    dispatch(tourBookingDate(newValue))
     setDateValue(newValue);
   };
 
@@ -84,6 +106,18 @@ const HomePage = () => {
     }
   }, 5000);
 
+
+
+const PlaceSearchHandler = (e) => {
+  setSearchInputValue(e.target.value)
+  
+}
+
+
+
+const showSearchPlace = (item) => {
+
+}
 
 
   const fetchCurrentUserData = async () => {
@@ -200,8 +234,84 @@ const HomePage = () => {
                       outline: "none",
                       border: "none",
                     }}
+                    // onChange={PlaceSearchHandler}
+                    value={searchInputValue}
+                    onChange={(e) => {
+                      setSearchInputValue(e.target.value);
+                    }}
+                    ref={inputRef}
+                    onFocus={() => setIsFocus(true)}
+						    onBlur={() => {
+							if (!isHovered) {
+								setIsFocus(false);
+							}
+						}}
                   />
+
+              <Box >
+
+              </Box>
+
+
+
+
+
                 </Box>
+                {isFocus && (
+					      	<Box
+						              	className="shadow-lg absolute w-full"
+						              	onMouseEnter={() => {
+						              		setIsHovered(true);
+						              	}}
+						              	onMouseLeave={() => {
+						              		setIsHovered(false);
+						              	}}
+                            sx={{
+                              width:{xs:"85%",md:"80%"},
+                              height:{xs:"10vh",md:"10vh"},
+                              position:"absolute",
+                              top:{xs:"60%",md:"65%"},
+                              zIndex:199999,
+                              backgroundColor:"white",
+                              display:"flex",
+                              flexDirection:"column",
+                              backgroundColor:"white",
+                              overflow:"auto",
+                              opacity:1
+                            }}
+						              >
+							{countryListSuggestions.map((suggestion, index) => {
+								const isMatch =
+									suggestion.toLowerCase().indexOf(searchInputValue.toLowerCase()) >
+									-1;
+								return (
+									<Box key={index} >
+										{isMatch && (
+											<Box
+												className="p-5 hover:bg-gray-200 cursor-pointer"
+												onClick={() => {
+													setSearchInputValue(suggestion);
+													inputRef.current.focus();
+                          setIsFocus(false)
+												}}
+                        sx={{"&:hover":{cursor:"pointer"}}}
+											>
+												{suggestion}
+											</Box>
+										)}
+									</Box>
+								);
+							})}
+              	{/* {countryListSuggestions.map((suggestion, index) => {
+                  if(suggestion.startsWith(searchInputValue)){
+                    return <Typography>{suggestion}</Typography>
+                  }
+							})} */}
+						</Box>
+					)}
+
+
+
                 <Box
                   className="datePicker"
                   sx={{
@@ -224,12 +334,24 @@ const HomePage = () => {
                       />
                     )}
                   />
-                  <Button variant="contained" color="success">
+                  <Button variant="contained" color="success"
+                  onClick={()=> {
+                    if(searchInputValue.length == 0){
+
+                    }else{
+                      dispatch(filterProductByCityAction(searchInputValue))
+                      navigate("/")
+                    }
+                  }}
+                  >
                     Search
                   </Button>
                 </Box>
               </Box>
             </Box>
+
+          
+
             <Box
               className="dots"
               sx={{
@@ -728,8 +850,10 @@ const HomePage = () => {
             >
 
               {
-                destinationArr.map((item, index) => {
-                  return <TopDestinations key={index}/>
+                countryListSuggestions.map((item, index) => {
+                  if(index < 8){
+                    return <TopDestinations key={index} item={item}/>
+                  }
                 })
               }
             </Box>

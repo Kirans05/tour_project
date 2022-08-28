@@ -17,6 +17,7 @@ import Travel9 from "../../assets/images/travel9.jpg";
 import Travel10 from "../../assets/images/travel10.jpg";
 import Travel11 from "../../assets/images/travel11.jpg";
 import Travel12 from "../../assets/images/travel312.jpg";
+import { useNavigate } from "react-router-dom";
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -25,6 +26,8 @@ let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Trav
 
 
 const WishListProductCard = ({item}) => {
+
+  const navigate = useNavigate()
 
   const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
   const myCartItems = useSelector((state) => state.cratItemReducer)
@@ -35,12 +38,21 @@ const WishListProductCard = ({item}) => {
     dispatch(cartItemAction(filterdProducts))
   }
 
+
+  const clickHandler = () => {
+    dispatch(individualProductAction(item))
+    navigate("/TourDeatils")
+  }
+
+
+
+
   return (
     <Box className='individualProduct'
     sx={{
       width:{xs:"100%",md:"400px"},
-      maxHeight:{xs:"100%",md:"420px"},
-      minHeight:{xs:"100%",md:"420px"},
+      maxHeight:{xs:"100%",md:"460px"},
+      minHeight:{xs:"100%",md:"460px"},
       border:"2px solid #f0efed",
       "&:hover":{
         boxShadow:"0px 0px 5px 3px #d9d8d7",
@@ -50,6 +62,7 @@ const WishListProductCard = ({item}) => {
       flexDirection:{xs:"row",md:"column"},
       columnGap:{xs:2,md:0},
     }}
+    onClick={clickHandler}
     >
       <Box className='images&AddToWishList'
       sx={{

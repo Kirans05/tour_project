@@ -27,7 +27,7 @@ const AboutPage = () => {
           sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >Viator, a Tripadvisor company, makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!</Typography>
+          >Mekatourizm, a Tripadvisor company, makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!</Typography>
           <Typography
           sx={{
             fontSize:{xs:"16px",md:"18px"}
@@ -43,7 +43,7 @@ const AboutPage = () => {
             fontSize:{xs:"18px",md:"20px"},
             fontWeight:"bold"
           }}
-          >Why choose Viator?</Typography>
+          >Why choose Mekatourizm?</Typography>
           <Box>
             <ul style={{fontSize:"18px"}}>
               <li>Exceptional flexibility You’re in control, with free cancellation and payment options to satisfy any plan or budget.</li>
@@ -62,12 +62,12 @@ const AboutPage = () => {
            sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >As one of the first online marketplaces for things to do, Viator makes it easy for you to grow your business and reach customers worldwide. Get access to market-specific insights and tailored coaching to help your products stand out from the rest. Use our intuitive Experiences Management Centre to spend less time managing your business and more time creating memorable moments.</Typography>
+          >As one of the first online marketplaces for things to do, Mekatourizm makes it easy for you to grow your business and reach customers worldwide. Get access to market-specific insights and tailored coaching to help your products stand out from the rest. Use our intuitive Experiences Management Centre to spend less time managing your business and more time creating memorable moments.</Typography>
           <Typography
            sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >From individual to multi-national operators, Viator is your trusted partner to grow your business and share your passion with the world. Click here to get started.</Typography>
+          >From individual to multi-national operators, Mekatourizm is your trusted partner to grow your business and share your passion with the world. Click here to get started.</Typography>
           <Typography
            sx={{
             fontSize:{xs:"18px",md:"20px"},
@@ -84,12 +84,12 @@ const AboutPage = () => {
             fontSize:{xs:"18px",md:"20px"},
             fontWeight:"bold"
           }}
-          >What does Viator mean?</Typography>
+          >What does Mekatourizm mean?</Typography>
           <Typography
            sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >The word Viator originates from the Latin word viāre and means traveller.</Typography>
+          >The word Mekatourizm originates from the Latin word viāre and means traveller.</Typography>
         </Box>
     </Box>
   )
