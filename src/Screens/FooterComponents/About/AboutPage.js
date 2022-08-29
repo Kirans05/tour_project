@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Header from '../../HeaderComponents/Header'
+import Footer from "../../FooterComponents/Footer"
 
 const AboutPage = () => {
   return (
@@ -12,9 +13,10 @@ const AboutPage = () => {
           flexDirection:"column",
           alignItems:"flex-start",
           justifyContent:"flex-start",
-          padding:{xs:"0%",md:"0% 5% 0% 5%"},
-          width:{xs:"100%",md:"60%"},
-          rowGap:1
+          padding:{xs:"0% 3% 0% 3%",md:"0% 5% 0% 5%"},
+          width:{xs:"90%",md:"60%"},
+          rowGap:1,
+          height:{xs:"160vh",md:"80vh"}
         }}
         >
           <Typography
@@ -27,7 +29,7 @@ const AboutPage = () => {
           sx={{
             fontSize:{xs:"16px",md:"18px"}
           }}
-          >Mekatourizm, a Tripadvisor company, makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!</Typography>
+          >Mekatourizm makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!</Typography>
           <Typography
           sx={{
             fontSize:{xs:"16px",md:"18px"}
@@ -52,45 +54,8 @@ const AboutPage = () => {
               <li>Award-winning support Find a lower price? Have a change in plans? No problem. We’re here to help, 24/7.</li>
             </ul>
           </Box>
-          <Typography
-           sx={{
-            fontSize:{xs:"18px",md:"20px"},
-            fontWeight:"bold"
-          }}
-          >Are you a tour operator?</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"16px",md:"18px"}
-          }}
-          >As one of the first online marketplaces for things to do, Mekatourizm makes it easy for you to grow your business and reach customers worldwide. Get access to market-specific insights and tailored coaching to help your products stand out from the rest. Use our intuitive Experiences Management Centre to spend less time managing your business and more time creating memorable moments.</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"16px",md:"18px"}
-          }}
-          >From individual to multi-national operators, Mekatourizm is your trusted partner to grow your business and share your passion with the world. Click here to get started.</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"18px",md:"20px"},
-            fontWeight:"bold"
-          }}
-          >Are you a travel agent?</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"16px",md:"18px"}
-          }}
-          >Sign up for our Travel Agent Platform here and start earning 8% commissions on all tours and activities you sell on our Travel Agent booking site. You'll get paid monthly and enjoy robust reporting to help you manage your bookings and earnings.</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"18px",md:"20px"},
-            fontWeight:"bold"
-          }}
-          >What does Mekatourizm mean?</Typography>
-          <Typography
-           sx={{
-            fontSize:{xs:"16px",md:"18px"}
-          }}
-          >The word Mekatourizm originates from the Latin word viāre and means traveller.</Typography>
         </Box>
+        <Footer />
     </Box>
   )
 }

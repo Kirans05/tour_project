@@ -2,6 +2,8 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import { RiTyphoonFill } from "react-icons/ri";
 import Header from "../../HeaderComponents/Header";
+import Footer from "../../FooterComponents/Footer"
+
 
 const PrivacyPolicy = () => {
   return (
@@ -14,8 +16,8 @@ const PrivacyPolicy = () => {
         alignItems:"flex-start",
         justifyContent:"flex-start",
         rowGap:2,
-        padding:{xs:"0% 1% 0% 1%",md:"0% 5% 0% 5%"},
-        width:{xs:"98%",md:"50%"}
+        padding:{xs:"0% 3% 0% 3%",md:"0% 5% 0% 5%"},
+        width:{xs:"92%",md:"50%"}
       }}
       >
       <Box
@@ -525,6 +527,7 @@ const PrivacyPolicy = () => {
 
       </Box>
     </Box>
+    <Footer />
     </Box>
   );
 };

@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Header from '../../HeaderComponents/Header'
+import Footer from "../../FooterComponents/Footer"
 
 const TermsAndCondition = () => {
   return (
@@ -13,8 +14,8 @@ const TermsAndCondition = () => {
       alignItems:"flex-start",
       justifyContent:"flex-start",
       rowGap:2,
-      padding:{xs:"0%",md:"0% 5% 0% 5%"},
-      width:{xs:"100%",md:"60%"}
+      padding:{xs:"0% 3% 0% 3%",md:"0% 5% 0% 5%"},
+      width:{xs:"90%",md:"60%"}
      }}
      >
         <Typography
@@ -53,7 +54,6 @@ const TermsAndCondition = () => {
 <li>Content</li>
 <li>Links to Third Party Websites</li>
 <li>Software on the Website</li>
-<li>Copyright and Trademark Notices</li>
 <li>Products and Booking Reservations</li>
 <li>Pricing</li>
 <li>Currency Conversions</li>
@@ -325,7 +325,7 @@ const TermsAndCondition = () => {
         sx={{
         fontSize:{xs:"16px",md:"18px"}
       }}
-        >l. use the Website to violate any third-party right, including any breach of confidence, copyright, trademark, patent, trade secret, moral right, privacy right, right of publicity, or any other intellectual property or proprietary right;</Typography>
+        >l. use the Website to violate any third-party right, including any breach of confidence,  trademark, patent, trade secret, moral right, privacy right, right of publicity, or any other intellectual property or proprietary right;</Typography>
 
         <Typography
         sx={{
@@ -448,7 +448,7 @@ const TermsAndCondition = () => {
        sx={{
         fontSize:{xs:"16px",md:"18px"}
       }}
-      >c. content that may infringe any patent, trademark, trade secret, copyright or other intellectual or proprietary right of any party;</Typography>
+      >c. content that may infringe any patent, trademark, trade secret or other intellectual or proprietary right of any party;</Typography>
 
       <Typography
        sx={{
@@ -589,7 +589,7 @@ const TermsAndCondition = () => {
      sx={{
         fontSize:{xs:"16px",md:"18px"}
       }}
-    >8.2 Any software (including, without limitation, all HTML, XML, Java code and Active X controls) that is made available to download from the Website ("Software") is owned by and is the copyrighted work of Mekatourizm, or Mekatourizm affiliates, or other third parties as identified. Your use of such Software is governed by the terms of the end user license agreement which accompanies, or is included with, the Software ("License Agreement"), if any. You may not install or use any Software that is accompanied by or includes a License Agreement unless you first agree to the License Agreement terms. For any Software made available for download on the Website not accompanied by a License Agreement, we hereby grant to you, the user, a limited, personal, non-transferable license to use the Software for viewing and otherwise using the Website in accordance with these Terms of Use and for no other purpose.</Typography>
+    >8.2 Any software (including, without limitation, all HTML, XML, Java code and Active X controls) that is made available to download from the Website ("Software") is owned by  Mekatourizm, or Mekatourizm affiliates, or other third parties as identified. Your use of such Software is governed by the terms of the end user license agreement which accompanies, or is included with, the Software ("License Agreement"), if any. You may not install or use any Software that is accompanied by or includes a License Agreement unless you first agree to the License Agreement terms. For any Software made available for download on the Website not accompanied by a License Agreement, we hereby grant to you, the user, a limited, personal, non-transferable license to use the Software for viewing and otherwise using the Website in accordance with these Terms of Use and for no other purpose.</Typography>
 
     <Typography
      sx={{
@@ -630,7 +630,7 @@ const TermsAndCondition = () => {
          sx={{
         fontSize:{xs:"16px",md:"18px"}
       }}
-        >9.2 If you are aware of an infringement of either your brand or our brand, click here and follow the Copyright Complaint Policy instructions. We only address messages concerning brand infringement at the email address ta-copyright@tripadvisor.com.</Typography>
+        >9.2 If you are aware of an infringement of either your brand or our brand, click here and follow the Copyright Complaint Policy instructions. </Typography>
     </Box>
 
 
@@ -1198,6 +1198,7 @@ const TermsAndCondition = () => {
     </Box>
 
      </Box>
+     <Footer />
     </Box>
   )
 }

@@ -20,6 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { signUpInfo } from "../../redux/reducer/reducer";
 import axios from "axios"
+import Footer from "../FooterComponents/Footer";
 
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
@@ -1186,6 +1187,7 @@ const SignUpUserDetails = () => {
           </Typography>
         </Box>
       </Box>
+      <Footer />
       <Snackbar
         open={SnakBarOpen}
         autoHideDuration={3000}

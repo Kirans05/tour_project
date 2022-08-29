@@ -42,7 +42,7 @@ import HomeImage5 from "../../assets/images/homePage5.jpg"
 import HomeImage6 from "../../assets/images/homePage6.jpg"
 import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterProductByCityAction} from "../../redux/action/index"
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {totalProductReducer, displayProductReducer, countryListReducer} from "../../redux/reducer/reducer"
 
 
@@ -58,6 +58,7 @@ const Base_url = process.env.REACT_APP_Axios_Base_urls
 const HomePage = () => {
 
 
+  const location = useLocation()
 
   const totalProductList = useSelector((state) => state.totalProductReducer)
   const countryListSuggestions = useSelector((state) => state.countryListReducer)
@@ -75,6 +76,8 @@ const HomePage = () => {
 	const [isFocus, setIsFocus] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 	const inputRef = useRef();
+  const [placesName, setPlacesName] = useState(countryListSuggestions)
+  const [showMenuOptions, setShowMenuOptions] = useState(false)
 
   const handleChange = (newValue) => {
     dispatch(tourBookingDate(newValue))
@@ -107,11 +110,22 @@ const HomePage = () => {
   }, 5000);
 
 
+  const headerSearchHandler = (e) => {
+    setSearchInputValue(e.target.value)
+    let word = e.target.value
+    let filterPlace = countryListSuggestions.filter(item => item.toLowerCase().startsWith(word) )
+    setPlacesName(filterPlace)
+  }
+
+
 
 const PlaceSearchHandler = (e) => {
   setSearchInputValue(e.target.value)
   
 }
+
+
+
 
 
 
@@ -176,7 +190,7 @@ const showSearchPlace = (item) => {
               }}
             />
             <Box
-              className="amazingThings"
+              id="amazingThings"
               sx={{
                 border: "2px solid #f5f2f2",
                 display: "flex",
@@ -222,10 +236,12 @@ const showSearchPlace = (item) => {
                     border: "2px solid #ebf1fa",
                     padding: "2%",
                     backgroundColor: "white",
+                    position:"relative"
                   }}
                 >
                   <SearchIcon />
                   <input
+                  id="mainPagesearch"
                     type={"text"}
                     placeholder={"Las Vegas, London, Paris..."}
                     style={{
@@ -235,29 +251,62 @@ const showSearchPlace = (item) => {
                       border: "none",
                     }}
                     // onChange={PlaceSearchHandler}
-                    value={searchInputValue}
-                    onChange={(e) => {
-                      setSearchInputValue(e.target.value);
-                    }}
-                    ref={inputRef}
-                    onFocus={() => setIsFocus(true)}
-						    onBlur={() => {
-							if (!isHovered) {
-								setIsFocus(false);
-							}
-						}}
+              //       value={searchInputValue}
+              //       onChange={(e) => {
+              //         setSearchInputValue(e.target.value);
+              //       }}
+              //       ref={inputRef}
+              //       onFocus={() => setIsFocus(true)}
+						  //   onBlur={() => {
+							// if (!isHovered) {
+							// 	setIsFocus(false);
+							// }
+						// }}
+            value={searchInputValue}
+            onChange={headerSearchHandler}
+            onClick={()=>setShowMenuOptions(!showMenuOptions)}
                   />
+
+      <Typography
+                sx={{
+                   position:"absolute",
+                   top:"100%",
+                   left:"0px",
+                   zIndex:19999,
+                   width:"100%",
+                   backgroundColor:"white",
+                   height:{xs:placesName.length < 3 ? "fit-content" :"20vh",md:placesName.length < 3 ? "fit-content" :"25vh"},
+                   overflow:"auto",
+                   display:showMenuOptions ? "flex" : "none" ,
+                   flexDirection:"column"
+              }}
+                >
+        {placesName.map((option,index) => (
+                      <MenuItem key={index} value={option}  
+                      onClick={()=>{
+                          dispatch(filterProductByCityAction(option.toLowerCase()))
+                          setSearchInputValue("")
+                        setShowMenuOptions(false)
+                        navigate("/")
+                      }}
+                      >
+                         {option}
+                      </MenuItem>
+                    ))}
+        </Typography>
+
+
 
               <Box >
 
               </Box>
-
-
-
-
-
                 </Box>
-                {isFocus && (
+
+
+
+
+
+                {/* {isFocus && (
 					      	<Box
 						              	className="shadow-lg absolute w-full"
 						              	onMouseEnter={() => {
@@ -287,7 +336,7 @@ const showSearchPlace = (item) => {
 								return (
 									<Box key={index} >
 										{isMatch && (
-											<Box
+											<Typography
 												className="p-5 hover:bg-gray-200 cursor-pointer"
 												onClick={() => {
 													setSearchInputValue(suggestion);
@@ -297,7 +346,7 @@ const showSearchPlace = (item) => {
                         sx={{"&:hover":{cursor:"pointer"}}}
 											>
 												{suggestion}
-											</Box>
+											</Typography>
 										)}
 									</Box>
 								);
@@ -307,8 +356,8 @@ const showSearchPlace = (item) => {
                     return <Typography>{suggestion}</Typography>
                   }
 							})} */}
-						</Box>
-					)}
+						{/* </Box>
+					)} */} 
 
 
 

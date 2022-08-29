@@ -44,6 +44,8 @@ import WebSiteLogo from "../../assets/images/websiteLogo.png"
 import WebSiteLogo1 from "../../assets/images/websiteLog1.jpeg"
 import WebSiteLogo2 from "../../assets/images/wesiteLogo2.jpeg"
 import WebSiteLogo3 from "../../assets/images/webSitelogo3.jpeg"
+import WebSiteLogo4 from "../../assets/images/webSiteLogo4.jpeg"
+import { height } from "@mui/system";
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
@@ -1159,7 +1161,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
 	const [isFocus, setIsFocus] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 	const inputRef = useRef();
-
+  const [placesName, setPlacesName] = useState(countyList)
+  const [showMenuOptions, setShowMenuOptions] = useState(false)
 
 
   const handleClick = (event) => {
@@ -1179,6 +1182,14 @@ const Header = ({setlogoutRender,logoutRender}) => {
   };
 
   
+  const headerSearchHandler = (e) => {
+    setSearchInputValue(e.target.value)
+    let word = e.target.value
+    let filterPlace = countyList.filter(item => item.toLowerCase().startsWith(word) )
+    setPlacesName(filterPlace)
+  }
+
+
 
 
   // main toogle drawer
@@ -6187,8 +6198,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
           }
         }}
         /> */}
-        <Box component={"img"} src={WebSiteLogo3} alt={"logo"} sx={{
-          width:{xs:"100px",md:"150px"},
+        <Box component={"img"} src={WebSiteLogo4} alt={"logo"} sx={{
+          width:{xs:"100px",md:"180px"},
           height:{xs:"50px",md:"50px"},
           margin:"0px",
           "&:hover":{cursor:"pointer"}
@@ -6214,6 +6225,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             "&:hover": { border: "1px solid black" },
             border: "1px solid white",
             padding: "2px",
+            position:"relative"
           }}
         >
           <input
@@ -6225,30 +6237,77 @@ const Header = ({setlogoutRender,logoutRender}) => {
               width: "320px",
               border: "1px solid white",
             }}
+            // value={searchInputValue}
+            //         onChange={(e) => {
+            //           setSearchInputValue(e.target.value);
+            //         }}
+            //         ref={inputRef}
+            //         onFocus={() => setIsFocus(true)}
+						// onBlur={() => {
+						// 	if (!isHovered) {
+						// 		setIsFocus(false);
+						// 	}
+						// }}
             value={searchInputValue}
-                    onChange={(e) => {
-                      setSearchInputValue(e.target.value);
-                    }}
-                    ref={inputRef}
-                    onFocus={() => setIsFocus(true)}
-						onBlur={() => {
-							if (!isHovered) {
-								setIsFocus(false);
-							}
-						}}
+            onChange={headerSearchHandler}
+            onClick={()=>setShowMenuOptions(!showMenuOptions)}
           />
           <SearchIcon 
+          sx={{"&:hover":{cursor:"pointer"}}}
           onClick={()=>{
-            dispatch(filterProductByCityAction(searchInputValue))
-            setIsFocus(false);
-            setlogoutRender(!logoutRender)
+            if(location.pathname == "/"){
+              dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
+              setShowMenuOptions(false)
+              setSearchInputValue("")
+              setlogoutRender(!logoutRender)
+            }else{
+              dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
+              setSearchInputValue("")
+            setShowMenuOptions(false)
             navigate("/")
-            setSearchInputValue("")
+            }
           }}
           />
+            <Typography
+                sx={{
+                   position:"absolute",
+                   top:"102%",
+                   left:"0px",
+                   zIndex:19999,
+                   width:"100%",
+                   backgroundColor:"white",
+                   height:{xs:"50vh",md:placesName.length < 5 ? "fit-content" :"40vh"},
+                   overflow:"auto",
+                   display:showMenuOptions ? "flex" : "none" ,
+                   flexDirection:"column",
+              }}
+                >
+        {placesName.map((option,index) => (
+                      <MenuItem key={index} value={option}  
+                      onClick={()=>{
+                        if(location.pathname == "/"){
+                          dispatch(filterProductByCityAction(option.toLowerCase()))
+                          setShowMenuOptions(false)
+                          setSearchInputValue("")
+                          setlogoutRender(!logoutRender)
+                        }else{
+                          dispatch(filterProductByCityAction(option.toLowerCase()))
+                          setSearchInputValue("")
+                        setShowMenuOptions(false)
+                        navigate("/")
+                        }
+                      }}
+                      >
+                         {option}
+                      </MenuItem>
+                    ))}
+        </Typography>
         </Box>
+       
 
-       { isFocus && (
+      
+
+       {/* { isFocus && (
 					      	<Box
 						              	className="shadow-lg absolute w-full"
 						              	onMouseEnter={() => {
@@ -6288,14 +6347,33 @@ const Header = ({setlogoutRender,logoutRender}) => {
 												}}
                         sx={{"&:hover":{cursor:"pointer"},}}
 											>
-												<Typography sx={{fontSize:{xs:"16px",md:"18px"}}}>{suggestion}</Typography>
+												<Typography sx={{fontSize:{xs:"12px",md:"14px"}}}>{suggestion}</Typography>
 											</Box>
 										)}
 									</Box>
 								);
 							})}
 						</Box>
-					)}
+					)} */}
+
+        {/* <TextField
+                    // id="outlined-select-currency"
+                    select
+                    // value={cardEexpiryMonth}
+                    // onChange={handleExpiryMonth}
+                  >
+                    {countyList.map((option,index) => (
+                      <MenuItem key={index} value={option}  >
+                         {option}
+                      </MenuItem>
+                    ))}
+                  </TextField> */}
+
+
+
+
+
+
 
         {/* right part */}
       <Box
@@ -6450,39 +6528,47 @@ const Header = ({setlogoutRender,logoutRender}) => {
         width:"94%",
         border:"2px solid #ededeb",
         padding:"3%",
-        borderRadius:"20px"
+        borderRadius:"20px",
+        position:"relative"
       }}
       >
-          <input type={"text"}   style={{
-            width:"80%",
+           <input
+            type={"text"}
+            placeholder="Search for Paris or Colosseum"
+            style={{
+              width:"80%",
             height:"30px",
             outline:"none",
             border:"none"
-          }}
-          placeholder={"Search Here.."}
-          value={searchInputValue}
-          onChange={(e) => {
-            setSearchInputValue(e.target.value);
-          }}
-          ref={inputRef}
-          onFocus={() => setIsFocus(true)}
-  onBlur={() => {
-    if (!isHovered) {
-      setIsFocus(false);
-    }
-  }}
+            }}
+            // value={searchInputValue}
+            //         onChange={(e) => {
+            //           setSearchInputValue(e.target.value);
+            //         }}
+            //         ref={inputRef}
+            //         onFocus={() => setIsFocus(true)}
+						// onBlur={() => {
+						// 	if (!isHovered) {
+						// 		setIsFocus(false);
+						// 	}
+						// }}
+            value={searchInputValue}
+            onChange={headerSearchHandler}
+            onClick={()=>setShowMenuOptions(true)}
           />
-          <SearchIcon sx={{
-            fontSize:"30px"
-          }}
+          <SearchIcon 
+          sx={{"&:hover":{cursor:"pointer"}}}
           onClick={()=>{
-            if(showSmallScreenSearch == false){
-              setShowSmallScreenSearch(true)
-            }else{
-              dispatch(filterProductByCityAction(searchInputValue))
-              setShowSmallScreenSearch(false)
-              setIsFocus(false);
+            if(location.pathname == "/"){
+              dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
+              setShowMenuOptions(false)
+              setSearchInputValue("")
               setlogoutRender(!logoutRender)
+            }else{
+              dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
+              setSearchInputValue("")
+            setShowMenuOptions(false)
+            navigate("/")
             }
           }}
           />
@@ -6494,6 +6580,40 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize:"30px"
           }}
           />
+           <Typography
+                sx={{
+                   position:"absolute",
+                   top:"102%",
+                   left:"0px",
+                   zIndex:19999,
+                   width:"100%",
+                   backgroundColor:"white",
+                   height:{xs:placesName.length < 5 ? "fit-content" :"30vh",md:placesName.length < 5 ? "fit-content" :"40vh"},
+                   overflow:"auto",
+                   display:showMenuOptions ? "flex" : "none" ,
+                   flexDirection:"column",
+              }}
+                >
+        {placesName.map((option,index) => (
+                      <MenuItem key={index} value={option}  
+                      onClick={()=>{
+                        if(location.pathname == "/"){
+                          dispatch(filterProductByCityAction(option.toLowerCase()))
+                          setShowMenuOptions(false)
+                          setSearchInputValue("")
+                          setlogoutRender(!logoutRender)
+                        }else{
+                          dispatch(filterProductByCityAction(option.toLowerCase()))
+                          setSearchInputValue("")
+                        setShowMenuOptions(false)
+                        navigate("/")
+                        }
+                      }}
+                      >
+                         {option}
+                      </MenuItem>
+                    ))}
+        </Typography>
       </Box>
 
       {/* NearBy Drawer */}

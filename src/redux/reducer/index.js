@@ -1,5 +1,5 @@
 import {combineReducers} from "redux"
-import {addTravelMembers, booking_date_day, travelDetails, signUpInfo, loginDetails, totalProductReducer, currentUserReducer, singleProductReducer, cratItemReducer, displayProductReducer, countryListReducer, filterProductByCityReducer} from "./reducer"
+import {addTravelMembers, booking_date_day, travelDetails, signUpInfo, loginDetails, totalProductReducer, currentUserReducer, singleProductReducer, cratItemReducer, displayProductReducer, countryListReducer, filterProductByCityReducer, productImageReducer} from "./reducer"
 
 const rootReducer = combineReducers({
     addTravelMembers,
@@ -13,7 +13,8 @@ const rootReducer = combineReducers({
     cratItemReducer,
     displayProductReducer,
     countryListReducer,
-    filterProductByCityReducer
+    filterProductByCityReducer,
+    productImageReducer
 })
 
 export default  rootReducer

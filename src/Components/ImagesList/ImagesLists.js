@@ -15,15 +15,15 @@ let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,]
 
 
 
-const ImagesLists = () => {
+const ImagesLists = ({item}) => {
 
-  const [productIamge, setProductImage] = useState(arrList[Math.floor(Math.random()*arrList.length)])
+  // const [productIamge, setProductImage] = useState(arrList[Math.floor(Math.random()*arrList.length)])
 
   return (
     <Box
                   className="placeImage"
                   component={"img"}
-                  src={productIamge}
+                  src={item}
                   alt="Place Image"
                   width={{ xs: "10px", md: "130px" }}
                   maxHeight={"80vh"}
@@ -33,6 +33,8 @@ const ImagesLists = () => {
                       cursor: "pointer",
                       opacity: 1,
                     },
+                    maxHeight:"98px",
+                    minHeight:"98px"
                   }}
                 />
   )

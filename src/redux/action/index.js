@@ -311,3 +311,64 @@ export const filterProductByCityAction = (payload) => {
         payload
     }
 }
+
+export const london = (payload) => {
+    return {
+        type:"london",
+        payload
+    }
+}
+export const amsterdam = (payload) => {
+    return {
+        type:"amsterdam",
+        payload
+    }
+}
+export const dubai = (payload) => {
+    return {
+        type:"dubai",
+        payload
+    }
+}
+export const edenburgh = (payload) => {
+    return {
+        type:"edenburgh",
+        payload
+    }
+}
+export const florence = (payload) => {
+    return {
+        type:"florence",
+        payload
+    }
+}
+export const istanbul = (payload) => {
+    return {
+        type:"istanbul",
+        payload
+    }
+}
+export const krakow = (payload) => {
+    return {
+        type:"krakow",
+        payload
+    }
+}
+export const raykjavik = (payload) => {
+    return {
+        type:"raykjavik",
+        payload
+    }
+}
+export const rome = (payload) => {
+    return {
+        type:"rome",
+        payload
+    }
+}
+export const venice = (payload) => {
+    return {
+        type:"venice",
+        payload
+    }
+}

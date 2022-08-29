@@ -28,6 +28,7 @@ import Footer from "../../Screens/FooterComponents/Footer";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useSelector } from "react-redux";
 
+
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const UserSettings = () => {
@@ -66,6 +67,7 @@ const UserSettings = () => {
             display: "flex",
             flexDirection: "row",
             columnGap: 2,
+            height:{xs:"90vh",md:"84vh"}
           }}
         >
           {/* left part */}
@@ -1099,6 +1101,7 @@ const UserSettings = () => {
             </Box>
           ) : null}
         </Box>
+        <Footer />
       </Box>
     </LocalizationProvider>
   );

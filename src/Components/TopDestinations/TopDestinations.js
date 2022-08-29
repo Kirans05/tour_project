@@ -12,6 +12,18 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { filterProductByCityAction } from '../../redux/action';
 
+import Amsterdam1 from "../../assets/amsterdam/amsterdam1.jpg"
+import Florence1 from "../../assets/florence/florence1.jpg"
+import Edenburgh1 from "../../assets/edenburgh/edenburgh1.jpg"
+import Dubai1 from "../../assets/dubai/dubai1.jpg"
+import London1 from "../../assets/london/london1.jpg"
+import Krakow1 from "../../assets/krakow/krakow1.jpg"
+import Istanbul1 from "../../assets/istanbul/istanbul1.jpg"
+import Venice1 from "../../assets/venice/venice1.jpg"
+import Rome1 from "../../assets/rome/romeImage1.jpg"
+import Raykjavik1 from "../../assets/raykjavik/raykjavik1.jpg"
+
+
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
 let touristName = ["Ajanta Caves","Eiffel Tower","Great Wall of China","Elephanta Caves","Statue of Liberty","Bara Imambara","İstanbul","Hawa Mahal"]
@@ -49,10 +61,11 @@ const TopDestinations = ({item}) => {
               >
                 <Box
                   component={"img"}
-                  src={productimage}
+                  src={item == "London" ? London1 : item == "Rome" ? Rome1 : item == "Krakow" ? Krakow1 : item == "Florence" ? Florence1 : item == "Edinburgh" ? Edenburgh1 : item == "venice" ? Venice1 : item == "raykjavik" ? Raykjavik1 : item == "Amsterdam" ? Amsterdam1 : item == "istanbul" ? Istanbul1 : Dubai1}
                   alt="destinationPlaces"
                   sx={{
                     width: {xs:"150px",md:"250px"},
+                    height:{xs:"100px",md:"120px"},
                     borderRadius: "20px",
                   }}
                 />

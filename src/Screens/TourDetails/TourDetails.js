@@ -64,11 +64,129 @@ import Footer from "../FooterComponents/Footer";
 import { Parser } from 'html-to-react'
 
 
+import Amsterdam1 from "../../assets/amsterdam/amsterdam1.jpg"
+import Amsterdam2 from "../../assets/amsterdam/amsterdam2.jpg"
+import Amsterdam3 from "../../assets/amsterdam/amsterdam3.jpg"
+import Amsterdam4 from "../../assets/amsterdam/amsterdam4.jpg"
+import Amsterdam5 from "../../assets/amsterdam/amsterdam5.jpg"
+import Amsterdam6 from "../../assets/amsterdam/amsterdam6.jpg"
+import Amsterdam7 from "../../assets/amsterdam/amsterdam7.jpg"
+import Amsterdam8 from "../../assets/amsterdam/amsterdam8.jpg"
+import Amsterdam9 from "../../assets/amsterdam/amsterdam9.jpg"
 
-let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
+// dubai images
+import Dubai1 from "../../assets/dubai/dubai1.jpg"
+import Dubai2 from "../../assets/dubai/dubai2.jpg"
+import Dubai3 from "../../assets/dubai/dubai3.jpg"
+import Dubai4 from "../../assets/dubai/dubai4.jpg"
+import Dubai5 from "../../assets/dubai/dubai5.jpg"
+
+// edenburgh images
+import Edenburgh1 from "../../assets/edenburgh/edenburgh1.jpg"
+import Edenburgh2 from "../../assets/edenburgh/edenburgh2.jpg"
+import Edenburgh3 from "../../assets/edenburgh/edenburgh3.jpg"
+import Edenburgh4 from "../../assets/edenburgh/edenburgh4.jpg"
+import Edenburgh5 from "../../assets/edenburgh/edenburgh5.jpg"
+import Edenburgh6 from "../../assets/edenburgh/edenburgh6.jpg"
+import Edenburgh7 from "../../assets/edenburgh/edenburgh7.jpg"
+import Edenburgh8 from "../../assets/edenburgh/edenburgh8.jpg"
+
+// florence images
+import Florence1 from "../../assets/florence/florence1.jpg"
+import Florence2 from "../../assets/florence/florence2.jpg"
+import Florence3 from "../../assets/florence/florence3.jpg"
+import Florence4 from "../../assets/florence/florence4.jpg"
+import Florence5 from "../../assets/florence/florence5.jpg"
+import Florence6 from "../../assets/florence/florence6.jpg"
+import Florence7 from "../../assets/florence/florence7.jpg"
 
 
-let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,Travel11]
+// istanbul images
+import Istanbul1 from "../../assets/istanbul/istanbul1.jpg"
+import Istanbul2 from "../../assets/istanbul/istanbul2.jpg"
+import Istanbul3 from "../../assets/istanbul/istanbul3.jpg"
+import Istanbul4 from "../../assets/istanbul/istanbul4.jpg"
+import Istanbul5 from "../../assets/istanbul/istanbul5.jpg"
+
+// krakow
+//  krakow imamges
+import Krakow1 from "../../assets/krakow/krakow1.jpg"
+import Krakow2 from "../../assets/krakow/krakow2.jpg"
+import Krakow3 from "../../assets/krakow/krakow3.jpg"
+import Krakow4 from "../../assets/krakow/krakow4.jpg"
+import Krakow5 from "../../assets/krakow/krakow5.jpg"
+import Krakow6 from "../../assets/krakow/krakow6.jpg"
+import Krakow7 from "../../assets/krakow/krakow7.jpg"
+import Krakow8 from "../../assets/krakow/krakow8.jpg"
+
+
+// london images
+import London1 from "../../assets/london/london1.jpg"
+import London2 from "../../assets/london/london2.jpg"
+import London3 from "../../assets/london/london3.jpg"
+import London4 from "../../assets/london/london4.jpg"
+import London5 from "../../assets/london/london5.jpg"
+import London6 from "../../assets/london/london6.jpg"
+import London7 from "../../assets/london/london7.jpg"
+import London8 from "../../assets/london/london8.jpg"
+
+// raykjavik images
+import Raykjavik1 from "../../assets/raykjavik/raykjavik1.jpg"
+import Raykjavik2 from "../../assets/raykjavik/raykjavik2.jpg"
+import Raykjavik3 from "../../assets/raykjavik/raykjavik3.jpg"
+import Raykjavik4 from "../../assets/raykjavik/raykjavik4.jpg"
+import Raykjavik5 from "../../assets/raykjavik/raykjavik5.jpg"
+import Raykjavik6 from "../../assets/raykjavik/raykjavik6.jpg"
+import Raykjavik7 from "../../assets/raykjavik/raykjavik7.jpg"
+import Raykjavik8 from "../../assets/raykjavik/raykjavik8.jpg"
+
+//  rome images
+import Rome1 from "../../assets/rome/romeImage1.jpg"
+import Rome2 from "../../assets/rome/romeImage2.jpg"
+import Rome3 from "../../assets/rome/romeImage3.jpg"
+import Rome4 from "../../assets/rome/romeImage4.jpg"
+import Rome5 from "../../assets/rome/romeImage5.jpg"
+import Rome6 from "../../assets/rome/romeImage6.jpg"
+import Rome7 from "../../assets/rome/romeImage7.jpg"
+import Rome8 from "../../assets/rome/romeImage8.jpg"
+
+// venice images
+import Venice1 from "../../assets/venice/venice1.jpg"
+import Venice2 from "../../assets/venice/venice2.jpg"
+import Venice3 from "../../assets/venice/venice3.jpg"
+import Venice4 from "../../assets/venice/venice4.jpg"
+import Venice5 from "../../assets/venice/venice5.jpg"
+import Venice6 from "../../assets/venice/venice6.jpg"
+import Venice7 from "../../assets/venice/venice7.jpg"
+
+
+
+// let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
+
+
+// let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,Travel11]
+
+
+
+
+let AmsertdamArr = [Amsterdam1, Amsterdam2, Amsterdam3, Amsterdam4, Amsterdam5, Amsterdam6, Amsterdam7, Amsterdam8, Amsterdam9]
+
+let DubaiArr = [Dubai1, Dubai2, Dubai3, Dubai4, Dubai5]
+
+let EdenBurghArr = [Edenburgh1, Edenburgh2, Edenburgh3, Edenburgh4, Edenburgh5, Edenburgh6, Edenburgh7, Edenburgh8]
+
+let FlorenceArr = [Florence1, Florence2, Florence3, Florence4, Florence5, Florence6, Florence7]
+
+let IstanBulArr = [Istanbul1, Istanbul2, Istanbul3, Istanbul4, Istanbul5]
+
+let KrakowArr = [Krakow1, Krakow2, Krakow3, Krakow4, Krakow5, Krakow6, Krakow7, Krakow8]
+
+let LondonArr = [London1, London2, London3, London4, London5, London6, London7, London8]
+
+let raykjavikArr = [Raykjavik1, Raykjavik2, Raykjavik3, Raykjavik4, Raykjavik5, Raykjavik6, Raykjavik7, Raykjavik8]
+
+let RomeArr = [Rome1, Rome2, Rome3, Rome4, Rome5, Rome6, Rome7, Rome8]
+let VeniceArr = [Venice1, Venice2, Venice3, Venice4, Venice5, Venice6, Venice7]
 
 
 
@@ -76,14 +194,32 @@ let arrList = [Travel4,Travel3, Travel6, Travel8, Travel9,Travel11]
 
 
 
-let datavalues = ` 
-
-
-`
 
 const TourDetails = () => {
 
-  const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
+
+
+
+  const memberPresentstate = useSelector((state) => state.addTravelMembers)
+  const booking_dateDetails = useSelector((state) => state.booking_date_day)
+  const singleTourDetails = useSelector((state) => state.singleProductReducer)
+  const cartItems = useSelector((state) => state.cratItemReducer)
+  const dispatch = useDispatch()
+  const item = singleTourDetails
+
+  // const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
+  const [productImage1, setProductImage1] = useState(item.name == "Harry Potter Tour of Warner Bros. Studio with Transport from London" ? London1 : item.name == "Stonehenge, Windsor Castle, and Bath from London" ? London2 : item.name == "Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock" ? London3 : item.name == "Westminster to Greenwich Sightseeing Thames Cruise in London" ? London4 : item.name == "Stonehenge and Bath Day Trip from London" ? London5 : item.name == "Buckingham Palace Tour Including Changing of the Guard Ceremony" ? London6 : item.name == "Windsor Castle, Stonehenge and Bath Tour from London with Admission" ? London7 : item.name == "Best of London Including Tower of London, Changing of the Guard, with a Cream Tea or London Eye Upgrade" ? London8 : item.name == "Skip-the-Line Vatican Museums & Sistine Chapel Group Tour" ? Rome1 : item.name == "Skip the Line: Colosseum Small Group Tour with Roman Forum & Palatine Hill" ? Rome2 : item.name == "Skip-the-Line: Vatican Museums & Sistine Chapel Guided Small-Group Tour" ? Rome3 : item.name == "Small-Group Tour of Colosseum Underground, Arena and Forum" ? Rome4 : item.name == "Pompeii, Amalfi Coast and Positano Guided Day Trip from Rome" ? Rome5 : item.name == "Colosseum VIP Gladiators access with Arena & Ancient Rome small group tour" ? Rome6 : item.name == "Tuscany Day Trip from Rome including 3-Course Lunch and Wine Tasting" ? Rome7 : item.name == "The Original Entire Vatican Tour & St. Peter's Dome Climb" ? Rome8 : item.name == "Auschwitz & Birkenau: Live-Guided Tour with Transportation and Hotel Pickup" ? Krakow1 : item.name == "Auschwitz-Birkenau Museum and Memorial Guided Tour from Krakow" ? Krakow2 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow" ? Krakow3 : item.name == "Auschwitz-Birkenau and Wieliczka Salt Mine Guided One Day Tour" ? Krakow4 : item.name == "Zakopane Tour with Hot Bath Pools and Hotel Pickup" ? Krakow5 : item.name == "Krakow: Extreme Shooting Range with Hotel Pick-Up" ? Krakow6 : item.name == "From Krakow: Auschwitz-Birkenau Guided Tour, Pickup & Transfers" ? Krakow7 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow with pick-up from Selected Hotels" ? Krakow8 :  null)
+  
+  
+
+  const [productImage2, setProductImage2] = useState(item.name == "Pisa, Siena and San Gimignano Day Trip from Florence Including Lunch" ? Florence1 : item.name == "Small-Group Wine Tasting Experience in the Tuscan Countryside" ? Florence2 : item.name == "Tuscany in One Day Sightseeing Tour from Florence" ? Florence3 : item.name == "Cinque Terre Day Trip with Transport from Florence" ? Florence4 : item.name == "David & Accademia Gallery Tour - Florence (Reserved Entrance)" ? Florence5 : item.name == "Skip-the-Line Florence Highlights and David Walking Tour" ? Florence6 :  item.name == "Uffizi Gallery Small Group Tour with Guide" ? Florence7 : item.name == "Loch Ness, Glencoe and the Highlands Small-Group Day Tour from Edinburgh" ? Edenburgh1 : item.name == "Loch Ness, Scottish Highlands, Glencoe & Hairy Coos Tour from Edinburgh" ? Edenburgh2 : item.name == "Loch Ness, Glencoe & The Highlands Day Trip from Edinburgh" ? Edenburgh3 : item.name == "Edinburgh Castle Tour - Skip The Line Tickets Included" ? Edenburgh4 : item.name == "Underground Walking Tour in Edinburgh" ? Edenburgh5 : item.name == "Edinburgh Castle Guided Walking Tour - Tickets Incluided" ? Edenburgh6 :  item.name == "Isle of Skye, The Highlands and Loch Ness- 3 Day Group Tour from Edinburgh" ? Edenburgh7 : item.name == "Loch Lomond, Stirling Castle and the Kelpies from Edinburgh" ? Edenburgh8 : item.name == "Legendary Venice St. Mark's Basilica with Terrace Access & Doge's Palace" ? Venice1 : item.name == "Skip the Line Venice Doge's Palace and St. Mark's Basilica Tour - T23" ? Venice2 : item.name == "Murano, Burano and Torcello Half-Day Sightseeing Tour" ? Venice3 : item.name == "Venice Marco Polo Airport Link Arrival Transfer" ? Venice4 : item.name == "Venice: Grand Canal by Gondola with commentary" ? Venice5 : item.name == "Dolomite Mountains and Cortina Semi Private Day Trip from Venice" ? Venice6 :  item.name == "Venice Marco Polo Airport Private Arrival Transfer" ? Venice7 : null)
+
+
+  const [productImage3, setProductImage3] = useState(item.name == "Golden Circle, Blue Lagoon Including Admission & Kerid Volcanic Crater" ? Raykjavik1 : item.name == "South Coast Full Day Tour by Minibus from Reykjavik" ? Raykjavik2 : item.name == "Whale Watching Cruise on a Superyacht in Reykjavik" ? Raykjavik3 : item.name == "Golden Circle Classic Day Trip from Reykjavik" ? Raykjavik4 : item.name == "Golden Circle & Glacier Snowmobiling Day Trip from Reykjavik" ? Raykjavik5 : item.name == "Snorkeling Between Continents in Silfra with Photos Included" ? Raykjavik6 : item.name == "Reykjavik Food Walk - Local Foodie Adventure in Iceland"? Raykjavik7 : item.name == "Golden Circle, Volcano Crater & Blue Lagoon Small Group Tour" ? Raykjavik8 : item.name == "Amsterdam Canal Cruise in Classic River Boat With Drinks & Dutch Cheese" ? Amsterdam1 : item.name == "Amsterdam Open Boat Canal Cruise - Live Guide - from Anne Frank House" ? Amsterdam2 : item.name == "All inclusive Canal Tour by Captain Jack (Traveller's Choice Award 2021)" ? Amsterdam3 : item.name == "Amsterdam Open Boat Tour With Live Guide and Unlimited Drinks" ? Amsterdam4 : item.name == "Volendam, Marken and Windmills Day Trip from Amsterdam" ? Amsterdam5 : item.name == "Giethoorn and Zaanse Schans Windmills Day Trip from Amsterdam" ? Amsterdam6 : item.name == "Day Trip to Zaanse Schans, Edam, Volendam and Marken from Amsterdam"? Amsterdam7 : item.name == "Amsterdam 1-Hour Canal Cruise from Central Station"  ? Amsterdam8 :  item.name == "Amsterdam Guided Evening Canal Cruise with Bar on Board" ? Amsterdam9 : null )
+
+
+  const [productimage4, setProductimage4] = useState(item.name == "Best of Istanbul: 1, 2 or 3-Day Private Guided Istanbul Tour" ? Istanbul1 : item.name == "Bosphorus Sunset Cruise on Luxury Yacht" ? Istanbul2 : item.name == "Taste of Two Continents Food Tour" ? Istanbul3 : item.name == "Small Group Tour: Essential Istanbul" ? Istanbul4 : item.name == "Private Guided Istanbul Day Tour" ? Istanbul5 : item.name == "Dubai Marina Yacht Tour with Breakfast or BBQ Tour" ? Dubai1 : item.name == "Dubai Marina Dinner Cruise with Live Music" ? Dubai2 : item.name == "Dubai Luxury Canal Dinner Cruise" ? Dubai3 : item.name == "Inside Burj Al Arab - Experience a unique guided tour" ? Dubai4 : Dubai5)
+
 
   const [coopyState, setCopyState] = useState({
     value: `${window.location.href}`,
@@ -92,11 +228,7 @@ const TourDetails = () => {
 
 
   // redux states and dispatch functions
-  const memberPresentstate = useSelector((state) => state.addTravelMembers)
-  const booking_dateDetails = useSelector((state) => state.booking_date_day)
-  const singleTourDetails = useSelector((state) => state.singleProductReducer)
-  const cartItems = useSelector((state) => state.cratItemReducer)
-  const dispatch = useDispatch()
+ 
 
 
   const navigate = useNavigate();
@@ -400,7 +532,212 @@ useEffect(()=>{
                 rowGap: { xs: 2, md: 0 },
               }}
             >
+              {
+                item.city == "London" ?
+                <Box
+                className="verticalImages"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  flexDirection: "column",
+                  rowGap: 2,
+                  alignItems: "center",
+                  width:"15%"
+                }}
+              >
+               {
+                LondonArr.map((item,index) => {
+                  if(index < 5){
+                    return <ImagesLists  key={index}  item={item} />
+                  }
+                })
+               } 
+              
+              </Box>
+              : item.city == "Rome" ?
               <Box
+              className="verticalImages"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                flexDirection: "column",
+                rowGap: 2,
+                alignItems: "center",
+                width:"15%"
+              }}
+            >
+             {
+              RomeArr.map((item,index) => {
+                if(index < 5){
+                  return <ImagesLists  key={index}  item={item}/>
+                }
+              })
+             } 
+            
+            </Box>
+             : item.city == "Krakow"?
+             <Box
+             className="verticalImages"
+             sx={{
+               display: { xs: "none", md: "flex" },
+               flexDirection: "column",
+               rowGap: 2,
+               alignItems: "center",
+               width:"15%"
+             }}
+           >
+            {
+             KrakowArr.map((item,index) => {
+              if(index < 5){
+                return <ImagesLists  key={index}  item={item}/>
+              }
+             })
+            } 
+           
+           </Box>
+           : item.city == "Florence" ?
+           <Box
+           className="verticalImages"
+           sx={{
+             display: { xs: "none", md: "flex" },
+             flexDirection: "column",
+             rowGap: 2,
+             alignItems: "center",
+             width:"15%"
+           }}
+         >
+          {
+           FlorenceArr.map((item,index) => {
+            if(index < 5){
+              return <ImagesLists  key={index}  item={item}/>
+            }
+           })
+          } 
+         
+            </Box>
+            : item.city == "Edinburgh" ?
+            <Box
+            className="verticalImages"
+            sx={{
+              display: { xs: "none", md: "flex" },
+              flexDirection: "column",
+              rowGap: 2,
+              alignItems: "center",
+              width:"15%"
+            }}
+          >
+           {
+            EdenBurghArr.map((item,index) => {
+              if(index < 5){
+                return <ImagesLists  key={index}  item={item}/>
+              }
+            })
+           } 
+          
+          </Box>
+          : item.city == "venice" ?
+          <Box
+          className="verticalImages"
+          sx={{
+            display: { xs: "none", md: "flex" },
+            flexDirection: "column",
+            rowGap: 2,
+            alignItems: "center",
+            width:"15%"
+          }}
+        >
+         {
+          VeniceArr.map((item,index) => {
+            if(index < 5){
+              return <ImagesLists  key={index}  item={item}/>
+            }
+          })
+         } 
+        
+        </Box>
+        : item.city == "raykjavik" ? 
+        <Box
+        className="verticalImages"
+        sx={{
+          display: { xs: "none", md: "flex" },
+          flexDirection: "column",
+          rowGap: 2,
+          alignItems: "center",
+          width:"15%"
+        }}
+      >
+       {
+        raykjavikArr.map((item,index) => {
+          if(index < 5){
+            return <ImagesLists  key={index}  item={item}/>
+          }
+        })
+       } 
+      
+      </Box>
+              : item.city == "Amsterdam" ?
+              <Box
+              className="verticalImages"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                flexDirection: "column",
+                rowGap: 2,
+                alignItems: "center",
+                width:"15%"
+              }}
+            >
+             {
+              AmsertdamArr.map((item,index) => {
+                if(index < 5){
+                  return <ImagesLists  key={index}  item={item}/>
+                }
+              })
+             } 
+            
+            </Box>
+                  : item.city == "istanbul" ?
+                  <Box
+                  className="verticalImages"
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    flexDirection: "column",
+                    rowGap: 2,
+                    alignItems: "center",
+                    width:"15%"
+                  }}
+                >
+                 {
+                  IstanBulArr.map((item,index) => {
+                    if(index < 5){
+                      return <ImagesLists  key={index}  item={item}/>
+                    }
+                  })
+                 } 
+                
+                </Box>
+                :   <Box
+                className="verticalImages"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  flexDirection: "column",
+                  rowGap: 2,
+                  alignItems: "center",
+                  width:"15%"
+                }}
+              >
+               {
+                DubaiArr.map((item,index) => {
+                  if(index < 5){
+                    return <ImagesLists  key={index}  item={item}/>
+                  }
+                })
+               } 
+              
+              </Box>
+              }
+
+
+
+
+              {/* <Box
                 className="verticalImages"
                 sx={{
                   display: { xs: "none", md: "flex" },
@@ -412,16 +749,18 @@ useEffect(()=>{
               >
                {
                 arrList.map((item,index) => {
-                  return <ImagesLists  key={index}  />
+                  if(index < 5){
+                    return <ImagesLists  key={index}  item={item}/>
+                  }
                 })
                } 
               
-              </Box>
+              </Box> */}
 
               <Box
                 className="placeImage"
                 component={"img"}
-                src={productImage}
+                src={productImage1 != null ? productImage1 : productImage2 != null ? productImage2 : productImage3 != null ? productImage3 : productimage4 }
                 alt="Place Image"
                 // width={{ xs: "350px", md: "1050px" }}
                 // maxHeight={"80vh"}
