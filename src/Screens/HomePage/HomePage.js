@@ -40,7 +40,10 @@ import HomeImage3 from "../../assets/images/homePage3.webp"
 import HomeImage4 from "../../assets/images/homePage4.jpg"
 import HomeImage5 from "../../assets/images/homePage5.jpg"
 import HomeImage6 from "../../assets/images/homePage6.jpg"
-import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterProductByCityAction} from "../../redux/action/index"
+import Turkey6 from "../../assets/turkey/turkey6.jpg"
+import Turkey7 from "../../assets/turkey/turkey7.jpg"
+import Turkey9 from "../../assets/turkey/turkey9.jpg"
+import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterProductByCityAction, productAction, displayProductAction, countryListAction} from "../../redux/action/index"
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {totalProductReducer, displayProductReducer, countryListReducer} from "../../redux/reducer/reducer"
@@ -65,7 +68,7 @@ const HomePage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [dateValue, setDateValue] = useState(new Date());
-  const [imageState, setImageState] = useState([HomeImage5, 2]);
+  const [imageState, setImageState] = useState([Turkey6, 2]);
   const [dotClicked, setDotClicked] = useState({
     first: false,
     second: true,
@@ -79,6 +82,7 @@ const HomePage = () => {
   const [placesName, setPlacesName] = useState(countryListSuggestions)
   const [showMenuOptions, setShowMenuOptions] = useState(false)
 
+
   const handleChange = (newValue) => {
     dispatch(tourBookingDate(newValue))
     setDateValue(newValue);
@@ -86,21 +90,21 @@ const HomePage = () => {
 
   setTimeout(() => {
     if (imageState[1] == 1) {
-      setImageState([HomeImage6, 2]);
+      setImageState([Turkey6, 2]);
       setDotClicked({
         first: false,
         second: true,
         third: false,
       });
     } else if (imageState[1] == 2) {
-      setImageState([HomeImage4, 3]);
+      setImageState([Turkey7, 3]);
       setDotClicked({
         first: false,
         second: false,
         third: true,
       });
     } else {
-      setImageState([HomeImage5, 1]);
+      setImageState([Turkey9, 1]);
       setDotClicked({
         first: true,
         second: false,
@@ -150,9 +154,49 @@ const showSearchPlace = (item) => {
   }
 
 
+
+  const fetchAllTourProducts = async () => {
+    let options = {
+      url:`${Base_url}/tour/allProducts`,
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+      }
+    }
+  
+  
+    try{
+      let {data} = await axios(options)
+      dispatch(productAction(data))
+      let cityObj = {}
+      let arr = []
+      const filterElements = data.filter(item => {
+        if(item.city in cityObj){
+        
+        }else{
+          cityObj[item.city] = item.city
+          arr.push(item.city)
+        }
+      })
+      dispatch(displayProductAction(filterElements))
+      dispatch(countryListAction(arr))
+    }catch(error){
+  
+    }
+  
+  }
+  
+
   useEffect(()=>{
     fetchCurrentUserData()
   },[])
+
+  
+  useEffect(()=>{
+    fetchAllTourProducts()
+  },[])
+
+ 
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -243,7 +287,7 @@ const showSearchPlace = (item) => {
                   <input
                   id="mainPagesearch"
                     type={"text"}
-                    placeholder={"Las Vegas, London, Paris..."}
+                    placeholder="Search for Istanbul,Turkey"
                     style={{
                       width: "80%",
                       height: "25px",
@@ -629,7 +673,7 @@ const showSearchPlace = (item) => {
 
 
             
-          <Box className="thirdPart">
+          {/* <Box className="thirdPart">
             <Typography
               sx={{
                 "&:hover": { cursor: "pointer" },
@@ -638,9 +682,9 @@ const showSearchPlace = (item) => {
             >
               Why you are seeing these recommendations
             </Typography>
-          </Box>
+          </Box> */}
 
-          <Box
+          {/* <Box
             className="recentlyViewd"
             sx={{
               display: "flex",
@@ -673,7 +717,7 @@ const showSearchPlace = (item) => {
                 })
               }
             </Box>
-          </Box>
+          </Box> */}
 
           <Box
             className="fifthPart"
@@ -735,7 +779,8 @@ const showSearchPlace = (item) => {
               flexDirection: "column",
               alignItems: "center",
               rowGap: 2,
-              width: "100%",
+              width: "90%",
+
             }}
           >
             <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"25px"} }}>
@@ -748,12 +793,19 @@ const showSearchPlace = (item) => {
                 flexDirection: "row",
                 justifyContent: { xs: "flex-start", md: "space-evenly" },
                 alignItems: "center",
-                columnGap: 4,
+                columnGap: 2,
                 width: { xs: "92%", md: "92%" },
                 overflow: "auto",
-                padding: { xs: "3% 4% 3% 4%", md: "3% 4% 3% 4%" },
+                padding: { xs: "3% 4% 3% 4%", md: "3% 0% 3% 8%" },
               }}
             >
+             {/* {
+                totalProductList.map((item,index) => {
+                  if(item.city == "Turkey"){
+                    return <TopAttraction key={index} item={item}/>
+                  }
+                })
+             } */}
               <Box
                 className="1stColumn"
                 sx={{
@@ -763,8 +815,27 @@ const showSearchPlace = (item) => {
                 }}
               >
                 {
-                  arrLsit.map((item, index) => {
-                    return <TopAttraction key={index} />
+                  totalProductList.filter(i => i.city == "Turkey").map((item, index) => {
+                    if(index <= 2){
+                      return <TopAttraction key={index} item={item}/>
+                    }
+                  })
+                }
+
+              </Box>
+              <Box
+                className="1stColumn"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  rowGap: 3,
+                }}
+              >
+               {
+                  totalProductList.filter(i => i.city == "Turkey").map((item, index) => {
+                    if(index > 2 && index <= 5){
+                      return <TopAttraction key={index} item={item}/>
+                    }
                   })
                 }
 
@@ -778,28 +849,14 @@ const showSearchPlace = (item) => {
                 }}
               >
                 {
-                  arrLsit.map((item, index) => {
-                    return <TopAttraction key={index} />
+                  totalProductList.filter(i => i.city == "Turkey").map((item, index) => {
+                    if(index > 5 && index <= 8){
+                      return <TopAttraction key={index} item={item}/>
+                    }
                   })
                 }
 
               </Box>
-              <Box
-                className="1stColumn"
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  rowGap: 3,
-                }}
-              >
-                {
-                  arrLsit.map((item, index) => {
-                    return <TopAttraction key={index} />
-                  })
-                }
-
-              </Box>
-             
             
              
             </Box>
@@ -890,7 +947,7 @@ const showSearchPlace = (item) => {
                 flexDirection: "row",
                 justifyContent: { xs: "flex-start", md: "space-evenly" },
                 flexWrap: { xs: "nowrap", md: "wrap" },
-                width: { xs: "94%", md: "80%" },
+                width: { xs: "94%", md: "90%" },
                 rowGap: 3,
                 overflow: { xs: "auto", md: "none" },
                 padding: { xs: "1% 3% 1% 3%", md: "2% 0% 2% 0%" },
@@ -900,7 +957,7 @@ const showSearchPlace = (item) => {
 
               {
                 countryListSuggestions.map((item, index) => {
-                  if(index < 8){
+                  if(index < 11 && item != "Krakow"){
                     return <TopDestinations key={index} item={item}/>
                   }
                 })

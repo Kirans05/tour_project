@@ -39,7 +39,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {useSelector,useDispatch} from "react-redux"
-import {addTravelMembers, booking_date_day, cratItemReducer, singleProductReducer} from "../../redux/reducer/reducer"
+import {addTravelMembers, booking_date_day, cratItemReducer, singleProductReducer,travelDetails} from "../../redux/reducer/reducer"
 import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, cartItemAction} from "../../redux/action/index"
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -160,6 +160,13 @@ import Venice6 from "../../assets/venice/venice6.jpg"
 import Venice7 from "../../assets/venice/venice7.jpg"
 
 
+import Turkey1 from "../../assets/turkey/turkey1.jpg"
+import Turkey2 from "../../assets/turkey/turkey2.jpg"
+import Turkey3 from "../../assets/turkey/turkey3.webp"
+import Turkey4 from "../../assets/turkey/turkey4.jpg"
+import Turkey5 from "../../assets/turkey/turkey5.jpg"
+
+
 
 // let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
 
@@ -186,7 +193,10 @@ let LondonArr = [London1, London2, London3, London4, London5, London6, London7, 
 let raykjavikArr = [Raykjavik1, Raykjavik2, Raykjavik3, Raykjavik4, Raykjavik5, Raykjavik6, Raykjavik7, Raykjavik8]
 
 let RomeArr = [Rome1, Rome2, Rome3, Rome4, Rome5, Rome6, Rome7, Rome8]
+
 let VeniceArr = [Venice1, Venice2, Venice3, Venice4, Venice5, Venice6, Venice7]
+
+let TurkeyArr = [Turkey1, Turkey2, Turkey3, Turkey4, Turkey5]
 
 
 
@@ -204,6 +214,9 @@ const TourDetails = () => {
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const singleTourDetails = useSelector((state) => state.singleProductReducer)
   const cartItems = useSelector((state) => state.cratItemReducer)
+  const travellerData = useSelector((state) => state.travelDetails)
+  const [EurPrice, setEuroPrice] = useState("") 
+
   const dispatch = useDispatch()
   const item = singleTourDetails
 
@@ -653,7 +666,7 @@ useEffect(()=>{
          } 
         
         </Box>
-        : item.city == "raykjavik" ? 
+        : item.city == "Raykjavik" ? 
         <Box
         className="verticalImages"
         sx={{
@@ -693,7 +706,7 @@ useEffect(()=>{
              } 
             
             </Box>
-                  : item.city == "istanbul" ?
+                  : item.city == "Istanbul" ?
                   <Box
                   className="verticalImages"
                   sx={{
@@ -713,7 +726,8 @@ useEffect(()=>{
                  } 
                 
                 </Box>
-                :   <Box
+                :  item.city == "Dubai" ?
+                <Box
                 className="verticalImages"
                 sx={{
                   display: { xs: "none", md: "flex" },
@@ -732,6 +746,25 @@ useEffect(()=>{
                } 
               
               </Box>
+              :  <Box
+              className="verticalImages"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                flexDirection: "column",
+                rowGap: 2,
+                alignItems: "center",
+                width:"15%"
+              }}
+            >
+             {
+              TurkeyArr.map((item,index) => {
+                if(index < 5){
+                  return <ImagesLists  key={index}  item={item}/>
+                }
+              })
+             } 
+            
+            </Box>
               }
 
 
@@ -760,7 +793,7 @@ useEffect(()=>{
               <Box
                 className="placeImage"
                 component={"img"}
-                src={productImage1 != null ? productImage1 : productImage2 != null ? productImage2 : productImage3 != null ? productImage3 : productimage4 }
+                src={singleTourDetails.imageUrl}
                 alt="Place Image"
                 // width={{ xs: "350px", md: "1050px" }}
                 // maxHeight={"80vh"}
@@ -807,7 +840,7 @@ useEffect(()=>{
                     }}
                   >
                     {/* <CurrencyRupeeIcon /> 8719.53 */}
-                    {singleTourDetails.currency} {singleTourDetails.price}
+                    {travellerData.currencyCode} {travellerData.currencyCode == "GBP" ? item.price : (travellerData.currencyValue*item.price).toFixed(2)}
                   </Typography>
                 </Box>
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
@@ -2199,8 +2232,26 @@ useEffect(()=>{
                           columnGap:1
                         }}
                       >
-                       {singleTourDetails.currency} 
-                        <Typography>{(memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price)}</Typography>
+
+{/* {travellerData.currencyCode == "GBP" ? item.price : (travellerData.currencyValue*item.price).toFixed(2)} */}
+
+                        {travellerData.currencyCode} 
+                        {/* <Typography>{(memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price)}</Typography> */}
+                        {/* (memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price) */}
+                         {/* <Typography>{travellerData.currencyCode == "GBP" ?(memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price)
+                         :  (memberPresentstate.adult*singleTourDetails.price*travellerData.currencyValue)+(memberPresentstate.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)  }</Typography> */}
+                         <Typography
+                         sx={{
+                          display:travellerData.currencyCode == "GBP" ? "flex" : "none"
+                         }}
+                         >{(memberPresentstate.adult*singleTourDetails.price)+(memberPresentstate.child*singleTourDetails.price)}</Typography>
+                         <Typography
+                         sx={{
+                          display:travellerData.currencyCode != "GBP" ? "flex":"none"
+                         }}
+                         >
+                        {(memberPresentstate.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentstate.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)}
+                         </Typography>
                       </Box>
                       <Typography>per group (up to 8)</Typography>
                     </Box>
@@ -2426,424 +2477,11 @@ useEffect(()=>{
               </Box>
             </Box>
 
-           
-            {/* <Box
-             sx={{
-              display: "flex",
-              flexDirection: "column",
-              rowGap: { xs: 3,md:10 },
-              width: { xs: "100%", md: "100%" },
-            }}
-            >
-            <Box
-              className="overView"
-              sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
-            >
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: { xs: "22px", md: "25px" },
-                }}
-              >
-                Overview
-              </Typography>
-              <Box className="overViewDetails"
-              sx={{
-                display:"flex",
-                flexDirection:"column",
-                rowGap:1
-              }}
-              >
-                <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                Immerse yourself in the spellbinding world of Harry Potter™ on this trip to the Warner Bros. Studio Tour London. Travel to the fabled Harry Potter studios by air-conditioned coach from central London, and on arrival, trace the footsteps of Hogwarts’ student wizards at leisure. Behold original sets such as Platform 9 ¾ and Diagon Alley; see the Hogwarts Express steam train; ride a broomstick like the cast; and uncover the behind-the-scenes secrets of the movies’ on-screen wizardry. This Harry Potter studio London tour includes round-trip coach transport and entrance tickets.
-                </Typography>
-                <Box className="unOrderList">
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Admission to Warner Bros. Studio Tour London - The Making of Harry Potter
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Step into the magical world of Harry Potter and see original sets, props, and costumes
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Walk down Diagon Alley and see shop fronts such as Ollivanders wand shop and Gringotts Bank
-                    </Typography>
-                  </Box>
-                
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Snap photos of Platform 9 ¾ and see steam billowing from the original Hogwarts Express
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Explore Dumbledore’s office and discover never-before-seen treasures.
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      columnGap: 1,
-                    }}
-                  >
-                    <FiberManualRecordIcon sx={{ fontSize: { xs: "10px" } }} />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Learn how J.K. Rowling's books were brought to life on screen using special effects, animatronics, and life-sized models
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-
-              <Box
-                className="travellersChoice"
-                sx={{ display: "flex", flexDirection: "column", rowGap: 1 }}
-              >
-                <Typography
-                  sx={{
-                    fontWeight: "bold",
-                    fontSize: { xs: "18px", md: "20px" },
-                  }}
-                >
-                  Why Travellers Choose This Tour
-                </Typography>
-                <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                Numerous daily departure times are available, making this tour a flexible option for Harry Potter fans.
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              className="What's Included"
-              sx={{ display: "flex", flexDirection: "column", rowGap: 1 }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: "18px", md: "20px" },
-                  fontWeight: "bold",
-                }}
-              >
-                What's Included
-              </Typography>
-              <Box
-                className="FullItems"
-                sx={{ display: "flex", flexDirection: "row", columnGap: 2 }}
-              >
-                <Box className="IncludedItems">
-                  <Box
-                    className="1stItem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <CheckIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Entry ticket to Harry Potter Warner Bros Studio Tour London
-                    </Typography>
-                  </Box>
-                  <Box
-                    className="2ndItem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <CheckIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Return transfers in air-conditioned coach
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box
-                  className="excludedItem"
-                  sx={{
-                    display: { xs: "none", md: "flex" },
-                    flexDirection: { xs: "column", md: "column" },
-                  }}
-                >
-                  <Box
-                    className="1stitem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <ClearIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Food and drinks
-                    </Typography>
-                  </Box>
-                  <Box
-                    className="2nditem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <ClearIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Gratuities
-                    </Typography>
-                  </Box>
-                  <Box
-                    className="3rditem"
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      columnGap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <ClearIcon />
-                    <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Digital guide available in 10 different languages at additional cost
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-            <Box className="Meeting And Pickup"
-            sx={{
-              display:"flex",
-              flexDirection:"column",
-              alignItems:"flex-start",
-              rowGap:3
-            }}
-            >
-                <Typography 
-                sx={{
-                  fontSize:{xs:"18px",md:"20px"},
-                  fontWeight:"bold"
-                }}
-                >Meeting And Pickup</Typography>
-
-                <Box className="meeting point"
-                sx={{
-                  display:"flex",
-                  flexDirection:"column",
-                  rowGap:2
-                }}
-                >
-                  <Typography
-                  sx={{
-                    fontWeight:"bold",
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                  >Meeting point</Typography>
-                  <Box>
-                    <Typography
-                    sx={{
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                    >Victoria Coach Station</Typography>
-                    <Typography
-                    sx={{
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                    >Victoria Coach Station, 164 Buckingham Palace Rd, London SW1W 9TP, UK</Typography>
-                  </Box>
-                  <Typography
-                  sx={{
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                  >Located approximately 7 minutes walk from Victoria Underground and Railway station. Tour departs inside the building at the following departure gate. Boarding starts 15 minute before the departure stated below. 8:15am - Gate 19 9:15am, 10:15am, 11:15am, 12:15pm & 13:45pm - Gate 0</Typography>
-                </Box>
-                <Box className="endPoint"
-                  sx={{
-                    display:"flex",
-                    flexDirection:"column",
-                    rowGap:2
-                  }}
-                >
-                  <Typography
-                  sx={{
-                    fontSize: { xs: "14px", md: "16px" },
-                    fontWeight:"bold"
-                  }}
-                  >End Point</Typography>
-                  <Box className="endPointDetails"
-                    sx={{
-                      display:"flex",
-                      flexDirection:"column",
-                    }}
-                  >
-                    <Typography
-                    sx={{
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                    >Victoria Station</Typography>
-                    <Typography
-                    sx={{
-                    fontSize: { xs: "14px", md: "16px" }
-                  }}
-                    >Victoria St, London SW1E 5ND, UK</Typography>
-                  </Box>
-                 
-                </Box>
-            </Box>
-            </Box> */}
-
-
-            {/* over  view */}
-            {/* <Box sx={{display:"flex",flexDirection:"column",rowGap:3}}>
-              <Typography variant="h4" >Overview</Typography>
-              <Typography fontSize={"18px"}>Discover the capital city of the United Arab Emirates on this guided all-day tour from Dubai. Along the way, pass by the Jebel Ali Port, the largest man-made port in the world. In Abu Dhabi, visit the Grand Mosque, the Heritage Village, and Emirates Palace. Stop at Marian Mall for lunch and browse the date and carpet markets. Tour also includes a stop at Ferrari World for photos.</Typography>
-              <List sx={{ listStyleType: 'disc',paddingLeft:"20px" }}>
-      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>VThis tour is ideal for first-time visitors to the UAE
-</Typography></ListItem>
-      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Relax on the drive to Abu Dhabi (less than two hours from Dubai)
-</Typography>
-</ListItem>
-      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Enjoy time to shop for souvenirs and wares</Typography>
-</ListItem>
-      <ListItem sx={{ display: 'list-item' }}><Typography fontSize={"18px"}>Hotel pickup and drop-off is included</Typography>
-</ListItem>
-               </List>
-               <Box sx={{display:"flex",flexDirection:"column",rowGap:2}}>
-                <Typography variant="h4">What's Included</Typography>
-                <Box sx={{display:"flex",justifyContent:"space-between",width:"100%"}}>
-                  <Box width={"50%"}>
-                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Pick-up & Drop-off from your Hotel / Residence</Typography>
-                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Sheikh Zayed Grand Mosque Visit</Typography>
-                    <Typography fontSize={"16px"}>✔&nbsp; &nbsp;Abu Dhabi Corniche
-</Typography>
-                  </Box>
-                  <Box width={"50%"}>
-                    <Typography fontSize={"16px"}>❌&nbsp; &nbsp; Gratuities</Typography>
-                    <Typography fontSize={"16px"}>❌&nbsp; &nbsp; Hotel transfers</Typography>
-                  </Box>
-                </Box>
-               </Box>
-               <Typography variant="h4">Meeting And Pickup</Typography>
-               <Typography variant="h5">Meeting point</Typography>
-               <Box>
-               <Typography fontSize={"18px"}>Jumeirah Beach Hotel</Typography>
-              <Typography fontSize={"18px"}>Jumeirah St - Umm Suqeim - Umm Suqeim 3 - Dubai - United Arab Emirates</Typography>
-               </Box>
-              <Typography fontSize={"18px"}>Located in: Jumeirah Beach Hotel Address: Inside Burj Al Arab, Ticket Lounge - Umm Suqeim - Umm Suqeim 3 - Dubai Note: Head to Jumeirah Beach Hotel where valet parking is available for the Inside Burj Al Arab tour</Typography>
-              <Typography variant="h5">End point</Typography>
-              <Box>
-              <Typography fontSize={"18px"}>This activity ends back at the meeting point.</Typography>
-              </Box>
-            </Box> */}
-
-
-
-{/* <div dangerouslySetInnerHTML={{ __html: singleTourDetails.description }}></div> */}
-
-            {/* <>
-              {singleTourDetails.description}
-            </> */}
+          
 
 <Box >
       {Parser().parse(singleTourDetails.description)}
     </Box>
-
-{/* {
-  singleTourDetails.description
-} */}
-
-
-
-            {/* smaple documennt */}
-            {/* <div>
-              <h2 className="overView-h2">Overview</h2>
-              <p className="overView-p">Visit some of the top attractions outside of London on this day trip to Stonehenge, Windsor Castle and the historic town of Bath. Start at Windsor Castle, home to the British royal family, for a tour of the State Apartments and St George’s Chapel, and then continue west of London to Salisbury, home of the mysterious Stonehenge rock formations. Finally, arrive in Bath, known for its elegant Georgian architecture and Roman baths. All admission tickets are included in the tour price. Please note: Windsor Castle is closed on Tuesdays and Wednesdays</p>
-              <ul className="overView-ul">
-                <li>Guided day trip from London to Windsor Castle, Stonehenge and Bath</li>
-                <li>Explore St George's Chapel and the State Apartments at Windsor Castle</li>
-                <li>Tour the mysterious site of Stonehenge with an exclusive interactive map & VOX audio guide</li>
-                <li>Take a panoramic tour of Georgian Bath with a guide
-                </li>
-                <li>Visit the Roman Baths with free audio guide, a well-preserved public bathing pool offering an insight into life during the Roman era</li>
-                <li>Includes first-class luxury coach with FREE Wi-Fi and the services of a guide</li>
-                              </ul>
-              <h3 className="overView-whyTravellers">Why Travellers Choose This Tour</h3>
-              <p className="overView-p">Visit Stonehenge, Windsor Castle, and Bath from London without worrying about transport or entry fees for attractions—you can choose from tour options with two or all entry fees included.</p>
-              <h3 className="overView-whyTravellers">What's Included</h3>
-              <div className="includedDiv">
-                <div className="leftDivIncluded">
-                  <p className="included-p">✔ &nbsp; &nbsp; Superior Coach, Wi-Fi and USB Charging On-board</p>
-                  <p className="included-p">✔ &nbsp; &nbsp; Expert guide</p>
-                  <p className="included-p">✔ &nbsp; &nbsp; Admission to Windsor Castle (if option selected)</p>
-                </div>
-                <div className="rightDivIncluded">
-                  <p className="included-p">❌&nbsp; &nbsp; Hotel pick-up and drop-off</p>
-                  <p className="included-p">❌&nbsp; &nbsp; Gratuities</p>
-                  <p className="included-p">❌&nbsp; &nbsp; Lunch</p>
-                </div>
-              </div>
-
-
-
-              <h2>Meeting And Pickup</h2>
-              <h3 className="meethingPoint">Meeting point</h3>
-              <div>
-              <p className="meething-p">Victoria Coach Station</p>
-              <p className="meething-p">Victoria Coach Station, 164 Buckingham Palace Rd, London SW1W 9TP, UK</p>
-              </div>
-                <p className="moreP">Tour departs at 8 am (boarding at 7.30 am), Victoria Coach Station, Gate 1-5</p>
-                <h3 className="meethingPoint">Start time</h3>
-                <p className="moreP">08:00 am</p>
-                <h3 className="meethingPoint">End point</h3>
-                <div>
-                  <p className="meething-p">Vauxhall Bridge Road</p>
-                  <p className="meething-p">Vauxhall Bridge Rd, Pimlico, London SW1, UK</p>
-                </div>
-            </div> */}
 
 
           </Box>

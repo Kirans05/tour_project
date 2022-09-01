@@ -67,7 +67,6 @@ const TermsAndCondition = () => {
 <li>Worry-free Shore Excursions</li>
 <li>Mekatourizm Tickets</li>
 <li>General Provisions</li>
-<li>Jurisdiction and Governing Law</li>
           </ol>
         </Box>
 
@@ -1169,33 +1168,7 @@ const TermsAndCondition = () => {
     </Box>
 
 
-    <Box className='Jurisdiction and Governing Law'
-     sx={{
-      display:"flex",
-      flexDirection:"column",
-      alignItems:"flex-start",
-      justifyContent:"flex-start",
-      rowGap:2
-    }}
-    >
-    <Typography
-     sx={{
-      fontSize:{xs:"16px",md:"18px"},
-      fontWeight:"bold"
-    }}
-    >23.Jurisdiction and Governing Law</Typography>
-    <Typography
-     sx={{
-        fontSize:{xs:"16px",md:"18px"}
-      }}
-    >23.1 The Services are provided by a U.S. entity and these Terms of Use is governed by the laws of the Commonwealth of Massachusetts, USA. You hereby consent to the exclusive jurisdiction and venue of courts in Boston, Massachusetts, USA and stipulate to the fairness and convenience of proceedings in such courts for all disputes arising out of or relating to the use of the Services. You agree that all claims you may have against Mekatourizm arising from or relating to the Services must be heard and resolved in a court of competent subject matter jurisdiction located in Boston, Massachusetts.</Typography>
-
-    <Typography
-     sx={{
-        fontSize:{xs:"16px",md:"18px"}
-      }}
-    >23.2 Use of the Services is unauthorized in any jurisdiction that does not give effect to all provisions of these terms and conditions, including, without limitation, this paragraph. The foregoing shall not apply to the extent that applicable law in your country of residence requires application of another law and/or jurisdiction and this cannot be excluded by contract.</Typography>
-    </Box>
+    
 
      </Box>
      <Footer />

@@ -4,6 +4,7 @@ import {
   Button,
   Checkbox,
   Divider,
+  Drawer,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -148,7 +149,8 @@ import Venice5 from "../../assets/venice/venice5.jpg"
 import Venice6 from "../../assets/venice/venice6.jpg"
 import Venice7 from "../../assets/venice/venice7.jpg"
 
-
+import FilterListIcon from '@mui/icons-material/FilterList';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 
@@ -178,7 +180,7 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-const minDistance = 20;
+const minDistance = 10;
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 
@@ -200,7 +202,7 @@ const DashBoard = () => {
   const dispatch = useDispatch()
   const [minPrice, setMInPrice] = useState(0)
   const [maxPrice, setMaxPrice] = useState(10)
-  const [rangePrice, setRangePrice] = useState([0,1000])
+  const [rangePrice, setRangePrice] = useState([0,300])
   const [tripDuration, setTripDuration] = useState([0,12])
   const [tripRating, setTripRatings] = useState(1)
   const [listOfCountries, setListOfCountries] = useState([])
@@ -217,7 +219,7 @@ const DashBoard = () => {
   // const [travel_Transportation, setTravel_Transportation] = useState(true);
   // const [uniqueExperience, setUniqueExperience] = useState(true);
 
-  const [value1, setValue1] = React.useState([20, 37]);
+  const [value1, setValue1] = React.useState([10, 37]);
   const [dateValue, setDateValue] = useState(new Date());
 
   const [FirstArtState, setFirstArtState] = useState("");
@@ -246,6 +248,336 @@ const DashBoard = () => {
   });
 
 
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const [priceFilter, setPriceFilter] = useState(false)
+  const [durationFilter, setDurationFilter] = useState(false)
+  const [ratingFilter, setRatingFilter] = useState(false)
+
+
+  const clearHandler = () => {
+    setRangePrice([0,1000])
+    setTripDuration([0,12])
+    setTripRatings(1)
+    dispatch(filterProductByCityAction(""))
+    setlogoutRender(!logoutRender)
+}
+
+
+
+const ApplyHandler = () => {
+  // toggleDrawer("left", false)
+    setlogoutRender(!logoutRender)
+}
+
+
+
+
+  const toggleDrawer = (anchor, open, handler) => {
+   return (event) => {
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+  
+      setState({ ...state, [anchor]: open });
+
+      if(handler == "clear"){
+          clearHandler()
+        }else if(handler == "apply"){
+          ApplyHandler()
+        }
+
+    };
+  }
+
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 360,
+      display:"flex",
+      flexDirection:"column",
+      rowGap:4
+    }}
+      role="presentation"
+    >
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        padding:{xs:"10% 8% 2% 8%"}
+
+      }}
+      >
+      <Typography sx={{fontSize:"18px",fontWeight:"bold"}}>Filter</Typography>
+      <ClearIcon 
+      onClick={toggleDrawer("left", false)}
+      />
+      </Box>
+
+      <Divider />
+
+      {/* price filters */}
+      <Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        padding:{xs:"2% 8% 2% 8%"}
+      }}
+      onClick={()=>setPriceFilter(!priceFilter)}
+      >
+        <Typography sx={{fontSize:"18px"}}>Price</Typography>
+        <Box className="arrows">
+            <KeyboardArrowDownIcon 
+            sx={{
+              display:!priceFilter ? "flex" : "none"
+            }}
+            />
+            <KeyboardArrowUpIcon 
+             sx={{
+              display:priceFilter ? "flex" : "none"
+            }}
+            />
+        </Box>
+      </Box>
+
+        {
+          priceFilter ? 
+          <Box
+          sx={{
+            padding:{xs:"2% 8% 2% 8%"}
+          }}>
+            <Slider
+                    getAriaLabel={() => "Minimum distance"}
+                    value={value1}
+                    onChange={handleChange1}
+                    valueLabelDisplay="on"
+                    getAriaValueText={valuetext}
+                    disableSwap
+                    min={minPrice}
+                    max={maxPrice}
+                    sx={{
+                      color:"blue",
+                    }}
+                  />
+            </Box>
+            : null
+        }    
+  </Box>
+
+        <Divider />
+        
+
+      {/* duration Filter */}
+      <Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        padding:{xs:"2% 8% 2% 8%"}
+      }}
+      onClick={()=>setDurationFilter(!durationFilter)}
+      >
+        <Typography sx={{fontSize:"18px"}}>Duration</Typography>
+        <Box className="arrows">
+            <KeyboardArrowDownIcon 
+            sx={{
+              display:!durationFilter ? "flex" : "none"
+            }}
+            />
+            <KeyboardArrowUpIcon 
+             sx={{
+              display:durationFilter ? "flex" : "none"
+            }}
+            />
+        </Box>
+      </Box>
+      {
+          durationFilter ? 
+          <Box
+          sx={{
+            padding:{xs:"2% 8% 2% 8%"}
+          }}
+          >
+             <FormControl>
+           <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+    onChange={handleRadioDurationChange}
+  >
+    <FormControlLabel value="Up to 1 hour" control={<Radio color="success" />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+     <Typography  sx={{ fontSize: "14px" }}>Up to 1 hour</Typography>
+    </Box>}
+    />
+    <FormControlLabel value="1 to 4 hours" control={<Radio  color="success"  />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Typography sx={{ fontSize: "14px" }}>1 to 4 hours</Typography>
+    </Box>}
+     />
+    <FormControlLabel value="4 hours to 1 day" control={<Radio  color="success" />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Typography sx={{ fontSize: "14px" }}>4 hours to 1 day</Typography>
+      </Box>}
+      />
+  </RadioGroup>
+                  </FormControl>
+            </Box>
+            : null
+        }  
+   </Box>
+
+   <Divider />
+
+      {/* ratings filter */}
+      <Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        padding:{xs:"2% 8% 2% 8%"}
+      }}
+      onClick={()=>setRatingFilter(!ratingFilter)}
+      >
+        <Typography sx={{fontSize:"18px"}}>Rating</Typography>
+        <Box className="arrows">
+            <KeyboardArrowDownIcon 
+            sx={{
+              display:!ratingFilter ? "flex" : "none"
+            }}
+            />
+            <KeyboardArrowUpIcon 
+             sx={{
+              display:ratingFilter ? "flex" : "none"
+            }}
+            />
+        </Box>
+      </Box>
+      {
+          ratingFilter ? 
+          <Box
+          sx={{
+            padding:{xs:"2% 8% 2% 8%"}
+          }}
+          >
+             <Box className="ratings"
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  rowGap:3
+                }}
+                >
+                  <FormControl>
+           <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    defaultValue="female"
+    name="radio-buttons-group"
+    onChange={handleRadioGroupChange}
+  >
+    <FormControlLabel value="five" control={<Radio color="success" />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Rating name="read-only" value={5} readOnly sx={{fontSize:"22px"}}/>
+    </Box>}
+    />
+    <FormControlLabel value="four" control={<Radio  color="success"  />} 
+    label={ <Box
+      className="4star"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      <Rating name="read-only" value={4} readOnly sx={{fontSize:"22px"}}/>
+      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+    </Box>}
+     />
+    <FormControlLabel value="three" control={<Radio  color="success" />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={3} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+    <FormControlLabel value="two" control={<Radio  color="success"  />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={2} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+    <FormControlLabel value="one" control={<Radio  color="success" />}
+      label={ <Box
+        className="4star"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <Rating name="read-only" value={1} readOnly sx={{fontSize:"22px"}}/>
+        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      </Box>}
+      />
+  </RadioGroup>
+                  </FormControl>
+                </Box>
+            </Box>
+            : null
+        }  
+        </Box>
+
+        <Divider />
+
+          <Box
+              sx={{
+                display:"flex",
+                flexDirection:"row",
+                alignItems:"center",
+                justifyContent:"space-evenly"
+              }}
+              >
+                <Button variant="contained" color="warning" 
+                // onClick={()=>{
+                //   toggleDrawer("left",false)
+                //   // clearHandler(anchor)
+                // }}
+                onClick={toggleDrawer("left",false,"clear")}
+                >Clear</Button>
+                <Button variant="contained" color="success"
+                onClick={toggleDrawer("left",false,"apply")}
+                >Apply</Button>
+              </Box>
+
+
+    </Box>
+  );
+
+
+
+
   const [addFavorite, setAddFovirate] = useState(false)
 
   const handleChange1 = (event, newValue, activeThumb) => {
@@ -259,11 +591,7 @@ const DashBoard = () => {
     } else {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
-    // setMInPrice(newValue[0])
-    // setMaxPrice(newValue[1])
-
-    // const filterElements = totalProductList.filter(item => item.price >= newValue[0] && item.price <= newValue[1] )
-    // dispatch(displayProductAction(filterElements))
+    
   };
 
   const handleDateTimeChange = (newValue) => {
@@ -321,19 +649,7 @@ const handleRadioDurationChange = (e) => {
 
 
 
-const clearHandler = () => {
-    setRangePrice([0,1000])
-    setTripDuration([0,12])
-    setTripRatings(1)
-    dispatch(filterProductByCityAction(""))
-    setlogoutRender(!logoutRender)
-}
 
-
-
-const ApplyHandler = () => {
-    setlogoutRender(!logoutRender)
-}
 
 
 
@@ -377,6 +693,7 @@ const fetchAllTourProducts = async () => {
     })
     setMInPrice(min)
     setMaxPrice(max)
+    setValue1([min,max])
     dispatch(displayProductAction(filterElements))
     dispatch(countryListAction(arr))
   }catch(error){
@@ -423,6 +740,19 @@ useEffect(()=>{
             <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
               Tours, Tickets, & Excursions
             </Typography>
+            <Box
+            sx={{
+              display:"flex",
+              alignItems:"center",
+              columnGap:2
+            }}
+            >
+              <FilterListIcon 
+                sx={{
+                  display:{xs:"flex",md:"none"}
+                }}
+                onClick={toggleDrawer("left", true)}
+              />
             <DesktopDatePicker
               inputFormat="MM/dd/yyyy"
               value={dateValue}
@@ -439,6 +769,7 @@ useEffect(()=>{
                 />
               }}
             />
+          </Box>
           </Box>
 
 
@@ -1731,8 +2062,8 @@ useEffect(()=>{
                     valueLabelDisplay="on"
                     getAriaValueText={valuetext}
                     disableSwap
-                    min={minPrice}
-                    max={maxPrice}
+                    min={ minPrice}
+                    max={ maxPrice}
                     sx={{
                       color:"blue",
                     }}
@@ -1749,7 +2080,7 @@ useEffect(()=>{
                 <Divider />
 
                 {/* duration lfilter */}
-      <FormControl>
+                  <FormControl>
            <RadioGroup
     aria-labelledby="demo-radio-buttons-group-label"
     defaultValue="female"
@@ -2063,6 +2394,13 @@ useEffect(()=>{
           </Box>
         </Box>
         <Footer />
+        <Drawer
+            anchor={"left"}
+            open={state["left"]}
+            onClose={toggleDrawer("left", false)}
+          >
+            {list("left")}
+          </Drawer>
       </Box>
     </LocalizationProvider>
   );

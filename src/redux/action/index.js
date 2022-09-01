@@ -260,6 +260,14 @@ export const currencyCodeAction = (payload) =>{
     }
 }
 
+// currency conversion
+export const currencyConversionAction = (payload) => {
+    return {
+        type:"currencyConversion",
+        payload
+    }
+}
+
 // singleProduct selected
 export const individualProductAction = (payload) => {
     return {
@@ -369,6 +377,13 @@ export const rome = (payload) => {
 export const venice = (payload) => {
     return {
         type:"venice",
+        payload
+    }
+}
+
+export const selectedBookedProductAction = (payload) => {
+    return {
+        type:"selectedProduct",
         payload
     }
 }

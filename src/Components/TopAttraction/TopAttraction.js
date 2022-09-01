@@ -8,6 +8,9 @@ import Travel10 from "../../assets/images/travel10.jpg";
 import Travel11 from "../../assets/images/travel11.jpg";
 import Travel12 from "../../assets/images/travel312.jpg";
 import { Box, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { individualProductAction } from '../../redux/action';
+import { useNavigate } from 'react-router-dom';
 
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -15,10 +18,18 @@ let touristName = ["Ajanta Caves","Eiffel Tower","Great Wall of China","Elephant
 
 
 
-const TopAttraction = () => {
-
+const TopAttraction = ({item}) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [productimage, setProductImage] = useState(arr[Math.floor(Math.random()*arr.length)])
     const [productnames, setProductName] = useState(touristName[Math.floor(Math.random()*touristName.length)])
+
+  const clickHandler = () => {
+    dispatch(individualProductAction(item))
+    navigate("/TourDeatils")
+  }
+
+
 
   return (
     <Box
@@ -34,9 +45,12 @@ const TopAttraction = () => {
   >
     <Box
       component={"img"}
-      src={productimage}
+      src={item.imageUrl}
       alt={"alternate image"}
-      sx={{ width: "120px" }}
+      sx={{ minWidth: "120px", maxWidth:"120px" ,
+    minHeight:"80px",
+    maxHeight:"80px"
+    }}
     />
     <Box
       className="plcaeDescriptions"
@@ -44,17 +58,19 @@ const TopAttraction = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        rowGap:1
+        rowGap:1,
+        width:{xs:"80px",md:"100px"}
       }}
+      onClick={clickHandler}
     >
       <Typography sx={{ fontSize: {xs:"12px",md:"16px"}, fontWeight: "bold" ,
     "&:hover":{cursor:"pointer",textDecoration:"underLine"}
     }}>
-        {productnames}
+        {item.name}
       </Typography>
-      <Typography sx={{ fontSize: "13px" }}>
+      {/* <Typography sx={{ fontSize: "13px" }}>
         206 Tours and Activities
-      </Typography>
+      </Typography> */}
     </Box>
   </Box>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Travel3 from "../../assets/images/travel3.jpg";
 import Travel4 from "../../assets/images/travel4.webp";
 import Travel6 from "../../assets/images/travel6.jpg";
@@ -11,14 +11,63 @@ import { Box, Rating, Typography } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CheckIcon from "@mui/icons-material/Check";
+import axios from 'axios';
+import { initializeConnect } from 'react-redux/es/components/connect';
+import { useDispatch } from 'react-redux';
+import { selectedBookedProductAction } from '../../redux/action';
+import { useNavigate } from 'react-router-dom';
 
 
+const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
 
-const BookingProductCart = () => {
+const BookingProductCart = ({item}) => {
 
+  const navigate = useNavigate()
+  const dipatch = useDispatch()
     const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
+    const [individualProduct, setIndividualProduct] = useState(null)
+
+
+
+const clickHandler = () => {
+  dipatch(selectedBookedProductAction(item))
+  navigate("/bookedDetailsPage")
+}
+
+
+
+  const fetchProductDetails = async () => {
+    let options = {
+      url:`${Base_url}/tour/product?id=${item.productId}`,
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    }
+
+    try{
+      let {data} = await axios(options)
+      setIndividualProduct(data)
+    }catch(err){
+      
+    }
+
+  }
+
+
+  useEffect(() =>{
+    fetchProductDetails()
+  },[])
+
+
+
+
+
+
+
 
 
   return (
@@ -36,6 +85,7 @@ const BookingProductCart = () => {
       flexDirection:{xs:"row",md:"column"},
       columnGap:{xs:2,md:0},
     }}
+    onClick={clickHandler}
     >
       <Box className='images&AddToWishList'
       sx={{
@@ -50,7 +100,7 @@ const BookingProductCart = () => {
       >
           <Box 
           component={"img"}
-          src={productimage}
+          src={individualProduct == null ? productimage : individualProduct.imageUrl}
           alt={"wishListImages"}
           sx={{
             width:{xs:"170px",md:"400px"},
@@ -99,7 +149,7 @@ const BookingProductCart = () => {
           sx={{
             fontSize:{xs:"14px",md:"16px"}
           }}
-          >Harry Potter Tour of Warner Bros. Studio with Transport from London</Typography>
+          >{individualProduct == null ? "Tour Name" : individualProduct.name}</Typography>
           <Box className='rating&Reviews'
           sx={{
             display:"flex",
@@ -109,7 +159,7 @@ const BookingProductCart = () => {
             columnGap:1
           }}
           >
-            <Rating name="read-only" value={4} readOnly 
+            <Rating name="read-only" value={individualProduct == null ? 4 : individualProduct.stars} readOnly 
             sx={{
               fontSize:{xs:"16px",md:"18px"}
             }}
@@ -120,7 +170,7 @@ const BookingProductCart = () => {
             }}
             >543.4</Typography>
           </Box>
-          <Box className='accessTimeAndFreeCancellation'>
+          {/* <Box className='accessTimeAndFreeCancellation'>
              <Box className='hoursTime'
           sx={{
             display:"flex",
@@ -155,7 +205,7 @@ const BookingProductCart = () => {
               Free Cancellation
             </Typography>
           </Box>
-          </Box>
+          </Box> */}
          
           <Box className='priceDetails'
           sx={{
@@ -170,7 +220,7 @@ const BookingProductCart = () => {
             sx={{
               fontSize:{xs:"12px",md:"10px"}
             }}
-            >from </Typography>
+            >Total </Typography>
             <Box className='price'
             sx={{
               display:"flex",
@@ -196,7 +246,7 @@ const BookingProductCart = () => {
                 fontSize:{xs:"14px",md:"16px"},
                 fontWeight:"bold",
               }}
-              >453</Typography>
+              >{item.price}</Typography>
             </Box>  
           </Box>
     </Box>

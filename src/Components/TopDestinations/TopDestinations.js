@@ -22,6 +22,7 @@ import Istanbul1 from "../../assets/istanbul/istanbul1.jpg"
 import Venice1 from "../../assets/venice/venice1.jpg"
 import Rome1 from "../../assets/rome/romeImage1.jpg"
 import Raykjavik1 from "../../assets/raykjavik/raykjavik1.jpg"
+import Turkey1 from "../../assets/turkey/turkey1.jpg"
 
 
 
@@ -61,7 +62,7 @@ const TopDestinations = ({item}) => {
               >
                 <Box
                   component={"img"}
-                  src={item == "London" ? London1 : item == "Rome" ? Rome1 : item == "Krakow" ? Krakow1 : item == "Florence" ? Florence1 : item == "Edinburgh" ? Edenburgh1 : item == "venice" ? Venice1 : item == "raykjavik" ? Raykjavik1 : item == "Amsterdam" ? Amsterdam1 : item == "istanbul" ? Istanbul1 : Dubai1}
+                  src={item == "London" ? London1 : item == "Rome" ? Rome1 : item == "Krakow" ? Krakow1 : item == "Florence" ? Florence1 : item == "Edinburgh" ? Edenburgh1 : item == "venice" ? Venice1 : item == "Raykjavik" ? Raykjavik1 : item == "Amsterdam" ? Amsterdam1 : item == "Istanbul" ? Istanbul1 : item == "Dubai" ? Dubai1 : Turkey1}
                   alt="destinationPlaces"
                   sx={{
                     width: {xs:"150px",md:"250px"},

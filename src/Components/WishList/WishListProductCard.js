@@ -120,7 +120,7 @@ let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Trav
 
 
 
-const WishListProductCard = ({item, reRenderPage, setReRenderPage, callReRender, src}) => {
+const WishListProductCard = ({item, reRenderPage, setReRenderPage, callReRender}) => {
 
   const navigate = useNavigate()
 
@@ -187,7 +187,7 @@ const WishListProductCard = ({item, reRenderPage, setReRenderPage, callReRender,
       >
           <Box 
           component={"img"}
-          src={src}
+          src={item.imageUrl}
           alt={"wishListImages"}
           sx={{
             width:{xs:"170px",md:"400px"},

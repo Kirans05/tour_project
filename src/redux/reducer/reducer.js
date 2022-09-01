@@ -157,7 +157,8 @@ const travelDetailsRecord = {
     PhoneNumber:"",
     countryCode:"",
     PromoCode:"",
-    currencyCode:"INR"
+    currencyCode:"GBP",
+    currencyValue:1
 }
 export const travelDetails = (state = travelDetailsRecord, action) => {
     switch(action.type){
@@ -208,6 +209,9 @@ export const travelDetails = (state = travelDetailsRecord, action) => {
        
         case "currencyCode" : 
             return {...state,currencyCode : action.payload};
+
+        case "currencyConversion" :
+            return {...state,currencyValue:action.payload}
 
         default : 
             return state
@@ -406,5 +410,17 @@ export const productImageReducer = (state = imageObj, action) => {
             return {...imageObj, venice : action.payload}
     default : 
         return state
+    }
+}
+
+
+
+const selectedProductObj = {}
+export const selectedBookedProductReducer = (state = selectedProductObj, action) => {
+    switch(action.type){
+        case "selectedProduct" : 
+            return action.payload
+        default :
+            return state
     }
 }

@@ -15,6 +15,8 @@ import WishList from "./Screens/WishList/WishList"
 import UserSettings from "./Components/userInformation/UserSettings"
 import SignUpUserDetails from "./Screens/SignupPage/SignUpUserDetails"
 import BookingPage from "./Screens/BookingPage/BookingPage"
+import BookedDetailsPage from './Screens/BookedDetailsPage/BookedDetailsPage'
+import AboutTurkey from './Components/AboutTurkey/AboutTurkey'
 
 
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
       <Route path='/userProfile' element={<UserSettings />} />
       <Route path='/checkoutPage' element={<CheckOutPage />} />
       <Route path='/signupUserDetails' element={<SignUpUserDetails />} />
+      <Route path='/bookedDetailsPage' element={<BookedDetailsPage />} />
+      <Route path='/aboutTurkey' element={<AboutTurkey />} />
 
     </Routes>
     </Box>

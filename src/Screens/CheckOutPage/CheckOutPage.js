@@ -1132,6 +1132,7 @@ const CheckOutPage = () => {
   const navigate = useNavigate()
 
   //  redux state and dispatch functions
+  const travellerData = useSelector((state) => state.travelDetails)
   const memberPresentState = useSelector((state) => state.addTravelMembers)
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const fullBookingDetails = useSelector((state) => state.travelDetails)
@@ -1142,6 +1143,7 @@ const CheckOutPage = () => {
   const [alertMessageColor, setAlertMessageColor] = useState("warning")
 
   const item = singleTourDetails
+  const [description, setDescription] = useState(item.city == "Turkey" ? item.description.substr(150,120) : item.description.substr(75,125))
      const [productImage1, setProductImage1] = useState(item.name == "Harry Potter Tour of Warner Bros. Studio with Transport from London" ? London1 : item.name == "Stonehenge, Windsor Castle, and Bath from London" ? London2 : item.name == "Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock" ? London3 : item.name == "Westminster to Greenwich Sightseeing Thames Cruise in London" ? London4 : item.name == "Stonehenge and Bath Day Trip from London" ? London5 : item.name == "Buckingham Palace Tour Including Changing of the Guard Ceremony" ? London6 : item.name == "Windsor Castle, Stonehenge and Bath Tour from London with Admission" ? London7 : item.name == "Best of London Including Tower of London, Changing of the Guard, with a Cream Tea or London Eye Upgrade" ? London8 : item.name == "Skip-the-Line Vatican Museums & Sistine Chapel Group Tour" ? Rome1 : item.name == "Skip the Line: Colosseum Small Group Tour with Roman Forum & Palatine Hill" ? Rome2 : item.name == "Skip-the-Line: Vatican Museums & Sistine Chapel Guided Small-Group Tour" ? Rome3 : item.name == "Small-Group Tour of Colosseum Underground, Arena and Forum" ? Rome4 : item.name == "Pompeii, Amalfi Coast and Positano Guided Day Trip from Rome" ? Rome5 : item.name == "Colosseum VIP Gladiators access with Arena & Ancient Rome small group tour" ? Rome6 : item.name == "Tuscany Day Trip from Rome including 3-Course Lunch and Wine Tasting" ? Rome7 : item.name == "The Original Entire Vatican Tour & St. Peter's Dome Climb" ? Rome8 : item.name == "Auschwitz & Birkenau: Live-Guided Tour with Transportation and Hotel Pickup" ? Krakow1 : item.name == "Auschwitz-Birkenau Museum and Memorial Guided Tour from Krakow" ? Krakow2 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow" ? Krakow3 : item.name == "Auschwitz-Birkenau and Wieliczka Salt Mine Guided One Day Tour" ? Krakow4 : item.name == "Zakopane Tour with Hot Bath Pools and Hotel Pickup" ? Krakow5 : item.name == "Krakow: Extreme Shooting Range with Hotel Pick-Up" ? Krakow6 : item.name == "From Krakow: Auschwitz-Birkenau Guided Tour, Pickup & Transfers" ? Krakow7 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow with pick-up from Selected Hotels" ? Krakow8 :  null)
   
   
@@ -1243,6 +1245,8 @@ const submitHandler = async () => {
 
   let expiryYear =  `${fullBookingDetails.Expirayyear}`.slice(2)
 
+  let amount = travellerData.currencyCode == "GBP" ? (memberPresentState.adult*singleTourDetails.price)+(memberPresentState.child*singleTourDetails.price) : (memberPresentState.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentState.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)
+
   let options = {
     url:`${Base_url}/order/create`,
     method:"POST",
@@ -1252,11 +1256,11 @@ const submitHandler = async () => {
     },
     data:{
       quantity:1,
-      currency:`${singleTourDetails.currency}`,
+      currency:`${travellerData.currencyCode}`,
       token:`${localStorage.getItem("accessToken")}`,
       userId:currentUserDetails.id,
       productId:singleTourDetails.id,
-      amount:(singleTourDetails.price*memberPresentState.adult)+(memberPresentState.child*singleTourDetails.price),
+      amount,
       cardNumber:fullBookingDetails.CreditCardNumber.toString(),
       cardHolderName:fullBookingDetails.CardholderName,
       cardExpiry:`${expirayMon}/${expiryYear}`,
@@ -1270,7 +1274,6 @@ const submitHandler = async () => {
     try{
       setAlertMessageColor("success")
       let {data} = await axios(options)
-      console.log(data)
       if(data.message == "Error processing order"){
         setAlertMessageColor("warning")
         setAlertMessage(data.message)
@@ -1281,9 +1284,9 @@ const submitHandler = async () => {
     }catch(error){
         console.log(error)
     }
-  //   setTimeout(()=>{
-  //     navigate("/")
-  //   },4000)
+    setTimeout(()=>{
+      navigate("/")
+    },4000)
   }
 }
 
@@ -1359,7 +1362,7 @@ const submitHandler = async () => {
             >
               <Box
                 component={"img"}
-                 src={productImage1 != null ? productImage1 : productImage2 != null ? productImage2 : productImage3 != null ? productImage3 : productimage4 }
+                 src={singleTourDetails.imageUrl }
                 alt="tour image"
                 sx={{
                   width: { xs: "120px", md: "200px" },
@@ -1395,7 +1398,7 @@ const submitHandler = async () => {
                       fontSize: { xs: "14px", md: "16px" },
                     }}
                   >
-                    {singleTourDetails.description.substr(75,105)}
+                    {description}
                   </Typography>
                   <Typography
                     sx={{
@@ -1875,7 +1878,7 @@ const submitHandler = async () => {
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}
-                >{singleTourDetails.description.substr(75,105)}</Typography>
+                >{description}</Typography>
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
@@ -1933,13 +1936,19 @@ const submitHandler = async () => {
                     columnGap:1
                   }}
                   >
-                   <Typography>{singleTourDetails.currency}</Typography>
-                    <Typography
-                    sx={{
-                        fontSize:{xs:"16px",md:"20px"},
-                        fontWeight:"bold"
-                    }}
-                    >{(singleTourDetails.price*memberPresentState.adult)+(memberPresentState.child*singleTourDetails.price)}</Typography>
+                   <Typography>{travellerData.currencyCode}</Typography>
+                   <Typography
+                         sx={{
+                          display:travellerData.currencyCode == "GBP" ? "flex" : "none"
+                         }}
+                         >{(memberPresentState.adult*singleTourDetails.price)+(memberPresentState.child*singleTourDetails.price)}</Typography>
+                         <Typography
+                         sx={{
+                          display:travellerData.currencyCode != "GBP" ? "flex":"none"
+                         }}
+                         >
+                        {(memberPresentState.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentState.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)}
+                         </Typography>
                   </Box>
                   </Box>
 
