@@ -384,7 +384,7 @@ const arrowImageChangerLeft = () => {
 
 const fetchVerticalImages = async () => {
   let option = {
-    url:`${Base_url}/tour/get-product-images?id=${localStorage.getItem("tourId")}`,
+    url:`${Base_url}/tour/get-product-images?id=${singleTourDetails.id}`,
     method:"GET",
     headers:{
       "content-type":"application/json",
@@ -404,28 +404,9 @@ const fetchVerticalImages = async () => {
 }
 
 
-const fetchIdividualTour = async () => {
-    let options = {
-      url:`${Base_url}/tour/product?id=${localStorage.getItem("tourId")}`,
-      method:"GET",
-      headers:{
-        "content-type":"application/json",
-        "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
-      }
-    }
-
-    try{
-      let {data} = await axios(options)
-      console.log(data)
-      // dispatch(individualProductAction(item));
-    }catch(error){
-
-    }
-}
-
 
 useEffect(()=>{
-  // fetchIdividualTour()
+
   fetchVerticalImages()
   checkWishListAdded()
 },[reRender])
