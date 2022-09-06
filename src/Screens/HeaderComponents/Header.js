@@ -1473,7 +1473,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               cursor: "pointer",
             },
           }}
-          onClick={() => navigate("/HomePage")}
+          onClick={() => navigate("/")}
         >
           <HomeIcon
             sx={{
@@ -1554,7 +1554,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               cursor: "pointer",
             },
           }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashBoard")}
         >
           <DashboardIcon
             sx={{
@@ -1912,13 +1912,13 @@ const Header = ({setlogoutRender,logoutRender}) => {
                 }}
                 // onClick={Tour_SightSeeingToggleDrawer("left", true)}
                 onClick={()=>{
-                  if(location.pathname == "/"){
+                  if(location.pathname == "/dashBoard"){
                     dispatch(filterProductByCityAction(""))
-                    navigate("/")
+                    navigate("/dashBoard")
                     setlogoutRender(!logoutRender)
                   }else{
                     dispatch(filterProductByCityAction(""))
-                    navigate("/")
+                    navigate("/dashBoard")
                   }
                  
                 }}
@@ -6274,11 +6274,12 @@ const Header = ({setlogoutRender,logoutRender}) => {
           "&:hover":{cursor:"pointer"}
         }}
         onClick={() => {
-          if(localStorage.getItem("accessToken") == null){
-            navigate("/login")
-          }else{
-            navigate("/HomePage")
-          }
+          // if(localStorage.getItem("accessToken") == null){
+          //   navigate("/login")
+          // }else{
+          //   navigate("/")
+          // }
+          navigate("/")
         }}
         /> 
       </Box>
@@ -6324,7 +6325,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           <SearchIcon 
           sx={{"&:hover":{cursor:"pointer"}}}
           onClick={()=>{
-            if(location.pathname == "/"){
+            if(location.pathname == "/dashBoard"){
               dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
               setShowMenuOptions(false)
               setSearchInputValue("")
@@ -6333,7 +6334,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
               setSearchInputValue("")
             setShowMenuOptions(false)
-            navigate("/")
+            navigate("/dashBoard")
             }
           }}
           />
@@ -6354,7 +6355,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         {placesName.map((option,index) => (
                       <MenuItem key={index} value={option}  
                       onClick={()=>{
-                        if(location.pathname == "/"){
+                        if(location.pathname == "/dashBoard"){
                           dispatch(filterProductByCityAction(option.toLowerCase()))
                           setShowMenuOptions(false)
                           setSearchInputValue("")
@@ -6363,7 +6364,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
                           dispatch(filterProductByCityAction(option.toLowerCase()))
                           setSearchInputValue("")
                         setShowMenuOptions(false)
-                        navigate("/")
+                        navigate("/dashBoard")
                         }
                       }}
                       >
@@ -6460,6 +6461,9 @@ const Header = ({setlogoutRender,logoutRender}) => {
                     select
                     value={countryCurrencyState}
                     onChange={contryChangeHandler}
+                    sx={{
+                      display:localStorage.getItem("accessToken") == null ? "none" :"flex"
+                    }}
                   >
                     {country_currency.map((option,index) => (
                       <MenuItem key={index} value={option.currency_code}  >
@@ -6628,7 +6632,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           <SearchIcon 
           sx={{"&:hover":{cursor:"pointer"}}}
           onClick={()=>{
-            if(location.pathname == "/"){
+            if(location.pathname == "/dashBoard"){
               dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
               setShowMenuOptions(false)
               setSearchInputValue("")
@@ -6637,7 +6641,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               dispatch(filterProductByCityAction(searchInputValue.toLowerCase()))
               setSearchInputValue("")
             setShowMenuOptions(false)
-            navigate("/")
+            navigate("/dashBoard")
             }
           }}
           />
@@ -6666,7 +6670,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         {placesName.map((option,index) => (
                       <MenuItem key={index} value={option}  
                       onClick={()=>{
-                        if(location.pathname == "/"){
+                        if(location.pathname == "/dashBoard"){
                           dispatch(filterProductByCityAction(option.toLowerCase()))
                           setShowMenuOptions(false)
                           setSearchInputValue("")

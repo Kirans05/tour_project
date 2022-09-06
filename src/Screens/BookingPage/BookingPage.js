@@ -199,7 +199,9 @@ const BookingPage =  () => {
             <Typography sx={{fontSize:{xs:"16px",md:"18px"}}}>No Products Booked</Typography>
               </Box>
             : bookedProductList.map((item,index) => {
-              return <BookingProductCart key={index} item={item}/>
+              if(item.status == "SUCCESS"){
+                return <BookingProductCart key={index} item={item}/>
+              }
             })
           }
     </Box>

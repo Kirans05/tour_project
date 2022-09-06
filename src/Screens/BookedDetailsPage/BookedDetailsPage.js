@@ -31,7 +31,6 @@ const BookedDetailsPage = () => {
           }
           try {
             let {data} = await axios(options)
-            console.log(data)
             setProductdetails(data)
           } catch (error) {
             

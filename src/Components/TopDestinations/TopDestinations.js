@@ -42,7 +42,7 @@ const TopDestinations = ({item}) => {
 
   const clickHandler = () => {
     dispatch(filterProductByCityAction(item))
-    navigate("/")
+    navigate("/dashBoard")
   }
 
   return (

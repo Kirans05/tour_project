@@ -737,9 +737,16 @@ useEffect(()=>{
               padding: { xs: "0% 3% 0% 3%", md: "0% 6% 0% 6%" },
             }}
           >
-            <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
+            {
+              selectedCity == "" ?
+              <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
               Tours, Tickets, & Excursions
             </Typography>
+            :   <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
+            {selectedCity[0].toUpperCase()+selectedCity.substr(1)} Tours, Tickets, & Excursions 
+          </Typography>
+
+          }
             <Box
             sx={{
               display:"flex",

@@ -23,13 +23,13 @@ const App = () => {
   return (
     <Box>
     <Routes>
-      <Route path='/' element={<DashBoard />} />
+      <Route path='/'  element={<HomePage />} />
+      <Route path='/dashBoard' element={<DashBoard />} />
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/login' element={<LoginInPage />} />
       <Route path='/TermsAndCondition' element={<TermsAndCondition />} />
       <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} />
       <Route path='/bookingPage' element={<BookingPage />} />
-      <Route path='/HomePage' element={<HomePage />} />
       <Route path='/helpPage' element={<HelpPage />} />
       <Route path='/TourDeatils' element={<TourDetails />} />
       <Route path='/aboutPage' element={<AboutPage />} />
@@ -39,7 +39,6 @@ const App = () => {
       <Route path='/signupUserDetails' element={<SignUpUserDetails />} />
       <Route path='/bookedDetailsPage' element={<BookedDetailsPage />} />
       <Route path='/aboutTurkey' element={<AboutTurkey />} />
-
     </Routes>
     </Box>
   )

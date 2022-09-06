@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Imgae2 from "../../assets/images/img2.jpg";
 import { RiVisaLine, RiRefund2Line } from "react-icons/ri";
 import { SiAmericanexpress, SiMastercard } from "react-icons/si";
@@ -1292,6 +1292,29 @@ const submitHandler = async () => {
 
 
 
+const fetchIdividualTour = async () => {
+  let options = {
+    url:`${Base_url}/tour/product?id=${localStorage.getItem("tourId")}`,
+    method:"GET",
+    headers:{
+      "content-type":"application/json",
+      "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+    }
+  }
+
+  try{
+    let {data} = await axios(options)
+    console.log(data)
+    // dispatch(individualProductAction(item));
+  }catch(error){
+
+  }
+}
+
+
+useEffect(() => {
+  // fetchIdividualTour()
+},[])
 
 
   return (

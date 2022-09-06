@@ -62,7 +62,7 @@ const HomePage = () => {
 
 
   const location = useLocation()
-
+  const [logoutRender, setlogoutRender] = useState(false)
   const totalProductList = useSelector((state) => state.totalProductReducer)
   const countryListSuggestions = useSelector((state) => state.countryListReducer)
   const navigate = useNavigate()
@@ -196,12 +196,16 @@ const showSearchPlace = (item) => {
     fetchAllTourProducts()
   },[])
 
- 
+  useEffect(()=>{
+
+  },[logoutRender])
+
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}>
-        <Header />
+        <Header logoutRender={logoutRender} setlogoutRender={setlogoutRender}/>
         <Box
           className="mainPart"
           sx={{
@@ -331,7 +335,7 @@ const showSearchPlace = (item) => {
                           dispatch(filterProductByCityAction(option.toLowerCase()))
                           setSearchInputValue("")
                         setShowMenuOptions(false)
-                        navigate("/")
+                        navigate("/dashBoard")
                       }}
                       >
                          {option}
@@ -433,7 +437,7 @@ const showSearchPlace = (item) => {
 
                     }else{
                       dispatch(filterProductByCityAction(searchInputValue))
-                      navigate("/")
+                      navigate("/dashBoard")
                     }
                   }}
                   >

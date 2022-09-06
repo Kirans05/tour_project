@@ -294,12 +294,15 @@ const ProductCards = ({ item }) => {
           justifyContent:{xs:"flex-start",md:"space-between"},
         }}
         onClick={() => {
-          if (localStorage.getItem("accessToken") != null) {
+          localStorage.setItem("tourId",item.id)
+          // if (localStorage.getItem("accessToken") != null) {
+          //   dispatch(individualProductAction(item));
+          //   navigate("/TourDeatils");
+          // } else {
+          //   navigate("/signup");
+          // }
             dispatch(individualProductAction(item));
             navigate("/TourDeatils");
-          } else {
-            navigate("/signup");
-          }
         }}
       >
         <Box
@@ -365,7 +368,9 @@ const ProductCards = ({ item }) => {
           >
             <AccessTimeIcon sx={{ fontSize: {xs:"14px",md:"12px"}, }} />
             <Typography sx={{ fontSize: {xs:"14px",md:"14px"}, }}>
-              12 hours 30 minutes
+              {/* 12 hours 30 minutes */}
+              {/* {`${item.duration.substr(0,1)}`} */}
+              {item.duration} hours
             </Typography>
           </Box>
 

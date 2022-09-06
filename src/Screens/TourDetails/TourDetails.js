@@ -165,7 +165,9 @@ import Turkey2 from "../../assets/turkey/turkey2.jpg"
 import Turkey3 from "../../assets/turkey/turkey3.webp"
 import Turkey4 from "../../assets/turkey/turkey4.jpg"
 import Turkey5 from "../../assets/turkey/turkey5.jpg"
-
+import axios from "axios";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+// import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 // let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
@@ -197,6 +199,7 @@ let RomeArr = [Rome1, Rome2, Rome3, Rome4, Rome5, Rome6, Rome7, Rome8]
 let VeniceArr = [Venice1, Venice2, Venice3, Venice4, Venice5, Venice6, Venice7]
 
 let TurkeyArr = [Turkey1, Turkey2, Turkey3, Turkey4, Turkey5]
+const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 
 
@@ -216,23 +219,15 @@ const TourDetails = () => {
   const cartItems = useSelector((state) => state.cratItemReducer)
   const travellerData = useSelector((state) => state.travelDetails)
   const [EurPrice, setEuroPrice] = useState("") 
+  const [verticalImages, setVerticalImages] = useState([])
+  const [tourImage, setTourImage] = useState(singleTourDetails.imageUrl)
+  const [imageIndex, setImageIndex] = useState(0)
+
 
   const dispatch = useDispatch()
   const item = singleTourDetails
 
   // const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
-  const [productImage1, setProductImage1] = useState(item.name == "Harry Potter Tour of Warner Bros. Studio with Transport from London" ? London1 : item.name == "Stonehenge, Windsor Castle, and Bath from London" ? London2 : item.name == "Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock" ? London3 : item.name == "Westminster to Greenwich Sightseeing Thames Cruise in London" ? London4 : item.name == "Stonehenge and Bath Day Trip from London" ? London5 : item.name == "Buckingham Palace Tour Including Changing of the Guard Ceremony" ? London6 : item.name == "Windsor Castle, Stonehenge and Bath Tour from London with Admission" ? London7 : item.name == "Best of London Including Tower of London, Changing of the Guard, with a Cream Tea or London Eye Upgrade" ? London8 : item.name == "Skip-the-Line Vatican Museums & Sistine Chapel Group Tour" ? Rome1 : item.name == "Skip the Line: Colosseum Small Group Tour with Roman Forum & Palatine Hill" ? Rome2 : item.name == "Skip-the-Line: Vatican Museums & Sistine Chapel Guided Small-Group Tour" ? Rome3 : item.name == "Small-Group Tour of Colosseum Underground, Arena and Forum" ? Rome4 : item.name == "Pompeii, Amalfi Coast and Positano Guided Day Trip from Rome" ? Rome5 : item.name == "Colosseum VIP Gladiators access with Arena & Ancient Rome small group tour" ? Rome6 : item.name == "Tuscany Day Trip from Rome including 3-Course Lunch and Wine Tasting" ? Rome7 : item.name == "The Original Entire Vatican Tour & St. Peter's Dome Climb" ? Rome8 : item.name == "Auschwitz & Birkenau: Live-Guided Tour with Transportation and Hotel Pickup" ? Krakow1 : item.name == "Auschwitz-Birkenau Museum and Memorial Guided Tour from Krakow" ? Krakow2 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow" ? Krakow3 : item.name == "Auschwitz-Birkenau and Wieliczka Salt Mine Guided One Day Tour" ? Krakow4 : item.name == "Zakopane Tour with Hot Bath Pools and Hotel Pickup" ? Krakow5 : item.name == "Krakow: Extreme Shooting Range with Hotel Pick-Up" ? Krakow6 : item.name == "From Krakow: Auschwitz-Birkenau Guided Tour, Pickup & Transfers" ? Krakow7 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow with pick-up from Selected Hotels" ? Krakow8 :  null)
-  
-  
-
-  const [productImage2, setProductImage2] = useState(item.name == "Pisa, Siena and San Gimignano Day Trip from Florence Including Lunch" ? Florence1 : item.name == "Small-Group Wine Tasting Experience in the Tuscan Countryside" ? Florence2 : item.name == "Tuscany in One Day Sightseeing Tour from Florence" ? Florence3 : item.name == "Cinque Terre Day Trip with Transport from Florence" ? Florence4 : item.name == "David & Accademia Gallery Tour - Florence (Reserved Entrance)" ? Florence5 : item.name == "Skip-the-Line Florence Highlights and David Walking Tour" ? Florence6 :  item.name == "Uffizi Gallery Small Group Tour with Guide" ? Florence7 : item.name == "Loch Ness, Glencoe and the Highlands Small-Group Day Tour from Edinburgh" ? Edenburgh1 : item.name == "Loch Ness, Scottish Highlands, Glencoe & Hairy Coos Tour from Edinburgh" ? Edenburgh2 : item.name == "Loch Ness, Glencoe & The Highlands Day Trip from Edinburgh" ? Edenburgh3 : item.name == "Edinburgh Castle Tour - Skip The Line Tickets Included" ? Edenburgh4 : item.name == "Underground Walking Tour in Edinburgh" ? Edenburgh5 : item.name == "Edinburgh Castle Guided Walking Tour - Tickets Incluided" ? Edenburgh6 :  item.name == "Isle of Skye, The Highlands and Loch Ness- 3 Day Group Tour from Edinburgh" ? Edenburgh7 : item.name == "Loch Lomond, Stirling Castle and the Kelpies from Edinburgh" ? Edenburgh8 : item.name == "Legendary Venice St. Mark's Basilica with Terrace Access & Doge's Palace" ? Venice1 : item.name == "Skip the Line Venice Doge's Palace and St. Mark's Basilica Tour - T23" ? Venice2 : item.name == "Murano, Burano and Torcello Half-Day Sightseeing Tour" ? Venice3 : item.name == "Venice Marco Polo Airport Link Arrival Transfer" ? Venice4 : item.name == "Venice: Grand Canal by Gondola with commentary" ? Venice5 : item.name == "Dolomite Mountains and Cortina Semi Private Day Trip from Venice" ? Venice6 :  item.name == "Venice Marco Polo Airport Private Arrival Transfer" ? Venice7 : null)
-
-
-  const [productImage3, setProductImage3] = useState(item.name == "Golden Circle, Blue Lagoon Including Admission & Kerid Volcanic Crater" ? Raykjavik1 : item.name == "South Coast Full Day Tour by Minibus from Reykjavik" ? Raykjavik2 : item.name == "Whale Watching Cruise on a Superyacht in Reykjavik" ? Raykjavik3 : item.name == "Golden Circle Classic Day Trip from Reykjavik" ? Raykjavik4 : item.name == "Golden Circle & Glacier Snowmobiling Day Trip from Reykjavik" ? Raykjavik5 : item.name == "Snorkeling Between Continents in Silfra with Photos Included" ? Raykjavik6 : item.name == "Reykjavik Food Walk - Local Foodie Adventure in Iceland"? Raykjavik7 : item.name == "Golden Circle, Volcano Crater & Blue Lagoon Small Group Tour" ? Raykjavik8 : item.name == "Amsterdam Canal Cruise in Classic River Boat With Drinks & Dutch Cheese" ? Amsterdam1 : item.name == "Amsterdam Open Boat Canal Cruise - Live Guide - from Anne Frank House" ? Amsterdam2 : item.name == "All inclusive Canal Tour by Captain Jack (Traveller's Choice Award 2021)" ? Amsterdam3 : item.name == "Amsterdam Open Boat Tour With Live Guide and Unlimited Drinks" ? Amsterdam4 : item.name == "Volendam, Marken and Windmills Day Trip from Amsterdam" ? Amsterdam5 : item.name == "Giethoorn and Zaanse Schans Windmills Day Trip from Amsterdam" ? Amsterdam6 : item.name == "Day Trip to Zaanse Schans, Edam, Volendam and Marken from Amsterdam"? Amsterdam7 : item.name == "Amsterdam 1-Hour Canal Cruise from Central Station"  ? Amsterdam8 :  item.name == "Amsterdam Guided Evening Canal Cruise with Bar on Board" ? Amsterdam9 : null )
-
-
-  const [productimage4, setProductimage4] = useState(item.name == "Best of Istanbul: 1, 2 or 3-Day Private Guided Istanbul Tour" ? Istanbul1 : item.name == "Bosphorus Sunset Cruise on Luxury Yacht" ? Istanbul2 : item.name == "Taste of Two Continents Food Tour" ? Istanbul3 : item.name == "Small Group Tour: Essential Istanbul" ? Istanbul4 : item.name == "Private Guided Istanbul Day Tour" ? Istanbul5 : item.name == "Dubai Marina Yacht Tour with Breakfast or BBQ Tour" ? Dubai1 : item.name == "Dubai Marina Dinner Cruise with Live Music" ? Dubai2 : item.name == "Dubai Luxury Canal Dinner Cruise" ? Dubai3 : item.name == "Inside Burj Al Arab - Experience a unique guided tour" ? Dubai4 : Dubai5)
-
 
   const [coopyState, setCopyState] = useState({
     value: `${window.location.href}`,
@@ -326,7 +321,112 @@ const addItemToWishList = () => {
 }
 
 
+
+const imageChanger =  (imageUrl, index) => {
+  if(index > 0){
+    setImageIndex(index)
+    setTourImage(imageUrl)
+  }else{
+    setImageIndex(0)
+    setTourImage(singleTourDetails.imageUrl)
+  }
+} 
+
+
+const arrowImageChangerRight = () => {
+  if(imageIndex == 0){
+    setImageIndex(1)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+  }else if(imageIndex == 1){
+    setImageIndex(2)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
+  }else if(imageIndex == 2){
+    setImageIndex(3)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+  }else if(imageIndex == 3){
+    setImageIndex(4)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+  }else if(imageIndex == 4){
+    setImageIndex(5)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+  }else if(imageIndex == 5){
+    setImageIndex(0)
+    setTourImage(singleTourDetails.imageUrl)
+  }
+}
+
+
+
+const arrowImageChangerLeft = () => {
+  if(imageIndex == 0){
+    setImageIndex(5)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+  }else if(imageIndex == 5){
+    setImageIndex(4)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+  }else if(imageIndex == 4){
+    setImageIndex(3)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+  }else if(imageIndex == 3){
+    setImageIndex(2)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
+  }else if(imageIndex == 2){
+    setImageIndex(1)
+    setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+  }else if(imageIndex == 1){
+    setImageIndex(0)
+    setTourImage(singleTourDetails.imageUrl)
+  }
+}
+
+
+
+
+const fetchVerticalImages = async () => {
+  let option = {
+    url:`${Base_url}/tour/get-product-images?id=${localStorage.getItem("tourId")}`,
+    method:"GET",
+    headers:{
+      "content-type":"application/json",
+      "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+    }
+  }
+
+
+  try{
+    let {data} = await axios(option)
+    if(data.status == "success"){
+      setVerticalImages(data.data.images)
+    }
+  }catch(error){
+
+  }
+}
+
+
+const fetchIdividualTour = async () => {
+    let options = {
+      url:`${Base_url}/tour/product?id=${localStorage.getItem("tourId")}`,
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    }
+
+    try{
+      let {data} = await axios(options)
+      console.log(data)
+      // dispatch(individualProductAction(item));
+    }catch(error){
+
+    }
+}
+
+
 useEffect(()=>{
+  // fetchIdividualTour()
+  fetchVerticalImages()
   checkWishListAdded()
 },[reRender])
 
@@ -348,10 +448,10 @@ useEffect(()=>{
         >
         <Breadcrumbs aria-label="breadcrumb">
             <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
-            onClick={()=>navigate("/")}
+            onClick={()=>navigate("/dashBoard")}
             >DashBoard</Typography>
             <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
-            onClick={()=>navigate("/")}
+            onClick={()=>navigate("/dashBoard")}
             >Tours, Sightseeing & Cruises</Typography>
         </Breadcrumbs>
         </Box>
@@ -545,7 +645,7 @@ useEffect(()=>{
                 rowGap: { xs: 2, md: 0 },
               }}
             >
-              {
+              {/* {
                 item.city == "London" ?
                 <Box
                 className="verticalImages"
@@ -765,7 +865,7 @@ useEffect(()=>{
              } 
             
             </Box>
-              }
+              } */}
 
 
 
@@ -790,21 +890,78 @@ useEffect(()=>{
               
               </Box> */}
 
+          <Box
+                className="verticalImages"
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  flexDirection: "column",
+                  rowGap: 2,
+                  alignItems: "center",
+                  width:"15%"
+                }}
+              >
+               {
+                verticalImages.map((item,index) => {
+                    return <ImagesLists  key={index}  item={item} imageChanger={imageChanger} index={index+1}/>
+                })
+               } 
+              
+              </Box>
+
+
+               <Box
+               sx={{
+                maxWidth:{xs:"100%",md:"50%"},
+                minWidth:{xs:"100%",md:"50%"},
+                minHeight:{xs:"100%",md:"555px"},
+                maxHeight:{xs:"100%",md:"555px"},
+                "&:hover":{cursor:"pointer"},
+                position:"relative"
+              }}
+               >
               <Box
                 className="placeImage"
                 component={"img"}
-                src={singleTourDetails.imageUrl}
+                src={tourImage}
                 alt="Place Image"
-                // width={{ xs: "350px", md: "1050px" }}
-                // maxHeight={"80vh"}
                 sx={{
-                  maxWidth:{xs:"100%",md:"500%"},
-                  minWidth:{xs:"100%",md:"50%"},
-                  minHeight:{xs:"100%",md:"555px"},
-                  maxHeight:{xs:"100%",md:"555px"}
-
+                  maxWidth:{xs:"100%",md:"100%"},
+                  minWidth:{xs:"100%",md:"100%"},
+                  minHeight:{xs:"300px",md:"555px"},
+                  maxHeight:{xs:"300px",md:"555px"},
+                  "&:hover":{cursor:"pointer"}
                 }}
+                onClick={()=>imageChanger("not",0)}
               />
+              <KeyboardArrowLeftIcon 
+              sx={{
+                fontSize:{xs:"25px",md:"50px"},
+                position:"absolute",
+                top:"50%",
+                left:{xs:"3%",md:"1%"},
+                border:"1px solid white",
+                borderRadius:"50%",
+                backgroundColor:"white",
+                opacity:0.8,
+                // display:{xs:"none",md:"flex"}
+              }}
+              onClick={arrowImageChangerLeft}
+              />
+              <KeyboardArrowRightIcon 
+               sx={{
+                fontSize:{xs:"25px",md:"50px"},
+                position:"absolute",
+                top:"50%",
+                right:{xs:"3%",md:"1%"},
+                border:"1px solid white",
+                borderRadius:"50%",
+                backgroundColor:"white",
+                opacity:0.8,
+                // opacity:0.8,display:{xs:"none",md:"flex"}
+              }}
+              onClick={arrowImageChangerRight}
+              />
+               </Box>
               <Box
                 className="PriceDetails"
                 sx={{
@@ -2261,7 +2418,15 @@ useEffect(()=>{
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => navigate("/checkoutPage")}
+                      // onClick={() => navigate("/checkoutPage")}
+                      onClick={()=>{
+                         if (localStorage.getItem("accessToken") != null) {
+            // dispatch(individualProductAction(item));
+            navigate("/checkoutPage");
+          } else {
+            navigate("/signup");
+          }
+                      }}
                     >
                       Book Now
                     </Button>
