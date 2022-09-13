@@ -16,7 +16,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useSelector, useDispatch } from "react-redux";
 import {booking_date_day, addTravelMembers, travelDetails, singleProductReducer, currentUserReducer} from "../../redux/reducer/reducer"
-import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../../redux/action/index";
+import { addFirstName, addLastName, CardholderName, Country, countryCode, CreditCardNumber, EmailAddress, ExpirationMonth, Expirayyear, individualProductAction, PhoneNumber, PromoCode, SaveCreditCard, SecurityCode, specialRequirements } from "../../redux/action/index";
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -126,6 +126,7 @@ import Venice4 from "../../assets/venice/venice4.jpg"
 import Venice5 from "../../assets/venice/venice5.jpg"
 import Venice6 from "../../assets/venice/venice6.jpg"
 import Venice7 from "../../assets/venice/venice7.jpg"
+import { useTranslation } from "react-i18next";
 
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
@@ -1128,7 +1129,7 @@ const CheckOutPage = () => {
 
   const [productimage, setProductIamge] = useState(arr[Math.floor(Math.random()*arr.length)])
 
-
+  const {t} = useTranslation()
   const navigate = useNavigate()
 
   //  redux state and dispatch functions
@@ -1137,26 +1138,15 @@ const CheckOutPage = () => {
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const fullBookingDetails = useSelector((state) => state.travelDetails)
   const singleTourDetails = useSelector((state) => state.singleProductReducer)
+  console.log(singleTourDetails)
   const currentUserDetails = useSelector((state) => state.currentUserReducer)
   const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = useState("")
   const [alertMessageColor, setAlertMessageColor] = useState("warning")
 
   const item = singleTourDetails
-  const [description, setDescription] = useState(item.city == "Turkey" ? item.description.substr(150,120) : item.description.substr(75,125))
-     const [productImage1, setProductImage1] = useState(item.name == "Harry Potter Tour of Warner Bros. Studio with Transport from London" ? London1 : item.name == "Stonehenge, Windsor Castle, and Bath from London" ? London2 : item.name == "Stonehenge, Windsor Castle and Bath with Pub Lunch in Lacock" ? London3 : item.name == "Westminster to Greenwich Sightseeing Thames Cruise in London" ? London4 : item.name == "Stonehenge and Bath Day Trip from London" ? London5 : item.name == "Buckingham Palace Tour Including Changing of the Guard Ceremony" ? London6 : item.name == "Windsor Castle, Stonehenge and Bath Tour from London with Admission" ? London7 : item.name == "Best of London Including Tower of London, Changing of the Guard, with a Cream Tea or London Eye Upgrade" ? London8 : item.name == "Skip-the-Line Vatican Museums & Sistine Chapel Group Tour" ? Rome1 : item.name == "Skip the Line: Colosseum Small Group Tour with Roman Forum & Palatine Hill" ? Rome2 : item.name == "Skip-the-Line: Vatican Museums & Sistine Chapel Guided Small-Group Tour" ? Rome3 : item.name == "Small-Group Tour of Colosseum Underground, Arena and Forum" ? Rome4 : item.name == "Pompeii, Amalfi Coast and Positano Guided Day Trip from Rome" ? Rome5 : item.name == "Colosseum VIP Gladiators access with Arena & Ancient Rome small group tour" ? Rome6 : item.name == "Tuscany Day Trip from Rome including 3-Course Lunch and Wine Tasting" ? Rome7 : item.name == "The Original Entire Vatican Tour & St. Peter's Dome Climb" ? Rome8 : item.name == "Auschwitz & Birkenau: Live-Guided Tour with Transportation and Hotel Pickup" ? Krakow1 : item.name == "Auschwitz-Birkenau Museum and Memorial Guided Tour from Krakow" ? Krakow2 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow" ? Krakow3 : item.name == "Auschwitz-Birkenau and Wieliczka Salt Mine Guided One Day Tour" ? Krakow4 : item.name == "Zakopane Tour with Hot Bath Pools and Hotel Pickup" ? Krakow5 : item.name == "Krakow: Extreme Shooting Range with Hotel Pick-Up" ? Krakow6 : item.name == "From Krakow: Auschwitz-Birkenau Guided Tour, Pickup & Transfers" ? Krakow7 : item.name == "Wieliczka Salt Mine Guided Tour from Krakow with pick-up from Selected Hotels" ? Krakow8 :  null)
+  const [description, setDescription] = useState(singleTourDetails.city == undefined ? "no description": singleTourDetails.city == "Turkey" ? singleTourDetails.description.substr(150,120) : singleTourDetails.description.substr(75,125))
   
-  
-
-  const [productImage2, setProductImage2] = useState(item.name == "Pisa, Siena and San Gimignano Day Trip from Florence Including Lunch" ? Florence1 : item.name == "Small-Group Wine Tasting Experience in the Tuscan Countryside" ? Florence2 : item.name == "Tuscany in One Day Sightseeing Tour from Florence" ? Florence3 : item.name == "Cinque Terre Day Trip with Transport from Florence" ? Florence4 : item.name == "David & Accademia Gallery Tour - Florence (Reserved Entrance)" ? Florence5 : item.name == "Skip-the-Line Florence Highlights and David Walking Tour" ? Florence6 :  item.name == "Uffizi Gallery Small Group Tour with Guide" ? Florence7 : item.name == "Loch Ness, Glencoe and the Highlands Small-Group Day Tour from Edinburgh" ? Edenburgh1 : item.name == "Loch Ness, Scottish Highlands, Glencoe & Hairy Coos Tour from Edinburgh" ? Edenburgh2 : item.name == "Loch Ness, Glencoe & The Highlands Day Trip from Edinburgh" ? Edenburgh3 : item.name == "Edinburgh Castle Tour - Skip The Line Tickets Included" ? Edenburgh4 : item.name == "Underground Walking Tour in Edinburgh" ? Edenburgh5 : item.name == "Edinburgh Castle Guided Walking Tour - Tickets Incluided" ? Edenburgh6 :  item.name == "Isle of Skye, The Highlands and Loch Ness- 3 Day Group Tour from Edinburgh" ? Edenburgh7 : item.name == "Loch Lomond, Stirling Castle and the Kelpies from Edinburgh" ? Edenburgh8 : item.name == "Legendary Venice St. Mark's Basilica with Terrace Access & Doge's Palace" ? Venice1 : item.name == "Skip the Line Venice Doge's Palace and St. Mark's Basilica Tour - T23" ? Venice2 : item.name == "Murano, Burano and Torcello Half-Day Sightseeing Tour" ? Venice3 : item.name == "Venice Marco Polo Airport Link Arrival Transfer" ? Venice4 : item.name == "Venice: Grand Canal by Gondola with commentary" ? Venice5 : item.name == "Dolomite Mountains and Cortina Semi Private Day Trip from Venice" ? Venice6 :  item.name == "Venice Marco Polo Airport Private Arrival Transfer" ? Venice7 : null)
-
-
-  const [productImage3, setProductImage3] = useState(item.name == "Golden Circle, Blue Lagoon Including Admission & Kerid Volcanic Crater" ? Raykjavik1 : item.name == "South Coast Full Day Tour by Minibus from Reykjavik" ? Raykjavik2 : item.name == "Whale Watching Cruise on a Superyacht in Reykjavik" ? Raykjavik3 : item.name == "Golden Circle Classic Day Trip from Reykjavik" ? Raykjavik4 : item.name == "Golden Circle & Glacier Snowmobiling Day Trip from Reykjavik" ? Raykjavik5 : item.name == "Snorkeling Between Continents in Silfra with Photos Included" ? Raykjavik6 : item.name == "Reykjavik Food Walk - Local Foodie Adventure in Iceland"? Raykjavik7 : item.name == "Golden Circle, Volcano Crater & Blue Lagoon Small Group Tour" ? Raykjavik8 : item.name == "Amsterdam Canal Cruise in Classic River Boat With Drinks & Dutch Cheese" ? Amsterdam1 : item.name == "Amsterdam Open Boat Canal Cruise - Live Guide - from Anne Frank House" ? Amsterdam2 : item.name == "All inclusive Canal Tour by Captain Jack (Traveller's Choice Award 2021)" ? Amsterdam3 : item.name == "Amsterdam Open Boat Tour With Live Guide and Unlimited Drinks" ? Amsterdam4 : item.name == "Volendam, Marken and Windmills Day Trip from Amsterdam" ? Amsterdam5 : item.name == "Giethoorn and Zaanse Schans Windmills Day Trip from Amsterdam" ? Amsterdam6 : item.name == "Day Trip to Zaanse Schans, Edam, Volendam and Marken from Amsterdam"? Amsterdam7 : item.name == "Amsterdam 1-Hour Canal Cruise from Central Station"  ? Amsterdam8 :  item.name == "Amsterdam Guided Evening Canal Cruise with Bar on Board" ? Amsterdam9 : null )
-
-
-  const [productimage4, setProductimage4] = useState(item.name == "Best of Istanbul: 1, 2 or 3-Day Private Guided Istanbul Tour" ? Istanbul1 : item.name == "Bosphorus Sunset Cruise on Luxury Yacht" ? Istanbul2 : item.name == "Taste of Two Continents Food Tour" ? Istanbul3 : item.name == "Small Group Tour: Essential Istanbul" ? Istanbul4 : item.name == "Private Guided Istanbul Day Tour" ? Istanbul5 : item.name == "Dubai Marina Yacht Tour with Breakfast or BBQ Tour" ? Dubai1 : item.name == "Dubai Marina Dinner Cruise with Live Music" ? Dubai2 : item.name == "Dubai Luxury Canal Dinner Cruise" ? Dubai3 : item.name == "Inside Burj Al Arab - Experience a unique guided tour" ? Dubai4 : Dubai5)
-
-
 
   const date = booking_dateDetails.BookDate +"/ "+booking_dateDetails.BookMonth+ "/"+ booking_dateDetails.BookYear
   const dispatch = useDispatch(0)
@@ -1245,7 +1235,7 @@ const submitHandler = async () => {
 
   let expiryYear =  `${fullBookingDetails.Expirayyear}`.slice(2)
 
-  let amount = travellerData.currencyCode == "GBP" ? (memberPresentState.adult*singleTourDetails.price)+(memberPresentState.child*singleTourDetails.price) : (memberPresentState.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentState.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)
+  let amount = travellerData.currencyCode == "GBP" ? (memberPresentState.adult*singleTourDetails.price)+(memberPresentState.child*singleTourDetails.price) : Math.ceil(memberPresentState.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentState.child*singleTourDetails.price*travellerData.currencyValue)
 
   let options = {
     url:`${Base_url}/order/create`,
@@ -1292,7 +1282,8 @@ const submitHandler = async () => {
 
 
 
-const fetchIdividualTour = async () => {
+
+const fetchCurrentProduct = async ()=>{
   let options = {
     url:`${Base_url}/tour/product?id=${localStorage.getItem("tourId")}`,
     method:"GET",
@@ -1304,16 +1295,15 @@ const fetchIdividualTour = async () => {
 
   try{
     let {data} = await axios(options)
-    console.log(data)
-    // dispatch(individualProductAction(item));
-  }catch(error){
-
+    dispatch(individualProductAction(data));
+  }catch(err){
+    
   }
 }
 
 
 useEffect(() => {
-  // fetchIdividualTour()
+  fetchCurrentProduct()
 },[])
 
 
@@ -1327,20 +1317,25 @@ useEffect(() => {
           padding: { xs: "0%", md: "0% 6% 0% 6%" },
         }}
       >
-        <Box className="1stPart">
+        <Box className="1stPart"
+        sx={{
+          width:{xs:"96%",md:"100%"},
+          padding:{xs:"0% 2% 0% 2%",md:"0%"}
+        }}
+        >
           <Typography
             sx={{
               fontSize: { xs: "20px", md: "30px" },
             }}
           >
-            Secure Checkout
+            {t("Secure Checkout")}
           </Typography>
           <Typography
             sx={{
               fontSize: { xs: "16px", md: "20px" },
             }}
           >
-            Checkout securely — it takes only a few minutes
+            {t("Checkout securely")} — {t("it takes only a few minutes")}
           </Typography>
         </Box>
         <Box
@@ -1428,7 +1423,7 @@ useEffect(() => {
                       fontSize: { xs: "14px", md: "16px" },
                     }}
                   >
-                    This experience is hosted by a business.
+                    {t("This experience is hosted by a business.")}
                   </Typography>
                 </Box>
               </Box>
@@ -1449,14 +1444,14 @@ useEffect(() => {
                   fontWeight: "bold",
                 }}
               >
-                Traveler Details
+                {t("Traveler Details")}
               </Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"}
               }}
               >
-                Information we need to confirm your tour or activity
+                {t("Information we need to confirm your tour or activity")}
               </Typography>
               <Box className="LeadTraveler" sx={{
                 width:{xs:"100%",md:"100%"},
@@ -1468,7 +1463,9 @@ useEffect(() => {
                   sx={{
                     fontSize:{xs:"16px",md:"20px"}
                   }}
-                  >Lead Traveler (Adult)</Typography>
+                  >
+                     {t("Lead Traveler")} ({t("Adult")})
+                     </Typography>
                 <Box className="travelerDetails" sx={{
                     width:{xs:"100%",md:"100%"},
                     display:"flex",
@@ -1491,7 +1488,9 @@ useEffect(() => {
                     sx={{
                         fontSize:{xs:"14px",md:"16px"}
                       }}
-                    >FirstName</Typography>
+                    >
+                      {t("FirstName")}
+                    </Typography>
                     <TextField type={"text"} placeholder={"Enter FirstName"} fullWidth   onChange={(e) => dispatch(addFirstName(e.target.value))}  />
                   </Box>
                   <Box className="LastName"
@@ -1509,7 +1508,8 @@ useEffect(() => {
                         fontSize:{xs:"14px",md:"16px"}
                       }}
                     >                        
-                        LastName</Typography>
+                        {t("LastName")}
+                        </Typography>
                     <TextField type={"text"} placeholder={"Enter LastName"}  fullWidth   onChange={(e) => dispatch(addLastName(e.target.value))}  />
                   </Box>
                 </Box>
@@ -1529,10 +1529,14 @@ useEffect(() => {
                     fontSize:{xs:"16px",md:"20px"},
                     fontWeight:"bold"
                 }}
-                >Tour Details</Typography>
+                >
+                  {t("Tour Details")}
+                </Typography>
                 <Typography sx={{
                     fontSize:{xs:"14px",md:"16px"}
-                }}>Special Requirements</Typography>
+                }}>
+                  {t("Special Requirements")}
+                </Typography>
                 <textarea rows={4} cols={40}  onChange={(e) => dispatch(specialRequirements(e.target.value))} />
               </Box>
             </Box>
@@ -1563,13 +1567,15 @@ useEffect(() => {
                     fontSize:{xs:"16px",md:"20px"},
                     fontWeight:"bold"
                 }}
-                >Payment Details</Typography>
+                >
+                  {t("Payment Details")}
+                </Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"}
               }}
               >
-                Pay securely—we use SSL encryption to keep your data safe
+                {t("Pay securely")}—{t("we use SSL encryption to keep your data safe")}
               </Typography>
               <Box className="radios&creditCardIcons"
               sx={{
@@ -1581,7 +1587,9 @@ useEffect(() => {
               }}
               >
                 <input type={"radio"} checked/>
-                <Typography>Creadit Card</Typography>
+                <Typography>
+                  {t("Creadit Card")}
+                </Typography>
                 <RiVisaLine style={{ color: "blue" }} />
                 <SiAmericanexpress style={{ color: "blue" }} />
                 <SiMastercard style={{ color: "red" }} />
@@ -1592,7 +1600,9 @@ useEffect(() => {
                 flexDirection:"column",
                 rowGap:1
               }}>
-                <Typography>Cardholder Name</Typography>
+                <Typography>
+                  {t("Cardholder Name")}
+                </Typography>
                 <TextField type={"text"}  placeholder="Enter CardHolder Name"   fullWidth   onChange={(e) => dispatch(CardholderName(e.target.value))}  />
               </Box>
               <Box className="creditCradNumber" sx={{
@@ -1601,7 +1611,9 @@ useEffect(() => {
                 flexDirection:"column",
                 rowGap:1
               }}>
-                <Typography>Credit Card Number</Typography>
+                <Typography>
+                  {t("Credit Card Number")}
+                </Typography>
                 <TextField  fullWidth 
                 placeholder="Enter Card Number"
                   onChange={(e) => dispatch(CreditCardNumber(e.target.value))}  
@@ -1629,7 +1641,9 @@ useEffect(() => {
                   sx={{
                     fontSize:{xs:"14px",md:"16px"}
                   }}
-                  >Expiration Month</Typography>
+                  >
+                    {t("Expiration Month")}
+                  </Typography>
                 <TextField
                     id="outlined-select-currency"
                     select
@@ -1656,7 +1670,9 @@ useEffect(() => {
                     sx={{
                         fontSize:{xs:"14px",md:"16px"}
                     }}
-                    >Expiray year</Typography>
+                    >
+                      {t("Expiray year")}
+                    </Typography>
                   <TextField type={"year"}  onChange={(e) => dispatch(Expirayyear(e.target.value))}     />
                 </Box>
                 <Box className="securityCode"
@@ -1670,7 +1686,9 @@ useEffect(() => {
                   sx={{
                     fontSize:{xs:"14px",md:"16px"}
                   }}
-                  >Security Code</Typography>
+                  >
+                    {t("Security Code")}
+                  </Typography>
                   <TextField type={"text"} placeholder="3 or 4 digit code usually found near the signature strip."  onChange={(e) => dispatch(SecurityCode(e.target.value))}  
                   inputProps={{ maxLength: 3 }}
                   />
@@ -1699,7 +1717,9 @@ useEffect(() => {
                     fontSize:{xs:"16px",md:"20px"},
                     fontWeight:"bold"
                   }}
-                  >Country</Typography>
+                  >
+                    {t("Country")}
+                  </Typography>
                   <TextField
                     id="outlined-select-currency"
                     select
@@ -1751,13 +1771,15 @@ useEffect(() => {
                 fontSize:{xs:"16px",md:"20px"},
                 fontWeight:"bold"
               }}
-              >Contact Information</Typography>
+              >
+                {t("Contact Information")}
+              </Typography>
               <Typography  
               sx={{
                 fontSize:{xs:"14px",md:"16px"}
               }}
               >
-                We’ll contact you with key updates on your tour or activity
+                {t("We’ll contact you with key updates on your tour or activity")}
               </Typography>
 
               <Box className="Email&PhoneNumber"
@@ -1784,7 +1806,9 @@ useEffect(() => {
                   sx={{
                     fontSize:{xs:"14px",md:"16px"}
                   }}
-                  >Email Address</Typography>
+                  >
+                    {t("Email Address")}
+                  </Typography>
                   <TextField type={"text"} placeholder="Enter Email Id"  onChange={(e) => dispatch(EmailAddress(e.target.value))}   />
                 </Box>
 
@@ -1802,7 +1826,9 @@ useEffect(() => {
                    sx={{
                     fontSize:{xs:"14px",md:"16px"}
                   }}
-                  >PhoneNumber</Typography>
+                  >
+                    {t("PhoneNumber")}
+                  </Typography>
                   <Box className="phoneNumberBox"
                   sx={{
                     display:"flex",
@@ -1829,8 +1855,7 @@ useEffect(() => {
                 </Box>
               </Box>
               <Typography>
-                The tour operator will call this number if they need to reach
-                you.
+                {t("The tour operator will call this number if they need to reach you.")}
               </Typography>
             </Box>
           
@@ -1838,7 +1863,7 @@ useEffect(() => {
           <Button variant="contained" color="success"
          onClick={submitHandler}
           >
-                        Book Now
+                        {t("Book Now")}
            </Button>
           </Box>
         
@@ -1877,7 +1902,9 @@ useEffect(() => {
                 fontSize:{xs:"16px",md:"20px"},
                 fontWeight:"bold"
               }}
-              >Review Order Details</Typography>
+              >
+                {t("Review Order Details")}
+              </Typography>
               {/* ticket details */}
               <Box className="tiicketDetails"
               sx={{
@@ -1906,7 +1933,7 @@ useEffect(() => {
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}
-                >{memberPresentState.adult} Adult, {memberPresentState.child} Child</Typography>
+                >{memberPresentState.adult} {t("Adult")}, {memberPresentState.child} {t("child")}</Typography>
               </Box>
 
               {/* nonrefundable */}
@@ -1924,7 +1951,9 @@ useEffect(() => {
                 sx={{
                     fontSize:{xs:"14px",md:";16px"}
                 }}
-                >Non-refundable</Typography>
+                >
+                  {t("Non-refundable")}
+                </Typography>
               </Box>
 
               {/* total amount and promo code details */}
@@ -1950,7 +1979,9 @@ useEffect(() => {
                     fontSize:{xs:"16px",md:"20px"},
                     fontWeight:"bold"
                   }}
-                  >Total</Typography>
+                  >
+                    {t("Total")}
+                  </Typography>
                   <Box className="amountWithSymbol"
                   sx={{
                     display:"flex",
@@ -1970,7 +2001,7 @@ useEffect(() => {
                           display:travellerData.currencyCode != "GBP" ? "flex":"none"
                          }}
                          >
-                        {(memberPresentState.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentState.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)}
+                        {Math.ceil(memberPresentState.adult*(singleTourDetails.price*travellerData.currencyValue)+memberPresentState.child*(singleTourDetails.price*travellerData.currencyValue))}
                          </Typography>
                   </Box>
                   </Box>
@@ -1987,7 +2018,9 @@ useEffect(() => {
                     }
                   }}
                   onClick={()=>setShowPromoCode(true)}
-                  >Enter Promo Code</Typography>
+                  >
+                    {t("Enter Promo Code")}
+                  </Typography>
 
                 {/* promo code box */}
                   <Box className="promoCode"
@@ -2023,7 +2056,7 @@ useEffect(() => {
               <Button variant="contained" color="success"
               onClick={submitHandler}
               >
-                Book Now
+                {t("Book Now")}
               </Button>
             </Box>
 
@@ -2042,7 +2075,9 @@ useEffect(() => {
                 fontSize:{xs:"16px",md:"20px"},
                 fontWeight:"bold"
               }}
-              >Book with Confidence</Typography>
+              >
+                {t("Book with Confidence")}
+              </Typography>
 
               <Divider />
 
@@ -2065,13 +2100,15 @@ useEffect(() => {
                     fontSize:{xs:"14px",md:"16px"},
                     fontWeight:"bold"
                   }}
-                  >Lowest Price Guarantee</Typography>
+                  >
+                    {t("Lowest Price Guarantee")}
+                  </Typography>
                   <Typography
                    sx={{
                     fontSize:{xs:"14px",md:"16px"},
                   }}
                   >
-                    Find it cheaper? We'll refund the difference
+                    {t("Find it cheaper? We'll refund the difference")}
                   </Typography>
                 </Box>
                 <Box className="support"
@@ -2086,13 +2123,15 @@ useEffect(() => {
                     fontSize:{xs:"14px",md:"16px"},
                     fontWeight:"bold"
                   }}
-                  >24/7 Global Support</Typography>
+                  >
+                    {t("24/7 Global Support")}
+                  </Typography>
                   <Typography
                    sx={{
                     fontSize:{xs:"14px",md:"16px"},
                   }}
                   >
-                    Get the answers you need, when you need them
+                    {t("Get the answers you need, when you need them")}
                   </Typography>
                 </Box>
                 <Box className="security"
@@ -2107,7 +2146,9 @@ useEffect(() => {
                     fontSize:{xs:"14px",md:"16px"},
                     fontWeight:"bold"
                   }}
-                  >Book Securely</Typography>
+                  >
+                    {t("Book Securely")}
+                  </Typography>
                   <Box className="securityDetails&LockIcon"
                   sx={{
                     display:"flex",
@@ -2123,7 +2164,7 @@ useEffect(() => {
                         fontSize:{xs:"14px",md:"16px"}
                     }}
                     >
-                      We use SSL encryption to keep your data secure
+                      {t("We use SSL encryption to keep your data secure")}
                     </Typography>
                   </Box>
                 </Box>

@@ -1,4 +1,4 @@
-import { Rating, Typography } from '@mui/material'
+import { Button, Rating, Typography } from '@mui/material'
 import { Box, minWidth, padding } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -74,7 +74,9 @@ const BookedDetailsPage = () => {
           alt="bookedTourImage"
           sx={{
             maxWidth:{xs:"150px",md:"500px"},
-            minWidth:{xs:"150px",md:"500px"}
+            minWidth:{xs:"150px",md:"500px"},
+            minHeight:{xs:"150px",md:"340px"},
+            maxHeight:{xs:"150px",md:"340px"}
           }}
           />
           <Box classname="productDescription"
@@ -83,7 +85,7 @@ const BookedDetailsPage = () => {
             flexDirection:"column",
             alignItems:"flex-start",
             justifyContent:"space-between",
-            height:"40vh"
+            height:{xs:"53vh",md:"47vh"},
           }}
           >
             <Typography sx={{ fontSize: { xs: "14px", md: "20px" },fontWeight:"bold"}}>{productDetails == null ? "Tour Name" : productDetails.name}</Typography>
@@ -94,6 +96,9 @@ const BookedDetailsPage = () => {
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Child - {bookedDetails.childQty}</Typography>
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Price - {productDetails == null ? "GBP": productDetails.currency+" "+bookedDetails.price}</Typography>
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Date - {bookedDetails.fromDate == undefined ? "No Date" : bookedDetails.fromDate.substr(0,10)}</Typography>
+            <Box>
+              <Button color='warning' variant='contained'>Cancel Tour</Button>
+            </Box>
         </Box>
                  </Box>
 

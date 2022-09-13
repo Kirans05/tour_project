@@ -43,7 +43,7 @@ import Footer from "../FooterComponents/Footer";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {totalProductReducer, displayProductReducer, filterProductByCityReducer} from "../../redux/reducer/reducer"
-import {individualProductAction, productAction, displayProductAction, countryListAction, filterProductByCityAction} from "../../redux/action/index"
+import {individualProductAction, productAction, displayProductAction, countryListAction, filterProductByCityAction, currencyCodeAction, currencyConversionAction} from "../../redux/action/index"
 import {useSelector, useDispatch} from "react-redux"
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
@@ -151,6 +151,7 @@ import Venice7 from "../../assets/venice/venice7.jpg"
 
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useTranslation } from "react-i18next";
 
 
 
@@ -185,11 +186,25 @@ const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 
 
+const country_currency = [
+  {
+    "currency_code": "EUR"
+},
+  {
+    "currency_code": "GBP"
+},
+{
+  "currency_code": "TRY"
+},
+]
+
+
+
 
 const DashBoard = () => {
 
 
-
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [logoutRender, setlogoutRender] = useState(true)
   const totalProductList = useSelector((state) => state.totalProductReducer)
@@ -258,6 +273,8 @@ const DashBoard = () => {
   const [priceFilter, setPriceFilter] = useState(false)
   const [durationFilter, setDurationFilter] = useState(false)
   const [ratingFilter, setRatingFilter] = useState(false)
+  const travellerData = useSelector((state) => state.travelDetails)
+  const [countryCurrencyState, setCountryCurrencyState] = useState(travellerData.currencyCode)
 
 
   const clearHandler = () => {
@@ -301,7 +318,8 @@ const ApplyHandler = () => {
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 360,
       display:"flex",
       flexDirection:"column",
-      rowGap:4
+      rowGap:4,
+      paddingBottom:"10%"
     }}
       role="presentation"
     >
@@ -315,7 +333,9 @@ const ApplyHandler = () => {
 
       }}
       >
-      <Typography sx={{fontSize:"18px",fontWeight:"bold"}}>Filter</Typography>
+      <Typography sx={{fontSize:"18px",fontWeight:"bold"}}>
+        {t("Filter")}
+      </Typography>
       <ClearIcon 
       onClick={toggleDrawer("left", false)}
       />
@@ -335,7 +355,9 @@ const ApplyHandler = () => {
       }}
       onClick={()=>setPriceFilter(!priceFilter)}
       >
-        <Typography sx={{fontSize:"18px"}}>Price</Typography>
+        <Typography sx={{fontSize:"18px"}}>
+          {t("Price")}
+        </Typography>
         <Box className="arrows">
             <KeyboardArrowDownIcon 
             sx={{
@@ -389,7 +411,9 @@ const ApplyHandler = () => {
       }}
       onClick={()=>setDurationFilter(!durationFilter)}
       >
-        <Typography sx={{fontSize:"18px"}}>Duration</Typography>
+        <Typography sx={{fontSize:"18px"}}>
+          {t("Duration")}
+        </Typography>
         <Box className="arrows">
             <KeyboardArrowDownIcon 
             sx={{
@@ -462,7 +486,9 @@ const ApplyHandler = () => {
       }}
       onClick={()=>setRatingFilter(!ratingFilter)}
       >
-        <Typography sx={{fontSize:"18px"}}>Rating</Typography>
+        <Typography sx={{fontSize:"18px"}}>
+          {t("Rating")}
+        </Typography>
         <Box className="arrows">
             <KeyboardArrowDownIcon 
             sx={{
@@ -551,6 +577,36 @@ const ApplyHandler = () => {
 
         <Divider />
 
+        <Box
+        sx={{
+          display:"flex",
+          flexDirection:"row",
+          justifyContent:"space-between",
+          alignItems:"center",
+          padding:{xs:"2% 8% 2% 8%"}
+        }}
+        >
+          <Typography>
+            {t("Currency")}
+          </Typography>
+              <TextField
+                    id="outlined-select-currency"
+                    select
+                    value={countryCurrencyState}
+                    onChange={contryChangeHandler}
+                  >
+                    {country_currency.map((option,index) => (
+                      <MenuItem key={index} value={option.currency_code}  >
+                         {option.currency_code}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+        </Box>
+
+        <Divider />
+
+
+
           <Box
               sx={{
                 display:"flex",
@@ -565,17 +621,48 @@ const ApplyHandler = () => {
                 //   // clearHandler(anchor)
                 // }}
                 onClick={toggleDrawer("left",false,"clear")}
-                >Clear</Button>
+                >{t("CLEAR")}</Button>
                 <Button variant="contained" color="success"
                 onClick={toggleDrawer("left",false,"apply")}
-                >Apply</Button>
+                >{t("APPLY")}</Button>
               </Box>
 
 
     </Box>
   );
 
+  const contryChangeHandler = async (e) => {
+    const present = countryCurrencyState
+    dispatch(currencyCodeAction(e.target.value))
+    setCountryCurrencyState(e.target.value)
 
+    let options = {
+      url:`${Base_url}/get-currency-exchange`,
+      method:"POST",
+      headers:{
+        "content-type":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      },
+      // data:{
+      //   "originalCurr":present,
+      //   "targetCurr":e.target.value,
+      //   "amount": 1
+      // }
+      data:{
+        "originalCurr":"GBP",
+        "targetCurr":e.target.value,
+        "amount": 1
+      }
+    }
+
+    try{
+      let {data} = await axios(options)
+      dispatch(currencyConversionAction(data.amount.toFixed(2)))
+    }catch(error){
+      console.log(error)
+    }
+
+  } 
 
 
   const [addFavorite, setAddFovirate] = useState(false)
@@ -740,10 +827,10 @@ useEffect(()=>{
             {
               selectedCity == "" ?
               <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
-              Tours, Tickets, & Excursions
+              {t("Tours, Tickets, & Excursions")}
             </Typography>
             :   <Typography sx={{ fontSize: {xs:"20px",md:"25px"}, fontWeight: "bold" }} className="Typography">
-            {selectedCity[0].toUpperCase()+selectedCity.substr(1)} Tours, Tickets, & Excursions 
+            {selectedCity[0].toUpperCase()+selectedCity.substr(1)} {t("Tours, Tickets, & Excursions")} 
           </Typography>
 
           }
@@ -822,7 +909,7 @@ useEffect(()=>{
                 }}
               >
                 <Typography sx={{ fontSize: {xs:"8px",md:"14px"} }}>
-                  When are you travelling?
+                  {t("When are you travelling?")}
                 </Typography>
                 <Box
                   sx={{
@@ -936,7 +1023,7 @@ useEffect(()=>{
                       fontWeight:"bold"
                     }}
                   >
-                    All Tours
+                    {t("All Tours")}
                   </Typography>
 
                   {/* arts and Culture */}
@@ -1215,7 +1302,7 @@ useEffect(()=>{
                           fontSize: "14px",
                         }}
                       >
-                        Tours, Sightseeing & Cruises
+                        {t("Tours, Sightseeing & Cruises")}
                       </Typography>
                       <Box className="arrows"
                       sx={{
@@ -2061,7 +2148,9 @@ useEffect(()=>{
                   rowGap:3
                 }}
                 >
-                  <Typography sx={{ fontSize: "16px", fontWeight:"bold" }}>Price</Typography>
+                  <Typography sx={{ fontSize: "16px", fontWeight:"bold" }}>
+                    {t("Price")}
+                  </Typography>
                   <Slider
                     getAriaLabel={() => "Minimum distance"}
                     value={value1}
@@ -2099,7 +2188,9 @@ useEffect(()=>{
       className="4star"
       sx={{ display: "flex", alignItems: "center" }}
     >
-     <Typography  sx={{ fontSize: "14px" }}>Up to 1 hour</Typography>
+     <Typography  sx={{ fontSize: "14px" }}>
+      {t("Up to 1 hour")}
+     </Typography>
     </Box>}
     />
     <FormControlLabel value="1 to 4 hours" control={<Radio  color="success"  />} 
@@ -2107,7 +2198,9 @@ useEffect(()=>{
       className="4star"
       sx={{ display: "flex", alignItems: "center" }}
     >
-      <Typography sx={{ fontSize: "14px" }}>1 to 4 hours</Typography>
+      <Typography sx={{ fontSize: "14px" }}>
+        {t("1 to 4 hours")}
+      </Typography>
     </Box>}
      />
     <FormControlLabel value="4 hours to 1 day" control={<Radio  color="success" />}
@@ -2115,7 +2208,9 @@ useEffect(()=>{
         className="4star"
         sx={{ display: "flex", alignItems: "center" }}
       >
-        <Typography sx={{ fontSize: "14px" }}>4 hours to 1 day</Typography>
+        <Typography sx={{ fontSize: "14px" }}>
+          {t("4 hours to 1 day")}
+        </Typography>
       </Box>}
       />
     {/* <FormControlLabel value="1 to 3 days" control={<Radio  color="success"  />}
@@ -2177,7 +2272,9 @@ useEffect(()=>{
                   rowGap:3
                 }}
                 >
-                  <Typography sx={{ fontSize: "16px",fontWeight:"bold" }}>Rating</Typography>
+                  <Typography sx={{ fontSize: "16px",fontWeight:"bold" }}>
+                    {t("Rating")}
+                  </Typography>
                   {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Box
                       className="5star"
@@ -2240,7 +2337,7 @@ useEffect(()=>{
       sx={{ display: "flex", alignItems: "center" }}
     >
       <Rating name="read-only" value={4} readOnly sx={{fontSize:"22px"}}/>
-      <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+      <Typography sx={{ fontSize: "14px" }}>{t("& up")}</Typography>
     </Box>}
      />
     <FormControlLabel value="three" control={<Radio  color="success" />}
@@ -2249,7 +2346,7 @@ useEffect(()=>{
         sx={{ display: "flex", alignItems: "center" }}
       >
         <Rating name="read-only" value={3} readOnly sx={{fontSize:"22px"}}/>
-        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+        <Typography sx={{ fontSize: "14px" }}>{t("& up")}</Typography>
       </Box>}
       />
     <FormControlLabel value="two" control={<Radio  color="success"  />}
@@ -2258,7 +2355,7 @@ useEffect(()=>{
         sx={{ display: "flex", alignItems: "center" }}
       >
         <Rating name="read-only" value={2} readOnly sx={{fontSize:"22px"}}/>
-        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+        <Typography sx={{ fontSize: "14px" }}>{t("& up")}</Typography>
       </Box>}
       />
     <FormControlLabel value="one" control={<Radio  color="success" />}
@@ -2267,7 +2364,7 @@ useEffect(()=>{
         sx={{ display: "flex", alignItems: "center" }}
       >
         <Rating name="read-only" value={1} readOnly sx={{fontSize:"22px"}}/>
-        <Typography sx={{ fontSize: "14px" }}>& up</Typography>
+        <Typography sx={{ fontSize: "14px" }}>{t("& up")}</Typography>
       </Box>}
       />
   </RadioGroup>
@@ -2344,10 +2441,10 @@ useEffect(()=>{
               >
                 <Button variant="contained" color="warning" 
                 onClick={clearHandler}
-                >Clear</Button>
+                >{t("CLEAR")}</Button>
                 <Button variant="contained" color="success"
                 onClick={ApplyHandler}
-                >Apply</Button>
+                >{t("APPLY")}</Button>
               </Box>
             </Box>
 

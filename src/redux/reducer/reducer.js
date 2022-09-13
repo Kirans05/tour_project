@@ -158,7 +158,8 @@ const travelDetailsRecord = {
     countryCode:"",
     PromoCode:"",
     currencyCode:"GBP",
-    currencyValue:1
+    currencyValue:1,
+    webSiteLanguage:localStorage.getItem("lang") == null ? "EN" : localStorage.getItem("lang")
 }
 export const travelDetails = (state = travelDetailsRecord, action) => {
     switch(action.type){
@@ -212,6 +213,9 @@ export const travelDetails = (state = travelDetailsRecord, action) => {
 
         case "currencyConversion" :
             return {...state,currencyValue:action.payload}
+        
+        case "websiteLanguage" :
+            return {...state,webSiteLanguage:action.payload}
 
         default : 
             return state
@@ -420,6 +424,21 @@ export const selectedBookedProductReducer = (state = selectedProductObj, action)
     switch(action.type){
         case "selectedProduct" : 
             return action.payload
+        default :
+            return state
+    }
+}
+
+
+
+const verticalImage = {
+    image : ""
+}
+export const verticalImagesReducer = (state= verticalImage, action) => {
+    switch(action.type){
+        case "VerticalImages" :
+            return {...state,image:action.payload}
+        
         default :
             return state
     }

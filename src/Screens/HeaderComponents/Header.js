@@ -36,7 +36,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import { useDispatch, useSelector } from "react-redux";
-import { currencyCodeAction, currencyConversionAction, currentUserAction, filterProductByCityAction } from "../../redux/action";
+import { currencyCodeAction, currencyConversionAction, currentUserAction, filterProductByCityAction, webSiteLanguageAction } from "../../redux/action";
 import {currentUserReducer, countryListReducer,travelDetails} from "../../redux/reducer/reducer"
 import axios from "axios";
 import { render } from "react-dom";
@@ -46,6 +46,8 @@ import WebSiteLogo2 from "../../assets/images/wesiteLogo2.jpeg"
 import WebSiteLogo3 from "../../assets/images/webSitelogo3.jpeg"
 import WebSiteLogo4 from "../../assets/images/webSiteLogo4.jpeg"
 import { height } from "@mui/system";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
@@ -1031,8 +1033,21 @@ const country_currency = [
   {
     "currency_code": "GBP"
 },
+{
+  "currency_code": "TRY"
+},
 ]
 
+
+
+const websiteLanguage =  [
+  {
+    "language": "en"
+},
+  {
+    "language": "tr"
+},
+]
 
 
 
@@ -1041,7 +1056,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
 
 
 
-
+  const [ t] = useTranslation()
   const [showUserProfile, setShowUserProfile] = useState(localStorage.getItem("accessToken") != null ? true : false)
   const travellerData = useSelector((state) => state.travelDetails)
   const location = useLocation()
@@ -1050,7 +1065,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [countryCurrencyState, setCountryCurrencyState] = useState(travellerData.currencyCode)
-  
+  const [websiteLangState, setWebsteLangState] = useState(travellerData.webSiteLanguage)
 
 
   const contryChangeHandler = async (e) => {
@@ -1065,21 +1080,35 @@ const Header = ({setlogoutRender,logoutRender}) => {
         "content-type":"application/json",
         "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
       },
+      // data:{
+      //   "originalCurr":present,
+      //   "targetCurr":e.target.value,
+      //   "amount": 1
+      // }
       data:{
-        "originalCurr":present,
+        "originalCurr":"GBP",
         "targetCurr":e.target.value,
         "amount": 1
       }
+
     }
 
     try{
       let {data} = await axios(options)
-      dispatch(currencyConversionAction(data.amount))
+      dispatch(currencyConversionAction(data.amount.toFixed(2)))
     }catch(error){
       console.log(error)
     }
 
   } 
+
+
+
+  const changeWebsiteLanguage = (e) => {
+      localStorage.setItem("lang",e.target.value)
+      dispatch(webSiteLanguageAction(e.target.value))
+      i18next.changeLanguage(e.target.value.toLowerCase())
+  }
 
   const [state, setState] = React.useState({
     top: false,
@@ -1416,7 +1445,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           onClick={toggleDrawer(anchor, false)}
         />
         <Typography sx={{ fontSize: { xs: "20px", md: "22px" } }}>
-          Travel
+          MekaTourizm
         </Typography>
       </Box>
 
@@ -1437,7 +1466,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
-          Login
+          {t("Login")}
         </Typography>
         <Typography
           onClick={() => navigate("/signup")}
@@ -1446,7 +1475,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
-          SignUp
+          {t("SignUp")}
         </Typography>
       </Box>
 
@@ -1486,7 +1515,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               "&:hover":{cursor:"pointer",textDecoration:"underLine"}
             }}
           >
-            Home
+            {t("Home")}
           </Typography>
         </Box>
         <Box
@@ -1513,7 +1542,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               "&:hover":{cursor:"pointer",textDecoration:"underLine"}
             }}
           >
-            Profile
+            {t("Profile")}
           </Typography>
         </Box>
         {/* <Box
@@ -1567,7 +1596,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               "&:hover":{cursor:"pointer",textDecoration:"underLine"}
             }}
           >
-            DashBoard
+            {t("DashBoard")}
           </Typography>
         </Box>
         <Box
@@ -1594,7 +1623,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               "&:hover":{cursor:"pointer",textDecoration:"underLine"}
             }}
           >
-            Bookings
+            {t("Bookings")}
           </Typography>
         </Box>
         <Box
@@ -1621,7 +1650,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
               "&:hover":{cursor:"pointer",textDecoration:"underLine"}
             }}
           >
-            Help
+            {t("Help")}
           </Typography>
         </Box>
         {/* <Box
@@ -1695,7 +1724,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "16px", md: "20px" },
           }}
         >
-          Explore
+          {t("Explore")}
         </Typography>
         {/* <Typography>London Tours</Typography> */}
         <Box
@@ -1923,7 +1952,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
                  
                 }}
               >
-                Tours, Sightseeing & Cruises
+                {t("Tours, Sightseeing & Cruises")}
               </Typography>
               <Box className="arrows"
               sx={{
@@ -2054,7 +2083,9 @@ const Header = ({setlogoutRender,logoutRender}) => {
       >
         <Typography sx={{fontSize: { xs: "14px", md: "16px" },"&:hover":{cursor:"pointer",textDecoration:"underLine"}}} 
         onClick={()=>navigate("/aboutTurkey")}
-        >About Turkey</Typography>
+        >
+          {t("About Turkey")}
+        </Typography>
       </Box>
     </Box>
   );
@@ -6452,18 +6483,15 @@ const Header = ({setlogoutRender,logoutRender}) => {
           display: { xs: "none", md: "flex" },
           flexDirection: "row",
           alignItems: "center",
-          columnGap: 3,
+          columnGap: 2,
         }}
       >
-        {/* country and currency */}
+        {/* website language selection  */}
                <TextField
                     id="outlined-select-currency"
                     select
                     value={countryCurrencyState}
                     onChange={contryChangeHandler}
-                    sx={{
-                      display:localStorage.getItem("accessToken") == null ? "none" :"flex"
-                    }}
                   >
                     {country_currency.map((option,index) => (
                       <MenuItem key={index} value={option.currency_code}  >
@@ -6471,6 +6499,20 @@ const Header = ({setlogoutRender,logoutRender}) => {
                       </MenuItem>
                     ))}
                   </TextField>
+
+                  <TextField
+                    id="outlined-select-currency"
+                    select
+                    value={travellerData.webSiteLanguage}
+                    onChange={changeWebsiteLanguage}
+                  >
+                    {websiteLanguage.map((option,index) => (
+                      <MenuItem key={index} value={option.language.toUpperCase()}  >
+                         {option.language.toUpperCase()}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
 
         {/* help */}
         <Box
@@ -6490,7 +6532,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         >
           <HelpOutlineIcon />
           <Typography sx={{ fontSize: { xs: "8px", md: "16px" } }} >
-            Help
+            {t("Help")}
           </Typography>
         </Box>
         
@@ -6522,7 +6564,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             }}
           />
           <Typography sx={{ fontSize: { xs: "8px", md: "16px" } }} >
-            Booking
+            {t("Bookings")}
           </Typography>
         </Box>
 
@@ -6546,7 +6588,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             sx={{ fontSize: { xs: "8px", md: "16px" } }} 
             onClick={handleClick}
           >
-            Account
+            {t("Account")}
           </Typography>
         </Box>
 
@@ -6823,7 +6865,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
-          SignUp
+          {t("SignUp")}
         </MenuItem>
         <MenuItem
           onClick={() => navigate("/login")}
@@ -6831,7 +6873,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
-          Login
+          {t("Login")}
         </MenuItem>
       </Menu>
 
@@ -6861,7 +6903,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             }
           }}
         >
-          LogOut
+          {t("LOGOUT")}
         </MenuItem>
         <MenuItem
           onClick={() => navigate("/userProfile")}
@@ -6869,7 +6911,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "14px", md: "16px" },
           }}
         >
-          Profile
+          {t("Profile")}
         </MenuItem>
       </Menu>
 

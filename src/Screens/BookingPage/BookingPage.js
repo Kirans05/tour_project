@@ -110,6 +110,8 @@ import Venice7 from "../../assets/venice/venice7.jpg"
 import { useSelector } from 'react-redux'
 import { currentUserReducer } from '../../redux/reducer/reducer'
 import axios from 'axios'
+import BookingPageSkeleton from '../../Components/BookingProductCart/BookingPageSkeleton'
+import { useTranslation } from 'react-i18next'
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
@@ -118,9 +120,11 @@ let arr = [1,2,3,4,5,6]
 
 const BookingPage =  () => {
 
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const userData = useSelector((state) => state.currentUserReducer)
   const [bookedProductList, setBookedProductList] = useState([])
+  const [productFetched, setProductFetched] = useState(false)
 
   const fetchBookedProduct = async () => {
     let options = {
@@ -134,8 +138,13 @@ const BookingPage =  () => {
 
     try{
 
-      let {data} = await axios(options)
-      setBookedProductList(data.object)
+      let response = await axios(options)
+      console.log(response)
+      console.log(response.data.status)
+      if(response.data.status == "success"){
+        setBookedProductList(response.data.object)
+        setProductFetched(true)
+      }
     }catch(err){
 
     }
@@ -169,12 +178,16 @@ const BookingPage =  () => {
                 fontSize:{xs:"16px",md:"20px"},
                 fontWeight:"bold"
               }}
-              >My Bookings</Typography>
+              >
+                {t("My Bookings")}
+              </Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"}
               }}
-              >Your list of tours that has been booked</Typography>
+              >
+                {t("Your list of tours that has been booked")}
+              </Typography>
           </Box>
         
         <Box className='AllWishListProducts'
@@ -190,7 +203,16 @@ const BookingPage =  () => {
         }}
         >
           {
-            bookedProductList.length == 0 ?
+            bookedProductList.length == 0 && productFetched == false ?
+            <Box sx={{width:{xs:"100%",md:"100%"},
+                    height:{xs:"70vh",md:"65vh"},
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center"}}
+                    > 
+                        <BookingPageSkeleton />
+              </Box>
+            : bookedProductList.length == 0  && productFetched == true?
             <Box sx={{width:{xs:"100%",md:"100%"},
             height:{xs:"70vh",md:"65vh"},
             display:"flex",

@@ -39,8 +39,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {useSelector,useDispatch} from "react-redux"
-import {addTravelMembers, booking_date_day, cratItemReducer, singleProductReducer,travelDetails} from "../../redux/reducer/reducer"
-import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, cartItemAction} from "../../redux/action/index"
+import {addTravelMembers, booking_date_day, cratItemReducer, singleProductReducer,travelDetails, verticalImagesReducer} from "../../redux/reducer/reducer"
+import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, cartItemAction, individualProductAction, verticalImagesAction} from "../../redux/action/index"
 import CloseIcon from "@mui/icons-material/Close";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -167,6 +167,7 @@ import Turkey4 from "../../assets/turkey/turkey4.jpg"
 import Turkey5 from "../../assets/turkey/turkey5.jpg"
 import axios from "axios";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { useTranslation } from "react-i18next";
 // import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
@@ -212,10 +213,11 @@ const TourDetails = () => {
 
 
 
-
+  const {t} = useTranslation()
   const memberPresentstate = useSelector((state) => state.addTravelMembers)
   const booking_dateDetails = useSelector((state) => state.booking_date_day)
   const singleTourDetails = useSelector((state) => state.singleProductReducer)
+  const verticalImageObj = useSelector((state) => state.verticalImagesReducer)
   const cartItems = useSelector((state) => state.cratItemReducer)
   const travellerData = useSelector((state) => state.travelDetails)
   const [EurPrice, setEuroPrice] = useState("") 
@@ -225,6 +227,7 @@ const TourDetails = () => {
 
 
   const dispatch = useDispatch()
+  // dispatch(verticalImagesAction(singleTourDetails.imageUrl))
   const item = singleTourDetails
 
   // const [productImage, setProductImage] = useState(arr[Math.floor(Math.random() * arr.length)]) 
@@ -325,10 +328,14 @@ const addItemToWishList = () => {
 const imageChanger =  (imageUrl, index) => {
   if(index > 0){
     setImageIndex(index)
-    setTourImage(imageUrl)
+    dispatch(verticalImagesAction(imageUrl))
+    // setImageIndex(index)
+    // setTourImage(imageUrl)
   }else{
     setImageIndex(0)
-    setTourImage(singleTourDetails.imageUrl)
+    dispatch(verticalImagesAction(singleTourDetails.imageUrl))
+    // setImageIndex(0)
+    // setTourImage(singleTourDetails.imageUrl)
   }
 } 
 
@@ -336,22 +343,30 @@ const imageChanger =  (imageUrl, index) => {
 const arrowImageChangerRight = () => {
   if(imageIndex == 0){
     setImageIndex(1)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[0].id}`))
+    // setImageIndex(1)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
   }else if(imageIndex == 1){
     setImageIndex(2)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[1].id}`))
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
   }else if(imageIndex == 2){
     setImageIndex(3)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[2].id}`))
   }else if(imageIndex == 3){
     setImageIndex(4)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[3].id}`))
   }else if(imageIndex == 4){
     setImageIndex(5)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[4].id}`))
   }else if(imageIndex == 5){
     setImageIndex(0)
-    setTourImage(singleTourDetails.imageUrl)
+    // setTourImage(singleTourDetails.imageUrl)
+    dispatch(verticalImagesAction(singleTourDetails.imageUrl))
   }
 }
 
@@ -360,22 +375,28 @@ const arrowImageChangerRight = () => {
 const arrowImageChangerLeft = () => {
   if(imageIndex == 0){
     setImageIndex(5)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[4].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[4].id}`))
   }else if(imageIndex == 5){
     setImageIndex(4)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[3].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[3].id}`))
   }else if(imageIndex == 4){
     setImageIndex(3)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[2].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[2].id}`))
   }else if(imageIndex == 3){
     setImageIndex(2)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[1].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[1].id}`))
   }else if(imageIndex == 2){
     setImageIndex(1)
-    setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+    // setTourImage(`${Base_url}/tour/image/${verticalImages[0].id}`)
+    dispatch(verticalImagesAction(`${Base_url}/tour/image/${verticalImages[0].id}`))
   }else if(imageIndex == 1){
     setImageIndex(0)
-    setTourImage(singleTourDetails.imageUrl)
+    // setTourImage(singleTourDetails.imageUrl)
+    dispatch(verticalImagesAction(singleTourDetails.imageUrl))
   }
 }
 
@@ -384,7 +405,7 @@ const arrowImageChangerLeft = () => {
 
 const fetchVerticalImages = async () => {
   let option = {
-    url:`${Base_url}/tour/get-product-images?id=${singleTourDetails.id}`,
+    url:`${Base_url}/tour/get-product-images?id=${localStorage.getItem("tourId")}`,
     method:"GET",
     headers:{
       "content-type":"application/json",
@@ -404,9 +425,29 @@ const fetchVerticalImages = async () => {
 }
 
 
+const fetchCurrentProduct = async ()=>{
+  let options = {
+    url:`${Base_url}/tour/product?id=${localStorage.getItem("tourId")}`,
+    method:"GET",
+    headers:{
+      "content-type":"application/json",
+      "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+    }
+  }
+
+  try{
+    let {data} = await axios(options)
+    dispatch(individualProductAction(data));
+    dispatch(verticalImagesAction(data.imageUrl))
+  }catch(err){
+    
+  }
+}
+
+
 
 useEffect(()=>{
-
+  fetchCurrentProduct()
   fetchVerticalImages()
   checkWishListAdded()
 },[reRender])
@@ -430,10 +471,14 @@ useEffect(()=>{
         <Breadcrumbs aria-label="breadcrumb">
             <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
             onClick={()=>navigate("/dashBoard")}
-            >DashBoard</Typography>
+            >
+              {t("DashBoard")}
+            </Typography>
             <Typography color="text.primary" sx={{fontSize:{xs:"12px",md:"16px","&:hover":{cursor:"pointer",textDecoration:"underLine"}}}}
             onClick={()=>navigate("/dashBoard")}
-            >Tours, Sightseeing & Cruises</Typography>
+            >
+              {t("Tours, Sightseeing & Cruises")}
+            </Typography>
         </Breadcrumbs>
         </Box>
         <Box
@@ -511,7 +556,7 @@ useEffect(()=>{
                       fontSize: { xs: "16px", md: "20px" },
                     }}
                   >
-                    Share
+                    {t("Share")}
                   </Typography>
                 </Box>
 
@@ -607,7 +652,7 @@ useEffect(()=>{
                       fontSize: { xs: "16px", md: "20px" },
                     }}
                   >
-                    Save To WishList
+                    {t("Save To WishList")}
                   </Typography>
                 </Box>
               </Box>
@@ -903,7 +948,7 @@ useEffect(()=>{
               <Box
                 className="placeImage"
                 component={"img"}
-                src={tourImage}
+                src={verticalImageObj.image}
                 alt="Place Image"
                 sx={{
                   maxWidth:{xs:"100%",md:"100%"},
@@ -914,6 +959,20 @@ useEffect(()=>{
                 }}
                 onClick={()=>imageChanger("not",0)}
               />
+              {/* <Box
+                className="placeImage"
+                component={"img"}
+                src={tourImage}
+                alt="Place Image"
+                sx={{
+                  maxWidth:{xs:"100%",md:"100%"},
+                  minWidth:{xs:"100%",md:"100%"},
+                  minHeight:{xs:"300px",md:"555px"},
+                  maxHeight:{xs:"300px",md:"555px"},
+                  "&:hover":{cursor:"pointer"}
+                }}
+                onClick={()=>imageChanger("not",0)}
+              /> */}
               <KeyboardArrowLeftIcon 
               sx={{
                 fontSize:{xs:"25px",md:"50px"},
@@ -967,7 +1026,7 @@ useEffect(()=>{
                   }}
                 >
                   <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    from
+                    {t("from")}
                   </Typography>
                   <Typography
                     sx={{
@@ -978,11 +1037,11 @@ useEffect(()=>{
                     }}
                   >
                     {/* <CurrencyRupeeIcon /> 8719.53 */}
-                    {travellerData.currencyCode} {travellerData.currencyCode == "GBP" ? item.price : (travellerData.currencyValue*item.price).toFixed(2)}
+                    {travellerData.currencyCode} {travellerData.currencyCode == "GBP" ? item.price : Math.ceil(travellerData.currencyValue*item.price)}
                   </Typography>
                 </Box>
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  Lowest Price Guarantee
+                  {t("Lowest Price Guarantee")}
                 </Typography>
                 <Box
                   className="date&TravelleerDeatils"
@@ -994,7 +1053,7 @@ useEffect(()=>{
                       fontSize: { xs: "16px", md: "20px" },
                     }}
                   >
-                    Select Date and Travellers
+                    {t("Select Date and Travellers")}
                   </Typography>
                   <DesktopDatePicker
                     inputFormat="MM/dd/yyyy"
@@ -1037,7 +1096,7 @@ useEffect(()=>{
                   >
                     <PermIdentityIcon />
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      {memberPresentstate.adult} Adult, {memberPresentstate.child} Child
+                      {memberPresentstate.adult} {t("Adult")}, {memberPresentstate.child} {t("child")}
                     </Typography>
                   </Box>
 
@@ -1086,14 +1145,14 @@ useEffect(()=>{
                               fontSize: { xs: "12px", md: "14px" },
                             }}
                           >
-                            Adult (18-110)
+                            {t("Adult")} (18-110)
                           </Typography>
                           <Typography
                             sx={{
                               fontSize: { xs: "12px", md: "14px" },
                             }}
                           >
-                            Minimum: 1, Maximum: 15
+                            {t("Minimum")}: 1, {t("Maximum")}: 15
                           </Typography>
                         </Box>
                         <Box
@@ -1169,14 +1228,14 @@ useEffect(()=>{
                               fontSize: { xs: "12px", md: "14px" },
                             }}
                           >
-                            child (5-17)
+                            {t("child")} (5-17)
                           </Typography>
                           <Typography
                             sx={{
                               fontSize: { xs: "12px", md: "14px" },
                             }}
                           >
-                            Minimum: 0, Maximum: 15
+                            {t("Minimum")}: 0, {t("Maximum")}: 15
                           </Typography>
                         </Box>
                         <Box
@@ -1241,23 +1300,23 @@ useEffect(()=>{
                   sx={{ display: "flex", flexDirection: "column", rowGap: 2 }}
                 >
                   <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Reserve Now & Pay Later
+                    {t("Reserve Now & Pay Later")}
                   </Typography>
                   <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Secure your spot while staying flexible
+                    {t("Secure your spot while staying flexible")}
                   </Typography>
                   <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                    Free cancellation
+                    {t("Free cancellation")}
                   </Typography>
                   <Box
                     className="timings&learnMore"
                     sx={{ display: "flex", flexDirection: "row", columnGap: 1 }}
                   >
                     <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                      Up to 24 hours in advance.
+                      {t("Up to 24 hours in advance.")}
                     </Typography>
                     <Typography sx={{ "&:hover": { cursor: "pointer" } }}>
-                      Learn more
+                      {t("Learn more")}
                     </Typography>
                   </Box>
                 </Box>
@@ -2335,11 +2394,14 @@ useEffect(()=>{
                       rowGap: 2,
                     }}
                   >
-                    <Typography>Option1</Typography>
-                    <Typography>8 Seater Van Airport Pickup</Typography>
                     <Typography>
-                      Up to 8 passengers + 8 medium luggage + 8 hand luggage per
-                      group. Pickup included
+                      {t("Option1")}
+                    </Typography>
+                    <Typography>
+                      {t("8 Seater Van Airport Pickup")}
+                    </Typography>
+                    <Typography>
+                      {t("Up to 8 passengers + 8 medium luggage + 8 hand luggage per group. Pickup included")}
                     </Typography>
                   </Box>
                   <Box className="rightPart"
@@ -2388,10 +2450,10 @@ useEffect(()=>{
                           display:travellerData.currencyCode != "GBP" ? "flex":"none"
                          }}
                          >
-                        {(memberPresentstate.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentstate.child*singleTourDetails.price*travellerData.currencyValue).toFixed(2)}
+                        {Math.ceil(memberPresentstate.adult*singleTourDetails.price*travellerData.currencyValue+memberPresentstate.child*singleTourDetails.price*travellerData.currencyValue)}
                          </Typography>
                       </Box>
-                      <Typography>per group (up to 8)</Typography>
+                      <Typography>{t("per group")} (up to 8)</Typography>
                     </Box>
                     {/* <Button variant="outlined" color="warning">
                       Reserve Now & Pay Later
@@ -2409,7 +2471,7 @@ useEffect(()=>{
           }
                       }}
                     >
-                      Book Now
+                      {t("Book Now")}
                     </Button>
                   </Box>
                 </Box>
@@ -2591,7 +2653,7 @@ useEffect(()=>{
               >
                 <SafetyCheckIcon />
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  Safety Measures
+                  {t("Safety Measures")}
                 </Typography>
               </Box>
               <Box
@@ -2609,7 +2671,7 @@ useEffect(()=>{
               >
                 <SmartphoneIcon />
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  Mobile Ticket
+                  {t("Mobile Ticket")}
                 </Typography>
               </Box>
               <Box

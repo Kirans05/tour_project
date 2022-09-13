@@ -20,11 +20,16 @@ import {LoginEmail, loginPassword} from "../../redux/action/index"
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
 import Footer from "../FooterComponents/Footer";
+import { useTranslation } from "react-i18next";
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 
 const LoginInPage = () => {
+
+
+
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [SnakBarOpen, setSnakBarOpen] = React.useState(false);
   const [alertMessage, setAlertMessage] = useState("")
@@ -107,14 +112,13 @@ const LoginInPage = () => {
       width:{xs:"80%",md:"35%"},
       textAlign:"center"
       }}>
-         Log in and get exploring
+         {t("Log in and get exploring")}
         </Typography>
         <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
       width:{xs:"80%",md:"35%"},
        textAlign:"center",
       }}>
-         Log into your account with your email, or create one below. Quick and
-          easy - promise
+         {t("Log into your account with your email, or create one below. Quick and easy - promise!")}
         </Typography>
       <Box
       sx={{
@@ -147,7 +151,7 @@ const LoginInPage = () => {
         <Button variant="contained" color="success" sx={{ minWidth:{xs:"100%",md:"100%"}}}
         onClick={submitHandler}
         >
-          Continue
+          {t("CONTINUE")}
         </Button>
         </Box>
         {/* <Box sx={{ display: "flex", flexDirection: "row" }}>

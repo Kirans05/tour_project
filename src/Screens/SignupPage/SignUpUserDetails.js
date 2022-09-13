@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpInfo } from "../../redux/reducer/reducer";
 import axios from "axios"
 import Footer from "../FooterComponents/Footer";
+import { useTranslation } from "react-i18next";
 
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
@@ -28,7 +29,7 @@ const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 const SignUpUserDetails = () => {
 
-
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [Country, setCountry] = React.useState("");
 
@@ -1078,7 +1079,7 @@ const SignUpUserDetails = () => {
             <Typography
               sx={{ fontSize: { xs: "20px", md: "30px" }, fontWeight: "bold" }}
             >
-              Sign Up
+              {t("Sign Up")}
             </Typography>
           </Box>
           <Box
@@ -1094,7 +1095,7 @@ const SignUpUserDetails = () => {
           >
             <Box className="firstColumn">
               <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
-                First Name
+                {t("First Name")}
               </Typography>
               <TextField
                 type={"text"}
@@ -1105,7 +1106,7 @@ const SignUpUserDetails = () => {
             </Box>
             <Box className="secondColumn">
               <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
-                Last Name
+                {t("Last Name")}
               </Typography>
               <TextField
                 type={"text"}
@@ -1117,7 +1118,7 @@ const SignUpUserDetails = () => {
           </Box>
           <Box className="phoneNumber">
             <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
-              PhoneNumber
+              {t("PhoneNumber")}
             </Typography>
             <Box className="phoneNumber&code">
               <TextField
@@ -1145,7 +1146,7 @@ const SignUpUserDetails = () => {
           </Box>
           <Box className="thirdRow " sx={{ width: "100%" }}>
             <Typography sx={{ fontSize: { xs: "16px", md: "20px" } }}>
-              Create password
+              {t("Create password")}
             </Typography>
             <TextField
               type={"password"}
@@ -1163,7 +1164,7 @@ const SignUpUserDetails = () => {
             }}
             onClick={submitHandler}
           >
-            Create an account
+            {t("CREATE AN ACCOUNT")}
           </Button>
         </Box>
         <Box className="secondPart">
@@ -1181,7 +1182,7 @@ const SignUpUserDetails = () => {
             </span>{" "}
             and{" "}
             <span className="hover" onClick={() => navigate("/agreement")}>
-              Agreement with Travel
+              Agreement with MekaTourizm
             </span>
             .
           </Typography>

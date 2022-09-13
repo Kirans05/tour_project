@@ -10,9 +10,11 @@ import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
 
+  const {t} = useTranslation()
   const navigate = useNavigate()
 
   return (
@@ -84,7 +86,9 @@ const Footer = () => {
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
             fontSize:{xs:"12px",md:"14px"}
           }}
-          >Privacy Policy</Typography>
+          >
+            {t("Privacy Policy")}
+          </Typography>
           
         </Box>
         <Box
@@ -101,7 +105,7 @@ const Footer = () => {
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
             fontSize:{xs:"12px",md:"14px"}
           }}
-          >About Travel</Typography>
+          >{t("About")} MekaTourizm</Typography>
           {/* <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
           <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/supplierSignUpPgae")}>Supplier Signup</Typography> */}
         </Box>
@@ -138,7 +142,9 @@ const Footer = () => {
             fontSize:{xs:"12px",md:"14px"}
           }}
           onClick={()=>navigate("/TermsAndCondition")}
-          >Terms & Conditions</Typography>
+          >
+            {t("Terms & Conditions")}
+          </Typography>
         </Box>
       </Box>
     </Box>

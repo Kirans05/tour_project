@@ -19,8 +19,11 @@ import {useDispatch, useSelector} from "react-redux"
 import {signUpInfo} from "../../redux/reducer/reducer"
 import Header from "../HeaderComponents/Header";
 import Footer from "../FooterComponents/Footer";
+import { useTranslation } from "react-i18next";
 
 const SignUpPage = () => {
+
+  const { t} = useTranslation()
   const navigate = useNavigate();
   const myState = useSelector((state) => state.signUpInfo)
   const dispatch = useDispatch()
@@ -64,14 +67,13 @@ const SignUpPage = () => {
       width:{xs:"80%",md:"50%"},
       textAlign:"center"
       }}>
-          Sign up and get exploring
+          {t("Sign up and get exploring")}
         </Typography>
         <Typography sx={{ fontSize: { xs: "14px", md: "16px" },
        width:{xs:"80%",md:"35%"},
        textAlign:"center",
       }}>
-          Log into your account with your email, or create one below. Quick and
-          easy - promise!
+          {t("Log into your account with your email, or create one below. Quick and easy - promise!")}
         </Typography>
         {/* <FormLabel>Email</FormLabel> */}
         <TextField id="outlined-basic" label="Email" variant="outlined" onChange={(e) => dispatch(signUpEmail(e.target.value))}  value={myState.email} 
@@ -86,10 +88,10 @@ const SignUpPage = () => {
           sx={{ minWidth:{xs:"85%",md:"35%"} }}
           onClick={submitHandler}
         >
-          Continue
+          {t("CONTINUE")}
         </Button>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <Typography>or Continue with</Typography>
+          <Typography>or {t("Continue with")}</Typography>
         </Box>
         {/* <Box
           className="loginOptions"
@@ -142,7 +144,7 @@ const SignUpPage = () => {
             </span>{" "}
             and{" "}
             <span className="hover" onClick={() => navigate("/agreement")}>
-              Agreement with Travel
+              Agreement with MekaTourizm
             </span>
             .
           </Typography>

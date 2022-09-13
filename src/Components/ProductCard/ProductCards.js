@@ -418,8 +418,11 @@ const ProductCards = ({ item }) => {
             <Typography sx={{ fontSize: { xs: "15px", md: "16px" },marginRight:"3px",fontWeight:"bold" }}>
               {travellerData.currencyCode}
             </Typography>
-            <Typography sx={{ fontSize: { xs: "16px", md: "18px" },fontWeight:"bold" }}>
+            {/* <Typography sx={{ fontSize: { xs: "16px", md: "18px" },fontWeight:"bold" }}>
               {travellerData.currencyCode == "GBP" ? item.price : (travellerData.currencyValue*item.price).toFixed(2)}
+            </Typography> */}
+            <Typography sx={{ fontSize: { xs: "16px", md: "18px" },fontWeight:"bold" }}>
+              {travellerData.currencyCode == "GBP" ? item.price : Math.ceil(travellerData.currencyValue*item.price)}
             </Typography>
           </Box>
         </Box>

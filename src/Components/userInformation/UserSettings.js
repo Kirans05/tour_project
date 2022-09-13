@@ -27,12 +27,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../Screens/FooterComponents/Footer";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const UserSettings = () => {
 
+
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const [displayItem, setDisplayItem] = useState("");
   const [displayChoice, setDisplayChoice] = useState(true)
@@ -63,11 +66,13 @@ const UserSettings = () => {
         <Box
           className="mainBody"
           sx={{
-            width: "100%",
+            width: {xs:"94%",md:"88%"},
             display: "flex",
             flexDirection: "row",
             columnGap: 2,
-            height:{xs:"90vh",md:"84vh"}
+            height:{xs:"90vh",md:"85vh"},
+            overflowY:"auto",
+            padding:{xs:"0% 3% 0% 3%",md:"0% 6% 0% 6%"}
           }}
         >
           {/* left part */}
@@ -117,7 +122,7 @@ const UserSettings = () => {
               >
                 <PermIdentityIcon />
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                  Personal Information
+                  {t("Personal Information")}
                 </Typography>
               </Box>
               <Divider />
@@ -137,7 +142,7 @@ const UserSettings = () => {
               >
                 <VpnKeyIcon />
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                  Login Information
+                  {t("Login Information")}
                 </Typography>
               </Box>
               <Divider />
@@ -158,7 +163,7 @@ const UserSettings = () => {
               >
                 <PaymentIcon />
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                  Payment Method
+                  {t("Payment Method")}
                 </Typography>
               </Box>
               <Divider />
@@ -178,7 +183,9 @@ const UserSettings = () => {
                   }}
               >
                 <NotificationsActiveIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Notifications</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Notifications")}
+                </Typography>
               </Box>
               <Divider />
               <Box
@@ -198,7 +205,7 @@ const UserSettings = () => {
               >
                 <CardTravelIcon />
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                  Traveller Preferences
+                  {t("Traveller Preferences")}
                 </Typography>
               </Box>
               <Divider />
@@ -219,7 +226,9 @@ const UserSettings = () => {
                   
               >
                 <SettingsIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Site Settings</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Site Settings")}
+                </Typography>
               </Box>
             </Box>
           </Box>
@@ -247,10 +256,12 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Profile")}
+                </Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                Personal Information
+                {t("Personal Information")}
               </Typography>
 
               {!userNameEdit ? (
@@ -264,7 +275,9 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Full Name</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Full Name")}
+                    </Typography>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>{myState.firstName} {myState.lastName}</Typography>
                   </Box>
                   <Typography
@@ -278,7 +291,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setUserNameEdit(true)}
                   >
-                    Edit
+                    {t("Edit")}
                   </Typography>
                 </Box>
               ) : (
@@ -300,7 +313,9 @@ const UserSettings = () => {
                       rowGap: 1,
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Full Name</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Full Name")}
+                    </Typography>
                     <TextField type={"text"} placeholder={"kiran"} />
                     <Button
                       variant="contained"
@@ -311,7 +326,7 @@ const UserSettings = () => {
                         
                       }}
                     >
-                      Save
+                      {t("Save")}
                     </Button>
                   </Box>
                   <Box
@@ -322,7 +337,9 @@ const UserSettings = () => {
                       rowGap: 1,
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>LastName</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("LastName")}
+                    </Typography>
                     <TextField type={"text"} placeholder={"s"} />
                   </Box>
                   <Typography
@@ -340,7 +357,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setUserNameEdit(false)}
                   >
-                    Cancel
+                    {t("Cancel")}
                   </Typography>
                   <Box className="breakpointColumn"
                   sx={{
@@ -365,7 +382,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setUserNameEdit(false)}
                   >
-                    Cancel
+                    {t("Cancel")}
                   </Typography>
                   <Button
                       variant="contained"
@@ -375,7 +392,7 @@ const UserSettings = () => {
                         display:{xs:"flex",md:"none"}
                       }}
                     >
-                      Save
+                      {t("Save")}
                     </Button>
                   </Box>
 
@@ -395,7 +412,9 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Email</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
+                      {t("Email")}
+                    </Typography>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
                       {myState.email}
                     </Typography>
@@ -411,7 +430,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setUserEmailEdit(true)}
                   >
-                    Edit
+                    {t("Edit")}
                   </Typography>
                 </Box>
               ) : (
@@ -435,7 +454,9 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Email</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Email")}
+                    </Typography>
                     <Typography
                       sx={{
                        fontSize: {xs:"16px",md:"16px"},
@@ -447,7 +468,7 @@ const UserSettings = () => {
                       }}
                       onClick={() => setUserEmailEdit(false)}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </Typography>
                   </Box>
                   <TextField
@@ -456,7 +477,7 @@ const UserSettings = () => {
                     fullWidth
                   />
                   <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                    Confirm Password
+                    {t("Confirm Password")}
                   </Typography>
                   <Box
                     className="passwordBox"
@@ -503,7 +524,7 @@ const UserSettings = () => {
                     color="success"
                     onClick={() => setUserEmailEdit(false)}
                   >
-                    Save
+                    {t("Save")}
                   </Button>
                 </Box>
               )}
@@ -522,10 +543,10 @@ const UserSettings = () => {
                 >
                   <Box>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                      Phone Number
+                      {t("Phone Number")}
                     </Typography>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                      Not Provided
+                      {t("Not Provided")}
                     </Typography>
                   </Box>
                   <Typography
@@ -539,7 +560,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setPhoneNumberEdit(true)}
                   >
-                    Add
+                    {t("Add")}
                   </Typography>
                 </Box>
               ) : (
@@ -563,7 +584,7 @@ const UserSettings = () => {
                     }}
                   >
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                      Phone Number
+                      {t("Phone Number")}
                     </Typography>
                     <Typography
                       sx={{
@@ -576,7 +597,7 @@ const UserSettings = () => {
                       }}
                       onClick={() => setPhoneNumberEdit(false)}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </Typography>
                   </Box>
                   <Box className="texField" sx={{ width: "100%" }}>
@@ -591,7 +612,7 @@ const UserSettings = () => {
                     color="success"
                     onClick={() => setPhoneNumberEdit(false)}
                   >
-                    Save
+                    {t("Save")}
                   </Button>
                 </Box>
               )}
@@ -610,10 +631,10 @@ const UserSettings = () => {
                 >
                   <Box>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
-                      Date of Birth
+                      {t("Date of Birth")}
                     </Typography>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
-                      Not Provided
+                      {t("Not Provided")}
                     </Typography>
                   </Box>
                   <Typography
@@ -628,7 +649,7 @@ const UserSettings = () => {
                     onClick={() => setDateOfBirthEdit(true)}
                     // onClick={()=>setDateOfBirthEdit(true)}
                   >
-                    Add
+                    {t("Add")}
                   </Typography>
                 </Box>
               ) : (
@@ -653,7 +674,7 @@ const UserSettings = () => {
                     }}
                   >
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
-                      Date of Birth
+                      {t("Date of Birth")}
                     </Typography>
                     <Typography
                       sx={{
@@ -666,7 +687,7 @@ const UserSettings = () => {
                       }}
                       onClick={() => setDateOfBirthEdit(false)}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </Typography>
                   </Box>
                   <Box>
@@ -686,7 +707,7 @@ const UserSettings = () => {
                     color="success"
                     onClick={() => setDateOfBirthEdit(false)}
                   >
-                    Save
+                    {t("Save")}
                   </Button>
                 </Box>
               )}
@@ -704,9 +725,11 @@ const UserSettings = () => {
                   }}
                 >
                   <Box>
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Home Town</Typography>
                     <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                      Not Provided
+                      {t("Home Town")}
+                    </Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Not Provided")}
                     </Typography>
                   </Box>
                   <Typography
@@ -720,7 +743,7 @@ const UserSettings = () => {
                     }}
                     onClick={() => setHomeTownCity(true)}
                   >
-                    Edit
+                    {t("Edit")}
                   </Typography>
                 </Box>
               ) : (
@@ -744,7 +767,9 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Home Town</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Home Town")}
+                    </Typography>
                     <Typography
                       sx={{
                        fontSize: {xs:"16px",md:"16px"},
@@ -756,7 +781,7 @@ const UserSettings = () => {
                       }}
                       onClick={() => setHomeTownCity(false)}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </Typography>
                   </Box>
                   <Box
@@ -808,7 +833,9 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Profile")}
+                </Typography>
               </Box>
 
               <Box
@@ -823,7 +850,7 @@ const UserSettings = () => {
                 }}
               >
                 <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                  Login Information
+                  {t("Login Information")}
                 </Typography>
                 <Box
                   sx={{
@@ -834,9 +861,7 @@ const UserSettings = () => {
                 >
                   <VpnKeyIcon />
                   <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                    Create a password to access your account from any device at
-                    any time. Or, log in with one click with a connected account
-                    below.
+                    {t("Create a password to access your account from any device at any time. Or, log in with one click with a connected account below.")}
                   </Typography>
                 </Box>
               </Box>
@@ -852,17 +877,13 @@ const UserSettings = () => {
                 }}
               >
                 <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}>
-                  Deactivate
+                  {t("Deactivate")}
                 </Typography>
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }} >
-                  Deactivating your account means that your account will no
-                  longer be available. You will not be able to log in and your
-                  profile will not be accessible. Any reviews, photos, and tips
-                  that you have contributed may continue to be displayed on the
-                  site
+                  {t("Deactivating your account means that your account will no longer be available. You will not be able to log in and your profile will not be accessible. Any reviews, photos, and tips that you have contributed may continue to be displayed on the site")}
                 </Typography>
                 <Alert severity="error" sx={{fontSize: {xs:"16px",md:"16px"} }}>
-                  To deactivate your account, please log in again.
+                  {t("To deactivate your account, please log in again.")}
                 </Alert>
                 <Button
                   variant="contained"
@@ -872,7 +893,7 @@ const UserSettings = () => {
                     "&:hover": { cursor: "not-allowed" },
                   }}
                 >
-                  Deactivate My Account
+                  {t("DEACTIVATE MY ACCOUNT")}
                 </Button>
               </Box>
             </Box>
@@ -897,13 +918,19 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"}}}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"}}}>
+                  {t("Profile")}
+                </Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                Payment Method
+                {t("Payment Method")}
               </Typography>
-              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Your stored cards</Typography>
-              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Please log in to view your stored cards</Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                {t("Your stored cards")}
+              </Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                {t("Please log in to view your stored cards")}
+              </Typography>
             </Box>
           ) : displayItem == "notifications" ? (
             <Box
@@ -926,12 +953,16 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Profile")}
+                </Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                Notifications
+                {t("Notifications")}
               </Typography>
-              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Marketing emails</Typography>
+              <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                {t("Marketing emails")}
+              </Typography>
               <Box
                 sx={{
                   display: "flex",
@@ -941,8 +972,7 @@ const UserSettings = () => {
                 }}
               >
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
-                  Mekatourizm will send you weekly emails with travel inspirations,
-                  tips, recommendations and company updates
+                   {t("Mekatourizm will send you weekly emails with travel inspirations, tips, recommendations and company updates")}
                 </Typography>
                 <Switch {...label} defaultChecked color="success" />
               </Box>
@@ -968,10 +998,10 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>{t("Profile")}</Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                Travel Preferences
+                {t("Travel Preferences")}
               </Typography>
 
               {!editButton ? (
@@ -991,7 +1021,9 @@ const UserSettings = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Special Requirements</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Special Requirements")}
+                    </Typography>
                     <Typography
                       sx={{
                         color: "green",
@@ -1003,10 +1035,12 @@ const UserSettings = () => {
                       }}
                       onClick={() => setEditButton(true)}
                     >
-                      Add
+                      {t("Add")}
                     </Typography>
                   </Box>
-                  <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Not Provided</Typography>
+                  <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                    {t("Not Provided")}
+                  </Typography>
                 </Box>
               ) : (
                 <Box
@@ -1027,7 +1061,9 @@ const UserSettings = () => {
                       width: "100%",
                     }}
                   >
-                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>Special Requirements</Typography>
+                    <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                      {t("Special Requirements")}
+                    </Typography>
                     <Typography
                       sx={{
                         color: "green",
@@ -1039,7 +1075,7 @@ const UserSettings = () => {
                       }}
                       onClick={() => setEditButton(false)}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </Typography>
                   </Box>
                   <TextareaAutosize
@@ -1057,7 +1093,7 @@ const UserSettings = () => {
                       color="success"
                       onClick={() => setEditButton(false)}
                     >
-                      Save
+                      {t("Save")}
                     </Button>
                   </Box>
                 </Box>
@@ -1086,17 +1122,24 @@ const UserSettings = () => {
                 onClick={()=>setDisplayChoice(true)}
               >
                 <ArrowBackIosIcon />
-                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>Profile</Typography>
+                <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}>
+                  {t("Profile")}
+                </Typography>
               </Box>
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
-                Site Settings
+                {t("Site Settings")}
               </Typography>
               <Button variant="contained" color="warning"
               onClick={()=>{
                 localStorage.removeItem("accessToken")
                 navigate("/")
               }}
-              >LogOut</Button>
+              sx={{
+                display:localStorage.getItem("accessToken") == null ? "none" : "flex"
+              }}
+              >
+                {t("LOGOUT")}
+              </Button>
 
             </Box>
           ) : null}

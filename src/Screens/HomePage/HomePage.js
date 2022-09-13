@@ -47,7 +47,7 @@ import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterP
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {totalProductReducer, displayProductReducer, countryListReducer} from "../../redux/reducer/reducer"
-
+import {useTranslation} from "react-i18next"
 
 
 
@@ -60,7 +60,7 @@ const Base_url = process.env.REACT_APP_Axios_Base_urls
 
 const HomePage = () => {
 
-
+  const { t } = useTranslation();
   const location = useLocation()
   const [logoutRender, setlogoutRender] = useState(false)
   const totalProductList = useSelector((state) => state.totalProductReducer)
@@ -111,7 +111,7 @@ const HomePage = () => {
         third: false,
       });
     }
-  }, 5000);
+  }, 4000);
 
 
   const headerSearchHandler = (e) => {
@@ -148,9 +148,12 @@ const showSearchPlace = (item) => {
       }
     }
 
+    try{
 
-    let {data} = await axios(options)
-    localStorage.setItem("userData",data)
+      let {data} = await axios(options)
+      localStorage.setItem("userData",data)
+    }catch(err){
+    }
   }
 
 
@@ -227,6 +230,7 @@ const showSearchPlace = (item) => {
             }}
           >
             <Box
+            className="sliderImage"
               component={"img"}
               src={imageState[0]}
               alt="homePageImages"
@@ -258,10 +262,10 @@ const showSearchPlace = (item) => {
                   fontWeight: "bold",
                 }}
               >
-                Find amazing things to do.
+                {t("Find amazing things to do.")}
               </Typography>
               <Typography sx={{ fontSize:{xs:"16px",md:"25px"}, fontWeight: "bold" }}>
-                Anytime, anywhere
+                {t("Anytime, anywhere")}
               </Typography>
               <Box
                 className="secondBox"
@@ -441,7 +445,9 @@ const showSearchPlace = (item) => {
                     }
                   }}
                   >
-                    Search
+                    <Typography>
+                    {t("SEARCH")}
+                    </Typography>
                   </Button>
                 </Box>
               </Box>
@@ -533,7 +539,7 @@ const showSearchPlace = (item) => {
             }}
           >
             <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"25px"} }}>
-              Why book with Travel
+              {t("Why book with Travel")}
             </Typography>
             <Box
               className="choice"
@@ -560,7 +566,7 @@ const showSearchPlace = (item) => {
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
-                  Ultimate flexibility
+                  {t("Ultimate flexibility")}
                 </Typography>
                 <Box className="ultimateFlexibiltyDetails"
                 sx={{
@@ -574,8 +580,7 @@ const showSearchPlace = (item) => {
                 <Typography sx={{
                   fontSize:{xs:"14px",md:"16px"},
                 }}>
-                  You’re in control, with free cancellation and payment options
-                  to satisfy any plan or budget.
+                  {t("You’re in control, with free cancellation and payment options to satisfy any plan or budget.")}
                 </Typography>
                 </Box>
              
@@ -592,7 +597,7 @@ const showSearchPlace = (item) => {
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
-                Memorable experiences
+                {t("Memorable experiences")}
                 </Typography>
                 <Box className="Memorable experiencesDetails"
                 sx={{
@@ -606,7 +611,7 @@ const showSearchPlace = (item) => {
                 <Typography sx={{
                   fontSize:{xs:"14px",md:"16px"},
                 }}>
-                  Browse and book tours and activities so incredible, you’ll want to tell your friends.
+                  {t("Browse and book tours and activities so incredible, you’ll want to tell your friends.")}
                 </Typography>
               </Box>
               </Box>
@@ -622,7 +627,7 @@ const showSearchPlace = (item) => {
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
-                Quality at our core
+                {t("Quality at our core")}
                 </Typography>
                 <Box className="Quality at our core Details"
                 sx={{
@@ -636,7 +641,7 @@ const showSearchPlace = (item) => {
                 <Typography sx={{
                   fontSize:{xs:"14px",md:"16px"},
                 }}>
-                  High quality standards. Millions of reviews. A Tripadvisor company.
+                  {t("High quality standards. Millions of reviews. A Tripadvisor company.")}
                 </Typography>
               </Box>
               </Box>
@@ -652,7 +657,7 @@ const showSearchPlace = (item) => {
                 }}
                 >
                 <Typography sx={{ fontSize: {xs:"16px",md:"20px"}, fontWeight: "bold" }}>
-                Award-winning supports
+                {t("Award-winning supports")}
                 </Typography>
                 <Box className="Award-winning supportDetails"
                 sx={{
@@ -667,7 +672,7 @@ const showSearchPlace = (item) => {
                   fontSize:{xs:"14px",md:"16px"},
                   // width:"75%"
                 }}>
-                  New price? New plan? No problem. We’re here to help, 24/7.
+                  {t("New price? New plan? No problem. We’re here to help, 24/7.")}
                 </Typography>
               </Box>
               </Box>
@@ -756,12 +761,12 @@ const showSearchPlace = (item) => {
               <Typography
                sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}
               >
-                Keep Things
+                {t("Keep Things")}
               </Typography>
               <Typography
                sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"30px"} }}
               >
-                flexible
+                {t("flexible")}
               </Typography>
               </Box>
               <Typography
@@ -770,8 +775,7 @@ const showSearchPlace = (item) => {
                 textAlign:"center"
               }}
               >
-                Use Reserve Now & Pay Later to secure the activities you don't
-                want to miss without being locked in.
+                {t("Use Reserve Now & Pay Later to secure the activities you don't want to miss without being locked in.")}
               </Typography>
             </Box>
           </Box>
@@ -788,7 +792,7 @@ const showSearchPlace = (item) => {
             }}
           >
             <Typography sx={{ fontWeight: "bold", fontSize: {xs:"20px",md:"25px"} }}>
-              Top attractions 
+              {t("Top attractions")} 
             </Typography>
             <Box
               className="topAttractionsplaces"
@@ -901,7 +905,7 @@ const showSearchPlace = (item) => {
                   fontWeight: "bold",
                 }}
               >
-                Free
+                {t("Free")}
               </Typography>
               <Typography
                 sx={{
@@ -909,7 +913,7 @@ const showSearchPlace = (item) => {
                   fontWeight: "bold",
                 }}
               >
-                cancellation
+                {t("cancellation")}
               </Typography>
               </Box>
               
@@ -919,8 +923,7 @@ const showSearchPlace = (item) => {
                 textAlign:"center"
               }}
               >
-                You'll receive a full refund if you cancel at least 24 hours in
-                advance of most experiences.
+                {t("You'll receive a full refund if you cancel at least 24 hours in advance of most experiences.")}
               </Typography>
             </Box>
           </Box>
@@ -942,7 +945,7 @@ const showSearchPlace = (item) => {
                 fontWeight: "bold",
               }}
             >
-              Top Destinations
+              {t("Top Destinations")}
             </Typography>
             <Box
               className="Top Destinations Places"

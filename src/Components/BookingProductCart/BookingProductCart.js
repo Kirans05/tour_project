@@ -240,7 +240,7 @@ const clickHandler = () => {
                 fontWeight:"bold",
                 fontSize:{xs:"14px",md:"16px"}
               }}
-              >GBP</Typography>
+              >{individualProduct == null ? "Currency" : individualProduct.currency}</Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"},

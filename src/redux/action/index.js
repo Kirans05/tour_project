@@ -387,3 +387,19 @@ export const selectedBookedProductAction = (payload) => {
         payload
     }
 }
+
+
+//  vertical images in tour details page
+export const verticalImagesAction = (payload) => {
+    return {
+        type:"VerticalImages",
+        payload
+    }
+} 
+
+export const webSiteLanguageAction = (payload) => {
+    return {
+        type:"websiteLanguage",
+        payload
+    }
+}
