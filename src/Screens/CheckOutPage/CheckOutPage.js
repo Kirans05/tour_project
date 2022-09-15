@@ -1416,7 +1416,7 @@ useEffect(() => {
                       fontSize: { xs: "14px", md: "16px" },
                     }}
                   >
-                    {description}
+                     {singleTourDetails.city == "Turkey" && localStorage.getItem("lang") == "EN" ? singleTourDetails.description.substr(150,120) : item.city == "Turkey" && localStorage.getItem("lang") == "TR" ? singleTourDetails.description.substr(154,110) : localStorage.getItem("lang") == "EN" ? singleTourDetails.description.substr(75,125) : singleTourDetails.description.substr(78,125)}
                   </Typography>
                   <Typography
                     sx={{
@@ -1928,7 +1928,9 @@ useEffect(() => {
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}
                 }}
-                >{description}</Typography>
+                >
+                   {singleTourDetails.city == "Turkey" && localStorage.getItem("lang") == "EN" ? singleTourDetails.description.substr(150,120) : item.city == "Turkey" && localStorage.getItem("lang") == "TR" ? singleTourDetails.description.substr(154,110) : localStorage.getItem("lang") == "EN" ? singleTourDetails.description.substr(75,125) : singleTourDetails.description.substr(78,125)}
+                </Typography>
                 <Typography 
                 sx={{
                     fontSize:{xs:"14px",md:"16px"}

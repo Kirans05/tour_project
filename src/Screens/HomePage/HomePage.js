@@ -46,7 +46,7 @@ import Turkey9 from "../../assets/turkey/turkey9.jpg"
 import {addChild, removeChild, addAdults, removeAdults, tourBookingDate, filterProductByCityAction, productAction, displayProductAction, countryListAction} from "../../redux/action/index"
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {totalProductReducer, displayProductReducer, countryListReducer} from "../../redux/reducer/reducer"
+import {totalProductReducer, displayProductReducer, countryListReducer, travelDetails, filterProductByCityReducer} from "../../redux/reducer/reducer"
 import {useTranslation} from "react-i18next"
 
 
@@ -81,6 +81,10 @@ const HomePage = () => {
 	const inputRef = useRef();
   const [placesName, setPlacesName] = useState(countryListSuggestions)
   const [showMenuOptions, setShowMenuOptions] = useState(false)
+  const travellerData = useSelector((state) => state.travelDetails)
+  const selectedCity = useSelector((state) => state.filterProductByCityReducer) 
+
+
 
 
   const handleChange = (newValue) => {
@@ -159,17 +163,26 @@ const showSearchPlace = (item) => {
 
 
   const fetchAllTourProducts = async () => {
-    let options = {
-      url:`${Base_url}/tour/allProducts`,
-      method:"GET",
-      headers:{
-        "content-type":"application/json",
-      }
+    // let options = {
+    //   url:`${Base_url}/tour/allProducts`,
+    //   method:"GET",
+    //   headers:{
+      //     "content-type":"application/json",
+      //   }
+      // }
+      let langauge = localStorage.getItem("lang") == null ? "ENG" : "TUR"
+      let options = {
+        url:`${Base_url}/tour/get-by-language?language=${langauge}`,
+        method:"GET",
+          headers:{
+              "content-type":"application/json",
+            }
     }
   
   
     try{
       let {data} = await axios(options)
+      console.log(data)
       dispatch(productAction(data))
       let cityObj = {}
       let arr = []
@@ -178,7 +191,7 @@ const showSearchPlace = (item) => {
         
         }else{
           cityObj[item.city] = item.city
-          arr.push(item.city)
+          arr.push(item.city.toLowerCase())
         }
       })
       dispatch(displayProductAction(filterElements))
@@ -186,7 +199,6 @@ const showSearchPlace = (item) => {
     }catch(error){
   
     }
-  
   }
   
 
@@ -964,7 +976,7 @@ const showSearchPlace = (item) => {
 
               {
                 countryListSuggestions.map((item, index) => {
-                  if(index < 11 && item != "Krakow"){
+                  if(index < 11 && item != "krakow"){
                     return <TopDestinations key={index} item={item}/>
                   }
                 })

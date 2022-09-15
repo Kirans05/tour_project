@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Divider,
+  MenuItem,
   Switch,
   TextareaAutosize,
   TextField,
@@ -26,22 +27,40 @@ import { useNavigate, useParams } from "react-router-dom";
 // import ProfileChoice from "./ProfileChoice";
 import Footer from "../../Screens/FooterComponents/Footer";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import { webSiteLanguageAction } from "../../redux/action";
 
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
+
+const websiteLanguage =  [
+  {
+    "language": "en"
+},
+  {
+    "language": "tr"
+},
+]
 
 const UserSettings = () => {
 
 
   const {t} = useTranslation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [displayItem, setDisplayItem] = useState("");
   const [displayChoice, setDisplayChoice] = useState(true)
 
   //  user ingormation
   const myState = useSelector((state) => state.currentUserReducer)
+  const travellerData = useSelector((state) => state.travelDetails)
+  const changeWebsiteLanguage = (e) => {
+    localStorage.setItem("lang",e.target.value)
+    dispatch(webSiteLanguageAction(e.target.value))
+    i18next.changeLanguage(e.target.value.toLowerCase())
+}
 
   // personal Information useStates
   const [dateValue, setDateValue] = React.useState(new Date());
@@ -1129,6 +1148,28 @@ const UserSettings = () => {
               <Typography sx={{ fontSize: {xs:"20px",md:"30px"}, fontWeight: "bold" }}>
                 {t("Site Settings")}
               </Typography>
+              <Box
+              sx={{
+                display:"flex",
+                flexDirection:"row",
+                alignItems:"center",
+                columnGap:4
+              }}
+              >
+                <Typography>Choose Language  </Typography>
+                <TextField
+                    id="outlined-select-currency"
+                    select
+                    value={travellerData.webSiteLanguage}
+                    onChange={changeWebsiteLanguage}
+                  >
+                    {websiteLanguage.map((option,index) => (
+                      <MenuItem key={index} value={option.language.toUpperCase()}  >
+                         {option.language.toUpperCase()}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
               <Button variant="contained" color="warning"
               onClick={()=>{
                 localStorage.removeItem("accessToken")

@@ -41,7 +41,7 @@ const TopDestinations = ({item}) => {
 
 
   const clickHandler = () => {
-    dispatch(filterProductByCityAction(item))
+    dispatch(filterProductByCityAction(item.toLowerCase()))
     navigate("/dashBoard")
   }
 
@@ -62,7 +62,7 @@ const TopDestinations = ({item}) => {
               >
                 <Box
                   component={"img"}
-                  src={item == "London" ? London1 : item == "Rome" ? Rome1 : item == "Krakow" ? Krakow1 : item == "Florence" ? Florence1 : item == "Edinburgh" ? Edenburgh1 : item == "venice" ? Venice1 : item == "Raykjavik" ? Raykjavik1 : item == "Amsterdam" ? Amsterdam1 : item == "Istanbul" ? Istanbul1 : item == "Dubai" ? Dubai1 : Turkey1}
+                  src={item == "london" ? London1 : item == "rome" ? Rome1 : item == "krakow" ? Krakow1 : item == "florence" ? Florence1 : item == "edinburgh" ? Edenburgh1 : item == "venice" ? Venice1 : item == "raykjavik" ? Raykjavik1 : item == "amsterdam" ? Amsterdam1 : item == "istanbul" ? Istanbul1 : item == "dubai" ? Dubai1 : Turkey1}
                   alt="destinationPlaces"
                   sx={{
                     width: {xs:"150px",md:"250px"},

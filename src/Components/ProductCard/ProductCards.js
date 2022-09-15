@@ -125,6 +125,7 @@ import Venice4 from "../../assets/venice/venice4.jpg"
 import Venice5 from "../../assets/venice/venice5.jpg"
 import Venice6 from "../../assets/venice/venice6.jpg"
 import Venice7 from "../../assets/venice/venice7.jpg"
+import { useTranslation } from "react-i18next";
 
 
 
@@ -152,7 +153,7 @@ let VeniceArr = [Venice1, Venice2, Venice3, Venice4, Venice5, Venice6, Venice7]
 
 const ProductCards = ({ item }) => {
 
-
+  const {t} = useTranslation()
   const [productImage, setProductImage] = useState() 
   const [description, setDescription] = useState(item.city == "Turkey" ? item.description.substr(150,120) : item.description.substr(75,125))
 
@@ -212,6 +213,8 @@ const ProductCards = ({ item }) => {
 
 
   return (
+
+
     <Box
       className="firstImage"
       sx={{
@@ -350,7 +353,7 @@ const ProductCards = ({ item }) => {
             sx={{ display: { xs: "none", md: "flex",width:"100%" } }}
           >
             <Typography sx={{ fontSize: {xs:"12px",md:"14px"}, display: "inline-block" }}>
-              {description}
+              {item.city == "Turkey" && localStorage.getItem("lang") == "EN" ? item.description.substr(150,120) : item.city == "Turkey" && localStorage.getItem("lang") == "TR" ? item.description.substr(154,110) : localStorage.getItem("lang") == "EN" ? item.description.substr(75,125) : item.description.substr(78,125)}
               <span className="more">&nbsp; more</span>
             </Typography>
           </Box>
@@ -370,7 +373,7 @@ const ProductCards = ({ item }) => {
             <Typography sx={{ fontSize: {xs:"14px",md:"14px"}, }}>
               {/* 12 hours 30 minutes */}
               {/* {`${item.duration.substr(0,1)}`} */}
-              {item.duration} hours
+              {item.duration} {t("hours")}
             </Typography>
           </Box>
 
@@ -385,7 +388,7 @@ const ProductCards = ({ item }) => {
           >
             <CheckIcon sx={{ fontSize: {xs:"14px",md:"14px"} }} />
             <Typography sx={{ fontSize: {xs:"14px",md:"14px"}, }}>
-              Free Cancellation
+              {t("Free Cancellation")}
             </Typography>
           </Box>
           </Box>
@@ -405,7 +408,7 @@ const ProductCards = ({ item }) => {
           }}
         >
           <Typography sx={{ fontSize: { xs: "12px", md: "12px" } }}>
-            from
+            {t("from")}
           </Typography>
           <Box
             sx={{

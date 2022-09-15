@@ -1717,7 +1717,7 @@ useEffect(()=>{
               },
             }}
           >
-            Dinner Cruises
+            Akşam yemeği Cruises
           </Typography>
           <Typography
             sx={{
@@ -2310,14 +2310,14 @@ useEffect(()=>{
 
 
             {/* <Box
-              className="Attractions"
+              className="gezilecek yerler"
               sx={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
               }}
             >
-              <Typography>Attractions</Typography>
+              <Typography>gezilecek yerler</Typography>
               <KeyboardArrowDownIcon />
             </Box>
             <Box
@@ -2662,7 +2662,7 @@ useEffect(()=>{
               >
                 <AccessTimeIcon />
                 <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                  12 hours 30 mintutes (approx.)
+                 {item.duration} {t("hours")}
                 </Typography>
               </Box>
               <Box
@@ -2687,10 +2687,13 @@ useEffect(()=>{
 
           
 
-<Box >
+    {/* <Box >
+      {Parser().parse(singleTourDetails.description)}
+    </Box> */}
+
+    <Box >
       {Parser().parse(singleTourDetails.description)}
     </Box>
-
 
           </Box>
         </Box>

@@ -741,18 +741,38 @@ const handleRadioDurationChange = (e) => {
 
 
 const fetchAllTourProducts = async () => {
-  let options = {
-    url:`${Base_url}/tour/allProducts`,
-    method:"GET",
-    headers:{
-      "content-type":"application/json",
+  let url
+  let language = travellerData.webSiteLanguage
+  if(selectedCity.length <= 0){
+    if(language == "EN"){
+      url = `${Base_url}/tour/get-by-language?language=ENG`
+    }else if(language == "TR"){
+      url = `${Base_url}/tour/get-by-language?language=TUR`
+    }
+  }else if(selectedCity.length > 0){
+    if(language == "EN"){
+      url = `${Base_url}/tour/get-by-city-and-language?city=${selectedCity}&language=ENG`
+    }else if(language == "TR"){
+      url = `${Base_url}/tour/get-by-city-and-language?city=${selectedCity}&language=TUR`
     }
   }
 
 
+  let options = {
+    url:url,
+    method:"GET",
+    headers:{
+      "content-type":"application/json",
+      "Authorization":`Bearer ${localStorage.getItem("accessToken")}`
+    }
+  }
+
   try{
     let {data} = await axios(options)
-    dispatch(productAction(data))
+    if(selectedCity == ""){
+      dispatch(productAction(data))
+    }
+    dispatch(displayProductAction(data))
     let min = data[0].price
     let max = data[0].price
     let cityObj = {}
@@ -768,7 +788,7 @@ const fetchAllTourProducts = async () => {
       
       }else{
         cityObj[item.city] = item.city
-        arr.push(item.city)
+        arr.push(item.city.toLowerCase())
       }
       if(selectedCity == "" && item.price >= rangePrice[0] && item.price <= rangePrice[1] && item.duration >= tripDuration[0] && item.duration <= tripDuration[1] && item.stars >= tripRating){
         return item
@@ -782,7 +802,9 @@ const fetchAllTourProducts = async () => {
     setMaxPrice(max)
     setValue1([min,max])
     dispatch(displayProductAction(filterElements))
-    dispatch(countryListAction(arr))
+    if(selectedCity == ""){
+      dispatch(countryListAction(arr))
+    }
   }catch(error){
 
   }
@@ -2462,7 +2484,7 @@ useEffect(()=>{
                 <Typography sx={{
                   fontSize:{xs:"14px",md:"14px"}
                   }}
-                >{allProductList.length} results</Typography>
+                >{allProductList.length} {t("results")}</Typography>
               </Box>
               {/* <Box
                 className="travelData"

@@ -37,7 +37,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import { useDispatch, useSelector } from "react-redux";
 import { currencyCodeAction, currencyConversionAction, currentUserAction, filterProductByCityAction, webSiteLanguageAction } from "../../redux/action";
-import {currentUserReducer, countryListReducer,travelDetails} from "../../redux/reducer/reducer"
+import {currentUserReducer, countryListReducer,travelDetails, filterProductByCityReducer} from "../../redux/reducer/reducer"
 import axios from "axios";
 import { render } from "react-dom";
 import WebSiteLogo from "../../assets/images/websiteLogo.png"
@@ -1066,6 +1066,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
   const navigate = useNavigate();
   const [countryCurrencyState, setCountryCurrencyState] = useState(travellerData.currencyCode)
   const [websiteLangState, setWebsteLangState] = useState(travellerData.webSiteLanguage)
+  const selectedCity = useSelector((state) => state.filterProductByCityReducer) 
 
 
   const contryChangeHandler = async (e) => {
@@ -1108,6 +1109,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
       localStorage.setItem("lang",e.target.value)
       dispatch(webSiteLanguageAction(e.target.value))
       i18next.changeLanguage(e.target.value.toLowerCase())
+      dispatch(filterProductByCityAction(""))
+      setlogoutRender(!logoutRender)
   }
 
   const [state, setState] = React.useState({

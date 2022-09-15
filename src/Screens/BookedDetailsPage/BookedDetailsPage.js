@@ -96,9 +96,9 @@ const BookedDetailsPage = () => {
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Child - {bookedDetails.childQty}</Typography>
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Price - {productDetails == null ? "GBP": productDetails.currency+" "+bookedDetails.price}</Typography>
             <Typography sx={{ fontSize: { xs: "14px", md: "16px" }}}>Date - {bookedDetails.fromDate == undefined ? "No Date" : bookedDetails.fromDate.substr(0,10)}</Typography>
-            <Box>
+            {/* <Box>
               <Button color='warning' variant='contained'>Cancel Tour</Button>
-            </Box>
+            </Box> */}
         </Box>
                  </Box>
 
