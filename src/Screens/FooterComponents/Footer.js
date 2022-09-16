@@ -105,7 +105,7 @@ const Footer = () => {
             "&:hover":{cursor:"pointer",textDecoration:"underLine"},
             fontSize:{xs:"12px",md:"14px"}
           }}
-          >{t("About")} MekaTourizm</Typography>
+          >{t("About")} MekoTourizm</Typography>
           {/* <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/siteMapPage")}>SiteMap</Typography>
           <Typography sx={{"&:hover":{cursor:"pointer",textDecoration:"underLine"}}}onClick={()=>navigate("/supplierSignUpPgae")}>Supplier Signup</Typography> */}
         </Box>

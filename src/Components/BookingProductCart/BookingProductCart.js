@@ -32,7 +32,9 @@ const BookingProductCart = ({item}) => {
 
 
 const clickHandler = () => {
+  
   dipatch(selectedBookedProductAction(item))
+  localStorage.setItem("bookedTour",JSON.stringify(item))
   navigate("/bookedDetailsPage")
 }
 
@@ -240,7 +242,10 @@ const clickHandler = () => {
                 fontWeight:"bold",
                 fontSize:{xs:"14px",md:"16px"}
               }}
-              >{individualProduct == null ? "Currency" : individualProduct.currency}</Typography>
+              >
+                {item.bookingCurrency == null ? "GBP" : item.bookingCurrency}
+                {/* {individualProduct == null ? "Currency" : individualProduct.currency} */}
+              </Typography>
               <Typography
               sx={{
                 fontSize:{xs:"14px",md:"16px"},

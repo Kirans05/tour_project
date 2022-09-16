@@ -78,7 +78,7 @@ const PrivacyPolicy = () => {
               }}
             >
               {t(
-                "Our Services are owned and operated by Mekatourizm, Inc. By using our Services and visiting our websites and related applications, whether on a computer, phone, tablet or similar device (these are all referred to as a “Device”), you are accepting the practices described below."
+                "Our Services are owned and operated by MekoTourizm, Inc. By using our Services and visiting our websites and related applications, whether on a computer, phone, tablet or similar device (these are all referred to as a “Device”), you are accepting the practices described below."
               )}
             </Typography>
             <Typography
@@ -233,7 +233,7 @@ const PrivacyPolicy = () => {
             </Typography>
             <Box className="ul">
               <ul style={{ fontSize: "18px" }}>
-                <li>{t("Register and manage your Mekatourizm account")}</li>
+                <li>{t("Register and manage your MekoTourizm account")}</li>
                 <li>{t("Facilitate your bookings")}</li>
                 <li>{t("Measure interest in and improve our Services")}</li>
                 <li>
@@ -284,7 +284,7 @@ const PrivacyPolicy = () => {
               }}
             >
               {t(
-                "Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a Mekatourizm user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information."
+                "Please note some information about you is required in order for us to provide you with relevant offerings from us, our affiliates and our partners and to enable you to enjoy other benefits of being a MekoTourizm user. Please review the “Information Choices” section below with respect to your choices related to the collection and use of your information."
               )}
             </Typography>
           </Box>

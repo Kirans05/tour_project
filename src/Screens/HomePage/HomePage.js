@@ -10,36 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import Image2 from "../../assets/images/img2.jpg";
-import Travel2 from "../../assets/images/travel2.jpg"
-import Image1 from "../../assets/images/img1.webp";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Footer from "./../FooterComponents/Footer";
 import SearchIcon from "@mui/icons-material/Search";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import Image3 from "../../assets/images/travel2.jpg";
 import axios from "axios";
 import Header from "../HeaderComponents/Header";
-import { textAlign } from "@mui/system";
-import Travel3 from "../../assets/images/travel3.jpg";
-import Travel4 from "../../assets/images/travel4.webp";
-import Travel6 from "../../assets/images/travel6.jpg";
-import Travel8 from "../../assets/images/travel8.jpg";
-import Travel9 from "../../assets/images/travel9.jpg";
-import Travel10 from "../../assets/images/travel10.jpg";
-import Travel11 from "../../assets/images/travel11.jpg";
-import Travel12 from "../../assets/images/travel312.jpg";
 import TopAttraction from "../../Components/TopAttraction/TopAttraction";
 import TopDestinations from "../../Components/TopDestinations/TopDestinations";
-import RecentlyViewed from "../../Components/RecentlyViewed/RecentlyViewed";
-import HomeImage1 from "../../assets/images/homePage1.jpg"
-import HomeImage2 from "../../assets/images/homePage2.jpg"
-import HomeImage3 from "../../assets/images/homePage3.webp"
-import HomeImage4 from "../../assets/images/homePage4.jpg"
-import HomeImage5 from "../../assets/images/homePage5.jpg"
-import HomeImage6 from "../../assets/images/homePage6.jpg"
 import Turkey6 from "../../assets/turkey/turkey6.jpg"
 import Turkey7 from "../../assets/turkey/turkey7.jpg"
 import Turkey9 from "../../assets/turkey/turkey9.jpg"
@@ -51,9 +31,6 @@ import {useTranslation} from "react-i18next"
 
 
 
-let arr = [ Travel4,Travel3, Travel6, Travel8, Travel9, Travel10, Travel11, Travel12]
-let arrLsit = [1,2,3]
-let destinationArr = [1,2,3,4,5,6,7,8]
 
 
 const Base_url = process.env.REACT_APP_Axios_Base_urls
@@ -170,7 +147,7 @@ const showSearchPlace = (item) => {
       //     "content-type":"application/json",
       //   }
       // }
-      let langauge = localStorage.getItem("lang") == null ? "ENG" : "TUR"
+      let langauge = localStorage.getItem("lang") == null ? "ENG" :  localStorage.getItem("lang") == "EN" ? "ENG" : "TUR"
       let options = {
         url:`${Base_url}/tour/get-by-language?language=${langauge}`,
         method:"GET",
@@ -209,11 +186,9 @@ const showSearchPlace = (item) => {
   
   useEffect(()=>{
     fetchAllTourProducts()
-  },[])
-
-  useEffect(()=>{
-
   },[logoutRender])
+
+  
 
 
 

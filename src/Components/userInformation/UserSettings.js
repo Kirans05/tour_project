@@ -991,7 +991,7 @@ const UserSettings = () => {
                 }}
               >
                 <Typography sx={{fontSize: {xs:"16px",md:"16px"} }}s>
-                   {t("Mekatourizm will send you weekly emails with travel inspirations, tips, recommendations and company updates")}
+                   {t("MekoTourizm will send you weekly emails with travel inspirations, tips, recommendations and company updates")}
                 </Typography>
                 <Switch {...label} defaultChecked color="success" />
               </Box>

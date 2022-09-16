@@ -26,6 +26,7 @@ const TopAttraction = ({item}) => {
 
   const clickHandler = () => {
     dispatch(individualProductAction(item))
+    localStorage.setItem("tourId",item.id)
     navigate("/TourDeatils")
   }
 

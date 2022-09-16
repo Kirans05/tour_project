@@ -1110,7 +1110,11 @@ const Header = ({setlogoutRender,logoutRender}) => {
       dispatch(webSiteLanguageAction(e.target.value))
       i18next.changeLanguage(e.target.value.toLowerCase())
       dispatch(filterProductByCityAction(""))
-      setlogoutRender(!logoutRender)
+      if(location.pathname == "/"){
+        setlogoutRender(!logoutRender)
+      }else if(location.pathname == "/dashBoard"){
+        setlogoutRender(!logoutRender)
+      }
   }
 
   const [state, setState] = React.useState({
@@ -1448,7 +1452,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           onClick={toggleDrawer(anchor, false)}
         />
         <Typography sx={{ fontSize: { xs: "20px", md: "22px" } }}>
-          MekaTourizm
+          MekoTourizm
         </Typography>
       </Box>
 
@@ -6271,7 +6275,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
             fontSize: { xs: "28px", md: "28px" },
           }}
         >
-          Mekatourizm
+          MekoTourizm
         </Typography> */}
         {/* <Box component={"img"} src={WebSiteLogo1} alt={"logo"} sx={{
           width:{xs:"100px",md:"150px"},

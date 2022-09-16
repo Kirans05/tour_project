@@ -36,7 +36,7 @@ const AboutPage = () => {
             fontSize:{xs:"16px",md:"18px"}
           }}
           >
-            {t("Mekatourizm makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!")}
+            {t("MekoTourizm makes it easy to find and book something you'll love to do. With access to the world's largest selection of high-quality experiences, there's always something new to discover, both near and far from home. From must-do moments to who-knew discoveries, see the familiar in a new way, or the unknown for the first time!")}
             </Typography>
           <Typography
           sx={{
@@ -58,7 +58,7 @@ const AboutPage = () => {
             fontWeight:"bold"
           }}
           >
-            {t("Why choose Mekatourizm?")}
+            {t("Why choose MekoTourizm?")}
           </Typography>
           <Box>
             <ul style={{fontSize:"18px"}}>

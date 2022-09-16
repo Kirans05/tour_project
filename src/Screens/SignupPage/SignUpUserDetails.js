@@ -1182,7 +1182,7 @@ const SignUpUserDetails = () => {
             </span>{" "}
             and{" "}
             <span className="hover" onClick={() => navigate("/agreement")}>
-              Agreement with MekaTourizm
+              Agreement with MekoTourizm
             </span>
             .
           </Typography>
