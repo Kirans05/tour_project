@@ -32,7 +32,7 @@ import HorizontalSlider from "react-horizontal-slider";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import ArtCulture from "../Tours Componnets/ArtCulture";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
@@ -41,7 +41,7 @@ import Footer from "../FooterComponents/Footer";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {totalProductReducer, displayProductReducer, filterProductByCityReducer} from "../../redux/reducer/reducer"
-import {individualProductAction, productAction, displayProductAction, countryListAction, filterProductByCityAction, currencyCodeAction, currencyConversionAction} from "../../redux/action/index"
+import {individualProductAction, productAction, displayProductAction, countryListAction, filterProductByCityAction, currencyCodeAction, currencyConversionAction, webSiteLanguageAction} from "../../redux/action/index"
 import {useSelector, useDispatch} from "react-redux"
 import axios from "axios"
 import Header from "../HeaderComponents/Header";
@@ -53,6 +53,7 @@ import { Parser } from 'html-to-react'
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 
 
@@ -82,6 +83,15 @@ const country_currency = [
 ]
 
 
+const websiteLanguage =  [
+  {
+    "language": "en"
+},
+  {
+    "language": "tr"
+},
+]
+
 
 
 const DashBoard = () => {
@@ -89,6 +99,7 @@ const DashBoard = () => {
 
   const {t} = useTranslation()
   const navigate = useNavigate();
+  const location = useLocation()
   const [logoutRender, setlogoutRender] = useState(true)
   const totalProductList = useSelector((state) => state.totalProductReducer)
   const allProductList = useSelector((state) => state.displayProductReducer) 
@@ -175,6 +186,17 @@ const ApplyHandler = () => {
     setlogoutRender(!logoutRender)
 }
 
+const changeWebsiteLanguage = (e) => {
+  localStorage.setItem("lang",e.target.value)
+  dispatch(webSiteLanguageAction(e.target.value))
+  i18next.changeLanguage(e.target.value.toLowerCase())
+  dispatch(filterProductByCityAction(""))
+  if(location.pathname == "/"){
+    setlogoutRender(!logoutRender)
+  }else if(location.pathname == "/dashBoard"){
+    setlogoutRender(!logoutRender)
+  }
+}
 
 
 
@@ -481,6 +503,36 @@ const ApplyHandler = () => {
                     {country_currency.map((option,index) => (
                       <MenuItem key={index} value={option.currency_code}  >
                          {option.currency_code}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+        </Box>
+
+        <Divider />
+
+
+
+        <Box
+        sx={{
+          display:"flex",
+          flexDirection:"row",
+          justifyContent:"space-between",
+          alignItems:"center",
+          padding:{xs:"2% 8% 2% 8%"}
+        }}
+        >
+          <Typography>
+            {t("Language")}
+          </Typography>
+          <TextField
+                    id="outlined-select-currency"
+                    select
+                    value={travellerData.webSiteLanguage}
+                    onChange={changeWebsiteLanguage}
+                  >
+                    {websiteLanguage.map((option,index) => (
+                      <MenuItem key={index} value={option.language.toUpperCase()}  >
+                         {option.language.toUpperCase()}
                       </MenuItem>
                     ))}
                   </TextField>
