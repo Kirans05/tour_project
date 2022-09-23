@@ -733,8 +733,11 @@ const fetchAllTourProducts = async () => {
         return item
       }
     })
+    // setMInPrice(travellerData.currencyCode == "GBP" ? min :  Math.ceil(min*travellerData.currencyValue))
+    // setMaxPrice(travellerData.currencyCode == "GBP" ? max :  Math.ceil(max*travellerData.currencyValue))
     setMInPrice(min)
     setMaxPrice(max)
+    // setValue1([travellerData.currencyCode == "GBP" ? min :  Math.ceil(min*travellerData.currencyValue),travellerData.currencyCode == "GBP" ? max :  Math.ceil(max*travellerData.currencyValue)])
     setValue1([min,max])
     dispatch(displayProductAction(filterElements))
     if(selectedCity == ""){

@@ -1101,6 +1101,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
       console.log(error)
     }
 
+    // setlogoutRender(!logoutRender)
+
   } 
 
 
