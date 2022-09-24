@@ -6309,7 +6309,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         }}
         /> */}
         <Box component={"img"} src={LogoWebsite} alt={"logo"} sx={{
-          width:{xs:"100px",md:"180px"},
+          width:{xs:"120px",md:"180px"},
           height:{xs:"50px",md:"50px"},
           margin:"0px",
           "&:hover":{cursor:"pointer"}
