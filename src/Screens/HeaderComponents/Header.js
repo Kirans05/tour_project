@@ -45,6 +45,7 @@ import WebSiteLogo1 from "../../assets/images/websiteLog1.jpeg"
 import WebSiteLogo2 from "../../assets/images/wesiteLogo2.jpeg"
 import WebSiteLogo3 from "../../assets/images/webSitelogo3.jpeg"
 import WebSiteLogo4 from "../../assets/images/webSiteLogo4.jpeg"
+import LogoWebsite from "../../assets/images/LogoWebsite.png"
 import { height } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -6307,7 +6308,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
           }
         }}
         /> */}
-        <Box component={"img"} src={WebSiteLogo4} alt={"logo"} sx={{
+        <Box component={"img"} src={LogoWebsite} alt={"logo"} sx={{
           width:{xs:"100px",md:"180px"},
           height:{xs:"50px",md:"50px"},
           margin:"0px",
@@ -6322,6 +6323,21 @@ const Header = ({setlogoutRender,logoutRender}) => {
           navigate("/")
         }}
         /> 
+        {/* <Box component={"img"} src={WebSiteLogo4} alt={"logo"} sx={{
+          width:{xs:"100px",md:"180px"},
+          height:{xs:"50px",md:"50px"},
+          margin:"0px",
+          "&:hover":{cursor:"pointer"}
+        }}
+        onClick={() => {
+          // if(localStorage.getItem("accessToken") == null){
+          //   navigate("/login")
+          // }else{
+          //   navigate("/")
+          // }
+          navigate("/")
+        }}
+        />  */}
       </Box>
 
       {/* serach box for big screens */}
@@ -6340,7 +6356,7 @@ const Header = ({setlogoutRender,logoutRender}) => {
         >
           <input
             type={"text"}
-            placeholder="Search for Istanbul,Turkey"
+            placeholder={t("Search for Istanbul,Turkey")}
             style={{
               outline: "none",
               height: "30px",

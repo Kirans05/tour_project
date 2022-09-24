@@ -282,7 +282,7 @@ const showSearchPlace = (item) => {
                   <input
                   id="mainPagesearch"
                     type={"text"}
-                    placeholder="Search for Istanbul,Turkey"
+                    placeholder={t("Search for Istanbul,Turkey")}
                     style={{
                       width: "80%",
                       height: "25px",
