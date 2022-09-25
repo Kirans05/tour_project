@@ -6311,8 +6311,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
         }}
         /> */}
         <Box component={"img"} src={LogoWebsite2} alt={"logo"} sx={{
-          width:{xs:"130px",md:"180px"},
-          height:{xs:"50px",md:"50px"},
+          width:{xs:"190px",md:"190px"},
+          height:{xs:"40px",md:"50px"},
           margin:"0px",
           "&:hover":{cursor:"pointer"}
         }}
