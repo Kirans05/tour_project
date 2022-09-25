@@ -159,7 +159,6 @@ const showSearchPlace = (item) => {
   
     try{
       let {data} = await axios(options)
-      console.log(data)
       dispatch(productAction(data))
       let cityObj = {}
       let arr = []

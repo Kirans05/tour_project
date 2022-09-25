@@ -46,6 +46,8 @@ import WebSiteLogo2 from "../../assets/images/wesiteLogo2.jpeg"
 import WebSiteLogo3 from "../../assets/images/webSitelogo3.jpeg"
 import WebSiteLogo4 from "../../assets/images/webSiteLogo4.jpeg"
 import LogoWebsite from "../../assets/images/LogoWebsite.png"
+import LogoWebsite2 from "../../assets/images/LogoWebsite2.png"
+import LogoWebsite3 from "../../assets/images/LogoWebsite3.png"
 import { height } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -6308,8 +6310,8 @@ const Header = ({setlogoutRender,logoutRender}) => {
           }
         }}
         /> */}
-        <Box component={"img"} src={LogoWebsite} alt={"logo"} sx={{
-          width:{xs:"120px",md:"180px"},
+        <Box component={"img"} src={LogoWebsite2} alt={"logo"} sx={{
+          width:{xs:"130px",md:"180px"},
           height:{xs:"50px",md:"50px"},
           margin:"0px",
           "&:hover":{cursor:"pointer"}
