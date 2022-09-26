@@ -17,10 +17,10 @@ const AboutPage = () => {
           flexDirection:"column",
           alignItems:"flex-start",
           justifyContent:"flex-start",
-          padding:{xs:"0% 3% 0% 3%",md:"2% 5% 0% 5%"},
+          padding:{xs:"2% 3% 2% 3%",md:"2% 5% 2% 5%"},
           width:{xs:"90%",md:"60%"},
           rowGap:1,
-          height:{xs:"160vh",md:"80vh"}
+          height:{xs:"fit-content",md:"fit-content"}
         }}
         >
           <Typography
@@ -75,6 +75,16 @@ const AboutPage = () => {
                 {t("Award-winning support Find a lower price? Have a change in plans? No problem. We’re here to help, 24/7.")}
               </li>
             </ul>
+          </Box>
+          <br />
+          {/* business name and address */}
+          <Box>
+            <Typography  sx={{
+            fontSize:{xs:"16px",md:"20px"}
+          }}>Business Name - MEKOSOFT TEKNOLOJİ İTHALAT İHRACAT SANAYİ VE TİCARET LİMİTED ŞİRKETİ</Typography>
+            <Typography  sx={{
+            fontSize:{xs:"16px",md:"20px"}
+          }}>Address - İHSANİYE MAH. KUVAİ MİLLİYE CAD. SAMAN İŞH. NO: 169 İÇ KAPI NO: 5 AKDENİZ/ MERSİN</Typography>
           </Box>
         </Box>
         <Footer />
